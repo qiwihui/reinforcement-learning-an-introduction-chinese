@@ -29,8 +29,16 @@
 ----
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
+
+   preface2nd
+   preface1st
+   notation
+   chapter1
+   partI/index
+   partII/index
+   partIII/index
+   references
 
 
 * :ref:`genindex`
