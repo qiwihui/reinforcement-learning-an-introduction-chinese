@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = '强化学习导论'
-copyright = '2019, qiwihui'
-author = 'qiwihui'
+copyright = '2019, Richard S. Sutton，Andrew G. Barto'
+author = 'Richard S. Sutton，Andrew G. Barto'
 
 # The short X.Y version
-version = ''
+version = '0.0.1'
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '0.0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -107,7 +107,7 @@ htmlhelp_basename = 'reinforcement-learning-an-introduction-chinesedoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
-
+latex_engine = 'xelatex'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
@@ -124,14 +124,29 @@ latex_elements = {
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
+    'papersize': 'a4paper',
+    'pointsize': '11pt',
+    'preamble': r'''
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont=STZhongsong, ItalicFont=STKaiti]{STSong}
+\setCJKsansfont[BoldFont=STHeiti]{STXihei}
+\setCJKmonofont{STFangsong}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\parindent 2em
+\definecolor{VerbatimColor}{rgb}{0.95,0.95,0.95}
+\setcounter{tocdepth}{3}
+\renewcommand\familydefault{\ttdefault}
+\renewcommand\CJKfamilydefault{\CJKrmdefault}
+'''
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'reinforcement-learning-an-introduction-chinese.tex', 'reinforcement-learning-an-introduction-chinese Documentation',
-     'qiwihui', 'manual'),
+    (master_doc, 'reinforcement-learning-an-introduction-chinese.tex', '强化学习导论',
+     'Richard S. Sutton，Andrew G. Barto', 'manual'),
 ]
 
 
@@ -140,7 +155,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'reinforcement-learning-an-introduction-chinese', 'reinforcement-learning-an-introduction-chinese Documentation',
+    (master_doc, 'reinforcement-learning-an-introduction-chinese', '强化学习导论',
      [author], 1)
 ]
 
@@ -161,6 +176,9 @@ texinfo_documents = [
 
 # Bibliographic Dublin Core info.
 epub_title = project
+epub_author = author
+epub_publisher = 'qiwihui'
+epub_copyright = copyright
 
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
