@@ -363,3 +363,15 @@
 
 书目备注
 --------
+
+关于强化学习的其他一般性报道，我们建议读者参考阅读Szepesv ari（2010），Bertsekas和Tsitsiklis（1996），
+Kaelbling（1993a）以及Sugiyama，Hachiya和Morimura（2013）的书籍。
+从控制或操作研究角度出发的书籍包括Si，Barto，Powell和Wunsch（2004），Powell（2011），Lewis和Liu（2012）以及Bertsekas（2012）。
+Cao（2009）的综述将强化学习置于其他学习和优化随机动力系统的背景下。
+机器学习期刊的三个特刊专注于强化学习：Sutton（1992a），Kaelbling（1996）和Singh（2002）。
+Barto（1995b）；Kaelbling，Littman和Moore（1996）以及Keerthi和Ravindran（1997）分别提供了有用的调查。
+Weiring和van Otterlo（2012）编辑的卷提供了对最近发展的精彩概述。
+
+1.2 本章菲尔早餐的例子灵感来自Agre（1988）。
+
+1.5 第6章介绍了在井字棋示例中使用的时间差分方法。
