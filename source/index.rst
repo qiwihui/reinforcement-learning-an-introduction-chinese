@@ -34,7 +34,7 @@
    preface2nd
    preface1st
    notation
-   chapter1
+   chapter1/introduction
    partI/index
    partII/index
    partIII/index

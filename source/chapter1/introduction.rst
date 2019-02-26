@@ -212,7 +212,7 @@
 而且，让我们考虑平局和亏损对我们同样不利。
 我们如何构建一个能够在比赛中发现对手的漏洞并且学会最大化获胜机会的棋手？
 
-.. image:: _static/images/chapter1/tic-tac-toe.png
+.. image:: images/tic-tac-toe.png
   :width: 200px
   :align: right
 
@@ -254,7 +254,7 @@
 在游戏中移动和考虑的一系列动作可以如图1.1所示。
 
 .. _figure_1.1:
-.. figure:: _static/images/chapter1/figure-1.1.png
+.. figure:: images/figure-1.1.png
 
   图1.1：一系列井字游动。黑色实线代表游戏中所采取的动作; 虚线表示我们（我们的强化学习者）考虑但未做出的动作。
   我们的第二步移动是一次探索性的举动，这意味着e*所表示的移动在等级上优于当前举动。
