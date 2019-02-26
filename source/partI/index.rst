@@ -21,10 +21,10 @@
 .. toctree::
    :maxdepth: 2
 
-   chapter3
-   chapter4
-   chapter5
    chapter2/multi_arm_bandits
+   chapter3/finite_markov_decision_process
+   chapter4/dynamic_programming
+   chapter5/monte_carlo_methods
    chapter6/temporal_difference_learning
    chapter7/n_step_bootstrapping
    chapter8/planning_and_learning_with_tabular_methods
