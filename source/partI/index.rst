@@ -21,10 +21,10 @@
 .. toctree::
    :maxdepth: 2
 
-   chapter2
    chapter3
    chapter4
    chapter5
-   chapter6
-   chapter7
-   chapter8
+   chapter2/multi_arm_bandits
+   chapter6/temporal_difference_learning
+   chapter7/n_step_bootstrapping
+   chapter8/planning_and_learning_with_tabular_methods
