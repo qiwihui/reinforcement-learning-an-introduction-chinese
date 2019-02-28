@@ -22,8 +22,8 @@
 考虑以下学习问题。你可以反复面对 :math:`k` 种不同的选择或行动。在每次选择之后，你会收到一个数值奖励，该奖励取决于你选择的行动的固定概率分布。
 你的目标是在一段时间内最大化预期的总奖励，例如，超过1000个操作选择或 *时间步骤*。
 
-这是 :math:`k` 臂老虎机问题的原始形式，通过类比于老虎机或“单臂强盗”命名，除了它有k个扳手而不是一个。
-每个动作选择就像一个老虎机的杠杆游戏，奖励是击中累积奖金的奖金。
+这是 :math:`k` 臂老虎机问题的原始形式，通过类比于老虎机或“单臂强盗”命名，除了它有k个拉杆而不是一个。
+每个动作选择就像一个老虎机的拉杆游戏，奖励是击中累积奖金的奖金。
 通过反复的行动选择，你可以通过将你的行动集中在最佳杠杆上来最大化你的奖金。
 另一个类比是医生在一系列重病患者的实验治疗之间进行选择。每个动作都是治疗的选择，每个奖励都是患者的生存或幸福。
 今天，“老虎机问题”一词有时用于上述问题的概括，但在本书中我们用它来指代这个简单的情况。
@@ -34,7 +34,7 @@
 
 .. math::
 
-    q_{*}(a) \doteq E[R_t|A_t=a]
+    q_{*}(a) \doteq \mathbb{E}[R_t|A_t=a]
 
 如果你知道每个动作的价值，那么解决 :math:`k` 臂老虎机问题将是轻而易举的：你总是选择具有最高价值的动作。
 我们假设你不确定地知道动作价值，尽管你可能有估计值。
@@ -59,3 +59,156 @@
 在本书中，我们不担心以复杂的方式平衡探索和开发；我们只担心平衡它们。
 在本章中，我们为 :math:`k` 臂老虎机提出了几种简单的平衡方法，并表明它们比总是利用的方法更好。
 平衡探索和开发的需要是强化学习中出现的一个独特挑战；我们的 :math:`k` 臂老虎机问题的简单性使我们能够以一种特别清晰的形式展示这一点。
+
+2.2 行动-价值方法
+------------------
+
+.. math::
+    :label: 2.1
+
+    Q_t(a) \doteq \frac{在t之前采取a动作的奖励总和}{在t之前采取a动作的次数}
+    = \frac{\sum_{i=1}^{t-1}R_i \cdot \mathbb{1}_{A_i=a}}{\sum_{i=1}^{t-1}\mathbb{1}_{A_i=a}}
+
+.. math::
+    :label: 2.2
+
+    A_t = \mathop{argmax} \limits_{a} Q_t(a)
+
+
+2.4
+------
+
+.. math::
+
+    Q_n \doteq \frac{R_1 + R_2 + \dots + R_{n-1}}{n-1}
+
+.. math::
+    :label: 2.3
+
+    \begin{align*}
+    Q_{n+1} &= \frac{1}{n}\sum_{i=1}^{n}R_i \\
+            &= \frac{1}{n}(R_n + \sum_{i=1}^{n-1}R_i) \\
+            &= \frac{1}{n}(R_n + (n-1)\frac{1}{n-1} \sum_{i=1}^{n-1}R_i) \\
+            &= \frac{1}{n}(R_n + (n-1)Q_n) \\
+            &= \frac{1}{n}(R_n + nQ_n-Q_n) \\
+            &= Q_n + \frac{1}{n}(R_n - Q_n)
+    \end{align*}
+
+.. math::
+    :label: 2.4
+
+    NewEstimate \leftarrow OldEstimate + StepSize [Target - OldEstimate]
+
+2.5
+----
+
+.. math::
+    :label: 2.5
+
+    Q_{n+1} \doteq Q_n + \alpha(R_n - Q_n)
+
+.. math::
+    :label: 2.6
+
+    \begin{align*}
+    Q_{n+1} &= Q_n + \alpha(R_n - Q_n) \\
+    &= \alpha R_n + (1-\alpha)Q_n \\
+    &= \alpha R_n + (1-\alpha)[\alpha R_{n-1} + (1-\alpha)Q_{n-1}] \\
+    &= \alpha R_n + (1-\alpha)\alpha R_{n-1} + (1-\alpha)^2 \alpha R_{n-2} + \\
+    & \qquad \qquad \dots + (1-\alpha)^{n-1}\alpha R_1 + (1-\alpha)^nQ_1 \\
+    &= (1-\alpha)^nQ_1 + \sum_{i=1}^{n}\alpha(1-\alpha)^{n-i}R_i
+    \end{align*}
+
+.. math::
+    :label: 2.7
+
+    \sum_{n=1}^{\infty}\alpha_n(a) = \infty 和 \sum_{n=1}^{\infty}\alpha_n^2(a) < \infty
+
+.. math::
+    :label: 2.8
+
+    \beta_n \doteq \alpha / \overline{o}_n
+
+.. math::
+    :label: 2.9
+
+    \overline{o}_n \doteq \overline{o}_{n-1} + \alpha(1-\overline{o}_{n-1}) for n \ge 0, with \overline{o}_0 \doteq 0
+
+.. math::
+    :label: 2.10
+
+    A_t \doteq \mathop{argmax} \limits_{a} \left[Q_t(a) + c \sqrt{\frac{\ln{t}}{N_t(a)}}\right]
+
+
+.. math::
+    :label: 2.11
+
+    Pr\{A_t=a\} \doteq \frac{e^{H_t(a)}}{\sum_{b=1}^{k}e^{H_t(b)}} \doteq \pi_t(a)
+
+.. math::
+    :label: 2.12
+
+    \begin{align*}
+    H_{t+1}(A_t) &\doteq H_t(A_t) + \alpha(R_t-\overline{R}_t)(1-\pi_t(A_t))， &和 \\
+    H_{t+1}(a) &\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&对所有 a \ne A_t
+    \end{align*}
+
+The Bandit Gradient Algorithm as Stochastic Gradient Ascent
+
+.. math::
+    :label: 2.13
+
+    H_{t+1}(a) \doteq H_t(a) + \alpha\frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)}
+
+.. math::
+
+    \mathbb{E}[R_t] = \sum_{x}\pi_t(x)q_*(x)
+
+.. math::
+
+    \begin{align*}
+    \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\left[\sum_{x}\pi_t(x)q_*(x)\right] \\
+    &= \sum_{x}q_*(x)\frac{\partial \pi_t(x)}{\partial H_t(a)} \\
+    &= \sum_{x}(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}
+    \end{align*}
+
+.. math::
+
+    \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} =
+        \sum_{x}\pi_t(x)(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}/\pi_t(x)
+
+.. math::
+
+    \begin{align*}
+    &= \mathbb{E}\left[ (q_*(A_t)-B_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right] \\
+    &= \mathbb{E}\left[ (R_t-\overline{R}_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right]
+    \end{align*}
+
+
+.. math::
+
+    \begin{align*}
+    &= \mathbb{E}\left[ (R_t-\overline{R}_t) \pi_t(A_t) (\mathbb{1}_{a=A_t}-\pi_t(a))/\pi_t(A_t) \right] \\
+    &= \mathbb{E}\left[ (R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a)) \right]
+    \end{align*}
+
+.. math::
+
+    H_{t+1}(a) = H_t(a) + \alpha(R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a))，对于所有a
+
+.. math::
+
+    \frac{\partial}{\partial x} \left[ \frac{f{x}}{g{x}} \right] =
+        \frac{ \frac{\partial f(x)}{\partial x}g(x) - f(x)\frac{\partial g(x)}{\partial x}}{g(x)^2}
+
+.. math::
+
+    \begin{align*}
+    \frac{\partial \pi_t(x)}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\pi_t(x) \\
+    &= \frac{\partial}{\partial H_t(a)}\left[ \frac{e^{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} \right] \\
+    &= \frac{ \frac{\partial e^{H_t(x)}}{\partial H_t(a)} \sum_{y=1}^{k}e^{H_t(y)} - e^{H_t(x)}\frac{\partial \sum_{y=1}^{k}e^{H_t(y)}}{\partial H_t(a)} }{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
+    &= \frac{ \mathbb{1}_{a=x}e_{H_t(x)}\sum_{y=1}^{k}e^{H_t(y)} - e^{H_t(x)}e^{H_t(a)} }{(\sum_{y=1}^{k}e^{H_t(y)})^2} (因为 \frac{\partial e^x}{\partial x}=e^x) \\
+    &= \frac{\mathbb{1}_{a=x}e_{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} - \frac{e^{H_t(x)}e^{H_t(a)}}{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
+    &= \mathbb{1}_{a=x}\pi_t(x) - \pi_t(x)\pi_t(a) \\
+    &= \pi_t(x)(\mathbb{1}_{a=x} - \pi_t(a)) &Q.E.D.
+    \end{align*}
