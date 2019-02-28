@@ -12,7 +12,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
+import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
@@ -40,7 +40,7 @@ release = '0.0.1'
 # ones.
 extensions = [
     'sphinx.ext.mathjax',
-    'sphinx.ext.githubpages',
+    # 'sphinxcontrib.googleanalytics',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -108,25 +108,51 @@ htmlhelp_basename = 'reinforcement-learning-an-introduction-chinesedoc'
 
 # -- Options for LaTeX output ------------------------------------------------
 latex_engine = 'xelatex'
-latex_elements = {
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+if on_rtd:
+    latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
+    #'papersize': 'letterpaper',
     # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
+    #'pointsize': '10pt',
     # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-    'papersize': 'a4paper',
-    'pointsize': '11pt',
     'preamble': r'''
+    \hypersetup{unicode=true}
+    \usepackage{CJKutf8}
+    \DeclareUnicodeCharacter{00A0}{\nobreakspace}
+    \DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
+    \DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
+    \DeclareUnicodeCharacter{2286}{\ensuremath{\subseteq}}
+    \DeclareUnicodeCharacter{2713}{x}
+    \DeclareUnicodeCharacter{27FA}{\ensuremath{\Longleftrightarrow}}
+    \DeclareUnicodeCharacter{221A}{\ensuremath{\sqrt{}}}
+    \DeclareUnicodeCharacter{221B}{\ensuremath{\sqrt[3]{}}}
+    \DeclareUnicodeCharacter{2295}{\ensuremath{\oplus}}
+    \DeclareUnicodeCharacter{2297}{\ensuremath{\otimes}}
+    \begin{CJK}{UTF8}{gbsn}
+    \AtEndDocument{\end{CJK}}
+    ''',
+    }
+else:
+    latex_elements = {
+        # The paper size ('letterpaper' or 'a4paper').
+        #
+        # 'papersize': 'letterpaper',
+
+        # The font size ('10pt', '11pt' or '12pt').
+        #
+        # 'pointsize': '10pt',
+
+        # Additional stuff for the LaTeX preamble.
+        #
+        # 'preamble': '',
+
+        # Latex figure (float) alignment
+        #
+        # 'figure_align': 'htbp',
+        'papersize': 'a4paper',
+        'pointsize': '11pt',
+        'preamble': r'''
 \usepackage{xeCJK}
 \setCJKmainfont[BoldFont=STZhongsong, ItalicFont=STKaiti]{STSong}
 \setCJKsansfont[BoldFont=STHeiti]{STXihei}
@@ -139,7 +165,7 @@ latex_elements = {
 \renewcommand\familydefault{\ttdefault}
 \renewcommand\CJKfamilydefault{\CJKrmdefault}
 '''
-}
+    }
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
@@ -197,3 +223,5 @@ epub_exclude_files = ['search.html']
 
 def setup(app):
     app.add_stylesheet('css/custom.css')
+
+# googleanalytics_id = 'UA-46660488-5'
