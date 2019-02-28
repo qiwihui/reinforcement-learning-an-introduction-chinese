@@ -40,7 +40,7 @@ release = '0.0.1'
 # ones.
 extensions = [
     'sphinx.ext.mathjax',
-    'sphinx.ext.githubpages',
+    'sphinxcontrib.googleanalytics',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -197,3 +197,5 @@ epub_exclude_files = ['search.html']
 
 def setup(app):
     app.add_stylesheet('css/custom.css')
+
+googleanalytics_id = 'UA-46660488-5'
