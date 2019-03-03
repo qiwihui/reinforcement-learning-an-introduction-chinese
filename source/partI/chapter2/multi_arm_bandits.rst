@@ -398,13 +398,26 @@
 请注意，为了使您的答案完全令人满意，它必须解释为什么奖励在第11步增加以及为什么在随后的步骤中减少。
 提示：如果 :math:`c=1`，则尖峰不太突出。
 
-2.8
-----
+2.8 老虎机问题的梯度算法
+------------------------
+
+到目前为止，在本章中我们已经考虑了估算行动价值并使用这些估计值来选择行动的方法。
+这通常是一种很好的方法，但它不是唯一可行的方法。在本节中，我们考虑为每个动作a学习数字 *偏好*，我们将其表示为 :math:`H_t(a)`。
+偏好越大，采取行动的次数越多，但偏好在奖励方面没有解释。只有一种行为相对于另一种行为的相对偏好才是重要的；
+如果我们将1000添加到所有动作首选项，则对动作概率没有影响，动作概率是根据soft-max分布（如Gibbs或Boltzmann分布）确定的，如下所示：
 
 .. math::
     :label: 2.11
 
     Pr\{A_t=a\} \doteq \frac{e^{H_t(a)}}{\sum_{b=1}^{k}e^{H_t(b)}} \doteq \pi_t(a)
+
+在这里，我们还引入了一个有用的新符号， :math:`\pi_t(a)`，表示在时间t采取行动的概率。
+最初，所有动作偏好都是相同的（例如，对于所有a， :math:`H_1(a)=0`），使得所有动作具有相同的被选择概率。
+
+*练习2.9* 指出在两个动作的情况下，soft-max分布与统计学和人工神经网络中经常使用的逻辑或sigmoid函数给出的相同。
+
+基于随机梯度上升的思想，存在用于该设置的自然学习算法。在每个步骤中，
+在选择动作 :math:`A_t` 并接收奖励 :math:`R_t` 之后，动作偏好通过以下方式更新：
 
 .. math::
     :label: 2.12
@@ -414,68 +427,106 @@
     H_{t+1}(a) &\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&对所有 a \ne A_t
     \end{align*}
 
-The Bandit Gradient Algorithm as Stochastic Gradient Ascent
+其中 :math:`\alpha>0` 是步长参数，:math:`\overline{R}_t \in \mathbb(R)` 是所有奖励的平均值，
+包括时间t，可以按照第2.4节（或第2.5节，如果问题是非平稳的）所述逐步计算。
+:math:`\overline{R}_t` 术语作为比较奖励的基线。
+如果奖励高于基线，那么将来获取 :math:`A_t` 的概率增加;
+如果奖励低于基线，则概率降低，未选择的动作向相反方向移动。
 
-.. math::
-    :label: 2.13
+图2.5显示了对10臂老虎机试验变体的梯度老虎机算法的结果，其中真实的预期奖励是根据正态分布选择的，
+平均值为+4而不是零（并且单位方差与之前一样）。由于奖励基线术语瞬间适应新的水平，所以所有奖励的上移对梯度老虎机算法完全没有影响。
+但如果基线被省略（即，如果 :math:`\overline{R}_t` 在（2.12）中被视为常数零），那么性能将显着降低，如图所示。
 
-    H_{t+1}(a) \doteq H_t(a) + \alpha\frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)}
+.. _figure_2.5:
+.. figure:: images/figure-2.5.png
 
-.. math::
+    **图2.5** 当 :math:`q_*(a)` 被选择为接近+4而不是接近零时，
+    在10臂老虎机试验上具有和不具有奖励基线的梯度老虎机算法的平均性能。
 
-    \mathbb{E}[R_t] = \sum_{x}\pi_t(x)q_*(x)
+.. admonition:: 随机梯度上升的强盗梯度算法
+    :class: important
 
-.. math::
+    .. math::
+        :label: 2.13
 
-    \begin{align*}
-    \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\left[\sum_{x}\pi_t(x)q_*(x)\right] \\
-    &= \sum_{x}q_*(x)\frac{\partial \pi_t(x)}{\partial H_t(a)} \\
-    &= \sum_{x}(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}
-    \end{align*}
+        H_{t+1}(a) \doteq H_t(a) + \alpha\frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)}
 
-.. math::
+    .. math::
 
-    \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} =
-        \sum_{x}\pi_t(x)(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}/\pi_t(x)
+        \mathbb{E}[R_t] = \sum_{x}\pi_t(x)q_*(x)
 
-.. math::
+    .. math::
 
-    \begin{align*}
-    &= \mathbb{E}\left[ (q_*(A_t)-B_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right] \\
-    &= \mathbb{E}\left[ (R_t-\overline{R}_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right]
-    \end{align*}
+        \begin{align*}
+        \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\left[\sum_{x}\pi_t(x)q_*(x)\right] \\
+        &= \sum_{x}q_*(x)\frac{\partial \pi_t(x)}{\partial H_t(a)} \\
+        &= \sum_{x}(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}
+        \end{align*}
+
+    .. math::
+
+        \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} =
+            \sum_{x}\pi_t(x)(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}/\pi_t(x)
+
+    .. math::
+
+        \begin{align*}
+        &= \mathbb{E}\left[ (q_*(A_t)-B_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right] \\
+        &= \mathbb{E}\left[ (R_t-\overline{R}_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right]
+        \end{align*}
 
 
-.. math::
+    .. math::
 
-    \begin{align*}
-    &= \mathbb{E}\left[ (R_t-\overline{R}_t) \pi_t(A_t) (\mathbb{1}_{a=A_t}-\pi_t(a))/\pi_t(A_t) \right] \\
-    &= \mathbb{E}\left[ (R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a)) \right]
-    \end{align*}
+        \begin{align*}
+        &= \mathbb{E}\left[ (R_t-\overline{R}_t) \pi_t(A_t) (\mathbb{1}_{a=A_t}-\pi_t(a))/\pi_t(A_t) \right] \\
+        &= \mathbb{E}\left[ (R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a)) \right]
+        \end{align*}
 
-.. math::
+    .. math::
 
-    H_{t+1}(a) = H_t(a) + \alpha(R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a))，对于所有a
+        H_{t+1}(a) = H_t(a) + \alpha(R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a))，对于所有a
 
-.. math::
+    .. math::
 
-    \frac{\partial}{\partial x} \left[ \frac{f{x}}{g{x}} \right] =
-        \frac{ \frac{\partial f(x)}{\partial x}g(x) - f(x)\frac{\partial g(x)}{\partial x}}{g(x)^2}
+        \frac{\partial}{\partial x} \left[ \frac{f{x}}{g{x}} \right] =
+            \frac{ \frac{\partial f(x)}{\partial x}g(x) - f(x)\frac{\partial g(x)}{\partial x}}{g(x)^2}
 
-.. math::
+    .. math::
 
-    \begin{align*}
-    \frac{\partial \pi_t(x)}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\pi_t(x) \\
-    &= \frac{\partial}{\partial H_t(a)}\left[ \frac{e^{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} \right] \\
-    &= \frac{ \frac{\partial e^{H_t(x)}}{\partial H_t(a)} \sum_{y=1}^{k}e^{H_t(y)} - e^{H_t(x)}\frac{\partial \sum_{y=1}^{k}e^{H_t(y)}}{\partial H_t(a)} }{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
-    &= \frac{ \mathbb{1}_{a=x}e_{H_t(x)}\sum_{y=1}^{k}e^{H_t(y)} - e^{H_t(x)}e^{H_t(a)} }{(\sum_{y=1}^{k}e^{H_t(y)})^2} (因为 \frac{\partial e^x}{\partial x}=e^x) \\
-    &= \frac{\mathbb{1}_{a=x}e_{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} - \frac{e^{H_t(x)}e^{H_t(a)}}{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
-    &= \mathbb{1}_{a=x}\pi_t(x) - \pi_t(x)\pi_t(a) \\
-    &= \pi_t(x)(\mathbb{1}_{a=x} - \pi_t(a)) &Q.E.D.
-    \end{align*}
+        \begin{align*}
+        \frac{\partial \pi_t(x)}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\pi_t(x) \\
+        &= \frac{\partial}{\partial H_t(a)}\left[ \frac{e^{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} \right] \\
+        &= \frac{ \frac{\partial e^{H_t(x)}}{\partial H_t(a)} \sum_{y=1}^{k}e^{H_t(y)} - e^{H_t(x)}\frac{\partial \sum_{y=1}^{k}e^{H_t(y)}}{\partial H_t(a)} }{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
+        &= \frac{ \mathbb{1}_{a=x}e_{H_t(x)}\sum_{y=1}^{k}e^{H_t(y)} - e^{H_t(x)}e^{H_t(a)} }{(\sum_{y=1}^{k}e^{H_t(y)})^2} (因为 \frac{\partial e^x}{\partial x}=e^x) \\
+        &= \frac{\mathbb{1}_{a=x}e_{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} - \frac{e^{H_t(x)}e^{H_t(a)}}{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
+        &= \mathbb{1}_{a=x}\pi_t(x) - \pi_t(x)\pi_t(a) \\
+        &= \pi_t(x)(\mathbb{1}_{a=x} - \pi_t(a)) &Q.E.D.
+        \end{align*}
 
-2.9
-----
+2.9 关联搜索（语境老虎机）
+--------------------------
 
-2.10
------
+到目前为止，在本章中我们只考虑了非关联性任务，即不需要将不同行为与不同情况联系起来的任务。
+在这些任务中，学习者要么在任务静止时尝试找到单个最佳动作，要么在任务非平稳时随着时间的推移而尝试跟踪最佳动作。
+但是，在一般的强化学习任务中，存在多种情况，目标是学习策略：从状态到在这些情况下最佳的行为的映射。
+为完整问题设置台阶，我们简要讨论非关联任务扩展到关联设置的最简单方法。
+
+举个例子，假设有几个不同的 :math:`k` 臂老虎机任务，并且在每一步中你都会随机对抗其中一个。
+因此，老虎机任务从一步到另一步随机变化。这在你看来是一个单一的，非平稳的 :math:`k` 臂老虎机任务，
+其真实动作值从一步到另一步随机变化。您可以尝试使用本章中描述的可以处理非平稳性的方法之一，
+但除非真实的操作值变化缓慢，否则这些方法将无法正常工作。
+但是，现在假设，当为您选择老虎机任务时，您将获得一些关于其身份的独特线索（但不是其动作价值）。
+也许你正面临一个真正的老虎机，它改变它的显示颜色来改变了它的动作价值。
+现在，您可以学习一项策略，将每个任务与你看到的颜色相关联，并在面对该任务时采取最佳操作。
+例如，如果是红色，选择第1个摇臂；如果是绿色，选择第2个摇臂。
+在没有任何区分一个老虎机任务的信息的情况下，通过正确的策略，你通常可以做得更好。
+
+这是一个关联搜索任务的示例，因为它涉及试错学习以搜索最佳操作，以及这些操作与它们最佳的情况的关联。
+关联搜索任务现在通常在文献中被称为语境老虎机。联合搜索任务介于 :math:`k` 臂老虎机问题和完全强化学习问题之间。
+它们就像完整的强化学习问题，因为它们涉及学习策略，但就像我们的 :math:`k` 臂老虎机问题的版本一样，每个动作只能立即得到奖励。
+如果允许行动来影响下一个情况以及奖励，那么我们就会有完整的强化学习问题。
+我们将在下一章中提出这个问题，并在本书的其余部分考虑它的影响。
+
+2.10 总结
+------------
