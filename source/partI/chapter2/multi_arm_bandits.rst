@@ -446,14 +446,24 @@
 .. admonition:: 随机梯度上升的老虎机梯度算法
     :class: important
 
+    通过将其理解为梯度上升的随机近似，可以更深入地了解梯度老虎机算法。
+    在精确的梯度上升中，每个动作偏好 :math:`H_t(a)` 将与增量对性能的影响成比例增加：
+
     .. math::
         :label: 2.13
 
         H_{t+1}(a) \doteq H_t(a) + \alpha\frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)}
 
+    这里的性能衡量指标是预期的奖励：
+
     .. math::
 
         \mathbb{E}[R_t] = \sum_{x}\pi_t(x)q_*(x)
+
+    并且增量效应的度量是该性能度量相对于动作偏好的 *偏导数*。
+    当然，在我们的情况下不可能完全实现梯度上升，因为假设我们不知道 :math:`q_*(x)`，
+    但实际上我们的算法（2.12）的更新等于（2.13）预期值，使算法成为 *随机梯度上升* 的一个实例。
+    显示这一点的计算只需要基础微积分，但需要几个步骤。 首先，我们仔细研究一下确切的性能梯度：
 
     .. math::
 
@@ -463,10 +473,18 @@
         &= \sum_{x}(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}
         \end{align*}
 
+    其中 :math:`B_t` 称为 *基线*，可以是任何不依赖于x的标量。我们可以在这里包括基线而不改变相等性，
+    因为梯度在所有动作上总和为零，:math:`\sum_{x}\frac{\partial \pi_t(x)}{\partial H_t(a)} = 0`，
+    当 :math:`H_t(a)` 改变时，一些动作的概率上升，有些下降，但变化的总和必须为零，因为概率的总和总是一。
+
+    接下来，我们将和的每个项乘以 :math:`\pi_t(x) / \pi_t(x)`：
+
     .. math::
 
         \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} =
             \sum_{x}\pi_t(x)(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}/\pi_t(x)
+
+    该等式现在采用期望的形式，对随机变量 :math:`A_t` 的所有可能值x求和，然后乘以取这些值的概率。从而：
 
     .. math::
 
@@ -475,6 +493,10 @@
         &= \mathbb{E}\left[ (R_t-\overline{R}_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right]
         \end{align*}
 
+    这里我们选择了基线 :math:`B_t=\overline{R}_t` 和替换 :math:`R_t` 为 :math:`q_*(A_t)`，
+    这是允许的，因为 :math:`\mathbb{E}[R_t|A_t] = q_*(A_t)`。
+    很快我们将确定 :math:`\frac{\partial \pi_t(x)}{\partial H_t(a)}=\pi_t(x)(\mathbb{1}_{a=A_t}-\pi_t(a))`，
+    其中，如果 :math:`a = x` 则定义 :math:`\mathbb{1}_{a=A_t}` 为1，否则为0。假设现在，我们有
 
     .. math::
 
@@ -483,14 +505,24 @@
         &= \mathbb{E}\left[ (R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a)) \right]
         \end{align*}
 
+    回想一下，我们的计划是将性能梯度编写为我们可以在每个步骤上采样的预期，就像我们刚刚完成的那样，
+    然后更新与样本成比例的每个步骤。将上述期望的样本替换为（2.13）中的性能梯度，得出：
+
     .. math::
 
         H_{t+1}(a) = H_t(a) + \alpha(R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a))，对于所有a
+
+    您可能认为它等同于我们的原始算法（2.12）。
+
+    因此，它只是表明这一点 :math:`\frac{\partial \pi_t(x)}{\partial H_t(a)}=\pi_t(x)(\mathbb{1}_{a=A_t}-\pi_t(a))`，
+    正如我们假定的一样。回想一下倒数的标准商法则：
 
     .. math::
 
         \frac{\partial}{\partial x} \left[ \frac{f{x}}{g{x}} \right] =
             \frac{ \frac{\partial f(x)}{\partial x}g(x) - f(x)\frac{\partial g(x)}{\partial x}}{g(x)^2}
+
+    使用这个，我们可以写出
 
     .. math::
 
@@ -503,6 +535,14 @@
         &= \mathbb{1}_{a=x}\pi_t(x) - \pi_t(x)\pi_t(a) \\
         &= \pi_t(x)(\mathbb{1}_{a=x} - \pi_t(a)) &Q.E.D.
         \end{align*}
+
+    我们刚刚表明，梯度老虎机算法的预期更新等于预期奖励的梯度，因此该算法是随机梯度上升的实例。
+    这确保了该算法具有稳健的收敛特性。
+
+    请注意，除了不依赖于所选操作之外，我们不需要奖励基线的任何属性。
+    例如，我们可以将其设置为零或1000，并且算法仍然是随机梯度上升的实例。
+    基线的选择不会影响算法的预期更新，但它确实会影响更新的方差，从而影响收敛速度（如图2.5所示）。
+    选择它作为奖励的平均值可能不是最好的，但它很简单并且在实践中运作良好。
 
 2.9 关联搜索（语境老虎机）
 --------------------------
