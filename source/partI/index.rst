@@ -21,7 +21,7 @@
 .. toctree::
    :maxdepth: 2
 
-   chapter2/multi_arm_bandits
+   chapter2/multi_armed_bandits
    chapter3/finite_markov_decision_process
    chapter4/dynamic_programming
    chapter5/monte_carlo_methods
