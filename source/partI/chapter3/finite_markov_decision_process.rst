@@ -45,15 +45,15 @@ MDP和个体一起产生了一个如下所示的序列或 *轨迹*：
 在 *有限* MDP中，状态，动作和奖励
 （:math:`\mathcal{S}`，:math:`\mathcal{A}` 和 :math:`\mathcal{R}`）的集合都具有有限数量的元素。
 在这种情况下，随机变量 :math:`R_t` 和 :math:`S_t` 具有明确定义的离散概率分布，仅取决于先前的状态和动作。
-也就是说，对于这些随机变量的特定值，:math:`s' \in \mathcal{S}` 和 :math:`r \in \mathcal{R}`，
+也就是说，对于这些随机变量的特定值，:math:`s^\prime \in \mathcal{S}` 和 :math:`r \in \mathcal{R}`，
 在给定前一状态和动作的特定值的情况下，存在这些值在时间t发生的概率：
 
 .. math::
     :label: 3.2
 
-    p(s',r|s,a) \doteq Pr\{S_t=s',R_t=r|S_{t-1}=s,R_{t-1}=a\}
+    p(s^\prime,r|s,a) \doteq Pr\{S_t=s^\prime,R_t=r|S_{t-1}=s,R_{t-1}=a\}
 
-对所有 :math:`s', s \in \mathcal{S}`，:math:`\mathcal{r} \in \mathcal{R}`
+对所有 :math:`s^\prime, s \in \mathcal{S}`，:math:`\mathcal{r} \in \mathcal{R}`
 和 :math:`a \in \mathcal{A}(s)`。函数 :math:`p` 定义了MDP的 *动态*。
 方程中等号上的点提醒我们它是一个定义（在这个例子中是函数 :math:`p`），而不是从先前定义得出的事实。
 动力学函数 :math:`p : \mathcal{S} \times \mathcal{R} \times \mathcal{S} \times \mathcal{A} \to [0, 1]`
@@ -63,7 +63,7 @@ MDP和个体一起产生了一个如下所示的序列或 *轨迹*：
 .. math::
     :label: 3.3
 
-    \sum_{s' \in \mathcal{S}}\sum_{r \in \mathcal{R}}p(s',r|s,a)=1，对所有 s \in \mathcal{S}，a \in \mathcal{A}(s)
+    \sum_{s^\prime \in \mathcal{S}}\sum_{r \in \mathcal{R}}p(s^\prime,r|s,a)=1，对所有 s \in \mathcal{S}，a \in \mathcal{A}(s)
 
 在 *马尔可夫* 决策过程中，:math:`p` 给出的概率完全表征了环境的动态。
 也就是说，:math:`S_t` 和 :math:`R_t` 的每个可能值的概率
@@ -80,14 +80,14 @@ MDP和个体一起产生了一个如下所示的序列或 *轨迹*：
 .. math::
     :label: 3.4
 
-    p(s'|s,a) \doteq Pr\{S_t=s'|S_{t-1}=s,A_{t-1}=a\}=\sum_{r\in\mathcal{R}}p(s',r|s,a)
+    p(s^\prime|s,a) \doteq Pr\{S_t=s^\prime|S_{t-1}=s,A_{t-1}=a\}=\sum_{r\in\mathcal{R}}p(s^\prime,r|s,a)
 
 我们还可以将状态 - 动作对的预期奖励计算为双参数函数 :math:`r : \mathcal{S} \times \mathcal{A} \to \mathbb{R}`，
 
 .. math::
     :label: 3.5
 
-    r(s,a)\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a\right]=\sum_{r\in\mathcal{R}}r\sum_{s'\in\mathcal{S}}p(s',r|s,a)
+    r(s,a)\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a\right]=\sum_{r\in\mathcal{R}}r\sum_{s^\prime\in\mathcal{S}}p(s^\prime,r|s,a)
 
 以及状态 - 行动 - 下一状态三元组的预期奖励作为三个参数函数
 :math:`r : \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to \mathbb{R}`，
@@ -95,7 +95,7 @@ MDP和个体一起产生了一个如下所示的序列或 *轨迹*：
 .. math::
     :label: 3.6
 
-    r(s,a,s')\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a,S_t=s'\right]=\sum_{r\in\mathcal{R}}r\frac{p(s',r|s,a)}{p(s'|s,a)}
+    r(s,a,s^\prime)\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a,S_t=s^\prime\right]=\sum_{r\in\mathcal{R}}r\frac{p(s^\prime,r|s,a)}{p(s^\prime|s,a)}
 
 在本书中，我们通常使用四参数p函数（3.2），但这些其他符号中的每一个偶尔也很方便。
 
@@ -190,12 +190,12 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
     以及每个状态-动作对的动作节点（由行动名称标记并由线连接的小实心圆圈）。
     从状态 :math:`s` 开始并采取动作 :math:`a`，你将沿着从状态节点 :math:`s` 到动作节点 :math:`(s,a)` 的线路移动。
     然后，环境通过离开动作节点 :math:`(s,a)` 的箭头之一转换到下一个状态的节点。
-    每个箭头对应一个三元组 :math:`(s,s',a)`，其中 :math:`s'` 是下一个状态，我们用转移概率 :math:`p(s'|s,a)` 标记箭头，
-    以及该转换的预期回报 :math:`r(s,a,s')`。请注意，标记离开动作节点的箭头的转移概率和总是为1。
+    每个箭头对应一个三元组 :math:`(s,s^\prime,a)`，其中 :math:`s^\prime` 是下一个状态，我们用转移概率 :math:`p(s^\prime|s,a)` 标记箭头，
+    以及该转换的预期回报 :math:`r(s,a,s^\prime)`。请注意，标记离开动作节点的箭头的转移概率和总是为1。
 
-*练习3.4* 给出一个类似于例3.3中的表，但是对于 :math:`p(s',r|s,a)`。
-它应该有 :math:`s, a, s', r` 和 :math:`p(s',r|s,a)` 的列，
-以及 :math:`p(s',r|s,a)>0` 的每个4元组的行。
+*练习3.4* 给出一个类似于例3.3中的表，但是对于 :math:`p(s^\prime,r|s,a)`。
+它应该有 :math:`s, a, s^\prime, r` 和 :math:`p(s^\prime,r|s,a)` 的列，
+以及 :math:`p(s^\prime,r|s,a)>0` 的每个4元组的行。
 
 3.2 目标和奖励
 ^^^^^^^^^^^^^^
@@ -363,6 +363,91 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
 包括 :math:`T = \infty` 或 :math:`\gamma = 1` （但不能同时存在）的可能性。
 我们在本书的剩余部分中使用这些约定来简化符号，并表达情节和持续任务之间的近乎相似。
 （之后，在第10章中，我们将介绍一个持续未衰减的形式。）
+
+3.5 策略和价值函数
+^^^^^^^^^^^^^^^^^^^^^^
+
+几乎所有的强化学习算法都涉及估计状态（或状态-动作对）的 *价值函数*，
+它们估计个体在给定状态下的 *好坏程度* （或者在给定状态下执行给定动作的程度有多好）。
+这里的“有多好”的概念是根据未来的奖励来定义的，或者准确的的说是预期回报方面。
+当然，个体未来可能获得的回报取决于它将采取的行动。因此，价值函数是根据特定的行为方式来定义的，称为策略。
+
+形式上，*策略* 是从状态到选择每个可能动作的概率的映射。如果个体在时间 :math:`t` 遵循策略 :math:`\pi`，
+则 :math:`\pi(a|s)` 是如果 :math:`S_t=s`，则 :math:`A_t=a` 的概率。
+像 :math:`p` 一样，:math:`\pi` 是一个普通的函数；
+:math:`\pi(a|s)` 中间的“|”仅提醒它为每个 :math:`s\in \mathcal{S}`
+定义了 :math:`a\in \mathcal{A}(s)` 的概率分布。
+强化学习方法指定了个体的策略如何因其经验结果而变化。
+
+*练习3.11* 如果当前状态为 :math:`S_t`，并且根据随机策略 :math:`\pi` 选择动作，
+则对于 :math:`\pi` 和四参数函数 :math:`p` （3.2），:math:`R_{t+1}` 的期望是多少？
+
+在状态 :math:`s` 下，策略 :math:`\pi` 下的 *价值函数* 表示为 :math:`v_\pi(s)` ，
+是从 :math:`s` 开始并且之后遵循策略 :math:`\pi` 的预期收益。
+对于 **MDPs**，我们可以正式将 :math:`v_\pi(s)` 定义为
+
+.. math::
+    :label: 3.12
+
+    v_\pi(s) \doteq \mathbb{E}_\pi\left[G_t|S_t=s\right]
+    = \mathbb{E}_\pi\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1}|S_t=s\right]，对所有 s\in \mathbb{S}
+
+其中 :math:`\mathbb{E}[\dot]` 表示个体遵循策略 :math:`\pi` 的随机变量的期望值， :math:`t` 是任意的时间步长。
+请注意，如果有终止状态的话，其值一直为0。我们称函数 :math:`v_\pi` 是 *策略* :math:`\pi` *的状态—价值函数*。
+
+
+同样，我们在政策⇡下定义采取行动a的价值，表示为q⇡（s，a），作为从s开始的预期收益，采取行动a，然后遵循政策⇡：
+
+同样，我们定义在策略 :math:`\pi`，状态 :math:`s` 下采取动作 :math:`a` 的价值，
+表示为 :math:`q_\pi(s,a)`，作为从 :math:`s` 开始的，采取行动` a :math:`，
+此后遵循策略 :math:`\pi` 的预期回报：
+
+.. math::
+    :label: 3.13
+
+    q_\pi(s,a) \doteq \mathbb{E}_\pi\left[G_t|S_t=s,A_t=a\right]
+    = \mathbb{E}_\pi\left[\sum^{\infty}_{k=0}\gamma^kR_{t+k+1}|S_t=s,A_t=a\right]
+
+我们称 :math:`q_\pi` 为策略 :math:`\pi` 的动作值函数。
+
+*练习3.12* 用 :math:`q_\pi` 和 :math:`\pi` 给出 :math:`v_\pi` 的等式。
+*练习3.13* 根据 :math:`v_\pi` 和四参数 :math:`p` 给出 :math:`q_\pi` 的等式。
+
+价值函数 :math:`v_\pi` 和 :math:`q_\pi` 可以根据经验估计。
+例如，如果个体遵循策略 :math:`\pi`并且对于遇到的每个状态保持平均值，
+那么该状态之后的实际返回值将收敛到状态价值 :math:`v+\pi(s)`，作为遇到的状态的次数接近无穷大。
+如果为每个状态采取的每项行动保留单独的平均值，那么这些平均值将同样收敛于行动价值 :math:`q_\pi(s,a)`。
+我们称这种估计方法为 *蒙特卡罗方法*，因为它们涉及对实际收益的许多随机样本进行平均。
+这些方法在第5章中介绍。当然，如果有很多状态，那么单独为每个状态保持单独的平均值可能是不切实际的。
+相反，个体将必须维护 :math:`v_\pi` 和 :math:`q_\pi` 作为参数化函数（参数少于状态），并调整参数以更好地匹配观察到的返回。
+这也可以产生准确的估计，尽管很大程度上取决于参数化函数逼近器的性质。这些可能性在本书的第二部分中讨论。
+
+在强化学习和动态规划中使用的价值函数的基本属性是它们满足类似于我们已经为返回建立的递归关系（3.9）。
+对于任何策略 :math:`\pi` 和任何状态 :math:`s`，:math:`s` 的值与其可能的后继状态的值之间保持以下一致性条件：
+
+.. math::
+    :label: 3.14
+
+    \begin{align*}
+    v_\pi(s) &\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
+    &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s] (由 (3.9)) \\
+    &= \sum_a\pi(a|s) \sum_{s^\prime}\sum_r p(s^\prime,r|s,a) \left[r+\gamma\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s^\prime]\right] \\
+    &= \sum_a\pi(a|s) \sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma v_\pi(s^\prime)], 对所有 s\in\mathcal{S}
+    \end{align*}
+
+其中隐含的动作 :math:`a` 取自集合 :math:`\mathcal{A}(s)`，
+下一个状态 :math:`s^\prime` 取自集合 :math:`\mathcal{S}`
+（或者在情节问题的情况下取自 :math:`\mathcal{S}+`），
+并且奖励 :math:`r` 取自集合 :math:`\mathcal{R}`。
+注意，在最后的等式中我们如何合并两个和，一个在 :math:`s^\prime` 的所有值上，
+另一个在 :math:`r` 的所有值上，合并为所有可能值的一个和。
+我们经常使用这种合并的和来简化公式。请注意最终表达式如何轻松作为期望值读取。
+它实际上是三个变量 :math:`a`，:math:`s^\prime` 和 :math:`r` 的所有值的总和。
+对于每个三元组，我们计算其概率 :math:`\pi(a|s)p(s^\prime,r|s,a)`，
+用该概率对括号中的数量进行加权，然后对所有可能性求和得到预期值。
+
+
+
 
 .. [1]
    我们使用术语个体，环境和动作，而不是工程师术语控制器，受控系统（或工厂）和控制信号，因为它们对更广泛的受众有意义。
