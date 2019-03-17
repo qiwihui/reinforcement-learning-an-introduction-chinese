@@ -114,7 +114,7 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 
     初始化一个数组 :math:`V(s)=0` ，所有的 :math:`s\in\mathcal{S}^+`，除了 :math:`V(终点) = 0`
 
-    重复
+    循环
         :math:`\Delta \leftarrow 0`
 
         对于每个 :math:`s \in \mathcal{S}`:
@@ -304,10 +304,10 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 
     2. 策略评估
 
-        重复
+        循环
             :math:`\Delta{\leftarrow}0`
 
-            对每个 :math:`s\in{S}` 重复:
+            对每个 :math:`s\in{S}` 循环:
 
                 :math:`v\leftarrow{V(s)}`
 
@@ -414,7 +414,7 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 
     对所有 :math:`s\in\mathcal{S}`，初始化 :math:`V(s)` 为任意值，其中 :math:`V(终点)=0`
 
-    重复：
+    循环：
 
         :math:`v\leftarrow{V(s)}`
 

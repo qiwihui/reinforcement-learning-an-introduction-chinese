@@ -224,7 +224,7 @@
         &N(a) \leftarrow 0
         \end{aligned}
 
-    一直循环：
+    循环：
 
     .. math::
 
