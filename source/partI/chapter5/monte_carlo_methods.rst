@@ -288,7 +288,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
         对所有的 :math:`s \in \mathcal{S}, a \in \mathcal{A}(s)`，任意 :math:`Q(s,a) \in \mathbb{R}`
 
-        对所有的 :math:`s \in \mathcal{S}, a \in \mathcal{A}(s)`，:math:`Returns(s,a) \leftarrow` 空表
+        对所有的 :math:`s \in \mathcal{S}, a \in \mathcal{A}(s)`，:math:`Returns(s,a) \leftarrow` 空列表
 
     一直循环（对每一个回合）：
 
@@ -308,7 +308,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
                 :math:`Q(S_t, A_t) \leftarrow average(Returns(S_t, A_t))`
 
-                :math:`\pi(S_t) \leftarrow \mathop{argmax} \limits_{a} Q(S_t, A_t)`
+                :math:`\pi(S_t) \leftarrow \mathop{argmax} \limits_{a} Q(S_t, a)`
 
 *练习5.4* 探索开端的蒙特卡洛算法的伪代码是无效的，因为对于每个状态-动作对，它维护所有返回的列表并重复计算它们的平均值。
 使用类似于第2.4节中解释的技术来维护平均值和计数（对于每个状态-动作对）并逐步更新它们会更有效。描述如何改变伪代码来实现这一目标。
@@ -335,120 +335,147 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 5.4 非探索开端的蒙特卡洛控制
 ----------------------------
 
-  如何摆脱这个在实践中不太可能发生的探索开端的假设呢？保证无限次后所有的动作都能被选到的惟一的通用办法是让智能体能够持续地选择它们。具体来讲有两种方法，我们称之为*在策略（on-policy）* 方法和 *离策略（off-policy）* 方法。在策略方法尝试去估计和提升我们用作决策的那个策略；而离策略估计和提升的策略与用来生成数据的策略不同。我们上一节所用到的Monte
-Carlo
-ES方法就是一种在策略方法。在这一节里，我们还将学习如何设计不用探索开端假设的在策略蒙特卡洛控制（on-policy
-Monte Carlo control）算法。离策略方法将在下一节说明。
+如何摆脱这个在实践中不太可能发生的探索开端的假设呢？
+保证无限次后所有的动作都能被选到的惟一的通用办法是让个体能够持续地选择它们。
+具体来讲有两种方法，我们称之为 *在策略（on-policy）* 方法和 *离策略（off-policy）* 方法。
+在策略方法尝试去估计和提升我们用作决策的那个策略；而离策略估计和提升的策略与用来生成数据的策略不同。
+我们上一节所用到的探索开端的蒙特卡洛方法就是一种在策略方法。
+在这一节里，我们还将学习如何设计不用探索开端假设的在策略蒙特卡洛控制（on-policy Monte Carlo control）算法。
+离策略方法将在下一节说明。
 
-  我们的在策略控制方法是*软的（soft）* ，即是说所有的 :math:`s \in S` 和 :math:`a \in A(s)` ， :math:`\pi(a|s) > 0` ，但是会逐渐地接近于确定性的最优策略。许多第二章谈论的方法都可以提供这种机制。这一节我们使用 *:math:`\epsilon -` 贪心（ :math:`\epsilon - greedy` ）* 策略，即大多数时间选择有最大的动作价值的动作，但是有 :math:`\epsilon` 的概率选择随机的动作。也就是说，对所有非贪心的动作，选择它的概率是 :math:`\frac{\epsilon}{|A(s)|}` ，选择贪心的动作的概率是 :math:`1 - \epsilon + \frac{\epsilon}{|A(s)|}` 。 :math:`\epsilon -` 贪心是 :math:`\epsilon - soft` 策略的一个例子，在 :math:`\epsilon - soft` 中，对所有的状态和动作，有 :math:`\pi(a|s) \geq \frac{\epsilon}{|A(s)|}` 。在 :math:`\epsilon - soft` 中， :math:`\epsilon -` 贪心策略是最接近贪心的。
+我们的在策略控制方法是 *软的（soft）* ，就是说所有的 :math:`s\in\mathcal{S}`
+和 :math:`a\in\mathcal{A}(s)`，:math:`\pi(a|s)>0`，但是会逐渐地接近于确定性的最优策略。
+许多第二章谈论的方法都可以提供这种机制。
+这一节我们使用 :math:`\epsilon -` *贪心* （:math:`\epsilon - greedy`）策略，
+即大多数时间选择有最大估计动作价值的动作，但是有 :math:`\epsilon` 的概率选择随机的动作。
+也就是说，对所有非贪心的动作，选择它的概率是 :math:`\frac{\epsilon}{|\mathcal{A}(s)|}`，
+选择贪心的动作的概率是 :math:`1-\epsilon+\frac{\epsilon}{|\mathcal{A}(s)|}`。
+:math:`\epsilon-` 贪心是 :math:`\epsilon-soft` 策略的一个例子，
+在 :math:`\epsilon-soft` 中，对所有的状态和动作，
+有 :math:`\pi(a|s)\geq\frac{\epsilon}{|A(s)|}`。
+在 :math:`\epsilon-soft` 中，:math:`\epsilon-` 贪心策略是最接近贪心的。
 
-  在策略蒙特卡洛控制的思想仍然是广义策略迭代（GPI）。和Monte Carlo
-ES一样，我们使用首次访问蒙特卡洛方法来估计当前策略的动作-价值函数。由于没有探索开端这个假设，我们不能简单地对当前价值函数使用贪心，来提升当前的策略，因为那样会影响我们在未来对非贪心动作的探索。幸运的是，广义策略迭代（GPI）并不需要我们的策略一直保持贪心，只是要求不断向贪心策略 *靠近（toward）* 。我们的在策略方法会不断的趋向于贪心策略。对任意的 :math:`\epsilon - soft` 策略 :math:`\pi` ， :math:`q_\pi` 对应的任意的$:raw-latex:`\epsilon `-
-:math:`贪心策略都不坏于策略` :raw-latex:`\pi`$。完整的算法如下。
+在策略蒙特卡洛控制的思想仍然是广义策略迭代（GPI）。
+和探索开端的蒙特卡洛算法一样，我们使用首次访问蒙特卡洛方法来估计当前策略的动作-价值函数。
+由于没有探索开端这个假设，我们不能简单地对当前价值函数使用贪心来提升当前的策略，
+因为那样会影响我们在未来对非贪心动作的探索。
+幸运的是，广义策略迭代（GPI）并不需要我们的策略一直保持贪心，只是要求不断向贪心策略 *靠近*。
+我们的在策略方法会不断的趋向于 :math:`\epsilon-` 贪心策略。
+对任意的 :math:`\epsilon-soft` 策略 :math:`\pi`，
+:math:`q_\pi` 对应的任意的 :math:`\epsilon-` 贪心策略都不坏于策略 :math:`\pi`。
+完整的算法如下。
 
---------------
+.. admonition:: 在策略首次访问蒙特卡洛控制（对于 :math:`\epsilon-soft` 策略），用于估算 :math:`V \approx v_\pi`
+    :class: important
 
-在策略首次访问蒙特卡洛控制（对于 :math:`\epsilon - soft` 策略）
+    算法参数：小 :math:`\epsilon > 0`
 
---------------
+    初始化:
 
-初始化，对所有的 :math:`s \in S, a \in A(s)` ：
+        :math:`\pi \leftarrow` 任意 :math:`\epsilon-soft` 策略
 
-​ $Q(s,a) :raw-latex:`\leftarrow `$ 随机值
+        对所有的 :math:`s \in \mathcal{S}, a \in \mathcal{A}(s)`，任意 :math:`Q(s,a) \in \mathbb{R}`
 
-​ :math:`Returns(s,a) \leftarrow` 空表
+        对所有的 :math:`s \in \mathcal{S}, a \in \mathcal{A}(s)`，:math:`Returns(s,a) \leftarrow` 空列表
 
-​ :math:`\pi(a|s) \leftarrow` 一个随机的 :math:`\epsilon - soft` 策略
+    一直循环：
 
-一直循环：
+        遵循策略 :math:`\pi` ，生成一个回合：:math:`S_0, A_0, R_1, \dots , S_{T-1|, A_{T-1}, R_T`
 
-​ （a）使用策略 :math:`\pi` 生成一个回合
+        :math:`G \leftarrow 0`
 
-​ （b）对回合中出现的每个 :math:`s,a` 对：
+        对于这个回合中的每一步，:math:`t=T-1, T-2, \dots, 0`：
 
-​ :math:`G \leftarrow` 回报（遵循 :math:`s,a` 对的首次出现原则）
+            :math:`G \leftarrow \gamma G + R_{t+1}`
 
-​ 将 :math:`G` 添加到表 :math:`Returns(s,a)` 中
+            除非 :math:`S_t, A_t` 出现在 :math:`S_0, A_0, R_1, \dots , S_{t-1|, A_{t-1}` 中：
 
-​ :math:`Q(s, a) \leftarrow average(Returns(s ,a))`
+                将 :math:`G` 添加到 :math:`Returns(S_t, A_t)` 中
 
-​ （c）对回合中的每个 :math:`s` ：
+                :math:`Q(S_t, A_t) \leftarrow average(Returns(S_t, A_t))`
 
-​ :math:`A^* \leftarrow arg \space \underset{a}{max} \space Q(s,a)`
+                :math:`A^* \leftarrow \mathop{argmax} \limits_{a} Q(S_t, a)`  （随意打破关系）
 
-​ 对所有的 :math:`a \in A(s)` ：
+                对所有 :math:`a \in\mathcal{A}(S_t)`:
+
+                    .. math::
+
+                        \pi(a|S_t) \leftarrow \left\{
+                        \begin{array}{rcl}
+                            1 - \epsilon + \frac{\epsilon}{|\mathcal{A}(S_t)|} & & if &a=A^* \\
+                            \frac{\epsilon}{|\mathcal{A}(S_t)|} & & if &a \neq A^*
+                        \end{array}
+                        \right.
+
+
+由于策略提升理论的保证，:math:`q_\pi` 对应的任意的 :math:`\epsilon -` 贪心策略
+都较 :math:`\epsilon - soft` 策略 :math:`\pi` 有所提高。
+设 :math:`\pi'` 为 :math:`\epsilon -` 贪心策略。
+策略提升理论能够应用在这里，因为对所有 :math:`s \in \mathcal{S}`:
+
+.. math::
+    :label: 5.2
+
+    \begin{eqnarray}
+    q_\pi{(s, \pi^{'}(s))} &=& \sum_a \pi^{'}(a|s)q_\pi{(s,a)}\\
+    &=& \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} + (1-\epsilon)\space  \underset{a}{max}\space q_\pi{(s,a)}\tag{5.2}\\
+    &\geq& \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} + (1-\epsilon)\sum_a \frac{\pi(a|s)-\frac{\epsilon}{|\mathcal{A}(s)|}}{1-\epsilon}q_\pi(s,a) \\
+    \end{eqnarray}
+
+（和是为1的非负权值的加权平均，所以它必须小于等于最大数的求和）
 
 .. math::
 
+    \begin{eqnarray}
+    &=& \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} - \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} + \sum_a \pi(a|s)q_\pi{(s,a)}\\
+    &=&v_\pi{(s)}.\\
+    \end{eqnarray}
 
-   \pi(a|s) \leftarrow \left\{
-   \begin{array}{rcl}
-   1 - \epsilon + \frac{\epsilon}{|A(s)|} & & if &a=A^* \\
-   \frac{\epsilon}{|A(s)|} & & if &a \neq A^*
-   \end{array}
-   \right.
+所以，由策略提升理论，:math:`\pi^{'} \geq \pi`，
+（即对所有 :math:`s \in \mathcal{S}`，:math:`v_{\pi^{'}}(s) \geq v_\pi(s)`。
+我们现在证明等号只能在 :math:`\pi^{'}` 和 :math:`\pi` 均为最优策略时才能取到，
+即它们比任何其他 :math:`\epsilon - soft` 策略要好或者相当。
 
---------------
-
-  由于策略提升理论的保证，:math:`q_\pi` 对应的任意的$:raw-latex:`\epsilon `-
-:math:`贪心策略都较` :raw-latex:`\epsilon `-
-soft :math:`策略` :raw-latex:`\pi` :math:`有所提高。设` :raw-latex:`\pi`’ :math:`为` :raw-latex:`\epsilon `-
-:math:`贪心策略。策略提升理论能够应用在这里，因为对所有` s
-:raw-latex:`\in `S$:
+考虑一个除了策略是 :math:`\epsilon - soft` 驱动的，其他和原来环境恰好相同的新环境。
+这个新环境有相同的状态和动作集，行为也和之前一样。如果在状态 :math:`s`，做出动作 :math:`a`，
+那么有 :math:`1 - \epsilon` 的可能性新环境和旧环境表现一样，
+有 :math:`\epsilon` 的可能性会随机地以等可能性在所有动作里重新选择一个动作，
+然后表现得像具有新的随机动作的旧环境。
+在这个具有一般策略的新环境中能够做的最好的情况与带 :math:`\epsilon-soft` 旧环境相同。
+让 :math:`\tilde{v}_*` 和 :math:`\tilde{q}_*` 表示新环境的最优的价值函数。
+则策略 :math:`\pi` 是最优的，当且仅当 :math:`v_\pi = \tilde{v}_*` 。
+从 :math:`\tilde{v}_*` 的定义我们知道它是下式的唯一解
 
 .. math::
-
 
    \begin{eqnarray}
-   q_\pi{(s, \pi^{'}(s))} &=& \sum_a \pi^{'}(a|s)q_\pi{(s,a)}\\
-   &=& \frac{\epsilon}{|A(s)|}\sum_a q_\pi{(s,a)} + (1-\epsilon)\space  \underset{a}{max}\space q_\pi{(s,a)}\tag{5.2}\\
-   &\geq& \frac{\epsilon}{|A(s)|}\sum_a q_\pi{(s,a)} + (1-\epsilon)\sum_a \frac{\pi(a|s)-\frac{\epsilon}{|A(s)|}}{1-\epsilon}q_\pi(s,a) \\
+   \tilde{v}_*(s)  &=& (1-\epsilon) \space \underset{a}{max} \space \tilde{q}_*(s,a) +
+   \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a \tilde{q}_*(s,a)\\
+   &=& (1-\epsilon) \space \underset{a}{max} \space \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma\tilde{v}_*(s^{'})] \\
+   & & + \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma\tilde{v}_*(s^{'})]
    \end{eqnarray}
 
-（和为1的非负权值的加权平均，所以它必须小于等于最大数的求和）
+当 :math:`\epsilon - soft` 策略 :math:`\pi` 没有提升时，取等号。由（5.2）式，我们还知道，
 
 .. math::
 
-
    \begin{eqnarray}
-   &=& \frac{\epsilon}{|A(s)|}\sum_a q_\pi{(s,a)} - \frac{\epsilon}{|A(s)|}\sum_a q_\pi{(s,a)} + \sum_a \pi(a|s)q_\pi{(s,a)}\\
-   &=&v_\pi{(s)}.\\
+   v_\pi(s) &=& (1-\epsilon) \space \underset{a}{max} \space q_\pi(s,a) +
+   \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi(s,a)\\
+   &=& (1-\epsilon) \space \underset{a}{max} \space \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma v_\pi(s^{'})] \\
+   & & + \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma v_\pi(s^{'})]
    \end{eqnarray}
 
-所以，由策略提升理论， :math:`\pi^{'} \geq \pi \space(i.e., v_\pi{'}{(s)} \geq v_\pi{(s)}, 对所有s \in S)` 。我们现在证明等号只能在 :math:`\pi^{'}` 和 :math:`\pi` 均为最优策略时才能取到，即它们比任何其他 :math:`\epsilon - soft` 策略要好。
+这个方程与上面的方程相比，除了把 :math:`\tilde{v}_*` 换成了 :math:`v_\pi` ，其他的都相同。
+由于 :math:`\tilde{v}_*` 是唯一的解，所以必定有 :math:`v_\pi = \tilde{v}_*` 。
 
-  考虑一个除了策略是:math:`\epsilon - soft` 移动到环境内部，其他和原来环境恰好相同的新环境。这个新环境有相同的状态和动作集，行为也和之前一样。如果在状态 :math:`s` ，做出动作 :math:`a` ，那么有 :math:`1 - \epsilon` 的可能性新环境和旧环境表现一样，有 :math:`\epsilon` 的可能性会随机的以等可能性在所有动作里重新选择一个动作，再次重复之前的动作（即对于这个新的动作，有 :math:`1-\epsilon` 可能性与旧环境一样， :math:`\epsilon` 可能性重新随机选动作）。在新环境中能够做的最好的情况与旧环境相同。让 :math:`\tilde{v}_*` 和 :math:`\tilde{q}_*` 表示新环境的最优的价值函数。策略 :math:`\pi` 是最优的，当且仅当 :math:`v_\pi = \tilde{v}_*` 。从 :math:`\tilde{v}_*` 的定义我们知道它是下式的唯一解
+其实，我们在前几页已经说明了策略迭代适用于 :math:`\epsilon - soft` 策略。
+对 :math:`\epsilon - soft` 策略使用贪心策略，我们能够保证每一步都有提升，
+直到我们在 :math:`\epsilon - soft` 策略中找到最优的策略为止。
+虽然这个分析独立于动作-价值函数的确定，但是它假设策略和价值都能精确计算。
+这使我们与上一节大致相同。现在我们只通过 :math:`\epsilon - soft` 策略得到最优策略，
+但是另一方面，我们移除了探索开端的假设。
 
-.. math::
-
-
-   \begin{eqnarray}
-   \tilde{v}_*(s)  &=& (1-\epsilon) \space \underset{a}{max} \space \tilde{q}_*(s,a) + 
-   \frac{\epsilon}{|A(s)|}\sum_a \tilde{q}_*(s,a)\\
-   &=& (1-\epsilon) \space \underset{a}{max} \space \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma\tilde{v}_*(s^{'})] \ 
-   & & + \frac{\epsilon}{|A(s)|}\sum_a \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma\tilde{v}_*(s^{'})]
-   \end{eqnarray}
-
-当 :math:`\epsilon - soft` 策略 :math:`\pi` 没有提升时，取等号。我们还知道，由（5.2）式，
-
-.. math::
-
-
-   \begin{eqnarray}
-   v_\pi(s) &=& (1-\epsilon) \space \underset{a}{max} \space q_\pi(s,a) + 
-   \frac{\epsilon}{|A(s)|}\sum_a q_\pi(s,a)\\
-   &=& (1-\epsilon) \space \underset{a}{max} \space \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma v_\pi(s^{'})] \ 
-   & & + \frac{\epsilon}{|A(s)|}\sum_a \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma v_\pi(s^{'})]
-   \end{eqnarray}
-
-这个方程与上面的方程相比，除了把 :math:`\tilde{v}_*` 换成了 :math:`v_\pi` ，其他的都相同。由于 :math:`\tilde{v}_*` 是唯一的，所以必须是 :math:`v_\pi = \tilde{v}_*` 。
-
-  其实，我们在前几页已经说明了策略迭代适用于:math:`\epsilon - soft` 策略。对 :math:`\epsilon - soft` 策略使用贪心策略，我们能够保证每一步都有提升，直到我们找到最优的策略为止。虽然这个分析独立于动作-价值函数的确定，但是它假设策略和价值都能精确计算。这使我们上一节大概相同。现在我们只通过 :math:`\epsilon - soft` 策略得到最优策略，但是另一方面，我们移除了探索开端（exploring
-starts）的假设。
-
-​
-
---------------
 
 5.5 通过重要性采样的离策略预测
 ------------------------------
@@ -526,22 +553,9 @@ MC算法将在将在下一小节给出。
 我们应用两种重要性采样方法来用离策略的数据估计单个21点状态的价值。前面讲过，蒙特卡洛方法的一个优势是它可以用来估计单一的一个状态，不用生成其他状态的估计。这个例子中，我们估计当庄家是两点，玩家点数和是13点，玩家有一个使用的A（即玩家有A和2两张牌）。从这个状态生成数据，然后选择要牌或停止是相同的概率（行为策略）。目标策略是只有当点数和为20或21时才停止，如例5.1所示。
 
 .. figure:: images/figure-5.4.png
-   :alt: 图
-   5.4：从离策略回合数据估计21点的单个状态的价值，加权重要性采样有更低的估计误差。
+   :alt: 图5.4：从离策略回合数据估计21点的单个状态的价值，加权重要性采样有更低的估计误差。
 
-   图
-   5.4：从离策略回合数据估计21点的单个状态的价值，加权重要性采样有更低的估计误差。
-
-.. raw:: html
-
-   <center>
-
-图
-5.3：从离策略回合数据估计21点的单个状态的价值，加权重要性采样有更低的估计误差。
-
-.. raw:: html
-
-   </center>
+   图5.4：从离策略回合数据估计21点的单个状态的价值，加权重要性采样有更低的估计误差。
 
 目标策略的价值大概是 :math:`-0.27726` （这是由目标策略生成一百万个回合的回报求平均而得）。两种离策略方法在 :math:`1000` 个随机的离策略回合后，估计的价值很接近这个值了。为使我们的结果更可信，我们独立的进行了 :math:`100` 次实验，每次估计值都从零开始，学习 :math:`10000` 个回合。图5.3显示了学习曲线——两种方法各自的均方误差是回合数的函数，结果是 :math:`100` 次实验的平均。两种算法的误差都趋向于零，但是加权重要性采样在开始的时候误差更小，这在实践中很典型。
 
@@ -552,25 +566,11 @@ MC算法将在将在下一小节给出。
 对原始重要性采样的估计通常会有无限的方差，因此带来了不太让人满意的收敛特性，即无论合适，缩放的回报都有无限的方差——而这在回合的轨迹中包含环时更加容易发生。一个简单的例子如图5.5所示。这里只有一个非结束状态 :math:`s` 和两个动作， **结束** 和 **返回** 。 **结束** 动作会百分百导致回合结束，而 **返回** 动作会有 :math:`0.9` 的可能返回状态 :math:`s` ，有 :math:`0.1` 的可能到结束状态。返回动作导致结束的话，有 :math:`+1` 的奖励；返回状态 :math:`s` 的话，奖励为零。考虑目标策略是一直选择 **返回** 的动作。所有的回合都包含了数次（可能是零次）返回状态 :math:`s` ，然后到结束，并获得奖励。回合的回报为 :math:`+1` 。因此，在目标策略下，状态 :math:`s` 的价值是 :math:`1` 。假设我们使用行为策略生成的离策略数据来估计这个状态的价值，该行为策略选择以等概率随机地选择两种动作。
 
 .. figure:: images/figure-5.5.png
-   :alt: 图
-   5.5：原始重要性采样估计例5.5的单状态MDP，产生了惊人的不稳定性。正确的估计值应该是1，即使只有一次回报。但图中样本的方差是无限的，估计值不能收敛于这个正确值。这些结果对应于离策略首次访问
+   :alt: 图5.5：原始重要性采样估计例5.5的单状态MDP，产生了惊人的不稳定性。正确的估计值应该是1，即使只有一次回报。但图中样本的方差是无限的，估计值不能收敛于这个正确值。这些结果对应于离策略首次访问MC方法。
+
+   图5.5：原始重要性采样估计例5.5的单状态MDP，产生了惊人的不稳定性。正确的估计值应该是1，即使只有一次回报。但图中样本的方差是无限的，估计值不能收敛于这个正确值。这些结果对应于离策略首次访问
    MC方法。
 
-   图
-   5.5：原始重要性采样估计例5.5的单状态MDP，产生了惊人的不稳定性。正确的估计值应该是1，即使只有一次回报。但图中样本的方差是无限的，估计值不能收敛于这个正确值。这些结果对应于离策略首次访问
-   MC方法。
-
-.. raw:: html
-
-   <center>
-
-图
-5.5：原始重要性采样估计例5.5的单状态MDP，产生了惊人的不稳定性。正确的估计值应该是1，即使只有一次回报。但图中样本的方差是无限的，估计值不能收敛于这个正确值。这些结果对应于离策略首次访问
-MC方法。
-
-.. raw:: html
-
-   </center>
 
   图5.5的下部显示了使用原始重要性采样，十次独立的首次访问
 MC方法得到的结果。即使是经历了数百万次的回合后，估计值也不能收敛到正确值 :math:`1` 。相反，对加权重要性采样算法来讲，它会在第一个以 **返回** 动作结束的回合后，就给出刚好为 :math:`1` 的估计值。所有返回不为 :math:`1` 的话（以 **结束** 动作结束），就会造成与目标策略不一致。这时 :math:`\rho_t^{T(t)}` 为零，影响5.5式的值。这样，加权重要性采样产生的加权平均值，仅考虑了与目标策略相同的回报，因此这个值恰好为 :math:`1` 。
