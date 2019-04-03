@@ -9,7 +9,7 @@
 并不是动态规划（DP）方法中所用到的所有转移概率的完整分布函数。
 在相当多情况下我们很容易从目标的概率分布函数中进行抽样得到样本，可是很难获得这个分布的显式（具体）形式。
 
-​蒙特卡罗方法是基于对样本回报求平均的办法来解决强化学习的问题的。
+蒙特卡罗方法是基于对样本回报求平均的办法来解决强化学习的问题的。
 为了保证能够得到良好定义的回报，这里我们定义蒙特卡洛方法仅适用于回合制任务。
 就是说，我们假设我们的经验被分成一个个的回合，而且对每个回合而言，不管选择什么样的动作，都会结束。
 只有在事件结束时，我们的价值估计和策略才会改变。蒙特卡洛方法因此能够写成逐个回合的增量形式，而不是逐步（在线）的形式。
@@ -61,25 +61,25 @@
 
     初始化：
 
-        ​对所有 :math:`s\in\mathcal{S}`，任意 :math:`V(s)\in\mathbb{R}`
+        对所有 :math:`s\in\mathcal{S}`，任意 :math:`V(s)\in\mathbb{R}`
 
         :math:`Returns(s) \leftarrow` 一个空的列表，对所有 :math:`s\in\mathcal{S}`
 
     一直循环（对每一个回合）：
 
-        ​使用 :math:`\pi` 生成一个回合：:math:`S_0, A_0, R_1, S_1, A_1, R_2, \dots , S_{T-1}, A_{T-1}, R_{T}`
+        使用 :math:`\pi` 生成一个回合：:math:`S_0, A_0, R_1, S_1, A_1, R_2, \dots , S_{T-1}, A_{T-1}, R_{T}`
 
         :math:`G \leftarrow 0`
 
         对于回合中的每一步循环，:math:`t = T-1, T-2, \dots, 0`：
 
-        ​    :math:`G \leftarrow \gamma{G} + R_{t+1}`
+            :math:`G \leftarrow \gamma{G} + R_{t+1}`
 
             除非 :math:`S_t` 出现在 :math:`S_0, S_1, \dots, S_{t-1}` 中：
 
-            ​    将 :math:`G` 添加到列表 :math:`Returns(s)` 中
+                将 :math:`G` 添加到列表 :math:`Returns(s)` 中
 
-            ​    :math:`V(s) \leftarrow average(Returns(s))`
+                :math:`V(s) \leftarrow average(Returns(s))`
 
 不论是首次访问MC方法还是每次访问MC方法，都会随着访问 :math:`s` 的次数趋于无穷而收敛于 :math:`v_\pi(s)`。
 对于首次访问MC方法，这是显而易见的。在这种情况下，每个回报都是对于 :math:`v_{\pi}(s)` 的有限方差的独立同分布的估计。
@@ -686,86 +686,79 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 5.6 增量式的实现
 ----------------
 
-  蒙特卡洛预测方法可以用增量式的方式，用回合式的形式，使用在第二章（2.3节）提到的展开的技术实现。不同的是，第二章中我们平均*奖励* ，而蒙特卡洛方法中，我们平均 *回报* 。其他第二章所用到的，都可以用在 *在策略* 蒙特卡洛方法中。对于 *离策略* 蒙特卡洛方法，我们需要分别考虑 *原始* 重要性采样和 *加权* 重要性采样两种情况。
+蒙特卡洛预测方法可以用增量式的方式，用回合式的形式，使用在第二章（2.4节）提到的展开的技术实现。
+不同的是，第二章中我们平均 *奖励*，而蒙特卡洛方法中，我们平均 *回报*。
+其他第二章所用到的，都可以用在 *在策略* 蒙特卡洛方法中。
+对于 *离策略* 蒙特卡洛方法，我们需要分别考虑 *原始* 重要性采样和 *加权* 重要性采样两种情况。
 
-  对于原始重要性采样，回报值会被重要性采样率:math:`\rho_t^{T(t)}` 所缩放（式5.3），然后再求平均。对于这些方法，我们可以再次使用第二章用到的增量式的方法，即使用缩放的回报值代替第二章所用的奖励值。现在，就剩下 *加权* 重要性采样的离策略方法。这里，我们需要生成对回报值的加权平均，所以需要一个稍有不同的增量式算法。
+对于原始重要性采样，回报值会被重要性采样率 :math:`\rho_{t:T(t)-1}` （式5.3）所缩放，然后再求平均（式5.5）。
+对于这些方法，我们可以再次使用第二章用到的增量式的方法，但使用缩放的回报值代替第二章所用的奖励值。
+现在，就剩下 *加权* 重要性采样的离策略方法。这里，我们需要生成对回报值的加权平均，所以需要一个稍有不同的增量式算法。
 
-  假设我们有一系列的回报值:math:`G_1,G_2,...,G_{n-1}` ，都是从相同的状态开始的，且每个回报值对应一个随机的权值 :math:`W_i (e.g., W_i = \rho_t^{T(t)})` 。我们希望表示估计值
+假设我们有一系列的回报值 :math:`G_1,G_2,\dots,G_{n-1}`，都是从相同的状态开始的，
+且每个回报值对应一个随机的权值 :math:`W_i` （比如 :math:`W_i = \rho_{t_i:T(t_i)-1}`）。我们希望表示估计值
 
 .. math::
 
+    V_n \doteq \frac{\sum_{k=1}^{n-1}W_k G_k}{\sum_{k=1}^{n-1}W_k}, \quad n \geq 2,
+    \tag{5.7}
 
-   V_n \doteq \frac{\sum_{k=1}^{n-1}W_k G_k}{\sum_{k=1}^{n-1}W_k}, \quad n \geq 2,\tag{5.6}
-
-然后每获得一个额外的回报 :math:`G_n` ，保持更新。除了跟踪 :math:`V_n` ，我们还必须保持，给定前 :math:`n` 个回报，每个状态的累积权值 :math:`C_n` 。 :math:`V_n` 的更新规则是
+然后在每获得一个额外的回报 :math:`G_n` 时保持更新。除了跟踪 :math:`V_n`，
+我们还必须保持给定前 :math:`n` 个回报下每个状态的累积权值 :math:`C_n`。:math:`V_n` 的更新规则是
 
 .. math::
 
-
-   V_{n+1} \doteq V_n +\frac{W_n}{C_n}\left[G_n - V_n \right], \quad n \geq 1,\tag{5.7}
+   V_{n+1} \doteq V_n +\frac{W_n}{C_n}\left[G_n - V_n \right], \quad n \geq 1,
+   \tag{5.8}
 
 且
 
 .. math::
 
-
    C_{n+1} \doteq C_n + W_{n+1},
 
---------------
+这里 :math:`C_0 \doteq 0` （且 :math:`V_1` 是随机的，因此需要一个具体值）。
+下面的框中包含了完整的回合式的增量式算法，用于蒙特卡洛策略估计。
+这个算法主要用在离策略的情况，使用加权重要性采样，但是也能用于在策略的情况。
+用于在策略时，让目标策略和行为策略一样即可（这种情况下（:math:`\pi = b`），:math:`W` 始终是1）。
+近似值 :math:`Q` 收敛到 :math:`q_\pi` （对所有的出现的状态-动作对），而动作由另一个潜在的不同策略 :math:`b` 提供。
 
-增量式的离策略每次访问 MC 策略评估
+*练习 5.9* 修改5.1节中首次访问MC策略评估算法，对样本求平均时使用2.4节提到的增量式的实现。
 
---------------
+*练习 5.10* 从5.7式推导出5.8式的加权平均更新规则。遵循2.3节的非加权的规则。
 
-初始化，对所有 :math:`s \in \mathcal S, a \in \mathcal A(s)` ：
+.. admonition:: 离策略 MC 预测（策略评估） :math:`Q \approx q_\pi`
+    :class: important
 
-​ :math:`Q(s,a) \leftarrow` 随机值
+    输入：任意目标策略 :math:`\pi`
 
-​ :math:`C(s,a) \leftarrow 0`
+    初始化，对所有 :math:`s \in \mathcal S`，:math:`a \in \mathcal{A}(s)`：
 
-​ :math:`b(a|s) \leftarrow` 随机的软的行为策略
+        :math:`Q(s,a) \in \mathbb{R}` （随机值）
 
-​ :math:`\pi(a|s) \leftarrow` 随机的目标策略
+        :math:`C(s,a) \leftarrow 0`
 
-一直循环：
+    一直循环（对每一个回合）：
 
-​ 使用策略 :math:`b` 生成回合：
+        :math:`b \leftarrow` 任何覆盖 :math:`\pi` 的策略
+ 
+        使用策略 :math:`b` 生成回合：:math:`S_0, A_0, R_1, \dots ,S_{T-1},A_{T-1}, R_T`
 
-​ :math:`S_0, A_0, R_1,...,S_{T-1},A_{T-1}, R_T, S_T`
+        :math:`G \leftarrow 0`
 
-​ :math:`G \leftarrow 0`
+        :math:`W \leftarrow 1`
 
-​ :math:`W \leftarrow 1`
+        对回合的每一步循环，:math:`t= T-1, T-2, \dots, 0`，当 :math:`W \ne 0` 时：
 
-​ :math:`for \quad t= T-1, T-2,... 0` ：
+            :math:`G \leftarrow \gamma G + R_{t+1}`
 
-​ :math:`G \leftarrow \gamma G + R_{t+1}`
+            :math:`C(S_t,A_t) \leftarrow C(S_t,A_t) +W`
 
-​ :math:`C(S_t,A_t) \leftarrow C(S_t,A_t) +W`
+            :math:`Q(S_t,A_t) \leftarrow Q(S_t,A_t) +
+            \frac{W}{C(S_t,A_t)}[G - Q(S_t,A_t)]`
 
-​
-:math:`Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \frac{W}{C(S_t,A_t)}[G - Q(S_t,A_t)]`
+            :math:`W \leftarrow W \frac{\pi(A_t|S_t)}{b(A_t|S_t)}`
 
-​ :math:`W \leftarrow W \frac{\pi(A_t|S_t)}{b(A_t|S_t)}`
-
-​ 如果 :math:`W=0` ， 退出 :math:`for` 循环
-
---------------
-
-这里 :math:`C_0 \doteq 0` （且 :math:`V_1` 是随机的因此需要一个具体值）。上面的框中包含了完整的回合式的增量式算法，用于蒙特卡洛策略估计。这个算法主要用在离策略的情况，使用加权重要性采样，但是也能用于在策略的情况。用于在策略时，让目标策略和行为策略一样即可（这种情况下（ :math:`\pi = b` ）， :math:`W` 始终是1）。近似值 :math:`Q` 收敛到 :math:`q_\pi` （对所有的出现的状态-动作对），而动作由另一个潜在的不同策略 :math:`b` 提供。
-
---------------
-
-练习 5.6
-
-修改5.1节中首次访问
-MC策略评估算法，对样本求平均时使用2.3节提到的增量式的实现。
-
-练习 5.7
-
-从5.6式推导出5.7式的加权平均更新规则。遵循2.3节的非加权的规则。
-
---------------
 
 5.7 离策略控制
 --------------
@@ -785,37 +778,37 @@ methods）使用上两节讲过的一种技术。它们跟随行为策略的同�
 
 初始化，对于所有的 :math:`s \in \mathcal S, a \in \mathcal A(s)` ：
 
-​ $Q(s,a) :raw-latex:`\leftarrow `$ 随机数
+ $Q(s,a) :raw-latex:`\leftarrow `$ 随机数
 
-​ :math:`C(s,a) \leftarrow 0`
+ :math:`C(s,a) \leftarrow 0`
 
-​ :math:`\pi(s) \leftarrow` 对 :math:`Q` 而言贪心的确定性策略
+ :math:`\pi(s) \leftarrow` 对 :math:`Q` 而言贪心的确定性策略
 
 一直循环：
 
-​ 用任意soft策略 :math:`b` 生成一个回合：
+ 用任意soft策略 :math:`b` 生成一个回合：
 
-​ :math:`S_0, A_0, R_1,..., S_{T-1}, A_{T-1}, R_T, S_T`
+ :math:`S_0, A_0, R_1,..., S_{T-1}, A_{T-1}, R_T, S_T`
 
-​ :math:`G \leftarrow 0`
+ :math:`G \leftarrow 0`
 
-​ :math:`W \leftarrow 1`
+ :math:`W \leftarrow 1`
 
-​ :math:`for \quad t= T-1, T-2,... 0` ：
+ :math:`for \quad t= T-1, T-2,... 0` ：
 
-​ :math:`G \leftarrow \gamma G + R_{t+1}`
+ :math:`G \leftarrow \gamma G + R_{t+1}`
 
-​ :math:`C(S_t,A_t) \leftarrow C(S_t,A_t) + W`
+ :math:`C(S_t,A_t) \leftarrow C(S_t,A_t) + W`
 
-​
+
 :math:`Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \frac{W}{C(S_t,A_t)} [G - Q(S_t,A_t)]`
 
-​
+
 :math:`\pi(S_t) \leftarrow arg \space \underset{a}{max} \space Q(S_t,a)`
 
-​ 如果 :math:`A_t \neq \pi(S_t)` ，跳出 :math:`for` 循环
+ 如果 :math:`A_t \neq \pi(S_t)` ，跳出 :math:`for` 循环
 
-​ :math:`W \leftarrow W\frac{1}{b(A_t|S_t)}`
+ :math:`W \leftarrow W\frac{1}{b(A_t|S_t)}`
 
 --------------
 
