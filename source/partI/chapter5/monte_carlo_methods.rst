@@ -243,16 +243,17 @@ MC 和首次访问 MC）都会以二次方收敛到期望值。
     \tag{5.1}
 
 之后我们可以做策略提升，我们构建每个 :math:`\pi_{k+1}` 为 :math:`q_{\pi_k}` 的贪婪策略。
-策略提升理论（见4.2节）可以应用到 :math:`\pi_k` 和 :math:`\pi_{k+1}` 上，因为对于所有 :math:`s \in\mathcal{S}`，
+策略提升理论（见4.2节）可以应用到 :math:`\pi_k` 和 :math:`\pi_{k+1}` 上，
+因为对于所有 :math:`s \in\mathcal{S}`，
 
 .. math::
 
-    \begin{eqnarray}
-    q_{\pi_k}(s, \pi_{k+1}(s)) &=& q_{\pi_k}(s, arg \space \underset{a}{max} \space q_{\pi_k}(s,a))\\
-    &= &\underset{a}{max} \space q_{\pi_k}(s, a)\\
-    &\geq& q_{\pi_k}(s, \pi_k(s))\\
-    &\geq& v_{\pi_k}(s).\\
-    \end{eqnarray}
+    \begin{aligned}
+    q_{\pi_{k}}\left(s, \pi_{k+1}(s)\right) &=q_{\pi_{k}}\left(s, \arg \max _{a} q_{\pi_{k}}(s, a)\right) \\
+    &=\max _{a} q_{\pi_{k}}(s, a) \\
+    & \geq q_{\pi_{k}}\left(s, \pi_{k}(s)\right) \\
+    & \geq v_{\pi_{k}}(s)
+    \end{aligned}
 
 正如我们上一章说阐述的，这个理论保证了每个 :math:`\pi_{k+1}` 都一致地比 :math:`\pi_k` 好，
 或者和 :math:`\pi_k` 一样好。后者，我们能得到两个最优策略。这个理论保证了整个过程会收敛到最优的策略和价值函数。
@@ -416,20 +417,20 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 .. math::
     :label: 5.2
 
-    \begin{eqnarray}
-    q_\pi{(s, \pi^{'}(s))} &=& \sum_a \pi^{'}(a|s)q_\pi{(s,a)}\\
-    &=& \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} + (1-\epsilon)\space  \underset{a}{max}\space q_\pi{(s,a)}\tag{5.2}\\
-    &\geq& \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} + (1-\epsilon)\sum_a \frac{\pi(a|s)-\frac{\epsilon}{|\mathcal{A}(s)|}}{1-\epsilon}q_\pi(s,a) \\
-    \end{eqnarray}
+    \begin{align}
+    q_{\pi}\left(s, \pi^{\prime}(s)\right) &=\sum_{a} \pi^{\prime}(a | s) q_{\pi}(s, a) \\
+    &=\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \max _{a} q_{\pi}(s, a) \tag{5.2}\\
+    & \geq \frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \sum_{a} \frac{\pi(a | s)-\frac{\varepsilon}{|\mathcal{A}(s)|}}{1-\varepsilon} q_{\pi}(s, a)
+    \end{align}
 
 （和是为1的非负权值的加权平均，所以它必须小于等于最大数的求和）
 
 .. math::
 
-    \begin{eqnarray}
-    &=& \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} - \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi{(s,a)} + \sum_a \pi(a|s)q_\pi{(s,a)}\\
-    &=&v_\pi{(s)}.\\
-    \end{eqnarray}
+    \begin{aligned}
+    &=\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)-\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+\sum_{a} \pi(a | s) q_{\pi}(s, a) \\
+    &=v_{\pi}(s)
+    \end{aligned}
 
 所以，由策略提升理论，:math:`\pi^{'} \geq \pi`，
 （即对所有 :math:`s \in \mathcal{S}`，:math:`v_{\pi^{'}}(s) \geq v_\pi(s)`。
@@ -448,23 +449,21 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
 .. math::
 
-   \begin{eqnarray}
-   \tilde{v}_*(s)  &=& (1-\epsilon) \space \underset{a}{max} \space \tilde{q}_*(s,a) +
-   \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a \tilde{q}_*(s,a)\\
-   &=& (1-\epsilon) \space \underset{a}{max} \space \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma\tilde{v}_*(s^{'})] \\
-   & & + \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma\tilde{v}_*(s^{'})]
-   \end{eqnarray}
+   \begin{aligned}
+   \widetilde{v}_{*}(s)=&(1-\varepsilon) \max _{a} \widetilde{q}_{*}(s, a)+\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} \widetilde{q}_{*}(s, a) \\
+   =&(1-\varepsilon) \max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \widetilde{v}_{*}\left(s^{\prime}\right)\right] \\
+   &+\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma \widetilde{v}_{*}\left(s^{\prime}\right)\right]
+   \end{aligned}
 
 当 :math:`\epsilon - soft` 策略 :math:`\pi` 没有提升时，取等号。由（5.2）式，我们还知道，
 
 .. math::
 
-   \begin{eqnarray}
-   v_\pi(s) &=& (1-\epsilon) \space \underset{a}{max} \space q_\pi(s,a) +
-   \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a q_\pi(s,a)\\
-   &=& (1-\epsilon) \space \underset{a}{max} \space \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma v_\pi(s^{'})] \\
-   & & + \frac{\epsilon}{|\mathcal{A}(s)|}\sum_a \sum_{s^{'}, r} p(s^{'},r|s,a)[r+\gamma v_\pi(s^{'})]
-   \end{eqnarray}
+   \begin{aligned}
+   v_{\pi}(s)=&(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a) \\
+   =&(1-\varepsilon) \max _{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right] \\
+   +\quad & \frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
+   \end{aligned}
 
 这个方程与上面的方程相比，除了把 :math:`\tilde{v}_*` 换成了 :math:`v_\pi` ，其他的都相同。
 由于 :math:`\tilde{v}_*` 是唯一的解，所以必定有 :math:`v_\pi = \tilde{v}_*` 。
@@ -665,13 +664,13 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
 .. math::
 
-   \begin{eqnarray}
-   &=& \frac{1}{2}\cdot 0.1\left(\frac{1}{0.5} \right)^2 \tag{长度为1的回合}\\
-   &&+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为2的回合}\\
-   &&+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为3的回合}\\
-   &&+ \cdots \\
-   &=& 0.1 \sum_{k=0}^{\infty}0.9^k \cdot 2^k \cdot 2 = 0.2 \sum_{k=0}^{\infty}1.8^k = \infty
-   \end{eqnarray}
+   \begin{align}
+   &= \frac{1}{2}\cdot 0.1\left(\frac{1}{0.5} \right)^2 \tag{长度为1的回合}\\
+   &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为2的回合}\\
+   &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为3的回合}\\
+   &+ \cdots \\
+   &= 0.1 \sum_{k=0}^{\infty}0.9^k \cdot 2^k \cdot 2 = 0.2 \sum_{k=0}^{\infty}1.8^k = \infty
+   \end{align}
 
 *练习 5.6* 给定策略 :math:`b` 的回报，
 式5.6中状态价值 :math:`V(s)` 换成 *动作* 价值 :math:`Q(s,a)` 的表达式是什么？
@@ -868,17 +867,17 @@ partial returns）* ：
 .. math::
 
 
-   \begin{eqnarray}
-   G_t &\doteq& R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{T-t-1} R_T\\
-   &=& (1-\gamma)R_{t+1}\\
-   &&+ (1-\gamma)\gamma (R_{t+1} + R_{t+2})\\
-   &&+ (1-\gamma)\gamma^2 (R_{t+1} + R_{t+2} + R_{t+3})\\
-   && \vdots\\
-   &&+ (1-\gamma)\gamma^{T-t-2} (R_{t+1} + R_{t+2} +\cdots + R_{T-1})\\
-   &&+ \gamma^{T-t-1} (R_{t+1} + R_{t+2} +\cdots + R_T)\\
-   &=&(1-\gamma) \sum_{h=t+1}^{T-1} \gamma^{h-t-1} \overline{G}_t^h 
+   \begin{aligned}
+   G_t &\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{T-t-1} R_T\\
+   &= (1-\gamma)R_{t+1}\\
+   &+ (1-\gamma)\gamma (R_{t+1} + R_{t+2})\\
+   &+ (1-\gamma)\gamma^2 (R_{t+1} + R_{t+2} + R_{t+3})\\
+   & \vdots\\
+   &+ (1-\gamma)\gamma^{T-t-2} (R_{t+1} + R_{t+2} +\cdots + R_{T-1})\\
+   &+ \gamma^{T-t-1} (R_{t+1} + R_{t+2} +\cdots + R_T)\\
+   &=(1-\gamma) \sum_{h=t+1}^{T-1} \gamma^{h-t-1} \overline{G}_t^h
    + \gamma^{T-t-1} \overline{G}_t^T\\
-    \end{eqnarray}
+    \end{aligned}
 
 现在我们需要使用重要性采样率来缩放平坦部分回报，这与截断相似。由于 :math:`G_t^h` 只包含了到 :math:`h` 的奖励，我们只需要到 :math:`h` 的概率。现在我们像式5.4那样，定义一个原始重要性采样估计器，如下
 
@@ -911,11 +910,11 @@ partial returns）* ：
 .. math::
 
 
-   \begin{eqnarray}
-   \rho_t^TG_t &=& \rho_t^T(R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{T-t-1} R_T)\\
-   &=& \rho_t^TR_{t+1} + \gamma \rho_t^T R_{t+2} + \cdots + \gamma^{T-t-1}\rho_t^T R_T.
+   \begin{align}
+   \rho_t^TG_t &= \rho_t^T(R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{T-t-1} R_T)\\
+   &= \rho_t^TR_{t+1} + \gamma \rho_t^T R_{t+2} + \cdots + \gamma^{T-t-1}\rho_t^T R_T.
    \tag{5.10}\\
-   \end{eqnarray}
+   \end{align}
 
 离策略估计器依赖于这些值的期望；我们尝试用更简单的方式表达出来。注意到，5.10中的每个元素是一个随机奖励和一个随机重要性采样率的乘积。比如，第一个元素，我们用5.3式展开，
 
