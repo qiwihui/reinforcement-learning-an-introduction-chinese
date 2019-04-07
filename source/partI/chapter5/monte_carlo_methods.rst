@@ -249,7 +249,7 @@ MC 和首次访问 MC）都会以二次方收敛到期望值。
 .. math::
 
     \begin{aligned}
-    q_{\pi_{k}}\left(s, \pi_{k+1}(s)\right) &=q_{\pi_{k}}\left(s, \arg \max _{a} q_{\pi_{k}}(s, a)\right) \\
+    q_{\pi_{k}}\left(s, \pi_{k+1}(s)\right) &=q_{\pi_{k}}(s, \arg \max _{a} q_{\pi_{k}}(s, a)) \\
     &=\max _{a} q_{\pi_{k}}(s, a) \\
     & \geq q_{\pi_{k}}\left(s, \pi_{k}(s)\right) \\
     & \geq v_{\pi_{k}}(s)
@@ -548,16 +548,16 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 为了方便，我们将时间步调设置为穿过回合的递增形式，即下一个回合开始时的时间步调不清零，而是接着上个回合的末尾加一。
 比如，这一批的回合中，第一回合在时间 :math:`100` 的时候结束，那么下一个回合在时间 :math:`t=101` 开始。
 这使我们能够使用时间步调来指代特定回合中的时间步调。
-特别地，我们可以定义一个集合表示状态 :math:`s` 被访问到的时间步调，记为 :math:`\cal{J}(s)`。
-这是对于每次访问而言的。对于首次访问，:math:`\cal{J}(s)` 只包含第一次访问 :math:`s` 的时间步调。
+特别地，我们可以定义一个集合表示状态 :math:`s` 被访问到的时间步调，记为 :math:`\cal{T}(s)`。
+这是对于每次访问而言的。对于首次访问，:math:`\cal{T}(s)` 只包含第一次访问 :math:`s` 的时间步调。
 然后，:math:`T(t)` 表示第一次回合结束的时间，:math:`G_t` 表示 :math:`t` 之后到 :math:`T(t)` 的回报。
-然后集合 :math:`\{G_t\}_{t \in \cal{J}(s)}` 表示状态 :math:`s` 的所有回报，
-:math:`\{\rho_{t:T(t)-1} \}_{t \in \cal J(s)}` 表示对应的重要性采样率。
+然后集合 :math:`\{G_t\}_{t \in \cal{T}(s)}` 表示状态 :math:`s` 的所有回报，
+:math:`\{\rho_{t:T(t)-1} \}_{t \in \cal{T}(s)}` 表示对应的重要性采样率。
 为了估计 :math:`v_\pi(s)` ，我们用重要性采样率来缩放回报，然后求平均：
 
 .. math::
 
-    V(s) \doteq \frac{\sum_{t \in \cal{J}(s)} \rho_{t:T(t)-1} G_t}{|\cal{J}(s)|}.
+    V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{|\cal{T}(s)|}.
     \tag{5.5}
 
 当重要性采样只是以上面的简单的方式求平均时，我们称为 *原始重要性采样（ordinary importance sampling）* 。
@@ -566,7 +566,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
 .. math::
 
-   V(s) \doteq \frac{\sum_{t \in \cal{J}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t \in \cal{J}(s)} \rho_{t:T(t)-1}},
+   V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1}},
    \tag{5.6}
 
 若分母为零，加权重要性采样也为零。
@@ -845,141 +845,157 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 应用蒙特卡洛控制算法来计算对于每个起始状态的最优策略。
 展示一些遵循最优策略的轨迹（关掉轨迹噪声）。
 
---------------
 
-\*5.8 具体返回的重要性采样
+5.8 \*折扣感知的重要性采样
 --------------------------
 
-  目前为止，我们所讨论的离策略是基于重要性采样，将回报看成一个整体，对回报进行加权。而并没有考虑到，回报内在的结构是折扣奖励的和。这一节，我们将简单考虑一种前沿研究的思想，使用这个回报的结构来很大意义上减少离策略估计的方差。
+目前为止，我们所讨论的离策略是基于重要性采样，将回报看成一个整体，对回报进行加权，
+而并没有考虑到回报内在的结构是折扣奖励的和。
+这一节，我们将简单考虑一种前沿研究的思想，使用这个回报的结构来很大意义上减少离策略估计的方差。
 
-  例如，考虑这种情况，回合很长，:math:`\gamma` 远小于 :math:`1` 。具体而言，假设回合有100个时间步长， :math:`\gamma = 0` 。那么时刻0的回报恰好是 :math:`G_0 = R_1` ，但是它的重要的采样率将会是一百个参数的乘积， :math:`\frac{\pi(A_0|S_0)}{b(A_0|S_0)} \frac{\pi(A_1|S_1)}{b(A_1|S_1)} \cdots \frac{\pi(A_{99}|S_{99})}{b(A_{99}|S_{99})}` 。对于原始重要性采样而言，回报会被上述的乘积所缩放，但是，真正起作用的是第一项，即 :math:`\frac{\pi(A_0|S_0)}{b(A_0|S_0)}` ，而与其他 :math:`99` 项 :math:`\frac{\pi(A_1|S_1)}{b(A_1|S_1)} \cdots \frac{\pi(A_{99}|S_{99})}{b(A_{99}|S_{99})}` 的乘积无关。因为，第一个奖励后，回报就已经决定了。之后的乘积项与回报值独立且期望为 :math:`1` ；它们并不改变期望值，但是增加了许多方差。一些情况下甚至产生无限大的方差。现在我们考虑如何避免这个外部的方差。
+例如，考虑这种情况，回合很长，:math:`\gamma` 远小于 :math:`1`。
+具体而言，假设回合有100个时间步长，:math:`\gamma = 0`。
+那么时刻0的回报恰好是 :math:`G_0 = R_1` ，但是它的重要的采样率将会是一百个参数的乘积，
+:math:`\frac{\pi(A_0|S_0)}{b(A_0|S_0)} \frac{\pi(A_1|S_1)}{b(A_1|S_1)} \cdots \frac{\pi(A_{99}|S_{99})}{b(A_{99}|S_{99})}`。
+对于原始重要性采样而言，回报会被上述的乘积所缩放，但是，真正起作用的是第一项，
+即 :math:`\frac{\pi(A_0|S_0)}{b(A_0|S_0)}`，
+而与其他 :math:`99` 项 :math:`\frac{\pi(A_1|S_1)}{b(A_1|S_1)} \cdots \frac{\pi(A_{99}|S_{99})}{b(A_{99}|S_{99})}` 的乘积无关。
+因为，第一个奖励后，回报就已经决定了。之后的乘积项与回报值独立且期望为 :math:`1`；
+它们并不改变期望值，但是增加了许多方差。一些情况下甚至产生无限大的方差。
+现在我们考虑如何避免这个外部的方差。
 
-  主要的思想是，将折扣认为是决定结束的概率，或者说，部分结束的*度（degree）* 。对所有的 :math:`\gamma \in [0,1)` ，我们考虑回报 :math:`G_0` 是，有 :math:`1 - \gamma` 的度，在第一步后部分结束，产生只有一个奖励 :math:`R_1` 的回报；有 :math:`(1 - \gamma)\gamma` 的度，在第二步后结束，产生 :math:`R_1+R_2` 的回报，等等。以二步为例， :math:`(1 - \gamma)\gamma` 对应二步结束的度，其中， :math:`\gamma` 表示第一步不结束的度， :math:`1-\gamma` 表示第二步结束的度。又比如，第三步后结束的度为 :math:`(1-\gamma)\gamma^2` ，其中 :math:`\gamma^2` 表示第一步第二步都后没有结束的度。这个部分的回报我们称为 *平坦部分回报（flat
-partial returns）* ：
+主要的思想是，将折扣认为是决定结束的概率，或者说，部分结束的 *度（degree）* 。
+对所有的 :math:`\gamma \in [0,1)` ，我们考虑回报 :math:`G_0` 是有 :math:`1 - \gamma` 的度，
+在第一步后部分结束，产生只有一个奖励 :math:`R_1` 的回报；
+有 :math:`(1 - \gamma)\gamma` 的度，在第二步后结束，产生 :math:`R_1+R_2` 的回报，等等。
+以二步为例，:math:`(1 - \gamma)\gamma` 对应二步结束的度，
+其中，:math:`\gamma` 表示第一步不结束的度，:math:`1-\gamma` 表示第二步结束的度。
+又比如，第三步后结束的度为 :math:`(1-\gamma)\gamma^2`，其中 :math:`\gamma^2` 表示第一步第二步都没有结束的度。
+这个部分的回报我们称为 *平坦部分回报（flat partial returns）*：
 
 .. math::
 
+   \overline{G}_{t : h} \doteq R_{t+1}+R_{t+2}+\cdots+R_{h}, \quad 0 \leq t<h \leq T
 
-   \overline{G}_t^h \doteq R_{t+1} + R_{t+2} + \cdots + R_h, \quad 0 \leq t < h \leq T,
-
-其中，“平坦”表示缺少折扣，“部分”表示这些回报只算到第 :math:`h` 步，不用一直算到结束， :math:`h` 称为 *地平线（horizon）* （ :math:`T` 是回合结束的时间）。传统的 :math:`G_t` 可以看成是这些部分平坦回报的和：
+其中，“平坦”表示缺少折扣，“部分”表示这些回报只算到第 :math:`h` 步，不用一直算到结束，
+:math:`h` 称为 *水平线（horizon）* （ :math:`T` 是回合结束的时间）。
+传统的 :math:`G_t` 可以看成是这些部分平坦回报的和：
 
 .. math::
 
-
-   \begin{aligned}
-   G_t &\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{T-t-1} R_T\\
-   &= (1-\gamma)R_{t+1}\\
-   &+ (1-\gamma)\gamma (R_{t+1} + R_{t+2})\\
-   &+ (1-\gamma)\gamma^2 (R_{t+1} + R_{t+2} + R_{t+3})\\
-   & \vdots\\
-   &+ (1-\gamma)\gamma^{T-t-2} (R_{t+1} + R_{t+2} +\cdots + R_{T-1})\\
-   &+ \gamma^{T-t-1} (R_{t+1} + R_{t+2} +\cdots + R_T)\\
-   &=(1-\gamma) \sum_{h=t+1}^{T-1} \gamma^{h-t-1} \overline{G}_t^h
-   + \gamma^{T-t-1} \overline{G}_t^T\\
+    \begin{aligned} G_{t} \doteq & R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\cdots+\gamma^{T-t-1} R_{T} \\
+    =&(1-\gamma) R_{t+1} \\
+    &+(1-\gamma) \gamma\left(R_{t+1}+R_{t+2}\right) \\
+    &+(1-\gamma) \gamma^{2}\left(R_{t+1}+R_{t+2}+R_{t+3}\right) \\
+    & \vdots \\
+    &+(1-\gamma) \gamma^{T-t-2}\left(R_{t+1}+R_{t+2}+\cdots+R_{T}\right) \\
+    &+\gamma^{T-t-1}\left(R_{t+1}+R_{t+2}+\cdots+R_{T}\right) \\
+    &=(1-\gamma) \sum_{h=t+1}^{T-1} \gamma^{h-t-1} \overline{G}_{t : h} \space + \space \gamma^{T-t-1} \overline{G}_{t:T}
     \end{aligned}
 
-现在我们需要使用重要性采样率来缩放平坦部分回报，这与截断相似。由于 :math:`G_t^h` 只包含了到 :math:`h` 的奖励，我们只需要到 :math:`h` 的概率。现在我们像式5.4那样，定义一个原始重要性采样估计器，如下
+现在我们需要使用重要性采样率来缩放平坦部分回报，这与截断相似。
+由于 :math:`G_{t:h}` 只包含了到水平线 :math:`h` 的奖励，我们只需要到 :math:`h` 的概率的比率。
+现在像式5.5那样，我们定义一个原始重要性采样估计器，如下
 
 .. math::
 
+    V(s) \doteq \frac{
+    \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1} \overline{G}_{t : h}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1} \overline{G}_{t : T(t)}\right)
+    }{
+    |\mathcal{T}(s)|
+    }
+    \tag{5.9}
 
-   V(s) \doteq \frac{\sum_{t \in \mathcal J(s)} 
-   \left( 
-   (1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_t^h \overline{G}_t^h + \gamma^{T(t)-t-1} \rho_t^{T(t)} \overline{G}_t^{T(t)} 
-   \right)}
-   {|\mathcal J(s)|}, 
-   \tag{5.8}
-
-像式5.5那样，定义一个加权重要性采样估计器，如下 $$ V(s)
-`\doteq `\frac{\sum_{t \in \mathcal J(s)} 
-\left( 
-(1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_t^h \overline{G}_t^h + \gamma^{T(t)-t-1} \rho_t^{T(t)} \overline{G}_t^{T(t)} 
-\right)}`
-
-{`\sum` *{t `\in ``\mathcal `J(s)}
-`\left`( (1-`\gamma`)
-`\sum`* {h=t+1}^{T(t)-1} `\gamma`^{h-t-1}
-`\rho`\_t^h + `\gamma`^{T(t)-t-1}
-`\rho`\_t^{T(t)} `\right`)},
-`\tag{5.9}`
-我们称上述两种估计器 *折扣意识（discounting-aware）* 重要性采样估计器。它们考虑了折扣率，且如果 :math:`\gamma = 1` 时没有影响（与5.5节离策略估计器一样）。
-
-  还有一种方法，奖励的和这样的结构可以考虑在离策略重要性采样里。这样的方法可以减少方差，即使没有折扣的情况也是如此（即，:math:`\gamma = 1` ）。在离策略估计器5.4和5.5中，和中的每个元素本身也是和：
+像式5.6那样，定义一个加权重要性采样估计器，如下
 
 .. math::
 
+    V(s) \doteq \frac{
+    \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1} \overline{G}_{t : h}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1} \overline{G}_{t : T(t)}\right)
+    }{
+    \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1}\right)
+    }
+    \tag{5.10}
 
-   \begin{align}
-   \rho_t^TG_t &= \rho_t^T(R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots + \gamma^{T-t-1} R_T)\\
-   &= \rho_t^TR_{t+1} + \gamma \rho_t^T R_{t+2} + \cdots + \gamma^{T-t-1}\rho_t^T R_T.
-   \tag{5.10}\\
-   \end{align}
+我们称上述两种估计器 *折扣感知（discounting-aware）* 重要性采样估计器。
+它们考虑了折扣率，但如果 :math:`\gamma = 1` 则没有影响（与5.5节离策略估计器一样）。
 
-离策略估计器依赖于这些值的期望；我们尝试用更简单的方式表达出来。注意到，5.10中的每个元素是一个随机奖励和一个随机重要性采样率的乘积。比如，第一个元素，我们用5.3式展开，
+5.9 \*每决策重要性抽样
+----------------------
+
+还有一种方法，在离策略重要性采样里将回报结构作为奖励总和考虑在内，
+这样的方法即使在没有折扣的情况下（即 :math:`\gamma = 1` ）也可以减少方差。
+在离策略估计器5.5和5.6中，和中的每个元素本身也是和：
 
 .. math::
 
+    \begin{align}
+    \rho_{t : T-1} G_{t} &=\rho_{t : T-1}\left(R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{T-t-1} R_{T}\right) \\
+    &=\rho_{t : T-1} R_{t+1}+\gamma \rho_{t : T-1} R_{t+2}+\cdots+\gamma^{T-t-1} \rho_{t : T-1} R_{T} \tag{5.11}
+    \end{align}
 
-   \rho_t^T R_{t+1} = \frac{\pi(A_t|S_t)}{b(A_t|S_t)} \frac{\pi(A_{t+1}|S_{t+1})}{b(A_{t+1}|S_{t+1})} \frac{\pi(A_{t+2}|S_{t+2})}{b(A_{t+2}|S_{t+2})} \cdots \frac{\pi(A_{T-1}|S_{T-1})}{b(A_{T-1}|S_{T-1})}R_{t+1}.
-
-注意到，上式中只有第一项和最后一项（奖励）是相关的，其他的比率都是相互独立的随机变量，他们的期望值是：
+离策略估计器依赖于这些值的期望；我们尝试用更简单的方式表达出来。
+注意到，5.11中的每个元素是一个随机奖励和一个随机重要性采样率的乘积。
+比如，第一个元素，我们用5.3式展开，
 
 .. math::
 
+    \rho_{t : T-1} R_{t+1} = \frac{\pi(A_t|S_t)}{b(A_t|S_t)} \frac{\pi(A_{t+1}|S_{t+1})}{b(A_{t+1}|S_{t+1})} \frac{\pi(A_{t+2}|S_{t+2})}{b(A_{t+2}|S_{t+2})} \cdots \frac{\pi(A_{T-1}|S_{T-1})}{b(A_{T-1}|S_{T-1})}R_{t+1}.
+    \tag{5.12}
 
-   \mathbb E_{A_k \sim b} \left[\frac{\pi(A_k|S_k)}{b(A_k|S_k)}\right]
+在所有这些项中，我们可以猜想，上式中只有第一项和最后一项（奖励）是相关的；所有其他都是与奖励后发生的事件有关，他们的期望值是：
+
+.. math::
+
+   \mathbb{E}\left[\frac{\pi(A_k|S_k)}{b(A_k|S_k)}\right]
    = \sum_a b(a|S_k)\frac{\pi(a|S_k)}{b(a|S_k)} = \sum_a \pi(a|S_k) = 1.
+   \tag{5.13}
 
-因此，因为独立随机变量的乘积的期望等于他们期望的乘积，所以除了第一项，其他比率的期望值都可以消掉，剩下
-
-.. math::
-
-
-   \mathbb E[\rho_t^T R_{t+1}] = \mathbb E[\rho_t^{t+1} R_{t+1}].
-
-如果对5.10中第k项重复上述的分析，我们得到
+通过更多几个步骤可以证明，如所猜想的那样，所有这些其他项对期望没有影响，换句话说，
 
 .. math::
 
+   \mathbb E[\rho_{t:T-1} R_{t+1}] = \mathbb E[\rho_{t:t} R_{t+1}].
+   \tag{5.14}
 
-   \mathbb E[\rho_t^T R_{t+k}] = \mathbb E[\rho_t^{t+k} R_{t+k}].
-
-将上述结果代入式5.10，得到
+如果对5.11中第k项重复上述的分析，我们得到
 
 .. math::
 
+   \mathbb E[\rho_{t:T-1} R_{t+k}] = \mathbb E[\rho_{t:t+k-1}R_{t+k}].
 
-   \mathbb E[\rho_t^T G_t] = \mathbb E[\tilde{G}_t],
+将上述结果代入式5.11，可以得到
+
+.. math::
+
+   \mathbb E[\rho_{t:T-1} G_t] = \mathbb E[\tilde{G}_t],
 
 其中
 
 .. math::
 
+   \tilde{G}_{t}=\rho_{t : t} R_{t+1}+\gamma \rho_{t : t+1} R_{t+2}+\gamma^{2} \rho_{t : t+2} R_{t+3}+\cdots+\gamma^{T-t-1} \rho_{t : T-1} R_{T}
 
-   \tilde{G}_t = \rho_t^{t+1}R_{t+1} + \gamma \rho_t^{t+2} R_{t+2} + \gamma^2 \rho_t^{t+3} R_{t+3}\cdots + \gamma^{T-t-1}\rho_t^T R_T.
-
-上述思想我们称作 *per-reward* 重要性采样。紧随其后的是一个交替重要性采样估计器，同样是无偏差的，就像5.4的OIS估计器一样，它使用了 :math:`G_t` ：
+上述思想我们称作 *每决策（per-decision）* 重要性采样。紧随其后的是一个交替重要性采样估计器，
+同样是无偏差的，就像5.5的原始重要性采样估计器一样，它使用了 :math:`\tilde{G}_{t}` ：
 
 .. math::
 
-
-   V(s) \doteq \frac{\sum_{t \in \mathcal J(s)} \tilde{G}_t}{|\mathcal J(s)|}, \tag{5.11}
+   V(s) \doteq \frac{\sum_{t \in \mathcal T(s)} \tilde{G}_t}{|\mathcal T(s)|},
+   \tag{5.11}
 
 我们可能会期望有时会降低方差。
 
-  是否存在一个per-reward版本的*加权* 重要性采样呢？这个我们不太清楚。目前为止，我们所知的这样的估计器都是非一致的（即是说，无限数据也不能让他们收敛到正确的值）。
+是否存在一个每决策版本的 *加权* 重要性采样呢？这个我们不太清楚。
+目前为止，我们所知的这样的估计器都是非一致的（即是说，无限数据也不能让他们收敛到正确的值）。
 
---------------
+\**练习5.13* 写出从（5.12）导出（5.14）的步骤。
+\**练习5.14* 使用截断加权平均估计量（5.10）的思想修改离策略蒙特卡洛控制算法（5.7节）。
+请注意，您首先需要将此等式转换为动作价值。
 
-\*练习 5.9
 
-使用5.9中的截断的加权重要性采样估计器来修改离策略蒙特卡洛控制算法。注意到，你需要首先将方程转化为动作价值。
-
---------------
-
-5.9 小结
---------
+5.10 小结
+-----------
 
   这一章的蒙特卡洛方法以*样本回合（sample
 episodes）* 的方式，从经验中学习价值函数和最优策略。相比于动态规划（DP）的方法，这至少有三种优势。首先，它们能够直接从与环境的交互中学习到最优的行为，并不需要知道环境的动态。其次，它们能够被用于模拟或 *样本模型（sample
@@ -1008,8 +1024,8 @@ sampling）* 是使用加权的平均。原始重要性采样是无偏估计，�
   这一章的蒙特卡洛方法与上一章的动态规划方法有两个主要的不同点。首先，它们对样本经验进行操作，因此可以不用模型，直接进行学习。其次，他们没有bootstrap。就是说，他们不依赖其他的价值估计来更新自己的价值估计。这两点不同并非紧密联系，可以分开谈论。下一章，我们将会考虑一种方法，它可以像蒙特卡洛那样从经验中学习，也可以像动态规划那样使用bootstrap。
 
 
-5.10 文献和历史
----------------
+文献和历史
+------------
 
   术语“蒙特卡洛”源于1940s，当时Los
 Alamos的物理学家发明了一种概率游戏，来帮助他们理解有关原子弹的复杂物理现象。有一些教材从这个方面谈论了蒙特卡洛方法（e.g.,
