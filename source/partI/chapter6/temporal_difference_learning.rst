@@ -17,6 +17,117 @@ TD，DP和蒙特卡洛方法之间的关系是强化学习理论中反复出现�
 6.1 TD预测
 -------------
 
+TD和蒙特卡罗方法都使用经验来解决预测问题。对于基于策略 :math:`\pi` 的一些经验，
+两种方法都更新了他们对该经验中发生的非终结状态 :math:`S_t` 的 :math:`v_\pi` 的估计 :math:`V`。
+粗略地说，蒙特卡罗方法一直等到访问后的回报已知，然后使用该回报作为 :math:`V(S_t)` 的目标。
+适用于非平稳环境的简单的每次访问蒙特卡罗方法是
+
+.. math::
+
+    V(S_{t}) \leftarrow V(S_{t})+\alpha\left[ G_{t}-V(S_{t})\right]
+    \tag{6.1}
+
+其中 :math:`G_t` 是跟随时间t的实际回报，:math:`\alpha` 是一个恒定的步长参数（参见方程2.4）。
+我们将此方法称为恒定 :math:`\alpha` MC。
+蒙特卡罗方法必须等到回合结束才能确定 :math:`V(S_t)` 的增量（这时只有 :math:`G_t` 已知），
+TD方法需要等到下一个时间步。 在时间 :math:`t+1`，它们立即形成目标并
+使用观察到的奖励 :math:`R_{t+1}`和估计 :math:`V(S_{t+1})` 进行有用的更新。
+最简单的TD方法立即进行更新
+
+.. math::
+
+    V(S_{t}) \leftarrow V(S_{t})+\alpha\left[R_{t+1}+\gamma V(S_{t+1})-V(S_{t})\right]
+    \tag{6.2}
+
+过渡到 :math:`S_{t+1}` 并接收 :math:`R_{t+1}`。
+在实际中，蒙特卡洛更新的目标是 :math:`G_t`，而TD更新的目标是 :math:`R_{t+1} + \gamma V(S_{t+1})`。
+这种TD方法称为 *TD(0)* 或 *一步TD*，因为它是第12章和第7章中开发的 TD(:math:`\lambda`)和n步TD方法的特例。
+下面的方框完全以程序形式给出了TD(0)。
+
+.. admonition:: 表格TD(0)估计 :math:`v_\pi`
+    :class: important
+
+    输入：要评估策略 :math:`\pi`
+
+    算法参数：步长 :math:`\alpha in (0,1]`
+
+    对所有 :math:`s \in \mathbb{S}^{+}`，除了 :math:`V(终点)=0`，任意初始化 :math:`V(s)`
+
+    对每个回合循环：
+
+        初始化 :math:`S`
+
+        对回合的每一步循环：
+
+            :math:`A \leftarrow` 由 :math:`\pi` 给出 :math:`S` 的动作
+
+            采取动作 :math:`A`，观察 :math:`R`，:math:`S^{\prime}`
+
+            :math:`V(S) \leftarrow V(S)+\alpha\left[R+\gamma V(S^{\prime})-V(S)\right]`
+
+            :math:`S \leftarrow S^{\prime}`
+
+        直到 :math:`S` 是终点
+
+因为TD(0)部分基于现有估计进行更新，所以我们说它是一种 *自举（bootstrapping）* 方法，就像DP一样。
+我们从第3章知道
+
+.. math::
+
+    \begin{align}
+    v_{\pi}(s) & \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right]  \tag{6.3}\\
+    &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s\right] & (由(3.9))\\
+    &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) | S_{t}=s\right] \tag{6.4}
+    \end{align}
+
+粗略地说，蒙特卡罗方法使用（6.3）的估计作为目标，而DP方法使用（6.4）的估计作为目标。
+蒙特卡洛目标是估计，因为（6.3）中的预期值未知；使用样本回报来代替实际预期回报。
+DP目标是一个估计，不是因为完全由环境模型提供的预期值，而是因为 :math:`v_{\pi}(S_{t+1})` 未知，
+且使用当前估计值 :math:`V(S_{t+1})` 来代替。
+TD目标是估计原因有两个：它在（6.4）中对预期值进行采样，*并* 使用当前估计值 :math:`V` 而不是真实 :math:`v_\pi`。
+因此，TD方法将蒙特卡罗的采样与DP的自举相结合。
+正如我们将要看到的那样，通过谨慎和想象，这将使我们在获得蒙特卡罗和DP方法的优势方面走得很远。
+
+.. figure:: images/TD(0).png
+    :align: right
+    :width: 50px
+
+右侧是表格TD(0)的备份图。
+备份图顶部的状态节点的值估计基于从它到紧接的状态的一个样本转换而更新。
+我们将TD和蒙特卡洛更新称为样本更新，因为它们涉及展望样本后继状态（或状态-动作对），
+使用后继值和相应的奖励来计算备份值（?），然后相应地更新原始状态（或状态-动作对）的值。
+*样本* 更新与DP方法的 *预期* 更新不同，因为它们基于单个样本后继，而不是基于所有可能后继的完整分布。
+
+最后，请注意在TD(0)更新中，括号中的数量是一种误差，
+衡量 :math:`S_t` 的估计值与更好的估计 :math:`R_{t+1} + \gamma V(S_{t+1})` 之间的差异。
+这个数量称为 *TD误差*，在整个强化学习过程中以各种形式出现：
+
+.. math::
+
+    \delta_{t} \doteq R_{t+1}+\gamma V\left(S_{t+1}\right)-V\left(S_{t}\right)
+    \tag{6.5}
+
+请注意，每次TD误差都是 *当时估算* 的误差。因为TD误差取决于下一个状态和下一个奖励，所以直到一个步骤之后才可用。
+也就是说，:math:`\delta_{t}` 是 :math:`V(S_{t+1})` 中的误差，在时间 :math:`t+1` 可用。
+还要注意，如果列表 :math:`V` 在回合期间没有改变（因为它不是蒙特卡罗方法(?)），那么蒙特卡罗误差可以写成TD误差的和：
+
+.. math::
+
+    \begin{align}
+    G_{t}-V\left(S_{t}\right) &=R_{t+1}+\gamma G_{t+1}-V\left(S_{t}\right)+\gamma V\left(S_{t+1}\right)-\gamma V\left(S_{t+1}\right) & (由(3.9)) \\
+    &=\delta_{t}+\gamma\left(G_{t+1}-V\left(S_{t+1}\right)\right) \\
+    &=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2}\left(G_{t+2}-V\left(S_{t+2}\right)\right) \\
+    &=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2} \delta_{t+2}+\cdots+\gamma^{T-t-1} \delta_{T-1}+\gamma^{T-t}\left(G_{T}-V\left(S_{T}\right)\right) \\
+    &=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2} \delta_{t+2}+\cdots+\gamma^{T-t-1} \delta_{T-1}+\gamma^{T-t}(0-0) \\
+    &=\sum_{k=t}^{T-1} \gamma^{k-t} \delta_{k} \tag{6.6}
+    \end{align}
+
+如果在回合期间更新 :math:`V` （因为它在TD(0)中），则此恒等式不准确，但如果步长很小，那么它可能仍然保持近似。
+这种恒等式的一般化在时序差分学习的理论和算法中起着重要作用。
+
+*练习6.1* 如果 :math:`V` 在回合中发生变化，那么（6.6）只能保持近似；等式两边的区别是什么？
+设 :math:`V_t` 表示在TD误差（6.5）和TD更新（6.2）中在时间 :math:`t` 使用的状态值列表。
+重做上面的推导以确定必须添加到TD误差总和的额外量，以便等于蒙特卡罗误差。
 
 6.2 TD预测方法的优势
 ---------------------
