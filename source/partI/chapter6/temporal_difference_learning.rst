@@ -406,7 +406,7 @@ Sarsa就以概率1收敛到最优策略和动作-价值函数。
 
         使用从 :math:`Q` 派生的策略从 :math:`S` 中选择 :math:`A`（例如，:maht:`\varepsilon` -贪婪）
 
-        回合的每一步循环：
+        对回合的每一步循环：
 
             采取动作 :math:`A`，观察 :math:`R`, :math:`S^{\prime}`
 
@@ -449,8 +449,73 @@ Sarsa等在线学习方法没有这个问题，因为他们很快就会在这一
 三分之一的时间将移动到目标上方两个单元格，最后三分之一的时间你移动到目标。
 
 
-6.5 Q-学习：离策略TD控制
+6.5 Q-learning：离策略TD控制
 -----------------------------
+
+强化学习的早期突破之一是开发了一种名为 *Q-learning* （Watkins，1989）的离策略TD控制算法，由以下定义：
+
+.. math::
+
+    Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \max _{a} Q\left(S_{t+1}, a\right)-Q\left(S_{t}, A_{t}\right)\right].
+    \tag{6.8}
+
+在这种情况下，学习的动作-价值函数 :math:`Q` 直接近似 :math:`q_*`，即最佳动作-价值函数，与所遵循的策略无关。
+这极大地简化了算法的分析并实现了早期的收敛证明。该策略仍然具有一个效果，即它确定访问和更新哪些状态-动作对。
+但是，正确收敛所需的只是所有动作-价值对继续更新。正如我们在第5章中所观察到的那样，这是一个最小要求，
+因为在一般情况下保证找到最佳行为的任何方法都必须要求它。
+在该假设和步长参数序列的通常随机近似条件的变体下，:math:`Q` 已经显示出以概率1收敛到 :math:`q_*`。
+Q-learning算法以程序形式显示如下。
+
+.. admonition:: Q-learning （离策略TD控制）估计 :math:`\pi \approx \pi_*`
+    :class: important
+
+    算法参数：步长 :math:`\alpha \in (0,1]`，小值 :math:`\varepsilon > 0`
+
+    对所有 :math:`s \in \mathcal(S)^+`，:math:`a \in \mathcal(A)(s)`，任意初始 :math:`Q(s, a)`，除了 :math:`Q(终点, \cdot)=0`
+
+    对每一个回合循环：
+
+        初始化 :math:`S`
+
+        对回合的每一步循环：
+
+            使用从 :math:`Q` 派生的策略从 :math:`S` 中选择 :math:`A`（例如，:maht:`\varepsilon` -贪婪）
+
+            采取动作 :math:`A`，观察 :math:`R`, :math:`S^{\prime}`
+
+            :math:`Q(S, A) \leftarrow Q(S, A)+\alpha\left[R+\gamma \max _{a} Q\left(S^{\prime}, a\right)-Q(S, A)\right]`
+
+            :math:`S \leftarrow S^{\prime}`
+
+        直到 :math:`S` 是终点
+
+Q-learning的备份图是什么？规则（6.8）更新状态-动作对，因此顶点（更新的根）必须是一个小的，填充的动作节点。
+更新也 *来自* 动作节点，最大化在下一个状态下可能执行的所有操作。因此，备份图的底部节点应该是所有这些动作节点。
+最后，请记住，我们指出将这些“下一个动作”节点的最大值放在它们之间（图3.4-右）。你能猜出现在的图是什么样吗？
+如果能，请在转到图6.4中的答案之前进行猜测。
+
+.. figure:: images/the_cliff_gridworld.png
+    :width: 350px
+    :align: right
+
+**例6.6：悬崖行走** 这个网格世界示例比较了Sarsa和Q-learning，突出了在策略（Sarsa）和离策略（Q-learning）方法之间的区别。
+考虑右边显示的网格世界。这是一个标准的未折扣的，偶然的任务，具有开始和目标状态，以及向上，向下，向右和向左移动的常见操作。
+所有过渡的奖励都是 :math:`1`，除了那些标记为“悬崖”的区域。进入该区域会产生 :math:`-100` 的奖励，并且会立即回到起点。
+
+.. figure:: images/performance_of_Sarsa_and_Q-learning.png
+    :width: 350px
+    :align: right
+
+右图显示了具有 :math:`\varepsilon` -贪婪动作选择的Sarsa和Q-learning方法的性能，:math:`\alpha=0.1`。
+在初始瞬态之后，Q-learning会学习最优策略的价值，这些策略沿着悬崖边缘行进。
+不幸的是，由于“:math:`\varepsilon` -贪婪动作选择”，这导致它偶尔从悬崖上掉下来。
+另一方面，Sarsa将动作选择考虑在内，并学习通过网格上部的更长但更安全的路径。
+虽然Q-learning实际上学习了最优策略的价值，其在线表现比学习迂回策略的Sarsa差。
+当然，如果 :math:`\varepsilon` 逐渐减少，那么两种方法都会渐近地收敛到最优策略。
+
+*练习6.11* 为什么Q-learning被认为是一种 *离策略* 控制方法？
+
+*练习6.12* 假设动作选择是贪婪的。Q-learning与Sarsa的算法完全相同吗？他们会做出完全相同的动作选择和权重更新吗？
 
 
 6.6 预期的Sarsa
