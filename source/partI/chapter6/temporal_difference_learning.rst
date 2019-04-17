@@ -521,6 +521,48 @@ Q-learning的备份图是什么？规则（6.8）更新状态-动作对，因此
 6.6 预期的Sarsa
 ---------------
 
+考虑与Q-learning一样的学习算法，区别在于其考虑到当前策略下每个动作的可能性，使用预期值而不是最大化下一个状态-动作对。
+也就是说，考虑具有如下更新规则的算法
+
+.. math::
+
+    \begin{aligned}
+    Q\left(S_{t}, A_{t}\right) & \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \mathbb{E}_{\pi}\left[Q\left(S_{t+1}, A_{t+1}\right) | S_{t+1}\right]-Q\left(S_{t}, A_{t}\right)\right] \\
+    & \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q\left(S_{t+1}, a\right)-Q\left(S_{t}, A_{t}\right)\right] & \text{(6.9)}
+    \end{aligned}
+
+但这遵循Q-learning的模式。给定下一个状态 :math:`S_{t+1}`，
+该算法 *确定地* 在与Sarsa *期望* 移动的方向相同的方向上移动，
+因此它被称为 *预期的Sarsa*。其备份图如图6.4右边所示。
+
+预期的Sarsa在计算上比Sarsa更复杂，但作为回报，它消除了由于随机选择 :math:`A_{t+1}` 而导致的差异
+基于相同的经验，我们可能期望它的表现略好于Sarsa，实际上它通常也是如此。
+图6.3显示了预期Sarsa与Sarsa，Q-learning的悬崖行走任务的总结。
+预期的Sarsa在这个问题上保留了Sarsa对Q-learning的显着优势。
+此外，对于广泛得步长参数 :math:`\alpha`的值，预期Sarsa显示出相对于Sarsa的显着改善。
+在悬崖行走中，状态转换都是确定性的，所有随机性都来自策略。
+在这种情况下，预期的Sarsa可以安全地设置 :math:`\alpha=1` 而不会导致渐近性能的任何退化，
+而Sarsa只能在长期运行时以小的 :math:`\alpha` 值表现良好，短期表现较差。
+在这个和其他例子中，预期的Sarsa相对于Sarsa具有一致的经验优势。
+
+
+.. figure:: images/figure-6.3.png
+
+    图6.3：TD控制方法对悬崖行走任务的临时和渐近性能是关于 :math:`\alpha` 的函数。
+    所有算法都使用 :math:`\varepsilon` -贪婪策略，其中 :math:`\varepsilon=1`。
+    渐近性能是超过100,000回合的平均，而临时性能是前100回合的平均值。
+    这些数据分别是临时和渐近情况的超过50,000回合和10次运行的平均。
+    实心圆圈标志着每种方法的最佳临时性能。改编自van Seijen et al.(2009)。
+
+.. figure:: images/figure-6.4.png
+
+    图6.4：Q-learning和预期Sarsa的备份图。
+
+在这些悬崖行走任务结果中，预期的Sarsa被用于策略，但总的来说，它可能使用与目标策略 :math:`\pi` 不同的策略来产生行为，
+在这种情况下，它成为一种离策略算法。例如，假设 :math:`\pi` 是贪婪的策略，而行为更具探索性；
+然后预期Sarsa正是Q-learning。在这个意义上，预期的Sarsa包含并概括了Q-learning，同时可靠地改善了Sarsa。
+除了额外的计算成本之外，预期的Sarsa可能完全支配其他更著名的TD控制算法。
+
 
 6.8 最大化偏差和双重学习
 -------------------------
