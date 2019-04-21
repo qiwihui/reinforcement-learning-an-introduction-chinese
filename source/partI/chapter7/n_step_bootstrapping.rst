@@ -1,5 +1,5 @@
-第7章 多步引导（Bootstrapping）方法
-======================================
+第7章 :math:`n` 步引导（Bootstrapping）方法
+==============================================
 
 在本章中，我们统一了蒙特卡罗（MC）方法和前两章中介绍的一步时序差分（TD）方法。MC方法和一步法TD方法都不是最好的。
 在本章中，我们将介绍 *n步TD方法*，这些方法概括了两种方法，以便可以根据需要平滑地从一种方法转换到另一种方法，以满足特定任务的需求。
@@ -21,8 +21,8 @@ n步方法的概念通常用作 *资格跟踪* （第12章）算法思想的介�
 然后我们将想法扩展到行动价值和控制方法。
 
 
-7.1 多步TD预测
----------------
+7.1 :math:`n` 步TD预测
+---------------------------
 
 蒙特卡罗和TD方法之间的方法空间是什么？考虑使用 :math:`\pi` 生成的样本回合估计v⇡。
 蒙特卡罗方法基于从该状态到回合结束的观察到的奖励的整个序列来执行每个状态的更新。
@@ -80,7 +80,7 @@ n步方法的概念通常用作 *资格跟踪* （第12章）算法思想的介�
 为了弥补这一点，在回合结束后，终止后和开始下一集之前，会进行相同数量的额外更新。
 完整的伪代码在下面的框中给出。
 
-.. admonition:: 多步TD(0)估计 :math:`V \approx v_\pi`
+.. admonition:: :math:`n` 步TD(0)估计 :math:`V \approx v_\pi`
     :class: important
 
     输入：策略 :math:`\pi`
@@ -109,7 +109,7 @@ n步方法的概念通常用作 *资格跟踪* （第12章）算法思想的介�
 
             :math:`\tau \leftarrow t - n + 1` （:math:`\tau` 是状态估计正在更新的时间）
 
-            如果 :math:`\tau > 0`：
+            如果 :math:`\tau geq 0`：
 
                 :math:`G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}`
 
@@ -161,12 +161,129 @@ n步回报的一个重要特性是，在最恶劣的意义上，它们的期望�
 较小的步行会将优势转移到不同的n值吗？在较大的步行中左侧结果从0变为 :math:`-1` 是怎么发生的？
 你认为这对n的最佳价值有任何不同吗？
 
-7.2 多步Sarsa
----------------
+
+7.2 :math:`n` 步Sarsa
+----------------------------
+
+如何使用n步方法不仅用于预测，还用于控制？在本节中，我们将展示如何以简单的方式将n步方法与Sarsa结合以产生一种策略上的TD控制方法。
+Sarsa的n步版本我们称之为n步Sarsa，而前一章中提到的原始版本我们称之为 *一步Sarsa* 或 *Sarsa(0)*。
+
+主要思想是简单地切换动作状态（状态-动作对），然后使用 :math:`\varepsilon` -贪婪策略。
+n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ），是交替状态和动作的字符串，
+除了Sarsa所有都以动作而不是状态开始和结束。我们根据估计的动作值重新定义n步回报（更新目标）：
+
+.. math::
+
+    G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t<T-n
+    \tag{7.4}
+
+如果 :math:`t+n \geq T`，则 :math:`G_{t : t+n} \doteq G_{t}`。那么自然算法就是
+
+.. math::
+
+    Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t<T
+    \tag{7.5}
+
+而所有其他状态的值保持不变：:math:`Q_{t+n}(s, a)=Q_{t+n-1}(s, a)`，
+对于所有 :math:`s, a` 使得 :math:`s \ne S_t` 或 :math:`a \ne A_t`。
+这是我们称之为 *n步Sarsa* 的算法。
+伪代码显示在下面的框中，图7.4给出了与一步法相比可以加速学习的原因示例。
+
+.. figure:: images/figure-7.3.png
+
+    **图7.3：** 状态-动作值的n步方法频谱的备份图。
+    它们的范围从Sarsa(0)的一步更新到蒙特卡罗方法的直到终止更新。
+    在两者之间是n步更新，基于实际奖励的n个步骤和第n个下一个状态-动作对的估计值，都被适当地折扣。
+    最右边是n步预期Sarsa的备份图。
+
+.. admonition:: :math:`n` 步Sarsa估计 :math:`Q \approx q_*` 或者 :math:`q_\pi`
+    :class: important
+
+    对所有 :math:`s\in\mathcal(S)`，:math:`a\in\mathcal(A)`，任意初始化 :math:`Q(s,a)`
+
+    初始化 :math:`\pi` 关于 :math:`Q` 或固定的给定策略为 :math:`\varepsilon` -贪婪
+
+    算法参数：步长 :math:`\alpha \in (0,1]`，小 :math:`\varepsilon > 0`，正整数 :math:`n`
+
+    所有存储和访问操作（对于 :math:`S_t`，:math:`A_t` 和 :math:`R_t`）都可以使其索引 :math:`mod n + 1`
+
+    对每个回合循环：
+
+        初始化并存储 :math:`S_0 \ne` 终点
+
+        选择并存储动作 :math:`A_{0} \sim \pi\left(\cdot | S_{0}\right)`
+
+        :math:`T \leftarrow \infty`
+
+        对 :math:`t=0,1,2, \ldots` 循环：
+
+            如果 :math:`t < T`，则：
+
+                采取行动 :math:`A_t`
+
+                观察并将下一个奖励存储为 :math:`R_{t+1}`，将下一个状态存储为 :math:`S_{t+1}`
+
+                如果 :math:`S_{t+1}` 是终点，则
+
+                    :math:`T \leftarrow t+1`
+
+                否则：
+
+                    选择并存储动作 :math:`A_{t+1} \sim \pi\left(\cdot | S_{t=1}\right)`
+
+            :math:`\tau \leftarrow t - n + 1` （:math:`\tau` 是状态估计正在更新的时间）
+
+            如果 :math:`\tau \geq 0`：
+
+                :math:`G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}`
+
+                如果 :math:`\tau + n < T`， 则 :math:`G \leftarrow G+\gamma^{n} Q\left(S_{\tau+n}, A_{\tau+n}\right)` :math:`\quad\quad\quad` :math:`\left(G_{\tau : \tau+n}\right)`
+
+                :math:`Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]`
+
+                如果 :math:`\pi` 正在被学习，那么确保 :math:`\pi\left(\cdot | S_{\tau}\right)` 是关于 :math:`Q` :math:`\varepsilon` -贪婪
+
+        直到 :math:`\tau = T - 1`
+
+.. figure:: images/figure-7.4.png
+
+    **图7.4：** 由于使用n步方法而导致的策略学习加速的网格世界示例。
+    第一个面板显示了一个个体在单个回合中所采用的路径，在一个高回报的位置结束，用 **G** 标记。
+    在这个例子中，这些值最初都是0，除了 **G** 的正奖励，所有奖励都是零。
+    其他两个面板中的箭头显示了通过一步Sarsa方法和n步Sarsa方法通过该路径加强了的动作价值。
+    一步Sarsa法只强化导致高回报的动作序列的最后一个动作，而n步法强化序列的最后n个动作，
+    因此从一个回合中学习了更多。
+
+*练习7.4* 证明Sarsa（7.4）的n步回报可以完全按照新的TD误差写成如下：
+
+.. math::
+
+    G_{t : t+n}=Q_{t-1}\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n, T)-1} \gamma^{k-t}\left[R_{k+1}+\gamma Q_{k}\left(S_{k+1}, A_{k+1}\right)-Q_{k-1}\left(S_{k}, A_{k}\right)\right]
+    \tag{7.6}
+
+那么预期的Sarsa呢？预期Sarsa的n步版本的备份图显示在图7.3的最右侧。
+它由一系列样本动作和状态的线性组成，就像在n步Sarsa中一样，
+除了它的最后一个元素一如既往是在 :math:`\pi` 下的概率加权的所有动作可能性的分支。
+该算法可以用与n步Sarsa（上面）相同的等式来描述，除了将n步回报重新定义为
+
+.. math::
+
+    G_{t : t+n} \doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \overline{V}_{t+n-1}\left(S_{t+n}\right), \quad t+n<T
+    \tag{7.7}
+
+对 :math:`t+n \geq T`，:math:`G_{t : t+n} \doteq G_{t}`。
+其中 :math:`\overline{V}_{t}(s)` 是状态s的 *预期近似值*，使用目标策略下时间 :math:`t` 的估计行动值：
+
+.. math::
+
+    \overline{V}_{t}(s) \doteq \sum_{a} \pi(a | s) Q_{t}(s, a), \quad \text { 对所有 } s \in \mathcal{S}
+    \tag{7.8}
+
+在本书的其余部分中，使用预期近似值来开发许多动作价值方法。如果s是终点，则其预期近似值被定义为0。
 
 
-7.3 多步离策略学习
-------------------
+7.3 :math:`n` 步离策略学习
+------------------------------
 
 
 7.4 \*具有控制变量的各决策方法
