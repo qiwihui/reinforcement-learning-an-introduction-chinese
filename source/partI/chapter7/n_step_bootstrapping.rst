@@ -285,6 +285,104 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 7.3 :math:`n` 步离策略学习
 ------------------------------
 
+回想一下，离策略学习是学习一项策略的价值函数 :math:`\pi`，同时遵循另一项策略 :math:`b`。
+通常，:math:`\pi` 是当前行动-价值-函数估计的贪婪策略，
+而 :math:`b` 是一种更具探索性的策略，也许是 :math:`\varepsilon` -贪婪。
+为了使用 :math:`b` 中的数据，我们必须考虑到两种策略之间的差异，使用它们采取所采取行动的相对概率（参见第5.5节）。
+在n步法中，回报是在n个步骤上构建的，因此我们对这些n个动作的相对概率感兴趣。
+例如，在构建n步TD的简单离策略版本，时间 :math:`t` 的更新（实际上在时间 :math:`t+n` 进行）
+可以简单地通过 :math:`\rho_{t : t}+n-1` 加权：
+
+.. math::
+
+    V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t : t+n-1}\left[G_{t : t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t<T
+    \tag{7.9}
+
+其中 :math:`\rho_{t : t}+n-1` 称为 *重要性抽样比率*，
+是在两个策略下从 :math:`A_t` 到 :math:`A_{t+n-1}` 采取 :math:`n` 个动作的相对概率（参见方程5.3）：
+
+.. math::
+
+    \rho_{t : h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}
+    \tag{7.10}
+
+例如，如果任何一个动作永远不会被 :math:`\pi` 占用（即 :math:`\pi\left(A_{k} | S_{k}\right)=0`），
+那么n步回报应该被赋予零权重并被完全忽略。
+另一方面，如果偶然采取行动，:math:`\pi` 将采取比 :math:`\b` 更大的概率，那么这将增加否则将给予回报的权重。
+这是有道理的，因为该动作是 :math:`\pi` 的特征（因此我们想要了解它），但很少被 :math:`\b` 选择，因此很少出现在数据中。
+为了弥补这一点，我们必须在它发生时增加权重（over-weight）。
+请注意，如果这两个策略实际上是相同的（在策略情况下），则重要性采样率始终为1。
+因此，我们的新更新（7.9）概括并可以完全取代我们之前的n步TD更新。
+同样，我们之前的n步Sarsa更新可以完全被简单的离策略形式所取代：
+
+.. math::
+
+    Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1 : t+n}\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]
+    \tag{7.11}
+
+对 :math:`0 \leq t<T`。注意，这里的重要性采样率比n步TD（7.9）晚一步开始和结束。
+这是因为我们正在更新状态-动作对。我们不必关心我们选择行动的可能性；
+现在我们选择了它，我们希望从发生的事情中充分学习，只对后续行动进行重要性采样。
+完整算法的伪代码如下面的框所示。
+
+.. admonition:: 离策略 :math:`n` 步Sarsa估计 :math:`Q \approx q_*` 或者 :math:`q_\pi`
+    :class: important
+
+    输入：对所有 :math:`s\in\mathcal(S)`，一个任意的行为策略 :math:`b` 使得 :math:`b(a | s)>0`
+
+    对所有 :math:`s\in\mathcal(S)`，:math:`a\in\mathcal(A)`，任意初始化 :math:`Q(s,a)`
+
+    初始化 :math:`\pi` 关于 :math:`Q` 或固定的给定策略为贪婪
+
+    算法参数：步长 :math:`\alpha \in (0,1]`，正整数 :math:`n`
+
+    所有存储和访问操作（对于 :math:`S_t`，:math:`A_t` 和 :math:`R_t`）都可以使其索引 :math:`mod n + 1`
+
+    对每个回合循环：
+
+        初始化并存储 :math:`S_0 \ne` 终点
+
+        选择并存储动作 :math:`A_{0} \sim \pi\left(\cdot | S_{0}\right)`
+
+        :math:`T \leftarrow \infty`
+
+        对 :math:`t=0,1,2, \ldots` 循环：
+
+            如果 :math:`t < T`，则：
+
+                采取行动 :math:`A_t`
+
+                观察并将下一个奖励存储为 :math:`R_{t+1}`，将下一个状态存储为 :math:`S_{t+1}`
+
+                如果 :math:`S_{t+1}` 是终点，则
+
+                    :math:`T \leftarrow t+1`
+
+                否则：
+
+                    选择并存储动作 :math:`A_{t+1} \sim \pi\left(\cdot | S_{t=1}\right)`
+
+            :math:`\tau \leftarrow t - n + 1` （:math:`\tau` 是状态估计正在更新的时间）
+
+            如果 :math:`\tau \geq 0`：
+
+                :math:`\rho \leftarrow \prod_{i=\tau+1}^{\min (\tau+n-1, T-1)} \frac{\pi\left(A_{i} | S_{i}\right)}{b\left(A_{i} | S_{i}\right)}` :math:`\quad\quad\quad` :math:`\left(\rho_{\tau}+1 : t+n-1\right)`
+
+                :math:`G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}`
+
+                如果 :math:`\tau + n < T`， 则 :math:`G \leftarrow G+\gamma^{n} Q\left(S_{\tau+n}, A_{\tau+n}\right)` :math:`\quad\quad\quad` :math:`\left(G_{\tau : \tau+n}\right)`
+
+                :math:`Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha \rho\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]`
+
+                如果 :math:`\pi` 正在被学习，那么确保 :math:`\pi\left(\cdot | S_{\tau}\right)` 是关于 :math:`Q` 贪婪
+
+        直到 :math:`\tau = T - 1`
+
+n步预期Sarsa的离策略版本将对n步Sarsa使用与上述相同的更新，除了重要性抽样比率将减少一个因素。
+也就是说，上面的等式将使用 :math:`\rho_{t}+1 : t+n-1` 而不是 :math:`\rho_{t}+1 : t+n`，
+当然它将使用n步回报（7.7）的预期Sarsa版本。这是因为在预期的Sarsa中，在最后一个状态中考虑了所有可能的行为；
+实际采取的那个没有效果，也没有必要纠正。
+
 
 7.4 \*具有控制变量的各决策方法
 ------------------------------
