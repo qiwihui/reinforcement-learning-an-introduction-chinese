@@ -468,6 +468,131 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 7.5 无重要性采样的离策略学习：n步树备份算法
 ---------------------------------------------
 
+没有重要性抽样，是否可以进行离策略学习？
+第6章中的Q-learning和预期的Sarsa针对一步式案例进行了此操作，但是是否有相应的多步算法？
+在本节中，我们将介绍一种称为 *树备份算法* 的n步方法。
+
+.. figure:: images/the-3-step-tree-backup-update.png
+    :align: right
+    :width: 120px
+
+右侧显示的3步树备份备份图表明了该算法的思想。
+沿中央脊柱向下并在图中标记的是三个样本状态和奖励，以及两个样本动作。
+这些是表示在初始状态-动作对 :math:`S_t`，:math:`A_t` 之后发生的事件的随机变量。
+悬挂在每个状态的两侧是 *未* 选择的行动。（对于最后一个状态，所有操作都被认为尚未被选中。）
+因为我们没有未选择操作的样本数据，所以我们引导并使用它们的值估计来形成更新目标。
+这略微扩展了备份图的概念。到目前为止，我们总是将图表顶部节点的估计值更新为一个目标，
+其中包括沿途的奖励（适当折扣）和底部节点的估计值。
+在树形备份更新中，目标包括所有这些内容以及悬挂在各个层面的悬空动作节点的估计值。
+这就是它被称为 *树形备份* 更新的原因；它是整个估计动作值树的更新。
+
+更确切地说，更新来自树的 *叶节点* 的估计动作值。内部的动作节点对应于所采取的实际动作，不参与更新。
+每个叶节点对目标的贡献与其在目标策略 :math:`\pi` 下发生的概率成比例。
+因此，每个第一级动作 :math:`a` 的权重为 :math:`\pi\left(a | S_{t+1}\right)`，
+除了实际采取的动作 :math:`A_{t+1}`，根本没有贡献。
+它的概率 :math:`\pi\left(A_{t+1} | S_{t+1}\right)` 用于加权所有第二级动作值。
+因此，每个未选择的第二级动作 :math:`a^{\prime}` 贡献权重
+:math:`\pi\left(A_{t+1} | S_{t+1}\right) \pi\left(a^{\prime} | S_{t+2}\right)`。
+每个第三级动作都有权重 :math:`\pi\left(A_{t+1} | S_{t+1}\right) \pi\left(A_{t+2} | S_{t+2}\right) \pi\left(a^{\prime \prime} | S_{t+3}\right)`，依此类推。
+就好像图中动作节点的每个箭头都被动作在目标策略下被选中的概率加权，如果动作下面有一棵树，则该权重适用于树中的所有叶节点。
+
+我们可以将3步树备份更新视为由6个半步骤组成，在从动作到后续状态的样本半步骤之间交替，
+以及根据策略从该状态考虑所有可能的动作及其概率的预期半步骤。
+
+现在让我们开发n步树备份算法的详细方程。一步回报（目标）与预期的Sarsa相同，
+
+.. math::
+
+    G_{t : t+1} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q_{t}\left(S_{t+1}, a\right)
+    \tag{7.15}
+
+对 :math:`t<T-1`。两步树备份回报为
+
+.. math::
+
+    \begin{align}
+    G_{t : t+2} &\doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right) \\
+    & \quad +\gamma \pi\left(A_{t+1} | S_{t+1}\right)\left(R_{t+2}+\gamma \sum_{a} \pi\left(a | S_{t+2}\right) Q_{t+1}\left(S_{t+2}, a\right)\right) \\
+    &=R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+2}
+    \end{align}
+
+对 :math:`t<T-2`。后一种形式表明了树备份n步回报的一般递归定义：
+
+.. math::
+
+    G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}
+    \tag{7.16}
+
+对 :math:`0 \leq t<T`，而所有其他状态-动作对的值保持不变：
+:math:`Q_{t+n}(s, a)=Q_{t+n-1}(s, a)`，
+对于所有 :math:`s,a` 使得 :math:`s\ne S_t` 或 :math:`a\ne A_t`。
+该算法的伪代码显示在下面的框中。
+
+.. admonition:: n步树备份估计 :math:`Q \approx q_*` 或者 :math:`q_\pi`
+    :class: important
+
+    对所有 :math:`s\in\mathcal(S)`，:math:`a\in\mathcal(A)`，任意初始化 :math:`Q(s,a)`
+
+    初始化 :math:`\pi` 关于 :math:`Q` 或固定的给定策略为贪婪
+
+    算法参数：步长 :math:`\alpha \in (0,1]`，正整数 :math:`n`
+
+    所有存储和访问操作都可以使其索引 :math:`mod n + 1`
+
+    对每个回合循环：
+
+        初始化并存储 :math:`S_0 \ne` 终点
+
+        选择并存储动作 :math:`A_{0} \sim \pi\left(\cdot | S_{0}\right)`
+
+        任意选择动作 :math:`A_{0}` 作为 :math:`S_{0}` 的函数；存储 :math:`A_{0}`
+
+        :math:`T \leftarrow \infty`
+
+        对 :math:`t=0,1,2, \ldots` 循环：
+
+            如果 :math:`t < T`，则：
+
+                采取行动 :math:`A_t`，观察并将下一个奖励存储为 :math:`R_{t+1}`，将下一个状态存储为 :math:`S_{t+1}`
+
+                如果 :math:`S_{t+1}` 是终点，则
+
+                    :math:`T \leftarrow t+1`
+
+                否则：
+
+                    任意选择动作 :math:`A_{t+1}` 作为 :math:`S_{t+1}` 的函数；存储 :math:`A_{t+1}`
+
+            :math:`\tau \leftarrow t + 1 -n` （:math:`\tau` 是状态估计正在更新的时间）
+
+            如果 :math:`\tau \geq 0`：
+
+                如果 :math:`t+1 \geq T`:
+
+                    :math:`G \leftarrow R_{T}`
+
+                否则：
+
+                    :math:`G \leftarrow R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q\left(S_{t+1}, a\right)`
+
+                对 :math:`k=\min (t, T-1)` 下降到 :math:`\tau + 1` 循环：
+
+                    :math:`G \leftarrow R_{k}+\gamma \sum_{a \neq A_{k}} \pi\left(a | S_{k}\right) Q\left(S_{k}, a\right)+\gamma \pi\left(A_{k} | S_{k}\right) G`
+
+                如果 :math:`\pi` 正在被学习，那么确保 :math:`\pi\left(\cdot | S_{\tau}\right)` 是关于 :math:`Q` 贪婪
+
+        直到 :math:`\tau = T - 1`
+
+*练习7.11* 显示如果近似动作值不变，则树备份返回（7.16）可以写为基于期望的TD误差的总和：
+
+.. math::
+
+    G_{t : t+n}=Q\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n-1, T-1)} \delta_{k} \prod_{i=t+1}^{k} \gamma \pi\left(A_{i} | S_{i}\right)
+
+其中 :math:`\delta_{t} \doteq R_{t+1}+\gamma \overline{V}_{t}\left(S_{t+1}\right)-Q\left(S_{t}, A_{t}\right)`
+并且 :math:`\overline{V}_{t}` 由（7.8）给出。
+
+
 
 7.6 \*统一算法：n步 :math:`Q(\sigma)`
 --------------------------------------
