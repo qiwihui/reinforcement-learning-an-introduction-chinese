@@ -388,7 +388,7 @@ n步预期Sarsa的离策略版本将对n步Sarsa使用与上述相同的更新�
 -------------------------------------------------
 
 上一节中介绍的多步离策略方法简单且概念清晰，但可能不是最有效的方法。
-更复杂的方法将使用每个决策重要性抽样的想法，如第5.9节中介绍的那样。
+更复杂的方法将使用每个决策重要性采样的想法，如第5.9节中介绍的那样。
 要理解这种方法，首先要注意普通的n步回报（7.1），就像所有回报一样，可以递归写入。
 对于以水平线 :math:`h` 结束的n个步骤，n步回报可以写成
 
@@ -468,7 +468,7 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 7.5 无重要性采样的离策略学习：n步树备份算法
 ---------------------------------------------
 
-没有重要性抽样，是否可以进行离策略学习？
+没有重要性采样，是否可以进行离策略学习？
 第6章中的Q-learning和预期的Sarsa针对一步式案例进行了此操作，但是是否有相应的多步算法？
 在本节中，我们将介绍一种称为 *树备份算法* 的n步方法。
 
@@ -593,13 +593,128 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 并且 :math:`\overline{V}_{t}` 由（7.8）给出。
 
 
-
 7.6 \*统一算法：n步 :math:`Q(\sigma)`
 --------------------------------------
+
+到目前为止，在本章中我们已经考虑了三种不同类型的动作价值算法，对应于图7.5中所示的前三个备份图。
+n步Sarsa具有所有样本转换，树备份算法将所有状态-动作转换完全分支而不进行采样，
+n步预期Sarsa具有除最后一个状态到动作之外的所有样本转换，这是完全分支，具有预期值。
+这些算法在多大程度上可以统一？
+
+图7.5中的第四个备份图表明了统一的一个想法。这是一个想法，
+人们可以逐步决定是否想要将动作作为样本，如在Sarsa中，或者考虑对所有动作的期望，如树备份更新。
+然后，如果一个人总是选择采样，那么就会获得Sarsa，而如果一个人选择永远不会采样，那么就会得到树备份算法。
+预期的Sarsa就是这样一种情况，即除了最后一步之外，所有步骤都选择采样。
+
+.. figure:: images/figure-7.5.png
+
+    **图7.5：** 本章到目前为止考虑的三种n步动作值更新的备份图（4步案例）以及将它们统一起来的第四种更新的备份图。
+    :math:`\rho` 表示在离策略情况下需要重要采样的一半过渡。
+    第四种更新通过逐个状态地选择是否采样（:math:`\sigma_{t}=1`）或不采样（:math:`\sigma_{t}=0`）来统一所有其他更新。
+
+当然，如图中的最后一个图所示，还有许多其他可能性。为了进一步提高可能性，我们可以考虑采样和期望之间的连续变化。
+令 :math:`\sigma_{t} \in[0,1]` 表示步骤 :math:`t` 的采样程度，
+其中 :math:`\sigma=1` 表示完全采样，:math:`\sigma=0` 表示没有采样的纯期望。
+随机变量 :math:`\sigma_t` 可以在时间 :math:`t` 被设置为状态，动作或状态 - 动作对的函数。
+我们将这个提议的新算法称为n步 :math:`Q(\sigma)`。
+
+现在让我们开发n步 :math:`Q(\sigma)` 的方程。
+首先，我们根据水平线 :math:`h+n` 写出树备份n步回报（7.16），然后根据预期的近似值 :math:`\overline{V}` （7.8）：
+
+.. math::
+
+    \begin{aligned}
+    G_{t : h} &=R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{h-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : h} \\
+    &=R_{t+1}+\gamma \overline{V}_{h-1}\left(S_{t+1}\right)-\gamma \pi\left(A_{t+1} | S_{t+1}\right) Q_{h-1}\left(S_{t+1}, A_{t+1}\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : h} \\
+    &=R_{t+1}+\gamma \pi\left(A_{t+1} | S_{t+1}\right)\left(G_{t+1 : h}-Q_{h-1}\left(S_{t+1}, A_{t+1}\right)\right)+\gamma \overline{V}_{h-1}\left(S_{t+1}\right)
+    \end{aligned}
+
+之后它与控制变量（7.14）的Sarsa的n步回报完全相同，
+除了动作概率 :math:`\pi\left(A_{t+1} | S_{t+1}\right)` 代替重要性采样率 :math:`\rho_{t+1}`。
+对于 :math:`Q(\sigma)`，我们在这两种情况之间线性滑动：
+
+.. math::
+
+    \begin{aligned}
+    G_{t : h} \doteq R_{t+1} &+\gamma\left(\sigma_{t+1} \rho_{t+1}+\left(1-\sigma_{t+1}\right) \pi\left(A_{t+1} | S_{t+1}\right)\right)\left(G_{t+1 : h}-Q_{h-1}\left(S_{t+1}, A_{t+1}\right)\right) \\
+    &+\gamma \overline{V}_{h-1}\left(S_{t+1}\right) & \text{(7.17)}
+    \end{aligned}
+
+对 :math:`t<h \leq T`。
+如果 :math:`h < T`，递归以 :math:`G_{h : h} \doteq Q_{h-1}\left(S_{h}, A_{h}\right)` 结束，
+或者如果 :math:`h = T`，则以 :math:`G_{T-1 : T} \doteq R_{T}`。
+那么我们使用n步Sarsa（7.11）的一般（离策略）更新。框中给出了完整的算法。
+
+.. admonition:: 离策略 :math:`n` 步Sarsa估计 :math:`Q \approx q_*` 或者 :math:`q_\pi`
+    :class: important
+
+    输入：对所有 :math:`s\in\mathcal(S)`，一个任意的行为策略 :math:`b` 使得 :math:`b(a | s)>0`
+
+    对所有 :math:`s\in\mathcal(S)`，:math:`a\in\mathcal(A)`，任意初始化 :math:`Q(s,a)`
+
+    初始化 :math:`\pi` 关于 :math:`Q` 或固定的给定策略为 :math:`\varepsilon` -贪婪
+
+    算法参数：步长 :math:`\alpha \in (0,1]`，小 :math:`\varepsilon>0`，正整数 :math:`n`
+
+    所有存储和访问操作都可以使其索引 :math:`mod n + 1`
+
+    对每个回合循环：
+
+        初始化并存储 :math:`S_0 \ne` 终点
+
+        选择并存储动作 :math:`A_{0} \sim b\left(\cdot | S_{0}\right)`
+
+        :math:`T \leftarrow \infty`
+
+        对 :math:`t=0,1,2, \ldots` 循环：
+
+            如果 :math:`t < T`，则：
+
+                采取行动 :math:`A_t`，观察并将下一个奖励存储为 :math:`R_{t+1}`，将下一个状态存储为 :math:`S_{t+1}`
+
+                如果 :math:`S_{t+1}` 是终点，则：
+
+                    :math:`T \leftarrow t+1`
+
+                否则：
+
+                    选择并存储动作 :math:`A_{t+1} \sim b\left(\cdot | S_{t+1}\right)`
+
+                    选择并存储 :math:`\sigma_{t+1}`
+
+                    存储 :math:`\frac{\pi\left(A_{t+1} | S_{t+1}\right)}{b\left(A_{t+1} | S_{t+1}\right)}` 为 :math:`\rho_{t+1}`
+
+            :math:`\tau \leftarrow t - n + 1` （:math:`\tau` 是状态估计正在更新的时间）
+
+            如果 :math:`\tau \geq 0`：
+
+                :math:`G \leftarrow 0`：
+
+                对 :math:`k=\min (t+1, T)` 下降到 :math:`\tau + 1` 循环：
+
+                    如果 :math:`k=T`：
+
+                        :math:`G \leftarrow R_{T}`
+
+                    否则：
+
+                        :math:`\overline{V} \leftarrow \sum_{a} \pi\left(a | S_{k}\right) Q\left(S_{k}, a\right)`
+
+                        :math:`G \leftarrow R_{k}+\gamma\left(\sigma_{k} \rho_{k}+\left(1-\sigma_{k}\right) \pi\left(A_{k} | S_{k}\right)\right)\left(G-Q\left(S_{k}, A_{k}\right)\right)+\gamma \overline{V}`
+
+                :math:`Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]`
+
+                如果 :math:`\pi` 正在被学习，那么确保 :math:`\pi\left(\cdot | S_{\tau}\right)` 是关于 :math:`Q` 贪婪
+
+        直到 :math:`\tau = T - 1`
 
 
 7.7 总结
 ----------
+
+.. figure:: images/4-step-TD-and-4-step-Q-sigma.png
+    :align: right
+    :width: 120px
 
 
 书目和历史评论
