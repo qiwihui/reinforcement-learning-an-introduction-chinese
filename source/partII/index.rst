@@ -31,8 +31,8 @@
 .. toctree::
    :maxdepth: 2
 
-   chapter9/chapter9
-   chapter10
-   chapter11
-   chapter12
-   chapter13
+   chapter9/on-policy_prediction_with_approximation
+   chapter10/on-policy_control_with_approximation
+   chapter11/off-policy_methods_with_approximation
+   chapter12/eligibility_traces
+   chapter13/policy_gradient_methods
