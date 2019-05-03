@@ -31,7 +31,7 @@
 .. toctree::
    :maxdepth: 2
 
-   chapter9
+   chapter9/chapter9
    chapter10
    chapter11
    chapter12
