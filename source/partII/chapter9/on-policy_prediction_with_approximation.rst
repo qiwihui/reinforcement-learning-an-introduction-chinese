@@ -300,6 +300,254 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 9.4 线性方法
 ----------------
 
+函数近似的一个最重要的特殊情况是其中近似函数 :math:`\hat{v}(\cdot, \mathbf{w})` 是
+权重向量 :math:`\mathbf{w}` 的线性函数。对应于每个状态 :math:`s`，存在实值向量
+:math:`\mathbf{x}(s) \doteq(x_{1}(s), x_{2}(s), \ldots, x_{d}(s))^{\top}`，
+具有与 :math:`\mathbf{w}` 相同数量的分量。
+线性方法通过 :math:`\mathbf{w}` 和 :math:`\mathbf{x}(s)` 之间的内积近似状态值函数：
+
+.. math::
+
+    \hat{v}(s, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s) \doteq \sum_{i=1}^{d} w_{i} x_{i}(s)
+    \tag{9.8}
+
+在这种情况下，近似价值函数被称为 *权重线性（linear in the weights）*，或简单地称为 *线性*。
+
+向量 :math:`\mathbf{x}(s)` 被称为表示状态 :math:`s` 的 *特征向量*。
+:math:`\mathbf{x}(s)` 的每个分量 :math:`x_{i}(s)` 是
+函数 :math:`x_{i}:\mathcal{S}\rightarrow\mathbb{R}` 的值。
+我们将一个 *特征* 视为这些函数之一的整体，我们将状态 :math:`s`的值称为 :math:`s` 的一个特征。
+对于线性方法，特征是 *基函数*，因为它们形成近似函数集的线性基。
+构造表示状态的 :math:`d` 维特征向量与选择一组 :math:`d` 基函数相同。
+可以用许多不同的方式定义特征；我们将在下一节中介绍几种可能。
+
+很自然地可以使用SGD更新处理线性函数近似。在这种情况下，近似价值函数相对于 :math:`\mathbf{w}` 的梯度是
+
+.. math::
+
+    \nabla \hat{v}(s, \mathbf{w})=\mathbf{x}(s)
+
+因此，在线性情况下，一般SGD更新（9.7）简化为一种特别简单的形式：
+
+.. math::
+
+    \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\right] \mathbf{x}\left(S_{t}\right)
+
+因为它非常简单，线性SGD情况是最有利于数学分析的情况之一。
+几乎所有类型的学习系统的有用收敛结果都是线性（或简单）函数近似方法。
+
+特别是，在线性情况下，只有一个最优（或者，在简并情况下，一组同样良好的最优），
+因此任何保证收敛到或接近局部最优的方法都会自动保证收敛到或接近全局最优。
+例如，如果根据通常条件 :math:`\alpha` 随着时间减小，
+则在前一部分中呈现的梯度蒙特卡罗算法收敛于线性函数近似下的 :math:`\overline{\mathrm{VE}}` 的全局最优。
+
+上一节中介绍的半梯度TD(0)算法也收敛于线性函数近似，但这并不符合SGD的一般结果；一个单独的定理是必要的。
+收敛到的权重向量也不是全局最优值，而是接近局部最优值的点。更详细地考虑这一重要案例是有用的，特别是对于持续情况。
+每个时间 :math:`t` 的更新是
+
+.. math::
+
+    \begin{aligned}
+    \mathbf{w}_{t+1} & \doteq \mathbf{w}_{t}+\alpha\left(R_{t+1}+\gamma \mathbf{w}_{t}^{\top} \mathbf{x}_{t+1}-\mathbf{w}_{t}^{\top} \mathbf{x}_{t}\right) \mathbf{x}_{t} & \text{(9.9)} \\
+    &=\mathbf{w}_{t}+\alpha\left(R_{t+1} \mathbf{x}_{t}-\mathbf{x}_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right)^{\top} \mathbf{w}_{t}\right)
+    \end{aligned}
+
+这里我们使用了符号缩写 :math:`\mathbf{x}_{t}=\mathbf{x}\left(S_{t}\right)`。
+一旦系统达到稳定状态，对于任何给定的 :math:`\mathbf{w}_t`，下一个权重向量的期望可以写成：
+
+.. math::
+
+    \mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=\mathbf{w}_{t}+\alpha\left(\mathbf{b}-\mathbf{A} \mathbf{w}_{t}\right)
+    \tag{9.10}
+
+其中
+
+.. math::
+
+    \mathbf{b} \doteq \mathbb{E}\left[R_{t+1} \mathbf{x}_{t}\right] \in \mathbb{R}^{d} \quad \text { 和 } \quad \mathbf{A} \doteq \mathbb{E}\left[\mathbf{x}_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right)^{\top}\right] \in \mathbb{R}^{d} \times \mathbb{R}^{d}
+    \tag{9.11}
+
+从（9.10）可以清楚地看出，如果系统收敛，它必须收敛到权重向量 :math:`\mathbf{W}_{\mathrm{TD}}`
+
+.. math::
+
+    \begin{aligned}
+    \mathbf{b}-\mathbf{A} \mathbf{w}_{\mathrm{TD}} &=\mathbf{0} \\
+    \Rightarrow \mathbf{b}&=\mathbf{A} \mathbf{w}_{\mathrm{TD}} \\
+    \Rightarrow \mathbf{w}_{\mathrm{TD}} &\doteq \mathbf{A}^{-1} \mathbf{b} & \text{(9.12)}
+    \end{aligned}
+
+该数量称为 *TD固定点*。事实上，线性半梯度TD(0)收敛到这一点。在框中给出了一些证明其收敛性的理论，以及上述逆的存在性。
+
+.. admonition:: 线性TD(0)的收敛性证明
+    :class: note
+
+    什么属性确保线性TD(0)算法（9.9）的收敛？通过重写（9.10）可以获得一些见解
+
+    .. math::
+
+        \mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=(\mathbf{I}-\alpha \mathbf{A}) \mathbf{w}_{t}+\alpha \mathbf{b}
+        \tag{9.13}
+
+    注意到矩阵 :math:`\mathbf{A}` 乘以权重向量 :math:`\mathbf{w}_t` 而不是 :math:`\mathbf{b}`；
+    只有 :math:`\mathbf{A}` 对收敛很重要。
+    为了发展直觉，考虑 :math:`\mathbf{A}` 是对角矩阵的特殊情况。如果任何对角元素为负，
+    则 :math:`\mathbf{I}-\alpha \mathbf{A}` 的对应对角元素将大于1，
+    并且 :math:`\mathbf{w}_t` 的相应分量将被放大，如果继续则将导致发散。
+    另一方面，如果 :math:`\mathbf{A}` 的对角线元素都是正的，那么可以选择 :math:`\alpha` 小于它们中的最大值，
+    使得 :math:`\mathbf{I}-\alpha \mathbf{A}` 是对角矩阵，所有对角线元素在0和1之间。
+    在这种情况下，第一个更新期限趋于缩小 :math:`\mathbf{w}_t`，并确保稳定性。
+    通常，无论何时 :math:`\mathbf{A}` 为 *正定* 时，
+    意味着对于任何实数向量 :math:`y \neq 0`，:math:`y^{\top} \mathbf{A} y>0`，:math:`\mathbf{w}_t` 将减小到零。
+    正定性也确保存在逆 :math:`\mathbf{A}^{-1}`。
+
+    对于线性TD(0)，在 :math:`\gamma<1` 的连续情况下，:math:`\mathbf{A}` 矩阵（9.11）可以写为：
+
+    .. math::
+
+        \begin{aligned}
+        \mathbf{A} &=\sum_{s} \mu(s) \sum_{a} \pi(a | s) \sum_{r, s^{\prime}} p\left(r, s^{\prime} | s, a\right) \mathbf{x}(s)\left(\mathbf{x}(s)-\gamma \mathbf{x}\left(s^{\prime}\right)\right)^{\top} \\
+        &=\sum_{s} \mu(s) \sum_{s^{\prime}} p\left(s^{\prime} | s\right) \mathbf{x}(s)\left(\mathbf{x}(s)-\gamma \mathbf{x}\left(s^{\prime}\right)\right)^{\top} \\
+        &=\sum_{s} \mu(s) \mathbf{x}(s)\left(\mathbf{x}(s)-\gamma \sum_{s^{\prime}} p\left(s^{\prime} | s\right) \mathbf{x}\left(s^{\prime}\right)\right)^{\top} \\
+        &=\mathbf{X}^{\top} \mathbf{D}(\mathbf{I}-\gamma \mathbf{P}) \mathbf{X}
+        \end{aligned}
+
+    其中 :math:`\mu(s)` 是 :math:`\pi` 下的平稳分布，
+    :math:`p\left(s^{\prime} | s\right)` 是在策略 :math:`\pi` 下从 :math:`s` 过渡到 :math:`s^{\prime}` 的概率，
+    :math:`\mathbf{P}` 是这些概率的 :math:`|\mathcal{S}|\times|\mathcal{S}|` 矩阵，
+    :math:`\mathbf{D}` 是 :math:`|\mathcal{S}|\times|\mathcal{S}|` 对角线矩阵，其对角线上有 :math:`\mu(s)`，
+    :math:`\mathbf{X}` 是 :math:`|\mathcal{S}|\times d` 矩阵，其中 :math:`\mathbf{x}(s)` 为行。
+    从这里可以清楚地看出，内矩阵 :math:`\mathbf{D}(\mathbf{I}-\gamma \mathbf{P})` 是确定 :math:`\mathbf{A}` 的正定性的关键。
+
+    对于这种形式的关键矩阵（key matrix），如果所有列的总和为非负数，则确定是正定的。
+    Sutton（1988，p.27）基于两个先前建立的定理证明了这一点。
+    一个定理说，当且仅当对称矩阵 :math:`\mathbf{S}=\mathbf{M}+\mathbf{M}^{\top}` 是正定时，
+    任何矩阵 :math:`\mathbf{M}` 都是正定的（Sutton 1988，附录）。
+    第二个定理说任何对称实矩阵 :math:`\mathbf{S}` 是正定的，
+    如果它的所有对角线条目都是正的并且大于相应的非对角线条目的绝对值之和（Varga 1962，第23页）。
+    对于我们的关键矩阵 :math:`\mathbf{D}(\mathbf{I}-\gamma \mathbf{P})`，
+    对角线条目是正的，非对角线条目是负的，所以我们要显示的是每个行和加上相应的列和是正的。
+    行和都是正数，因为 :math:`\mathbf{P}` 是一个随机矩阵且 :math:`\gamma<1`。因此，它只是表明列和是非负的。
+    注意，任何矩阵 :math:`\mathbf{M}` 的列和的行向量可以写为 :math:`\mathbf{1}^{\top} \mathbf{M}`，
+    其中 :math:`\mathbf{1}` 是所有分量等于1的列向量。
+    令 :math:`\mathbf{\mu}` 表示 :math:`\mu(s)` 的 :math:`|\mathcal{S}|` -向量，
+    其中 :math:`\mathbf{\mu}=\mathbf{P}^{\top} \mathbf{\mu}`，因为 :math:`\mu` 是固定分布。
+    然后，我们的关键矩阵的列总和是：
+
+    .. math::
+
+        \begin{aligned}
+        \mathbf{1}^{\top} \mathbf{D}(\mathbf{I}-\gamma \mathbf{P}) &=\boldsymbol{\mu}^{\top}(\mathbf{I}-\gamma \mathbf{P}) \\
+        &=\boldsymbol{\mu}^{\top}-\gamma \boldsymbol{\mu}^{\top} \mathbf{P} \\
+        &=\boldsymbol{\mu}^{\top}-\gamma \boldsymbol{\mu}^{\top} \quad \text{（因为} \mu \text{是固定分布）} \\
+        &=(1-\gamma) \boldsymbol{\mu}^{\top}
+        \end{aligned}
+
+    所有分量都是正的。因此，关键矩阵及其 :math:`\mathbf{A}` 矩阵是正定的，并且在策略TD(0)是稳定的。
+    （需要附加条件和随时间推移减少 :math:`\alpha` 的时间表来证明收敛概率为1。）
+
+
+在TD固定点，已经证明（在持续情况下） :math:`\overline{\mathrm{VE}}` 在最低可能误差的有限扩展内：
+
+.. math::
+
+    \overline{\mathrm{VE}}\left(\mathbf{w}_{\mathrm{TD}}\right) \leq \frac{1}{1-\gamma} \min _{\mathbf{w}} \overline{\mathrm{VE}}(\mathbf{w})
+    \tag{9.14}
+
+也就是说，TD方法的渐近误差不超过最小可能误差的 :math:`\frac{1}{1-\gamma}` 倍，这是通过蒙特卡罗方法达到的极限值。
+因为 :math:`\gamma` 通常接近1，所以这个扩展因子可能非常大，因此TD方法的渐近性能存在很大的潜在损失。
+另一方面，回想一下，与蒙特卡罗方法相比，TD方法的方差通常大大减少，因此更快，正如我们在第6章和第7章中看到的那样。
+哪种方法最好取决于近似和问题的性质，以及学习的持续时间。
+
+类似于（9.14）的约束也适用于其他在策略自举方法。例如，线性半梯度DP（等式9.7
+:math:`U_{t}\doteq\sum_a\pi(a|S_t)\sum_{s^{\prime},r}p(s^{\prime},r|S_t,a)[r+\gamma\hat{v}(s^{\prime},\mathbf{w}_{t})]`）
+根据在策略分布进行更新也将收敛到TD固定点。一步半梯度 *动作价值* 方法，
+例如下一章中介绍的半梯度Sarsa(0)会收敛到类似的固定点和类似的边界。
+对于回合任务，存在一个稍微不同但相关的界限（参见Bertsekas和Tsitsiklis，1996）。
+步长参数的奖励，特征和减少也有一些技术条件，我们在此省略。
+完整的细节可以在原始论文中找到（Tsitsiklis和Van Roy，1997）。
+
+这些收敛结果的关键是根据在策略分布更新状态。对于其他更新分布，使用函数近似的自举方法实际上可能会发散到无穷大。
+第11章给出了这方面的例子以及对可能的解决方法的讨论。
+
+**例9.2：1000个状态随机行走中的自举** 状态聚合是线性函数近似的一种特殊情况，
+所以让我们回到1000个状态随机行走来说明本章所做的一些观察。
+图9.2的左侧面板显示了使用与例9.1中相同的状态聚合，通过半梯度TD(0)算法（9.3节）学习的最终价值函数。
+我们看到近似渐近的TD近似确实比图9.1中所示的蒙特卡罗近似的真实值更远。
+
+.. figure:: images/figure-9.2.png
+
+    **图9.2：** 在1000个状态随机行走任务上使用状态聚合进行自举。
+    *左图*：半梯度TD的渐近值比图9.1中的渐近蒙特卡罗值差。
+    *右图*：具有状态聚合的n步方法的性能与具有表格表示的方法非常相似（参见图7.2）。
+    这些数据是100次运行的平均值。
+
+然而，TD方法在学习速率方面保留了很大的潜在优势，并且推广了蒙特卡罗方法，正如我们在第7章中用n步TD方法完全研究的那样。
+图9.2的右图显示了采用n步半梯度TD方法的结果在1000状态随机行走上使用状态聚合，这与我们之前使用表格方法和19个状态随机行走走获得的状态非常相似（图7.2）。
+为了获得这种定量相似的结果，我们将状态聚合切换为20组，每组50个状态。然后，这20个小组在数量上接近表格问题的19个状态。
+特别是，回想一下状态转换是向左或向右的100个状态。然后典型的转换将是向右或向左的50个状态，这在数量上类似于19状态表格系统的单状态转换。
+为了完成匹配，我们在这里使用相同的性能度量──在所有状态和前10回合中的RMS误差的未加权平均值──
+而不是 :math:`\overline{\mathrm{VE}}` 目标，否则在使用函数近似时更合适。
+
+在上面的例子中使用的半梯度n步TD算法是第7章中给出的表格n步TD算法对半梯度函数近似的自然扩展。伪代码在下面的框中给出。
+
+.. admonition:: n步半梯度TD估计 :math:`\hat{v} \approx v_{\pi}`
+    :class: important
+
+    输入：要评估的策略 :math:`\pi`。
+
+    输入：可微分函数 :math:`\hat{v} : \mathcal{S}^{+} \times \mathbb{R}^{d} \rightarrow \mathbb{R}` 使得 :math:`\hat{v}(\text{终止}, \cdot)=0`
+
+    算法参数：步长 :math:`\alpha>0`，正整数 :math:`n`
+
+    任意初始化价值函数权重 :math:`\mathbf{w}` （例如，:math:`\mathbf{w}=\mathbf{0}`）
+
+    所有存储和访问操作（:math:`S_{t+1}` 和 :math:`R_{t+1}`）都可以使用它们的索引 :math:`mod n+1`
+
+    对每一个回合一直循环：
+
+        初始化并存储 :math:`S_0 \ne \text{终止}`
+
+        :math:`T \leftarrow \infty`
+
+        :math:`t=0,1,2, \ldots` 循环：
+
+            如果 :math:`t<T` 则：
+
+                根据 :math:`\pi(\cdot|S_t)` 采取行动
+
+                观察并将下一个奖励存储为 :math:`R_{t+1}`，将下一个状态存储为 :math:`S_{t+1}`
+
+                如果 :math:`S_{t+1}` 终止，则 :math:`T \leftarrow t+1`
+
+            :math:`\tau \leftarrow t - n + 1` （:math:`\tau` 是状态估计正在更新的时间）
+
+            如果 :math:`\tau \geq 0`：
+
+                :math:`G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}`
+
+                如果 :math:`\tau + n < T`， 则 :math:`G \leftarrow G+\gamma^{n} \hat{v}\left(S_{\tau+n}, \mathbf{w}\right)` :math:`\quad\quad\quad`   :math:`\left(G_{\tau : \tau+n}\right)`
+
+                :math:`\mathbf{w} \leftarrow \mathbf{w}+\alpha\left[G-\hat{v}\left(S_{\tau}, \mathbf{w}\right)\right] \nabla \hat{v}\left(S_{\tau}, \mathbf{w}\right)`
+
+        直到 :math:`\tau = T - 1`
+
+类似于（7.2），这个算法的关键方程是
+
+.. math::
+
+    \mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t<T
+    \tag{9.15}
+
+其中n步回报从（7.1）推广到
+
+.. math::
+
+    G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{v}\left(S_{t+n}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t \leq T-n 
+    \tag{9.16}
+
+**练习9.1** 展示本书第一部分中介绍的表格方法是线性函数近似的一种特殊情况。特征向量是什么？
+
 
 9.5 线性方法的特征构造
 ------------------------
