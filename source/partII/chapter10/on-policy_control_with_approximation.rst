@@ -542,6 +542,25 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 书目和历史评论
 ---------------
 
+**10.1** Rummery和Niranjan（1994）首次探讨了具有函数近似的半梯度Sarsa。
+具有 :math:`\varepsilon` -贪婪动作选择的线性半梯度Sarsa在通常意义上并不收敛，
+但确实进入了最佳解决方案附近的有界区域（Gordon，1996a，2001）。
+Pupcup和Perkins（2003）展示出在可微分作用选择中表现出收敛性。
+可参见Perkins和Pendrith（2002）以及Melo，Meyn和Ribeiro（2008）。
+陡坡汽车的例子是基于Moore（1990）研究的类似任务，但这里使用的确切形式来自Sutton（1996）。
+
+**10.2** 回合n步半梯度Sarsa基于van Seijen（2016）的前向Sarsa(:math:`\lambda`)算法。
+此处显示的实证结果是本文第二版的新内容。
+
+**10.3** 已经描述了动态规划的平均奖励表述（例如，Puterman，1994）和强化学习的观点
+（Mahadevan，1996；Tadepalli和Ok，1994；
+Bertsekas和Tsitsiklis，1996；Tsitsiklis和Van Roy，1999年）。
+这里描述的算法是Schwartz（1993）引入的“R-learning”算法的在策略类比。
+R-learning的名称可能是Q-learning的字母继承者，但我们更愿意将其视为学习差分或 *相对* 价值的参考。
+Carlstr̈om和Nordstr̈om（1997）的工作提出了访问控制排队的例子。
+
+**10.4** 在本文第一版出版后不久，作者对作为具有函数近似的强化学习问题的表述的限制的认识变得明显。
+Singh，Jaakkola和Jordan（1994）可能是第一个在印刷品中注意到它的人。
 
 .. [1]
     特别地，我们使用了铺片编码软件，可从http://incompleteideas.net/tiles/tiles3.html获得，
