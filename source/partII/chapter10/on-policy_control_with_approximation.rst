@@ -46,10 +46,10 @@
 然后通过将估计策略更改为贪婪策略（例如 :math:`\varepsilon` -贪婪策略）的软近似来完成策略改进
 （在本章中处理的在策略案例中）。根据相同的策略选择动作。完整算法的伪代码于下框中给出。
 
-.. admonition:: 回合半梯度Sarsa法估计 :math:`\hat{q} \approx q_*`
+.. admonition:: 回合半梯度Sarsa估计 :math:`\hat{q} \approx q_*`
     :class: important
 
-    输入：可微分的动作价值函数参数化 :math:`\hat{q} : \delta \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}`
+    输入：可微分的动作价值函数参数化 :math:`\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}`
 
     算法参数：步长 :math:`\alpha>0`，小 :math:`\varepsilon>0`
 
@@ -148,7 +148,7 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 
 完整的伪代码在下面的框中给出：
 
-.. admonition:: 回合半梯度n步Sarsa法估计 :math:`\hat{q} \approx q_*` 或 :math:`q_\pi`
+.. admonition:: 回合半梯度n步Sarsa估计 :math:`\hat{q} \approx q_*` 或 :math:`q_\pi`
     :class: important
 
     输入：可微分的动作价值函数参数化 :math:`\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}`
@@ -222,9 +222,178 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 *练习10.3* 为什么图10.4中显示的结果在大 :math:`n` 处比在小 :math:`n` 处具有更高的标准误差？
 
 
-
 10.3 平均奖励：持续任务的新问题设置
 -------------------------------------
+
+我们现在引入第三个经典设置──与回合和折扣设置一起，用于制定马尔可夫决策问题（MDP）中的目标。
+与折扣设置一样，*平均奖励* 设置适用于持续存在的问题，即个体与环境之间的交互在没有终止或启动状态的情况下持续进行的问题。
+然而，与那种情况不同的是，没有折扣──个体对延迟奖励的关注与对即时奖励的关注一样多。
+平均奖励设置是经典动态规划理论中常用的主要设置之一，在强化学习中较少见。
+正如我们在下一节中讨论的那样，折扣设置在功能近似方面存在问题，因此需要平均奖励设置来替换它。
+
+在平均奖励设置中，策略 :math:`\pi` 的质量被定义为平均奖励率，或简称为 *平均奖励*，
+同时遵循该策略，我们将其表示为 :math:`r(\pi)`：
+
+.. math::
+
+    \begin{aligned}
+    r(\pi) & \doteq \lim _{h \rightarrow \infty} \frac{1}{h} \sum_{t=1}^{h} \mathbb{E}\left[R_{t} | S_{0}, A_{0 : t-1} \sim \pi\right] && \text{(10.6)}\\
+    &=\lim _{t \rightarrow \infty} \mathbb{E}\left[R_{t} | S_{0}, A_{0 : t-1} \sim \pi\right] && \text{(10.7)}\\
+    &=\sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right) r
+    \end{aligned}
+
+期望取决于初始状态 :math:`S_0`，以及按照 :math:`\pi` 的
+后续动作 :math:`A_{0}, A_{1}, \dots, A_{t-1}`，:math:`\mu_\pi` 是稳态分布，
+:math:`\mu_{\pi}(s) \doteq \lim_{t \rightarrow \infty} Pr\left\{S_{t}=s | A_{0:t-1} \sim \pi\right\}`，
+假设存在于任何 :math:`\pi` 并且独立于 :math:`S_0`。关于MDP的这种假设被称为 *遍历性（ergodicity）*。
+这意味着MDP启动或个体做出的任何早期决策只会产生暂时影响；从长远来看，处于一个状态的期望仅取决于策略和MDP转移概率。
+遍历性足以保证上述等式中存在极限。
+
+在未折现的持续情况中，可以在不同类型的最优性之间进行微妙的区分。
+然而，对于大多数实际目的而言，简单地根据每个时间步的平均奖励来订购策略可能就足够了，换句话说，根据他们的 :math:`r(\pi)`。
+如（10.7）所示，该数量基本上是 :math:`\pi` 下的平均回报。
+特别是，我们认为所有达到 :math:`r(\pi)` 最大值的策略都是最优的。
+
+请注意，稳态分布是特殊分布，在该分布下，如果根据 :math:`\pi` 选择动作，则保留在同一分布中。也就是说，为此
+
+.. math::
+
+    \sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) p\left(s^{\prime} | s, a\right)=\mu_{\pi}\left(s^{\prime}\right)
+    \tag{10.8}
+
+在平均奖励设置中，回报是根据奖励与平均奖励之间的差来定义的：
+
+.. math::
+
+    G_{t} \doteq R_{t+1}-r(\pi)+R_{t+2}-r(\pi)+R_{t+3}-r(\pi)+\cdots
+    \tag{10.9}
+
+这称为 *差分* 回报，相应的值函数称为 *差分* 价值函数。
+它们以相同的方式定义，我们将一如既往地使用相同的符号：
+:math:`v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right]` 和
+:math:`q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_t|S_{t}=s, A_{t}=a\right]`
+（类似于 :math:`v_*` 和 :math:`q_*`）。 差分价值函数也有Bellman方程，与我们之前看到的略有不同。
+我们只是删除所有 :math:`\gamma s` 并通过奖励和真实平均奖励之间的差替换所有奖励
+
+.. math::
+
+    \begin{array}{l}
+    {v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-r(\pi)+v_{\pi}\left(s^{\prime}\right)\right]} \\
+    {q_{\pi}(s, a)=\sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-r(\pi)+\sum_{a^{\prime}} \pi\left(a^{\prime} | s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]} \\
+    {v_{*}(s)=\max _{a} \sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-\max _{\pi} r(\pi)+v_{*}\left(s^{\prime}\right)\right], \text { 以及 }} \\
+    {q_{*}(s, a)=\sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-\max _{\pi} r(\pi)+\max _{a^{\prime}} q_{*}\left(s^{\prime}, a^{\prime}\right)\right]}
+    \end{array}
+
+（参见（3.14），练习3.17，（3.19）和（3.20））。
+
+还存在两种TD误差的差分形式：
+
+.. math::
+
+    \delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
+    \tag{10.10}
+
+以及
+
+.. math::
+
+    \delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
+    \tag{10.11}
+
+其中 :math:`\overline{R}_{t}` 是平均奖励 :math:`r(\pi)` 在时间 :math:`t` 的估计值。
+通过这些替代定义，我们的大多数算法和许多理论结果都可以在不改变的情况下进行平均奖励设置。
+
+例如，半梯度Sarsa的平均奖励版本定义如（10.2），除了TD误差版本的不同。也就是说
+
+.. math::
+
+    \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \delta_{t} \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
+    \tag{10.12}
+
+由（10.11）给出的 :math:`t`。完整算法的伪代码在下框中给出。
+
+.. admonition:: 差分半梯度Sarsa估计 :math:`\hat{q} \approx q_*`
+    :class: important
+
+    输入：可微分的动作价值函数参数化 :math:`\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}`
+
+    算法参数：步长 :math:`\alpha,\beta>0`
+
+    任意初始化价值函数权重 :math:`\mathbf{w} \in \mathbb{R}^{d}` （比如 :math:`\mathbf{w}=\mathbf{0}`）
+
+    任意初始化平均奖励估计 :math:`\overline{R} \in \mathbb{R}` （比如 :math:`\overline{R}=0`）
+
+    初始化动作 :math:`S`，状态 :math:`A`
+
+    对每个回合循环：
+
+        采取动作 :math:`A`，观察 :math:`R, S^{\prime}`
+
+        选择 :math:`A^{\prime}` 作为 :math:`\hat{q}\left(S^{\prime}, \cdot, \mathbf{w}\right)` 的函数（比如 :math:`\varepsilon` -贪婪）
+
+        :math:`\delta \leftarrow R-\overline{R}+\hat{q}\left(S^{\prime}, A^{\prime}, \mathbf{w}\right)-\hat{q}(S, A, \mathbf{w})`
+
+        :math:`\overline{R} \leftarrow \overline{R}+\beta \delta`
+
+        :math:`\overline{R} \leftarrow \overline{R}+\beta \delta`
+
+        :math:`\mathbf{w} \leftarrow \mathbf{w}+\alpha \delta \nabla \hat{q}(S, A, \mathbf{w})`
+
+        :math:`S \leftarrow S^{\prime}`
+
+        :math:`A \leftarrow A^{\prime}`
+
+*练习10.4* 为半梯度Q-learning的差分版本提供伪代码。
+
+*练习10.5* 需要哪些方程式（除了10.10）来指定TD(0)的差分版本？
+
+*练习10.6* 假设有一个MDP在任何策略下产生确定性的奖励序列 :math:`+1,0,+1,0,+1,0, \dots` 一直继续下去。
+从技术上讲，这是不允许的，因为它违反了遍历性；没有静态极限分布 :math:`\mu_\pi`，并且不存在极限（10.7）。
+然而，平均奖励（10.6）是明确的；它是什么？现在考虑这个MDP中的两个状态。
+从 **A** 开始，奖励序列完全如上所述，从 :math:`+1` 开始，
+而从 **B** 开始，奖励序列以 :math:`0` 开始，然后继续 :math:`+1,0,+1,0, \ldots`。
+对于这种情况，差分回报（10.9）没有很好地定义，因为不存在限制。为了修复这个问题，可以交替地将状态值定义为
+
+.. math::
+
+    v_{\pi}(s) \doteq \lim _{\gamma \rightarrow 1} \lim _{h \rightarrow \infty} \sum_{t=0}^{h} \gamma^{t}\left(\mathbb{E}_{\pi}\left[R_{t+1} | S_{0}=s\right]-r(\pi)\right)
+    \tag{10.13}
+
+根据这个定义，状态 **A** 和 **B** 的值是多少？
+
+*练习10.7* 考虑马尔可夫奖励过程，该过程由三个状态 **A**，**B** 和 **C** 组成，
+状态转换确定性地围绕环。到达 **A** 时会收到 :math:`+1` 的奖励，否则奖励为 :math:`0`。
+使用（10.13）的三个状态的差分值是多少？
+
+*练习10.8* 本节的方框中的伪代码使用 :math:`\delta_t` 作为误差而
+不是简单的 :math:`R_{t+1}-\overline{R}_{t}` 更新 :math:`\overline{R}_{t}`。
+这两个误差都有效，但使用 :math:`\delta_t` 更好。要了解原因，请考虑练习10.7中三个状态的环形MRP。
+平均奖励的估计应倾向于其真实值 :math:`\frac{1}{3}`。 假设它已经存在并被卡在那里。
+:math:`R_{t+1}-\overline{R}_{t}` 误差的序列是什么？
+:math:`\delta_{t}` 误差的序列是什么（使用（10.10））？
+如果允许估计价值因误差而改变，哪个误差序列会产生更稳定的平均回报估计值？ 为什么？
+
+**例10.2：访问控制排队任务** 这是一个涉及对一组10台服务器的访问控制的决策任务。
+有四个不同优先级的客户到达一个队列。如果允许访问服务器，则客户向服务器支付1,2,4或8的奖励，
+具体取决于他们的优先级，优先级较高的客户支付更多。
+在每个时步中，队列头部的客户被接受（分配给其中一个服务器）或被拒绝（从队列中移除，奖励为零）。
+在任何一种情况下，在下一个时步中，将考虑队列中的下一个客户。队列永远不会清空，队列中客户的优先级随机分布。
+当然，如果没有免费服务器，则无法提供服务；在这种情况下，客户总是被拒绝。
+每个繁忙的服务器在每个时步都变为空闲，概率 :math:`p=0.06`。
+虽然我们刚刚将它们描述为明确，但让我们假设到达和离开的统计数据是未知的。
+任务是根据优先级和免费服务器的数量来决定是接受还是拒绝下一个客户，以便最大化长期奖励而不折扣。
+
+在这个例子中，我们考虑这个问题的表格解决方案。虽然状态之间没有泛化，
+但我们仍然可以在通用函数近似设置中考虑它，因为此设置泛化了表格设置。
+因此，我们对每对状态（空闲服务器的数量和队列头部的客户的优先级）和操作（接受或拒绝）进行了不同的动作-价值估计。
+图10.5显示了差分半梯度Sarsa求解的解，
+参数 :math:`\alpha=0.01`，:math:`\beta=0.01`，:math:`\varepsilon=0.1`。
+初始动作价值和 :math:`\overline{R}` 为零。
+
+.. figure:: images/figure-10.5.png
+
+    图10.5：差分半梯度一步法Sarsa在200万步后的访问控制排队任务中找到的策略和价值函数。
+    图表右侧的下降可能是由于数据不完善；许多这些状态从未经历过。:math:`\overline{R}` 学习的价值约为2.31。
 
 
 10.4 弃用折扣设置
