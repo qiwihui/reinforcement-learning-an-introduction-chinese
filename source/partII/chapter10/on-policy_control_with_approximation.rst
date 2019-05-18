@@ -127,8 +127,100 @@
 
     **图10.2：** 具有铺片编码函数近似和 :math:`\varepsilon` -贪婪动作选择的半梯度Sarsa方法的陡坡汽车任务学习曲线。
 
+
 10.2 半梯度n步Sarsa
 ------------------------
+
+我们可以通过在半梯度Sarsa更新方程（10.1）中使用n步回报作为更新目标来获得回合半梯度Sarsa的n步版本。
+n步回报立即从其表格形式（7.4）推广到函数近似形式：
+
+.. math::
+
+    G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right), \quad t+n<T
+    \tag{10.4}
+
+其中 :math:`G_{t:t+n}=G_{t}` 如果 :math:`t+n \geq T`，像往常一样。 n步更新方程是
+
+.. math::
+
+    \mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t<T
+    \tag{10.5}
+
+完整的伪代码在下面的框中给出：
+
+.. admonition:: 回合半梯度n步Sarsa法估计 :math:`\hat{q} \approx q_*` 或 :math:`q_\pi`
+    :class: important
+
+    输入：可微分的动作价值函数参数化 :math:`\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}`
+
+    输入：一个策略 :math:`\pi` （如果估计 :math:`q_\pi`）
+
+    算法参数：步长 :math:`\alpha>0`，小 :math:`\varepsilon>0`，一个正整数 :math:`n`
+
+    任意初始化价值函数权重 :math:`\mathbf{w} \in \mathbb{R}^{d}` （比如 :math:`\mathbf{w}=\mathbf{0}`）
+
+    所有存储和访问操作（:math:`S_t`，:math:`A_t` 和 :math:`R_t`）都可以使用它们的索引 :math:`mod n+1`
+
+    对每个回合循环：
+
+        初始化并存储 :math:`S_0 \ne` 终点
+
+        选择并存储动作 :math:`A_0 \sim \pi(\cdot | S_0)` 或者关于 :math:`\hat{q}(S_{0}, \cdot, \mathbf{w})` :math:`\varepsilon` -贪婪
+
+        :math:`S, A \leftarrow` 初始回合状态和动作（比如 :math:`\varepsilon` -贪婪）
+
+        :math:`T \leftarrow \infty`
+
+        对 :math:`t=0,1,2,cdots` 循环：
+
+            如果 :math:`t<T`，则：
+
+                采取动作 :math:`A_t`
+
+                观察和存储下一个奖励为 :math:`R_{t+1}` 和下一个状态为 :math:`S_{t+1}`
+
+                如果 :math:`S_{t+1}` 是终点，则：
+
+                    :math:`T=t+1`
+
+                否则：
+
+                    选择并存储动作 :math:`A_{t+1} \sim \pi(\cdot | S_{t+1})` 或者关于 :math:`\hat{q}(S_{t+1}, \cdot, \mathbf{w})` :math:`\varepsilon` -贪婪
+
+            :math:`\tau \leftarrow t-n+1` （:math:`\tau` 是其估算值正在更新的时间）
+
+            如果 :math:`\tau \geq 0`：
+
+                :math:`G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}`
+
+                如果 :math:`\tau+n<T` 则 :math:`G\leftarrow G+\gamma^n \hat{q}\left(S_{\tau+n}, A_{\tau+n}, \mathbf{w}\right) \quad` （:math:`G_{\tau:\tau+n}`）
+
+                :math:`\mathbf{w} \doteq \mathbf{w}+\alpha\left[G-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}\right)\right] \nabla \hat{q}\left(S_{\tau}, A_{\tau}, \mathbf{w}\right)`
+
+        直到 :math:`\tau=T-1`
+
+正如我们之前看到的，如果使用中等级别的自举，性能最佳，对应于大于1的n。
+图10.3显示了该算法陡坡汽车任务中在 :math:`n=8` 时比在 :math:`n=\infty` 处更快地学习并获得更好的渐近性能。
+图10.4显示了参数 :math:`\alpha` 和 :math:`n` 对该任务学习率的影响的更详细研究结果。
+
+.. figure:: images/figure-10.3.png
+
+    **图10.3：** 陡坡汽车任务中一步与八步半梯度Sarsa的表现。使用了良好的步长：
+    :math:`n=1` 时 :math:`\alpha=0.5/8` 且 :math:`n=8` 时 :math:`\alpha=0.3/8`。
+
+.. figure:: images/figure-10.4.png
+
+    **图10.4：** :math:`\alpha` 和 :math:`n` 对陡坡汽车任务的n步半梯度Sarsa和铺片编码函数近似的早期性能的影响。
+    像往常一样，中等的自举（:math:`n=4`）表现最佳。这些结果用于选定的 :math:`\alpha` 值，以对数刻度，然后通过直线连接。
+    对于 :math:`n=16`，标准误差范围从 :math:`n=1` 时0.5（小于线宽）到大约 :math:`n=16` 时4，因此主要影响都是统计上显着的。
+
+*练习10.1* 在本章中，我们没有明确考虑或给出任何蒙特卡罗方法的伪代码。他们会是什么样的？
+为什么不为它们提供伪代码是合理的？他们将如何在陡坡汽车任务上表现？
+
+*练习10.2* 给出关于控制的半梯度一步 *预期* Sarsa提供伪代码。
+
+*练习10.3* 为什么图10.4中显示的结果在大 :math:`n` 处比在小 :math:`n` 处具有更高的标准误差？
+
 
 
 10.3 平均奖励：持续任务的新问题设置
