@@ -463,8 +463,68 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 因为策略可能会在好的策略之间振动而不是收敛（Gordon，1996a）。这是一个有多个开放理论问题的领域。
 
 
-10.5 微分半梯度n步Sarsa
+10.5 差分半梯度n步Sarsa
 -----------------------------
+
+为了推广到n步自举，我们需要一个TD误差的n步版本。我们首先将n步回报（7.4）推广到其差分形式，并使用函数近似：
+
+.. math::
+
+    G_{t : t+n} \doteq R_{t+1}-\overline{R}_{t+n-1}+\cdots+R_{t+n}-\overline{R}_{t+n-1}+\hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right)
+    \tag{10.14}
+
+其中 :math:`\overline{R}` 是 :math:`r(\pi)` 的一个估计，:math:`n\geq 1` 且 :math:`t+n<T`。
+如果 :math:`t+n \geq T` 则我们如通常一样定义 :math:`G_{t : t+n} \doteq G_{t}`。
+则n步TD误差为
+
+.. math::
+
+    \delta_{t} \doteq G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}\right)
+    \tag{10.15}
+
+之后我们可以应用我们通常的半梯度Sarsa更新（10.12）。框中给出了完整算法的伪代码。
+
+.. admonition:: 差分半梯度n步Sarsa估计 :math:`\hat{q} \approx q_\pi` 或 :math:`q_*`
+    :class: important
+
+    输入：可微分函数 :math:`\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}`，策略 :math:`\pi`
+
+    任意初始化价值函数权重 :math:`\mathbf{w} \in \mathbb{R}^{d}` （比如 :math:`\mathbf{w}=\mathbf{0}`）
+
+    任意初始化平均奖励估计 :math:`\overline{R} \in \mathbb{R}` （比如 :math:`\overline{R}=0`）
+
+    算法参数：步长 :math:`\alpha,\beta>0`，正整数 :math:`n`
+
+    所有存储和访问操作（:math:`S_t`，:math:`A_t` 和 :math:`R_t`）都可以使用它们的索引 :math:`mod n+1`
+
+    初始化动作 :math:`S_0`，状态 :math:`A_0`
+
+    对 :math:`t=0,1,2, \ldots` 每步循环：
+
+        采取动作 :math:`A_t`
+
+        观察和存储下一个奖励为 :math:`R_{t+1}` 和下一个状态为 :math:`S_{t+1}`
+
+        选择并存储动作 :math:`A_{t+1} \sim \pi(\cdot | S_{t+1})` 或者关于 :math:`\hat{q}(S_{t+1}, \cdot, \mathbf{w})` :math:`\varepsilon` -贪婪
+
+        :math:`\tau \leftarrow t-n+1` （:math:`\tau` 是其估算值正在更新的时间）
+
+        如果 :math:`\tau>0`：
+
+            :math:`\delta \leftarrow \sum_{i=\tau+1}^{\tau+n}\left(R_{i}-\overline{R}\right)+\hat{q}\left(S_{\tau+n}, A_{\tau+n}, \mathbf{w}\right)-\hat{q}\left(S_{\tau}, A_{\tau}, \mathbf{w}\right)`
+
+            :math:`\overline{R} \leftarrow \overline{R}+\beta \delta`
+
+            :math:`\mathbf{w} \leftarrow \mathbf{w}+\alpha \delta \nabla \hat{q}\left(S_{\tau}, A_{\tau}, \mathbf{w}\right)`
+
+*练习10.9* 在差分半梯度n步Sarsa算法中，平均奖励的步长参数 :math:`\beta` 需要非常小，
+以便 :math:`\overline{R}` 成为平均奖励的良好长期估计。
+不幸的是，:math:`\overline{R}` 会因许多步骤的初始值而产生偏差，这可能会使学习变得无用。
+或者，我们可以使用 :math:`\overline{R}` 观察到的奖励的样本平均值。
+这最初会迅速适应，但从长远来看也会缓慢适应。
+随着策略的缓慢变化，:math:`\overline{R}` 也会发生变化；这种长期非平稳性的可能性使得采样平均方法不适合。
+实际上，平均奖励的步长参数是使用练习2.7中无偏的恒定步长技巧的理想场所。
+描述上面的框中差分半梯度n步Sarsa的算法使用此技巧所需的具体变化。
 
 
 10.6 总结
