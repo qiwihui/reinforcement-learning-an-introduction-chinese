@@ -31,6 +31,98 @@
 11.1 半梯度方法
 ---------------
 
+我们首先描述在前面的章节中为离策略案例开发的方法作为半梯度方法，如何容易地扩展到函数近似。
+这些方法解决了离策略学习挑战的第一部分（更改更新目标），而不是第二部分（更改更新分布）。
+因此，这些方法在某些情况下可能会发散，并且在这种意义上不是合理的，但它们仍然经常被成功使用。
+请记住，对于表格情况，这些方法保证稳定且渐近无偏，这对应于函数近似的特殊情况。
+因此，仍然可以将它们与特征选择方法相结合，使得组合系统可以保证稳定。无论如何，这些方法很简单，因此是一个很好的起点。
+
+在第7章中，我们描述了各种表格式离策略算法。
+为了将它们转换为半梯度形式，我们只需使用近似价值函数（:math:`\hat{v}` 或 :math:`\hat{q}`）
+及其梯度将更新替换为数组（:math:`V` 或 :math:`Q`）以更新权重向量（:math:`\mathbf{w}`）。
+其中许多的算法使用每步重要性采样率：
+
+.. math::
+
+    \rho_{t} \doteq \rho_{t : t}=\frac{\pi\left(A_{t} | S_{t}\right)}{b\left(A_{t} | S_{t}\right)}
+    \tag{11.1}
+
+例如，一步状态价值算法是半梯度离策略TD(0)，这与相应的在策略算法（第203页9.3节）类似，除了添加 :math:`\rho_t`：
+
+.. math::
+
+    \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \rho_{t} \delta_{t} \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
+    \tag{11.2}
+
+其中 :math:`\rho_t` 的定义取决于问题是否是回合的和折扣的，还是使用平均奖励持续的和未折扣：
+
+.. math::
+
+    \delta_{t} \doteq R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right), \text { 或者 }
+    \tag{11.3}
+
+.. math::
+
+    \delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
+    \tag{11.4}
+
+对于动作价值，一步算法是半梯度预期Sarsa：
+
+.. math::
+
+    \begin{array}{l}
+    {\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \delta_{t} \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right), \text { 以及 }} \\
+    {\delta_{t} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) \hat{q}\left(S_{t+1}, a, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right), \text { or } \quad \text { (回合的) }} \\
+    {\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\sum_{a} \pi\left(a | S_{t+1}\right) \hat{q}\left(S_{t+1}, a, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right) . \quad \text { (持续的) }}
+    \end{array}
+
+请注意，此算法不使用重要性采样。在表格情况下，很明显这是恰当的，因为唯一的示例动作是 :math:`A_t`，
+在学习它的价值时，我们不必考虑任何其他动作。
+对于函数近似，它不太清楚，因为一旦它们都对相同的整体近似有贡献，我们可能想要对不同的状态-动作对进行不同的加权。
+正确解决这个问题等待对强化学习中函数近似理论的更透彻理解。
+
+在这些算法的多步泛化中，状态价值和动作价值算法都涉及重要性采样。例如，半梯度Sarsa的n步版本是
+
+.. math::
+
+    \mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha \rho_{t+1} \cdots \rho_{t+n-1}\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)
+    \tag{11.6}
+
+以及
+
+.. math::
+
+    \begin{aligned}
+    G_{t : t+n} &\doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right), \text { 或者 } &(\text { 持续的 })\\
+    G_{t : t+n} &\doteq R_{t+1}-\overline{R}_{t}+\cdots+R_{t+n}-\overline{R}_{t+n-1}+\hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right) &(\text { 持续的 })
+    \end{aligned}
+
+在这里，我们在处理回合的结尾时略显非正式。
+在第一个等式中，:math:`k \geq T`（其中 :math:`T` 是该回合的最后一个时步）时
+:math:`\rho_{k} \mathrm{S}` 应该取为1，
+而如果 :math:`t+n \geq T`，:math:`G_{t:n}` 应该取 :math:`G_{t}`。
+
+回想一下，我们在第7章中还提出了一种不涉及重要性采样的离策略算法：n步树备份算法。这是它的半梯度版本：
+
+.. math::
+
+    \mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)
+    \tag{11.7}
+
+.. math::
+
+    G_{t : t+n} \doteq \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t-1}\right)+\sum_{k=t}^{t+n-1} \delta_{k} \prod_{i=t+1}^{k} \gamma \pi\left(A_{i} | S_{i}\right)
+    \tag{11.8}
+
+其中 :math:`\rho_t` 在本页顶部为预期的Sarsa定义。
+我们还在第7章中定义了一种统一所有动作价值算法的算法：n步Q(:math:`\sigma`)。
+我们保留该算法的半梯度形式，以及n步状态价值算法，作为读者的练习。
+
+*练习11.1* 将n步离策略TD（7.9）的等式转换为半梯度形式。提供关于回合和持续情况的回报的附带定义。
+*练习11.2* 将n步Q(:math:`\sigma`)（7.11和7.17）的方程转换为半梯度形式。给出涵盖情节和持续情况的定义。
+
+
+
 
 11.2 离策略差异例子
 --------------------
