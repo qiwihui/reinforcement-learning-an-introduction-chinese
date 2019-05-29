@@ -99,7 +99,7 @@
 
 在这里，我们在处理回合的结尾时略显非正式。
 在第一个等式中，:math:`k \geq T`（其中 :math:`T` 是该回合的最后一个时步）时
-:math:`\rho_{k} \mathrm{S}` 应该取为1，
+:math:`\rho_{k} \mathbf{S}` 应该取为1，
 而如果 :math:`t+n \geq T`，:math:`G_{t:n}` 应该取 :math:`G_{t}`。
 
 回想一下，我们在第7章中还提出了一种不涉及重要性采样的离策略算法：n步树备份算法。这是它的半梯度版本：
@@ -244,8 +244,8 @@
 .. math::
 
     \begin{aligned}
-    w_{k+1} &=\underset{w \in \mathbb{R}}{\operatorname{argmin}} \sum_{s \in \mathcal{S}}\left(\hat{v}(s, w)-\mathbb{E}_{\pi}\left[R_{t+1}+\gamma \hat{v}\left(S_{t+1}, w_{k}\right) | S_{t}=s\right]\right)^{2} \\
-    &=\underset{w \in \mathbb{R}}{\operatorname{argmin}}\left(w-\gamma 2 w_{k}\right)^{2}+\left(2 w-(1-\varepsilon) \gamma 2 w_{k}\right)^{2} \\
+    w_{k+1} &=\underset{w \in \mathbb{R}}{\arg\min} \sum_{s \in \mathcal{S}}\left(\hat{v}(s, w)-\mathbb{E}_{\pi}\left[R_{t+1}+\gamma \hat{v}\left(S_{t+1}, w_{k}\right) | S_{t}=s\right]\right)^{2} \\
+    &=\underset{w \in \mathbb{R}}{\arg\min}\left(w-\gamma 2 w_{k}\right)^{2}+\left(2 w-(1-\varepsilon) \gamma 2 w_{k}\right)^{2} \\
     &=\frac{6-4 \varepsilon}{5} \gamma w_{k} & \text{(11.10)}
     \end{aligned}
 
@@ -318,6 +318,173 @@
 
 11.4 线性价值函数几何
 -----------------------
+
+为了更好地理解离策略学习的稳定性挑战，有必要更加抽象思考价值函数近似，以及学习是如何独立地完成的。
+我们可以想象所有可能的状态价值函数的空间──从状态到实数的所有函数 :math:`v:\mathcal{S}\rightarrow\mathbb{R}`。
+这些价值函数中的大多数都与任何策略都不对应。对我们来说更重要的是大多数都不能用函数近似器表示，它在设计上的参数远远少于状态。
+
+给定状态空间的枚举 :math:`\mathcal{S}=\{s_{1}, s_{2}, \ldots, s_{|\mathcal{S}|}\}`，
+任何值函数 :math:`v` 对应于按顺序列出每个状态的价值的向量
+:math:`\left[v(s_{1}), v(s_{2}), \ldots, v(s_{|S|})\right]^{\top}`。
+价值函数的这个向量表示具有与状态一样多的分量。在我们想要使用函数近似的大多数情况下，这将是太多的分量来明确地表示向量。
+然而，这个向量的想法在概念上是有用的。在下文中，我们可以互换地处理价值函数及其向量表示。
+
+为了发展直觉，考虑具有三个状态 :math:`\mathcal{S}=\left\{s_{1}, s_{2}, s_{3}\right\}`
+和两个参数 :math:`\mathbf{w}=\left(w_{1}, w_{2}\right)^{\top}` 的情况。
+然后，我们可以将所有价值函数/向量视为三维空间中的点。参数在二维子空间上提供替代坐标系。
+任何权重向量 :math:`\mathbf{w}=\left(w_{1}, w_{2}\right)^{\top}` 是二维子空间中的点，
+因此也是将值分配给所有三个状态的完整价值函数 :math:`v_{\mathbf{w}}`。
+对于一般函数近似，可表示函数的全空间和子空间之间的关系可能很复杂，
+但在 *线性* 价值-函数近似的情况下，子空间是一个简单的平面，如图11.3所示。
+
+.. figure:: images/figure-11.3.png
+
+    **图11.3：** 线性价值-函数近似几何。展示了三个状态上的所有价值函数的三维空间，而显示为平面的是所有价值函数的子空间，
+    其可由具有参数 :math:`\mathbf{w}=\left(w_{1}, w_{2}\right)^{\top}` 的线性函数近似表示。
+    真值函数 :math:`v_\pi` 在较大的空间中，
+    可以向下投影（在子空间中，使用投影算子 :math:`\Pi`）到价值误差（VE）意义上的最佳近似值。
+    Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE）意义的最佳近似值都可能不同，并在右下方显示。
+    （VE，BE和PBE都被视为该图中的相应向量。）Bellman算子将平面中的价值函数带到一个外部，然后可以将其投射回去。
+    如果你在空间外迭代地应用Bellman算子（如上面的灰色所示），你将获得真值函数，就像在传统的动态规划中一样。
+    相反，如果你在每个步骤中保持投射回子空间，如灰色所示的下部步骤，则不动点将是向量零PBE的点。
+
+现在考虑一个单一的固定策略 :math:`\pi`。我们假设它的真值函数 :math:`v_\pi` 太复杂而不能完全表示为近似值。
+因此 :math:`v_\pi` 不在子空间中；在图中，它被描绘为在可表示函数的平面子空间之上。
+
+如果 :math:`v_\pi` 无法准确表示，那么最接近它的可表示的价值函数是什么？这是一个含有多个答案的微妙问题。
+首先，我们需要测量两个价值函数之间的距离。给定两个值函数 :math:`v_1` 和 :math:`v_2`，
+我们可以讨论它们之间的向量差 :math:`v=v_1-v_2`。如果 :math:`v` 很小，则两个价值函数彼此接近。
+但是我们如何衡量这种差向量的大小呢？传统的欧几里德范数是不合适的，因为如9.2节所述，
+某些状态比其他状态更重要，因为它们更频繁地发生或者因为我们对它们更感兴趣（第9.11节）。
+如第9.2节所述，让我们使用分布 :math:`\mu : \mathcal{S} \rightarrow[0,1]`
+指定我们关心不同状态被准确估价的程度（通常被视为在策略上的分布）。然后我们可以使用范数定义价值函数之间的距离
+
+.. math::
+
+    \|v\|_{\mu}^{2} \doteq \sum_{s \in \mathcal{S}} \mu(s) v(s)^{2}
+    \tag{11.11}
+
+请注意，9.2节中的 :math:`\overline{\mathrm{VE}}` 可以简单地使用此范数表示，
+因为 :math:`\overline{\mathrm{VE}}(\mathbf{w})=\left\|v_{\mathbf{w}}-v_{\pi}\right\|_{\mu}^{2}`。
+对于任何价值函数 :math:`v`，在可表示价值函数的子空间中找到其最接近的价值函数的操作是投影操作。
+我们定义一个投影算子 :math:`\Pi`，它将任意价值函数带到我们范数中最接近的可表示函数：
+
+.. math::
+
+    \Pi v \doteq v_{\mathbf{w}} \quad \text { 其中 } \quad \mathbf{w}=\underset{\mathbf{w} \in \mathbb{R}^{d}}{\arg\min}\left\|v-v_{\mathbf{w}}\right\|_{\mu}^{2}
+    \tag{11.12}
+
+因此，最接近真值函数 :math:`v_\pi` 的可表示价值函数是其投影 :math:`\Pi_{v_\pi}`，如图11.3所示。
+这是蒙特卡罗方法渐近发现的解决方案，尽管通常非常缓慢。投影操作将在下面的框中更全面地讨论。
+
+.. admonition:: 投影矩阵
+    :class: note
+
+    对于线性函数近似器，投影操作是线性的，这意味着它可以表示为 :math:`|\mathcal{S}|\times|\mathcal{S}|` 矩阵：
+
+    .. math::
+
+        \Pi \doteq \mathbf{X}\left(\mathbf{X}^{\top} \mathbf{D} \mathbf{X}\right)^{-1} \mathbf{X}^{\top} \mathbf{D}
+        \tag{11.14}
+
+    其中，如9.4节所示，:math:`\mathbf{D}` 表示 :math:`|\mathcal{S}|\times|\mathcal{S}|` 对角线矩阵，:math:`\mu(s)` 在对角线上，
+    :math:`\mathbf{X}` 表示 :math:`|\mathcal{S}|\times d` 矩阵，其行是特征向量 :math:`\mathbf{x}(s)^{\top}`，每个状态 :math:`s` 有一个。
+    如果（11.14）中的逆不存在，则替换伪逆。使用这些矩阵，可以写出向量的平方范数
+
+    .. math::
+
+        \|v\|_{\mu}^{2}=v^{\top} \mathbf{D} v
+        \tag{11.15}
+
+    并且可以写出近似线性价值函数
+
+    .. math::
+
+        v_{\mathbf{w}}=\mathbf{X} \mathbf{w}
+        \tag{11.16}
+
+TD方法找到不同的解决方案。为了理解它们的基本原理，请回想一下价值函数 :math:`v_\pi` 的Bellman方程
+
+.. math::
+
+    v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right], \quad \text { 对所有 } s \in \mathcal{S}
+    \tag{11.13}
+
+真值函数 :math:`v_\pi` 是唯一能够精确求解（11.13）的价值函数。
+如果用近似价值函数 :math:`v_{\mathbf{w}}` 代替 :math:`v_\pi`，
+则修改的方程的右侧和左侧之间的差可以用作 :math:`v_{\mathbf{w}}` 与 :math:`v_\pi` 的距离的度量。
+我们称之为状态 :math:`s` 的 *Bellman误差*：
+
+.. math::
+
+    \begin{aligned}
+    \overline{\delta}_{\mathbf{w}}(s) & \doteq\left(\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\mathbf{w}}\left(s^{\prime}\right)\right]\right)-v_{\mathbf{w}}(s) & \text{(11.17)} \\
+    &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\mathbf{w}}\left(S_{t+1}\right)-v_{\mathbf{w}}\left(S_{t}\right) | S_{t}=s, A_{t} \sim \pi\right] & \text{(11.18)}
+    \end{aligned}
+
+这清楚地表明了Bellman误差与TD误差的关系（11.3）。Bellman误差是TD误差的期望。
+
+在所有状态下，所有Bellman误差的向量
+:math:`\overline{\delta}_{\mathbf{w}} \in \mathbb{R}^{|\mathcal{S}|}`
+被称为 *Bellman误差向量* （在图11.3中显示为BE）。
+这个向量的总体大小，在范数中，是价值函数中误差的总体度量，称为 *均方Bellman误差*：
+
+.. math::
+
+    \overline{\mathrm{BE}}(\mathbf{w})=\left\|\overline{\delta}_{\mathbf{w}}\right\|_{\mu}^{2}
+    \tag{11.19}
+
+通常不可能将 :math:`\overline{\mathrm{BE}}` 减小到零（此时 :math:`v_{\mathbf{w}}=v_\pi`），
+但是对于线性函数近似，存在 :math:`\mathbf{w}` 的唯一值，:math:`\overline{\mathrm{BE}}` 被最小化。
+可表示函数子空间中的这一点（图11.3中标记为 :math:`\min \overline{\mathrm{BE}}`）
+与通常最小化 :math:`\overline{\mathrm{VE}}` （显示为 :math:`\Pi v_{\pi}`）的点不同。
+寻求最小化 :math:`\overline{\mathrm{BE}}` 的方法将在接下来的两节中讨论。
+
+Bellman误差向量如图11.3所示，作为应用 *Bellman算子*
+:math:`B_{\pi}:\mathbb{R}^{|\mathcal{S}|}\rightarrow\mathbb{R}^{|\mathcal{S}|}`
+到近似价值函数的结果。Bellman算子的定义是
+
+.. math::
+
+    \left(B_{\pi} v\right)(s) \doteq \sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v\left(s^{\prime}\right)\right]
+    \tag{11.20}
+
+对于所有 :math:`s\in\mathcal{S}` 和 :math:`v:\mathcal{S} \rightarrow \mathbb{R}`。
+:math:`v` 的Bellman误差向量可以写成
+:math:`\overline{\delta}_{\mathbf{w}}=B_{\pi} v_{\mathbf{w}}-v_{\mathbf{w}}`。
+
+如果Bellman算子应用于可表示子空间中的价值函数，则通常会产生一个位于子空间之外的新价值函数，如图所示。
+在动态规划中（没有函数近似），该算子被重复应用于可表示空间之外的点，如图11.3顶部的灰色箭头所示。
+最终，该过程收敛于真值函数 :math:`v_\pi`，这是Bellman算子唯一的不动点，是唯一的价值函数
+
+.. math::
+
+    v_{\pi}=B_{\pi} v_{\pi}
+    \tag{11.21}
+
+这只是 :math:`\pi` （11.13）的Bellman方程的另一种写法。
+
+然而，利用函数近似，不能表示位于子空间之外的中间价值函数。
+无法遵循图11.3上半部分中的灰色箭头，因为在第一次更新（暗线）之后，必须将价值函数投影回可表示的内容。
+然后，下一次迭代在子空间内开始；Bellman算子再次在子空间之外取价值函数，然后由投影算子映射回来，如图中下半部分灰色箭头和线所示。
+在这些箭头之后是具有近似的类似DP的过程。
+
+在这种情况下，我们感兴趣的是将Bellman误差向量投影回可表示的空间。
+这是投影的Bellman误差向量 :math:`\Pi \overline{\delta}_{v_{\mathbf{w}}}`，如图11.3所示为PBE。
+在正常情况下，该向量的大小是近似价值函数中的另一个误差度量。对于任何近似价值函数 :math:`v`，
+我们定义 *均方投影Bellman误差*，表示为 :math:`\overline{\mathrm{PBE}}` 如下
+
+.. math::
+
+    \overline{\mathrm{PBE}}(\mathbf{w})=\left\|\Pi \overline{\delta}_{\mathbf{w}}\right\|_{\mu}^{2}
+    \tag{11.22}
+
+对于线性函数近似，总是存在具有零 :math:`\overline{\mathrm{PBE}}` 的近似价值函数（在子空间内）；
+这是第9.4节中介绍的TD的不动点 :math:`\mathbf{w}_{TD}`。
+正如我们所看到的，在半梯度TD方法和离策略训练下，这一点并不总是稳定的。
+如图所示，该价值函数通常不同于最小化 :math:`\overline{\mathrm{VE}}`
+或 :math:`\overline{\mathrm{BE}}` 的函数。
+保证收敛于它的方法在第11.7节和第11.8节中讨论。
 
 
 11.5 Bellman误差中的梯度下降
