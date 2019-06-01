@@ -490,6 +490,114 @@ Bellman误差向量如图11.3所示，作为应用 *Bellman算子*
 11.5 Bellman误差中的梯度下降
 ------------------------------
 
+通过更好地理解价值函数近似及其各种目标，我们现在回到了离策略学习的稳定性挑战。
+我们希望应用随机梯度下降（SGD，第9.3节）的方法，其中依据期望等于目标函数的负梯度进行更新。
+这些方法总是在目标中下坡（期望），因此通常具有优异的收敛特性。
+在本书到目前为止研究的算法中，只有蒙特卡罗方法才是真正的SGD方法。
+这些方法在在策略和离策略训练以及一般非线性（可微分）函数近似器之间健壮地收敛，
+尽管它们通常比不是SGD方法的具有自举的半梯度方法慢。
+正如我们在本章前面所见，半梯度方法可能在离政策训练中，
+以及在非线性函数近似的设计案例（Tsitsiklis和Van Roy，1997）中偏离。
+使用真正的SGD方法，这种偏离是不可能的。
+
+SGD的吸引力是如此之大，以至于已经付出了巨大的努力来寻找一种利用它进行强化学习的实用方法。
+所有这些努力的起点是选择要优化的误差或目标函数。
+在本节和下一节中，我们将探讨最受欢迎的目标函数的起源和局限，它基于上一节中介绍的 *Bellman误差*。
+虽然这是一种流行且有影响力的方法，但我们在这里得出的结论是它是一个失误并且没有产生好的学习算法。
+另一方面，这种方法以一种有趣的方式失败，提供了可能构成一种好方法的洞察力。
+
+首先，让我们考虑不是Bellman错误，而是更直接和天真的东西。时序差分学习由TD误差驱动。
+为什么不将TD误差的预期平方最小化作为目标？在一般函数近似的情况下，带折扣的一步TD误差是
+
+.. math::
+
+    \delta_{t}=R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
+
+那么一个可能的目标函数是人们可能称之为 *均方TD误差*：
+
+.. math::
+
+    \begin{aligned}
+    \overline{\operatorname{TDE}}(\mathbf{w}) &=\sum_{s \in \mathcal{S}} \mu(s) \mathbb{E}\left[\delta_{t}^{2} | S_{t}=s, A_{t} \sim \pi\right] \\
+    &=\sum_{s \in \mathcal{S}} \mu(s) \mathbb{E}\left[\rho_{t} \delta_{t}^{2} | S_{t}=s, A_{t} \sim b\right] \\
+    &=\mathbb{E}_{b}\left[\rho_{t} \delta_{t}^{2}\right] & \text{(如果} \mu \text{是} b \text{下遇到的分布)}
+    \end{aligned}
+
+最后一个等式是SGD所需的形式；它将目标作为可以从经验中抽样的期望（记住经验是由于行为策略 :math:`b`）。
+因此，遵循标准SGD方法，可以基于此预期值的样本推导出每步更新：
+
+.. math::
+
+    \begin{aligned}
+    \mathbf{w}_{t+1} &=\mathbf{w}_{t}-\frac{1}{2} \alpha \nabla\left(\rho_{t} \delta_{t}^{2}\right) \\
+    &=\mathbf{w}_{t}-\alpha \rho_{t} \delta_{t} \nabla \delta_{t} \\
+    &=\mathbf{w}_{t}+\alpha \rho_{t} \delta_{t}\left(\nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right)-\gamma \nabla \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)\right)
+    \end{aligned}
+
+你将认识到与半梯度TD算法（11.2）相同，除了额外的最终项。
+该项完成了梯度，使其成为真正的SGD算法，具有出色的收敛保证。
+让我们称这个算法为 *朴素残差梯度* 算法（在Baird，1995之后）。
+尽管朴素残差梯度算法健壮地收敛，但它不一定会收敛到理想的位置。
+
+.. admonition:: 例11.2：A分割示例，显示了朴素残差梯度算法的天真
+    :class: note
+
+    11.2
+
+在A分割示例中使用表格表示，因此可以精确地表示真实状态值，但是朴素残差梯度算法找到不同的值，
+并且这些值具有比真实值更低的 :math:`\overline{\mathrm{TDE}}`。
+最小化 :math:`\overline{\mathrm{TDE}}` 是天真的；通过惩罚所有TD误差，它实现了比准确预测更像时序平滑的东西。
+
+一个更好的想法似乎是最小化Bellman误差。如果学习了确切的值，则Bellman误差在任何地方都为零。
+因此，Bellman误差最小化算法应该没有A分割示例的麻烦。
+我们不能指望一般实现Bellman误差，因为它将涉及找到真值函数，我们假设它在可表示值函数的空间之外。
+但接近这个理想是一个看似自然的目标。正如我们所看到的，Bellman误差也与TD误差密切相关。
+状态的Bellman误差是该状态下的预期TD误差。因此，让我们用预期的TD误差重复上面的推导
+（这里的所有期望都隐含地以 :math:`S_t` 为条件）：
+
+.. math::
+
+    \begin{aligned}
+    \mathbf{w}_{t+1} &=\mathbf{w}_{t}-\frac{1}{2} \alpha \nabla\left(\mathbb{E}_{\pi}\left[\delta_{t}\right]^{2}\right) \\
+    &=\mathbf{w}_{t}-\frac{1}{2} \alpha \nabla\left(\mathbb{E}_{b}\left[\rho_{t} \delta_{t}\right]^{2}\right) \\
+    &=\mathbf{w}_{t}-\alpha \mathbb{E}_{b}\left[\rho_{t} \delta_{t}\right] \nabla \mathbb{E}_{b}\left[\rho_{t} \delta_{t}\right] \\
+    &=\mathbf{w}_{t}-\alpha \mathbb{E}_{b}\left[\rho_{t}\left(R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}\right)-\hat{v}\left(S_{t}, \mathbf{w}\right)\right)\right] \mathbb{E}_{b}\left[\rho_{t} \nabla \delta_{t}\right] \\
+    &=\mathbf{w}_{t}+\alpha\left[\mathbb{E}_{b}\left[\rho_{t}\left(R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}\right)\right)\right]-\hat{v}\left(S_{t}, \mathbf{w}\right)\right]\left[\nabla \hat{v}\left(S_{t}, \mathbf{w}\right)-\gamma \mathbb{E}_{b}\left[\rho_{t} \nabla \hat{v}\left(S_{t+1}, \mathbf{w}\right)\right]\right]
+    \end{aligned}
+
+该更新和各种采样方法被称为 *残差梯度算法*。如果你只是在所有预期中使用样本值，那么上面的等式几乎精确地减少到（11.23），即朴素残差梯度算法 [1]_。
+但这是天真的，因为上面的等式涉及下一个状态 :math:`S_{t+1}`，出现在两个相乘法的期望中。
+为了获得乘积的无偏差样本，需要两个下一状态的独立样本，但在与外部环境的正常交互期间，仅获得一个。
+可以对一个期望或另一个期望进行采样，但不能同时采样。
+
+有两种方法可以使残差梯度算法起作用。
+一种是确定性环境。如果到下一状态的转换是确定性的，那么两个样本必然是相同的，并且朴素算法是有效的。
+另一种方法是从 :math:`S_t` 获得下一个状态 :math:`S_{t+1}` 的 *两个* 独立样本，一个用于第一个期望，另一个用于第二个期望。
+在与环境的真实交互中，这似乎是不可能的，但是当与模拟环境交互时，它就是可能的。
+可以简单地回滚到先前的状态并在从第一个下一个状态前进之前获得备用的下一个状态。
+在这些情况中的任何一种情况下，保证残差梯度算法在步长参数的通常条件下收敛到 :math:`\overline{\mathrm{BE}}` 的最小值。
+作为一种真正的SGD方法，这种收敛是健壮的，适用于线性和非线性函数近似器。
+在线性情况下，始终收敛到最小化 :math:`\overline{\mathrm{BE}}` 的唯一 :math:`\mathbf{w}`。
+
+然而，仍然存在至少三种方式，其中残余梯度方法的收敛不令人满意。
+第一个是经验上它是缓慢的，比半梯度方法慢得多。实际上，这种方法的支持者已经提出通过最初将其与更快的半梯度方法相结合来提高其速度，
+然后逐渐切换到残差梯度以获得收敛保证（Baird和Moore，1999）。
+残差梯度算法不令人满意的第二种方式是它似乎仍然收敛到错误的值。
+它确实在所有表格情况下得到了正确的值，例如A分割示例，正如对于那些可能的Bellman方程的精确解决方案。
+但是如果我们用真正的函数近似来检验例子，
+那么残差梯度算法，实际上是 :math:`\overline{\mathrm{BE}}` 目标，似乎找到了错误的值函数。
+其中一个最有说服力的例子是A分割示例的变化，称为A *预* 分割示例，如下面的框所示，
+其中残差梯度算法找到与其朴素版本相同的差劲的解决方案。
+该示例直观地示出了最小化 :math:`\overline{\mathrm{BE}}` （残差梯度算法确实如此）可能不是期望的目标。
+
+.. admonition:: 例11.3：A预分割示例，:math:`\overline{\mathrm{BE}}` 的反例
+    :class: note
+
+    11.3
+
+残差梯度算法的收敛性不令人满意的第三种方法将在下一节中解释。
+与第二种方式一样，第三种方式也是 :math:`\overline{\mathrm{BE}}` 目标本身的问题，而不是用于实现它的任何特定算法。
+
 
 11.6 Bellman误差是不可学习的
 ------------------------------
@@ -513,3 +621,8 @@ Bellman误差向量如图11.3所示，作为应用 *Bellman算子*
 
 书目和历史评论
 ---------------
+
+
+.. [1]
+    对于状态价值，重要性采样率 :math:`\rho_t` 的处理仍存在小的差异。
+    在类似于动作价值的情况下（这是控制算法最重要的情况），残差梯度算法将精确地减少到朴素版本。
