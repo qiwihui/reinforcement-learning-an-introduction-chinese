@@ -737,7 +737,38 @@ SGD的吸引力是如此之大，以至于已经付出了巨大的努力来寻�
 .. admonition:: 例11.4：Bellman误差可学习性的反例
     :class: note
 
-    11.4
+    为了展示各种可能性，我们需要一个稍微复杂的马尔可夫奖励过程（MRP），而不是之前考虑的那些。考虑以下两个MRP：
+
+    .. figure:: images/example-11.4.png
+
+    在两条边离开状态的情况下，假设两个转换以相同的概率发生，并且数字表示所接收的奖励。
+    左边的MRP有两个明确表示的状态。右边的MRP有三种状态，其中两种状态 **B** 和 **B'** 看起来相同，必须给出相同的近似值。
+    具体而言，:math:`\mathbf{w}` 具有两个分量，状态 **A** 的值由第一个分量给出，**B** 和 **B'** 的值由第二个给出。
+    第二个MRP被设计成在所有三个状态中花费相等的时间，因此对于所有 :math:`s`，我们可以取 :math:`\mu(s)=1`。
+
+    请注意，两个MRP的可观察数据分布是相同的。在这两种情况下，个体都会看到单次出现的 **A** 后跟一个0，
+    然后是一些明显的B，每个后跟一个 -1，除了最后一个，然后是1，然后我们再次从 **A** 后跟一个0重新开始，等等。
+    所有的统计细节都是一样的；在两个MRP中，一串 :math:`k` 个B的概率是 :math:`2^{-k}`。
+
+    现在假设 :math:`\mathbf{w}=\mathbf{0}`。在第一个MRP中，这是一个精确解，并且 :math:`\overline{\mathrm{BE}}` 为零。
+    在第二MRP中，该解决方案在 **B** 和 **B'** 均产生1的平方误差，
+    使得 :math:`\overline{\mathrm{BE}}=\mu(\mathrm{B}) 1+\mu\left(\mathrm{B}^{\prime}\right) 1=\frac{2}{3}`。
+    这两个产生相同个数据分布的MRP具有不同的 :math:`\overline{\mathrm{BE}}`；:math:`\overline{\mathrm{BE}}` 不可学习。
+
+    此外（并且与 :math:`\overline{\mathrm{VE}}` 的早期示例不同），对于两个MRP，:math:`\mathbf{w}` 的最小值是不同的。
+    对于第一个MRP，:math:`\mathbf{w}=\mathbf{0}` 可以最小化任何 :math:`\overline{\mathrm{BE}}`。
+    对于第二个MRP，最小化 :math:`\mathbf{w}` 是一个复杂的函数 :math:`\gamma`，
+    但在极限情况下，为 :math:`\gamma \rightarrow 1`，它是 :math:`\left(-\frac{1}{2}, 0\right)^{\top}`。
+    因此，不能仅从数据中估计出最小化 :math:`\overline{\mathrm{BE}}` 的解决方案；需要超出数据中显示的MRP知识。
+    从这个意义上说，原则上不可能将BE作为学习的目标。
+
+    令人惊讶的是，在第二MRP中，**A** 的 :math:`\overline{\mathrm{BE}}` 最小化值远离零。
+    回想一下 **A** 具有专用权重，因此其值不受函数近似的约束。**A** 之后是0的奖励并转换到值接近0的状态，
+    这表明 :math:`v_{\mathbf{w}}(A)` 应为0；为什么它的最佳值基本上是负的而不是0？
+    答案是当从 **B** 到达 **A** 时，使 :math:`v_{\mathbf{w}}(A)` 为负减少了误差。
+    这个确定性转变的回报是1，这意味着 **B** 应该具有比 **A** 大1的值。
+    因为 **B** 的值近似为零，所以 **A** 的值被驱动为 -1。
+    :math:`\overline{\mathrm{BE}}` 最小化 **A** 的值为 :math:`\approx-\frac{1}{2}` 是在减少离开和进入 **A** 时的误差之间的折衷。
 
 因此，:math:`\overline{\mathrm{BE}}` 是不可学习的；它不能从特征向量和其他可观察数据估计。
 这将 :math:`\overline{\mathrm{BE}}` 限制为基于模型的设置。
