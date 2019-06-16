@@ -783,6 +783,160 @@ SGD的吸引力是如此之大，以至于已经付出了巨大的努力来寻�
 11.7 梯度TD方法
 -----------------
 
+我们现在考虑用于最小化 :math:`\overline{\mathrm{PBE}}` 的SGD方法。
+作为真正的SGD方法，即使在非策略训练和非线性函数近似下，这些 *梯度-TD方法* 也具有稳健的收敛特性。
+请记住，在线性情况下，始终存在精确解，
+即TD固定点 :math:`\mathbf{W}_{\mathrm{TD}}`，:math:`\overline{\mathrm{PBE}}` 为零。
+这种解决方案可以通过最小二乘法（第9.8节）找到，但只能通过参数数量的二次 :math:`O\left(d^{2}\right)` 复杂度的方法找到。
+我们寻求一种SGD方法，该方法应该是 :math:`O(d)` 并且具有稳健的收敛特性。
+梯度-TD方法接近于实现这些目标，代价是计算复杂度大幅加倍。
+
+为了得到 :math:`\overline{\mathrm{PBE}}` 的SGD方法（假设线性函数近似），我们首先用矩阵术语扩展和重写目标（11.22）：
+
+.. math::
+
+    \begin{aligned}
+    \overline{\mathrm{PBE}}(\mathbf{w}) &=\left\|\Pi \overline{\delta}_{\mathbf{w}}\right\|_{\mu}^{2} \\
+    &=\left(\Pi \overline{\delta}_{\mathbf{w}}\right)^{\top} \mathbf{D} \Pi \overline{\delta}_{\mathbf{w}} & \text{(从(11.15)得出)}\\
+    &=\overline{\delta}_{\mathbf{w}}^{\top} \Pi^{\top} \mathbf{D} \Pi \overline{\delta}_{\mathbf{w}} \\
+    &=\overline{\delta}_{\mathbf{w}}^{\top} \mathbf{D} \mathbf{X}\left(\mathbf{X}^{\top} \mathbf{D} \mathbf{X}\right)^{-1} \mathbf{X}^{\top} \mathbf{D} \overline{\delta}_{\mathbf{w}} & \text{(11.25)} \\
+    &\text { (使用 }(11.14) \text { 和单位矩阵 } \Pi^{\top} \mathbf{D} \Pi=\mathbf{D} \mathbf{X}\left(\mathbf{X}^{\top} \mathbf{D} \mathbf{X}\right)^{-1} \mathbf{X}^{\top} \mathbf{D} ) \\
+    &=\left(\mathbf{X}^{\top} \mathbf{D} \overline{\delta}_{\mathbf{w}}\right)^{\top}\left(\mathbf{X}^{\top} \mathbf{D} \mathbf{X}\right)^{-1}\left(\mathbf{X}^{\top} \mathbf{D} \overline{\delta}_{\mathbf{w}}\right) &\text{(11.26)}
+    \end{aligned}
+
+关于 :math:`\mathbf{w}` 的梯度是
+
+.. math::
+
+    \nabla \overline{\mathrm{PBE}}(\mathbf{w})=2 \nabla\left[\mathbf{X}^{\top} \mathbf{D} \overline{\delta}_{\mathbf{w}}\right]^{\top}\left(\mathbf{X}^{\top} \mathbf{D} \mathbf{X}\right)^{-1}\left(\mathbf{X}^{\top} \mathbf{D} \overline{\delta}_{\mathbf{w}}\right)
+
+要将此转换为SGD方法，我们必须在每个具有此数量作为其预期值的时间步骤上进行采样。
+让我们把 :math:`\mu` 作为行为策略下访问的状态的分布。
+然后，上述所有三个因子都可以根据此分布的期望来书写。例如，最后一个因子可以写成
+
+.. math::
+
+    \mathbf{X}^{\top} \mathbf{D} \overline{\delta}_{\mathbf{w}}=\sum_{s} \mu(s) \mathbf{x}(s) \overline{\delta}_{\mathbf{w}}(s)=\mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]
+
+这只是半梯度TD(0)更新（11.2）的期望。第一个因子是此更新的梯度的转置：
+
+.. math::
+
+    \begin{aligned}
+    \nabla \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]^{\top} &=\mathbb{E}\left[\rho_{t} \nabla \delta_{t}^{\top} \mathbf{x}_{t}^{\top}\right] \\
+    &=\mathbb{E}\left[\rho_{t} \nabla\left(R_{t+1}+\gamma \mathbf{w}^{\top} \mathbf{x}_{t+1}-\mathbf{w}^{\top} \mathbf{x}_{t}\right)^{\top} \mathbf{x}_{t}^{\top}\right] & (\text{使用回合} \delta_{t}) \\
+    &=\mathbb{E}\left[\rho_{t}\left(\gamma \mathbf{x}_{t+1}-\mathbf{x}_{t}\right) \mathbf{x}_{t}^{\top}\right]
+    \end{aligned}
+
+最后，中间因子是特征向量的期望外积矩阵的逆：
+
+.. math::
+
+    \mathbf{X}^{\top} \mathbf{D X}=\sum_{s} \mu(s) \mathbf{x}_{s} \mathbf{x}_{s}^{\top}=\mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]
+
+将这些期望替换为我们表达 :math:`\overline{\mathrm{PBE}}` 梯度的三个因子，我们得到了
+
+.. math::
+
+    \nabla \overline{\mathrm{PBE}}(\mathbf{w})=2 \mathbb{E}\left[\rho_{t}\left(\gamma \mathbf{x}_{t+1}-\mathbf{x}_{t}\right) \mathbf{x}_{t}^{\top}\right] \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]
+    \tag{11.27}
+
+我们通过以这种形式编写梯度来取得任何进展可能并不明显。它是三个表达式的乘积，第一个和最后一个不是独立的。
+它们都依赖于下一个特征向量 :math:`\mathbf{x}_{t+1}`；我们不能简单地对这两个期望进行抽样，然后将样本相乘。
+这将为我们提供梯度的有偏估计，就像在朴素残差梯度算法中一样。
+
+另一个想法是分别估计三个期望值，然后将它们组合起来产生梯度的无偏估计。
+这将起作用，但需要大量的计算资源，特别是存储前两个期望值，即 :math:`d \times d` 矩阵，并计算第二个的逆。
+这个想法可以改进。如果估计并存储了三个期望中的两个，则可以对第三个期望进行采样并与两个存储的量一起使用。
+例如，您可以存储后两个量的估计值（使用第9.8节中的增量逆更新技术），然后对第一个表达式进行采样。
+不幸的是，整体算法仍然具有二次复杂度（ :math:`O\left(d^{2}\right)` 阶）。
+
+分别存储一些估计然后将它们与样本组合的想法是一个很好的想法，也用在梯度-TD方法中。
+梯度-TD方法估计并存储第二个因子的 *乘积* （11.27）。
+这些因子是 :math:`d \times d` 矩阵和 :math:`d` 维向量，因此它们的乘积只是一个 :math:`d` 维向量，
+就像 :math:`\mathbf{w}` 本身一样。我们将第二个学习的向量表示为 :math:`\mathbf{v}`：
+
+.. math::
+
+    \mathbf{v} \approx \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]
+    \tag{11.28}
+
+这种形式对于线性监督学习的学生来说是熟悉的。
+它是线性最小二乘问题的解决方案，试图从特征中逼近 :math:`\rho_{t} \delta_{t}`。
+用于递增地找到最小化预期平方误差
+:math:`(\mathbf{v}^{\top} \mathbf{x}_{t}-\rho_{t} \delta_{t})^{2}`
+的向量 :math:`\mathbf{v}` 的标准SGD方法被称为最小均方（LMS）规则（这里增加了重要性采样率）：
+
+.. math::
+
+    \mathbf{v}_{t+1} \doteq \mathbf{v}_{t}+\beta \rho_{t}\left(\delta_{t}-\mathbf{v}_{t}^{\top} \mathbf{x}_{t}\right) \mathbf{x}_{t}
+
+其中 :math:`\beta>0` 是另一个步长参数。我们可以使用这种方法有效地实现（11.28） :math:`O(d)` 存储和每步计算。
+
+给定存储的估计 :math:`\mathbf{v}_{t}` 近似（11.28），
+我们可以使用基于（11.27）的SGD方法更新我们的主参数向量 :math:`\mathbf{w}_{t}`。最简单的这样的规则是
+
+.. math::
+
+    \begin{aligned}
+    \mathbf{w}_{t+1} &=\mathbf{w}_{t}-\frac{1}{2} \alpha \nabla \overline{\mathrm{PBE}}\left(\mathbf{w}_{t}\right) & \text{(一般的SGD规则)}\\
+    &=\mathbf{w}_{t}-\frac{1}{2} \alpha 2 \mathbb{E}\left[\rho_{t}\left(\gamma \mathbf{x}_{t+1}-\mathbf{x}_{t}\right) \mathbf{x}_{t}^{\top}\right] \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right] & \text{(由(11.27))}\\
+    &=\mathbf{w}_{t}-\frac{1}{2} \alpha 2 \mathbb{E}\left[\rho_{t}\left(\gamma_{t}-\gamma \mathbf{x}_{t+1}\right) \mathbf{x}_{t}^{\top}\right] \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right] & \text{(11.29)}\\
+    & \approx \mathbf{w}_{t}+\alpha \mathbb{E}\left[\rho_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right) \mathbf{x}_{t}^{\top}\right] \mathbf{V}_{t} & \text{(基于(11.28))}\\
+    & \approx \mathbf{w}_{t}+\alpha \rho_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right) \mathbf{x}_{t}^{\top} \mathbf{v}_{t} & \text{(采样)}
+    \end{aligned}
+
+该算法称为 *GTD2*。
+注意，如果首先完成最终内积（:math:`\mathbf{x}_{t}^{\top} \mathbf{v}_{t}`），
+则整个算法具有 :math:`O(d)` 复杂度。
+
+在替换 :math:`\mathbf{v}_{t}` 之前，可以通过执行一些更多的分析步骤来导出稍微更好的算法。
+从（11.29）继续：
+
+.. math::
+
+    \begin{aligned}
+    \mathbf{w}_{t+1} &=\mathbf{w}_{t}+\alpha \mathbb{E}\left[\rho_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right) \mathbf{x}_{t}^{\top}\right] \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right] \\
+    &=\mathbf{w}_{t}+\alpha\left(\mathbb{E}\left[\rho_{t} \mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]-\gamma \mathbb{E}\left[\rho_{t} \mathbf{x}_{t+1} \mathbf{x}_{t}^{\top}\right]\right) \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right] \\
+    &=\mathbf{w}_{t}+\alpha\left(\mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]-\gamma \mathbb{E}\left[\rho_{t} \mathbf{x}_{t+1} \mathbf{x}_{t}^{\top}\right]\right) \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right] \\
+    &=\mathbf{w}_{t}+\alpha\left(\mathbb{E}\left[\mathbf{x}_{t} \rho_{t} \delta_{t}\right]-\gamma \mathbb{E}\left[\rho_{t} \mathbf{x}_{t+1} \mathbf{x}_{t}^{\top}\right] \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]\right) \\
+    &\approx \mathbf{w}_{t}+\alpha\left(\mathbb{E}\left[\mathbf{x}_{t} \rho_{t} \delta_{t}\right]-\gamma \mathbb{E}\left[\rho_{t} \mathbf{x}_{t+1} \mathbf{x}_{t}^{\top}\right] \mathbf{v}_{t}\right) & \text{(基于(11.28))} \\
+    &\approx \mathbf{w}_{t}+\alpha \rho_{t}\left(\delta_{t} \mathbf{x}_{t}-\gamma \mathbf{x}_{t+1} \mathbf{x}_{t}^{\top} \mathbf{v}_{t}\right) & \text{(采样)}
+    \end{aligned}
+
+如果最终内积（:math:`\mathbf{x}_{t}^{\top} \mathbf{v}_{t}`）首先完成，则再次为 :math:`O(d)`。
+该算法被称为 *具有梯度校正（TDC）的TD(0)*，或者作为 *GTD(0)*。
+
+图11.5显示了Baird反例中TDC的样本和预期行为。
+按照预期，:math:`\overline{\mathrm{PBE}}` 降至零，但请注意参数向量的各个分量不接近零。
+事实上，对于所有 :math:`s`，这些值仍远不是最优解，:math:`\hat{v}(s)=0`，
+其中 :math:`\mathbf{w}` 必须与 :math:`(1,1,1,1,1,1,4,-2)^{\top}` 成比例。
+在1000次迭代之后，我们仍然远离最佳解决方案，正如我们可以从 :math:`\overline{\mathrm{VE}}` 看到的那样，它几乎保持为2。
+系统实际上正在收敛到最优解，但是由于 :math:`\overline{\mathrm{PBE}}` 已经接近于零，因此进展非常缓慢。
+
+.. figure:: images/figure-11.5.png
+
+    **图11.5：** 关于Baird反例的TDC算法的行为。在左侧显示典型的单次运行，在右侧显示该算法的预期行为，
+    如果更新是同步完成的（类似于（11.9），除了两个TDC参数向量）。
+    步长为 :math:`\alpha=0.005` 且 :math:`\beta=0.05`。
+
+GTD2和TDC都涉及两个学习过程，
+一个用于 :math:`\mathbf{w}` 的主要学习过程和一个用于 :math:`\mathbf{v}` 的次要学习过程。
+主要学习过程的逻辑依赖于已经完成的次要学习过程，至少近似，而次要学习过程在不受第一个的影响的情况下进行。
+我们将这种不对称依赖称为 *级联*。在级联中，我们经常假设次要学习过程进展得更快，
+因此始终处于渐近值，准备好并准确地协助主要学习过程。
+这些方法的收敛证明经常明确地做出这个假设。这些被称为 *两次时间尺度（two-time-scale）* 的证明。
+快速时间尺度是次要学习过程的时间尺度，较慢的时间尺度是主要学习过程的时间尺度。
+如果 :math:`\alpha` 是主要学习过程的步长，:math:`\beta` 是次要学习过程的步长，
+那么这些收敛证明通常要求极限 :math:`\beta \rightarrow 0`
+和 :math:`\frac{\alpha}{\beta} \rightarrow 0`。
+
+梯度-TD方法是目前最容易理解和广泛使用的稳定离策略方法。行动价值和控制的扩展（GQ，Maei等，2010），
+资格迹（GTD(:math:`\lambda`)和GQ(:math:`\lambda`)，Maei，2011；Maei和Sutton，2010），
+以及非线性函数逼近（Maei等，2009）。在半梯度TD和梯度TD之间还提出了混合算法（Hackman，2012；White and White，2016）。
+混合TD算法在目标和行为策略非常不同的状态下表现得像梯度-TD算法，并且在目标和行为策略相同的状态下表现得像半梯度算法。
+最后，将梯度TD思想与近端方法和控制变量的思想相结合，以产生更有效的方法（Mahadevan等，2014；Du等，2017）。
+
 
 11.8 强调TD方法
 ---------------
