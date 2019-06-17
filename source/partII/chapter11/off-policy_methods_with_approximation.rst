@@ -1055,6 +1055,46 @@ TD学习似乎提供了并行学习多个事物的可能性，即使用一种经
 书目和历史评论
 ---------------
 
+**11.1** 第一种半梯度方法是线性TD(:math:`\lambda`)（Sutton，1988）。
+“半梯度”这个名字是最近的（Sutton，2015a）。
+在Sutton，Mahmood和White（2016）之前，可能尚未明确说明具有一般重要性采样率的半梯度离策略TD(0)，
+但行动价值形式由Precup，Sutton和Singh（2000年）引入 ），他们也做了这些算法的资格跟踪形式（见第12章）。
+他们持续的，不折扣的形式尚未得到重大探索。这里给出的n步形式是新的。
+
+**11.2** 最早的 :math:`w-\text{to}-2w` 例子由Tsitsiklis和Van Roy（1996）提供，
+他们也在第263页的框中介绍了具体的反例。Baird的反例是由于Baird（1995），尽管我们在这里提出的版本略有修改。
+Gordon（1995,1996b）开发了函数近似的平均方法。
+Boyan和Moore（1995）给出了使用离策略DP方法和更复杂的函数近似方法的不稳定性的其他例子。
+Bradtke（1993）给出了一个例子，其中在线性二次调节问题中使用线性函数近似的Q-learning收敛于不稳定策略。
+
+**11.3** 致命的三元组首先由Sutton（1995b）确定，并由Tsitsiklis和Van Roy（1997）进行了彻底的分析。
+“致命三元组”这个名字归功于Sutton（2015a）。
+
+**11.4** 这种线性分析由Tsitsiklis和Van Roy（1996; 1997）开创，包括动态规划算子。
+图11.3中的图由Lagoudakis和Parr（2003）引入。
+我们所谓的Bellman算子，用 :math:`B_{\pi}` 表示，更常见的是 :math:`I^{\pi}`，称为“动态规划算子”，
+而广义形式，表示为 :math:`T^{(\lambda)}`，
+称为“TD(:math:`\lambda`)算子”（Tsitsiklis和范罗伊，1996年，1997年）。
+
+**11.5** :math:`\overline{\mathrm{BE}}` 最初是作为Schweitzer和Seidmann（1985）的
+动态规划的目标函数提出的。Baird（1995,1999）将其扩展到基于随机梯度下降的TD学习。
+在文献中，:math:`\overline{\mathrm{BE}}` 最小化通常被称为Bellman残差最小化。
+
+最早的A分裂例子是由于Dayan（1992）。这里给出的两种形式由Sutton等人介绍。 （2009年a）。
+
+**11.6** 本节内容是本书的新内容。
+
+**11.7** Sutton，Szepesvari和Maei（2009b）介绍了梯度-TD方法。
+Sutton等（2009a）和Mahmood等（2014）介绍了本节中强调的方法。
+Mahadevan等（2014）开发了近端TD方法的主要扩展。
+迄今为止对梯度-TD和相关方法进行的最敏感的实证研究由Geist和Scherrer（2014），Dann，Neumann和Peters（2014），White（2015）
+以及Ghiassian，Patterson，White，Sutton和White（2018）给出。
+Yu（2017）提出了梯度-TD方法理论的最新发展。
+
+**11.8** Sutton，Mahmood和White（2016）介绍了强调-TD方法。
+Yu（2015; 2016; Yu，Mahmood和Sutton，2017），Hallak，Tamar和Mannor（2015）
+以及Hallak，Tamar，Munos和Mannor（2016）后来建立了完整的收敛证明和其他理论。
+
 
 .. [1]
     对于状态价值，重要性采样率 :math:`\rho_t` 的处理仍存在小的差异。
