@@ -361,7 +361,7 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
 .. math::
     :label: 3.11
 
-    G_t \doteq \sum_{k=t+1}^{T} \gamma^{k-t-1} R_t
+    G_t \doteq \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k
 
 包括 :math:`T = \infty` 或 :math:`\gamma = 1` （但不能同时存在）的可能性。
 我们在本书的剩余部分中使用这些约定来简化符号，并表达情节和持续任务之间的近乎相似。
