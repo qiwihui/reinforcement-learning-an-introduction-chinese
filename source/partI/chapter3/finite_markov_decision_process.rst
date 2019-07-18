@@ -52,7 +52,7 @@ MDP和个体一起产生了一个如下所示的序列或 *轨迹*：
 .. math::
     :label: 3.2
 
-    p(s^\prime,r|s,a) \doteq Pr\{S_t=s^\prime,R_t=r|S_{t-1}=s,R_{t-1}=a\}
+    p(s^\prime,r|s,a) \doteq Pr\{S_t=s^\prime,R_t=r|S_{t-1}=s,A_{t-1}=a\}
 
 对所有 :math:`s^\prime, s \in \mathcal{S}`，:math:`\mathcal{r} \in \mathcal{R}`
 和 :math:`a \in \mathcal{A}(s)`。函数 :math:`p` 定义了MDP的 *动态*。
