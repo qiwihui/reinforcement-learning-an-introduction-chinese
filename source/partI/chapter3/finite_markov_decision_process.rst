@@ -613,7 +613,7 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
     v_*(s) &= \max_{a\in\mathcal{A}(s)} q_{\pi_*}(s,a) \\
     &=\max_a \mathbb{E}_{\pi_*}[G_t|S_t=s,A_t=a] \\
     &=\max_a \mathbb{E}_{\pi_*}[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] &(由(3.9)式) \\
-    &=\max_a \mathbb{E}[R_{t=1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a] &(3.18) \\
+    &=\max_a \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a] &(3.18) \\
     &=\max_{a\in \mathcal{A}(s)}\sum_{s^\prime,r} p(s^\prime,r|s,a)[r+\gamma v_*(s^\prime)] &(3.19)
     \end{align*}
 
