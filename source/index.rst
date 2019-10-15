@@ -4,7 +4,11 @@
 本项目为《Reinforcement Learning: An Introduction》（第二版）中文翻译，
 旨在帮助喜欢强化学习（Reinforcement Learning）的各位能更好的学习交流。
 
-​目前第二版原版已完成，大家可以前往 `下载`_。
+**本书正在翻译中**，请查看具体 `进度`_。
+
+.. _进度: https://github.com/qiwihui/reinforcement-learning-an-introduction-chinese
+
+目前第二版原版已完成，大家可以前往 `下载`_。
 
 .. _下载: http://incompleteideas.net/book/the-book-2nd.html
 
