@@ -1,3 +1,7 @@
+# 弃坑了！！！
+
+因为官方翻译版本已经出版，本项目停止更新维护。请前往查看食用：[强化学习](https://book.douban.com/subject/34809689/)。
+
 # reinforcement-learning-an-introduction-chinese
 
 本项目为《Reinforcement Learning: An Introduction》（第二版）中文翻译，旨在帮助喜欢
