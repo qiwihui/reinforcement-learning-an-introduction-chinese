@@ -5,8 +5,6 @@ before_install:
 - git config --global push.default matching
 - git config --global user.name "qiwihui via Travis CI"
 - git config --global user.email "qwh005007@gmail.com"
-- sed -i'' "s~git@github.com:qiwihui/blog.git~https://${GH_TOKEN}:x-oauth-basic@github.com/qiwihui/blog.git~"
-  _config.yml
 install:
 - pip install sphinx==1.5.6 sphinx-autobuild==0.7.1 sphinx-rtd-theme==0.4.1 
 script:
