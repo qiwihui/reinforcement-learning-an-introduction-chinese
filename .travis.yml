@@ -10,6 +10,7 @@ install:
 script:
 - make html
 - touch build/html/.nojekyll
+- echo "rl.qiwihui.com" > build/html/CNAME
 
 # Tell Travis CI to copy the documentation to the gh-pages branch of
 # your GitHub repository.
