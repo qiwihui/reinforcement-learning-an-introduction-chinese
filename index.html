@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>强化学习导论 &mdash; 强化学习导论 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="第二版前言" href="preface2nd.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> 强化学习导论
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="preface2nd.html">第二版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface1st.html">第一版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">符号一览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter1/introduction.html">第1章 简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partI/index.html">第一部分 表格解决方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partII/index.html">第二部分 近似解决方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="partIII/index.html">第三部分 Looking Deeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">强化学习导论</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>强化学习导论</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>强化学习导论<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>本项目为《Reinforcement Learning: An Introduction》（第二版）中文翻译，
+旨在帮助喜欢强化学习（Reinforcement Learning）的各位能更好的学习交流。</p>
+<p><strong>本书正在翻译中</strong>，请查看具体 <a class="reference external" href="https://github.com/qiwihui/reinforcement-learning-an-introduction-chinese">进度</a>。</p>
+<p>目前第二版原版已完成，大家可以前往 <a class="reference external" href="http://incompleteideas.net/book/the-book-2nd.html">下载</a>。</p>
+<div class="section" id="id4">
+<h2>版权声明<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>本书的著作权归作者(Richard S. Sutton 和 Andrew G. Barto)所有。你可以：</p>
+<blockquote>
+<div><ul class="simple">
+<li>下载、保存以及打印本书</li>
+<li>网络链接、转载本书的部分或者全部内容，但是必须在明显处提供读者访问本书发布网站的链接</li>
+<li>在你的程序中任意使用本书所附的程序代码，但是由本书的程序所引起的任何问题，作者不承担任何责任</li>
+</ul>
+</div></blockquote>
+<p>你不可以：</p>
+<blockquote>
+<div><ul class="simple">
+<li>以任何形式出售本书的电子版或者打印版</li>
+<li>擅自印刷、出版本书</li>
+<li>以纸媒出版为目的，改写、改编以及摘抄本书的内容</li>
+<li>在课程设计、毕业设计以及作业中大段摘抄本书文字，或直接使用本书的程序代码</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h2>目录<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preface2nd.html">第二版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preface1st.html">第一版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notation.html">符号一览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter1/introduction.html">第1章 简介</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id4">1.1 强化学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id5">1.2 例子</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id6">1.3 强化学习的要素</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id7">1.4 局限性和范围</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id8">1.5 拓展例子：井字棋</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id9">1.6 小结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id10">1.7 强化学习早期历史</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter1/introduction.html#id11">书目备注</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="partI/index.html">第一部分 表格解决方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html">第2章 多臂赌博机问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id2">2.1 一个 <span class="math">\(k\)</span> 臂赌博机问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id3">2.2 行动价值方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id4">2.3 10臂赌博机试验</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id5">2.4 增量实现</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id6">2.5 追踪非平稳问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id7">2.6 乐观的初始值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id8">2.7 上限置信区间动作选择</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id9">2.8 赌博机问题的梯度算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id10">2.9 关联搜索（语境赌博机）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id11">2.10 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter2/multi_armed_bandits.html#id12">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html">第3章 有限马尔可夫决策过程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id2">3.1 个体环境接口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id7">3.2 目标和奖励</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id10">3.3 回报和情节</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id12">3.4 情节和持续任务的统一符号</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id13">3.5 策略和价值函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id14">3.6 最优策略和最优价值函数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id15">3.7 优化和近似</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id16">3.8 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter3/finite_markov_decision_process.html#id17">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partI/chapter4/dynamic_programming.html">第4章 动态规划</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id2">4.1 策略评估（预测）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id3">4.2 策略提升</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id4">4.3 策略迭代</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id5">4.4 价值迭代</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id6">4.5 异步动态规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id7">4.6 广义策略迭代</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id8">4.7 动态规划的效率</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id9">4.8 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter4/dynamic_programming.html#id10">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html">第5章 蒙特卡洛方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id2">5.1 蒙特卡洛预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id3">5.2 动作价值的蒙特卡洛估计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id4">5.3 蒙特卡洛控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id5">5.4 非探索开端的蒙特卡洛控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id6">5.5 通过重要性采样的离策略预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id7">5.6 增量式的实现</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id8">5.7 离策略蒙特卡洛控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id9">5.8 *折扣感知的重要性采样</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id10">5.9 *每决策重要性抽样</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id11">5.10 小结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter5/monte_carlo_methods.html#id12">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html">第6章 时序差分学习</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#td">6.1 TD预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#id3">6.2 TD预测方法的优势</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#td-0">6.3 TD(0)的最优性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#sarsa-td">6.4 Sarsa：在策略TD控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#q-learning-td">6.5 Q-learning：离策略TD控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#sarsa">6.6 预期的Sarsa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#id4">6.8 最大化偏差和双学习</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#afterstates">6.9 游戏，Afterstates和其他特殊情况</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#id5">6.10 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter6/temporal_difference_learning.html#id6">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html">第7章 <span class="math">\(n\)</span> 步引导（Bootstrapping）方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#td">7.1 <span class="math">\(n\)</span> 步TD预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#sarsa">7.2 <span class="math">\(n\)</span> 步Sarsa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#id1">7.3 <span class="math">\(n\)</span> 步离策略学习</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#per-decision">7.4 *具有控制变量的每个决策（per-decision）方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#n">7.5 无重要性采样的离策略学习：n步树备份算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#id2">7.6 *统一算法：n步 <span class="math">\(Q(\sigma)\)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#id3">7.7 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter7/n_step_bootstrapping.html#id4">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html">第8章 表格方法规划和学习</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id2">8.1 模型和规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#dyna">8.2 Dyna：集成规划，行动和学习</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id3">8.3 当模型错误时</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id5">8.4 优先扫描</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id6">8.5 预期与样本更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id7">8.6 轨迹采样</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id8">8.7 实时动态规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id9">8.8 决策时规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id10">8.9 启发式搜索</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#rollout">8.10 Rollout算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id12">8.11 蒙特卡洛树搜索</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id13">8.12 本章总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id14">8.13 第一部分总结：维度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partI/chapter8/planning_and_learning_with_tabular_methods.html#id15">书目和历史评论</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="partII/index.html">第二部分 近似解决方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html">第9章 在策略预测近似方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id2">9.1 价值函数近似</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id3">9.2 预测目标（<span class="math">\(\overline{\mathrm{VE}}\)</span>）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id4">9.3 随机梯度和半梯度方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id6">9.4 线性方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id7">9.5 线性方法的特征构造</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id12">9.6 手动选择步长参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id13">9.7 非线性函数近似：人工神经网络</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#td">9.8 最小二乘TD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id14">9.9 基于内存的函数近似</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id15">9.10 基于核的函数近似</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id16">9.11 深入研究在策略学习：兴趣和重点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id17">9.12 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter9/on-policy_prediction_with_approximation.html#id18">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html">第10章 在策略控制近似方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html#id2">10.1 回合半梯度控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html#nsarsa">10.2 半梯度n步Sarsa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html#id5">10.3 平均奖励：持续任务的新问题设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html#id6">10.4 弃用折扣设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html#id7">10.5 差分半梯度n步Sarsa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html#id8">10.6 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter10/on-policy_control_with_approximation.html#id9">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html">第11章 *离策略近似方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id2">11.1 半梯度方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id3">11.2 离策略发散例子</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id4">11.3 致命的三元组</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id5">11.4 线性价值函数几何</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#bellman">11.5 Bellman误差中的梯度下降</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id7">11.6 Bellman误差是不可学习的</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#td">11.7 梯度TD方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#td-emphatic-td">11.8 强调TD方法（Emphatic-TD）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id11">11.9 减小误差</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id12">11.10 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter11/off-policy_methods_with_approximation.html#id13">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partII/chapter12/eligibility_traces.html">第12章 资格迹（Eligibility Traces）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id1">12.1 <span class="math">\(\lambda\)</span> 回报</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#td">12.2 TD(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id2">12.3 <span class="math">\(n\)</span> 步截断 <span class="math">\(\lambda\)</span> 回报方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id3">12.4 重做更新：在线 <span class="math">\(\lambda\)</span> 回报算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id4">12.5 真正的在线TD(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#dutch">12.6 蒙特卡洛学习中的Dutch迹</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#sarsa">12.7 Sarsa(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id5">12.8 变量 <span class="math">\(\lambda\)</span> 和 <span class="math">\(\gamma\)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id6">12.9 具有控制变量的离策略迹</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#watkinsq-tree-backup">12.10 Watkins的Q(<span class="math">\(\lambda\)</span>)到Tree-Backup(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id7">12.11 具有迹的稳定离策略方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id8">12.12 实施问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id9">12.13 结论</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter12/eligibility_traces.html#id10">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html">第13章 策略梯度方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id3">13.1 策略近似及其优势</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id4">13.2 策略梯度定理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id5">13.3 强化：蒙特卡罗策略梯度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id6">13.4 带基线强化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id7">13.5 演员-评论家方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id8">13.6 持续问题的策略梯度</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id9">13.7 持续动作的策略参数化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id10">13.8 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partII/chapter13/policy_gradient_methods.html#id11">书目和历史评论</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="partIII/index.html">第三部分 Looking Deeper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="partIII/chapter14.html">第14章 Psychology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partIII/chapter15.html">第15章 Neuroscience</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partIII/chapter16.html">第16章 Applications and Case Studies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partIII/chapter17.html">第17章 Frontiers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">参考文献</a></li>
+</ul>
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">索引</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">模块索引</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">搜索页面</span></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="preface2nd.html" class="btn btn-neutral float-right" title="第二版前言" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            LANGUAGE:'zh_CN',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-46660488-5');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 文章末尾广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="6325921777"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+</body>
+</html>

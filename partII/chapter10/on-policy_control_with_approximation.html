@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>第10章 在策略控制近似方法 &mdash; 强化学习导论 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="第11章 *离策略近似方法" href="../chapter11/off-policy_methods_with_approximation.html" />
+    <link rel="prev" title="第9章 在策略预测近似方法" href="../chapter9/on-policy_prediction_with_approximation.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> 强化学习导论
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notation.html">符号一览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chapter1/introduction.html">第1章 简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../partI/index.html">第一部分 表格解决方法</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">第二部分 近似解决方法</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../chapter9/on-policy_prediction_with_approximation.html">第9章 在策略预测近似方法</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">第10章 在策略控制近似方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.1 回合半梯度控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nsarsa">10.2 半梯度n步Sarsa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">10.3 平均奖励：持续任务的新问题设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">10.4 弃用折扣设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">10.5 差分半梯度n步Sarsa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">10.6 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter11/off-policy_methods_with_approximation.html">第11章 *离策略近似方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter12/eligibility_traces.html">第12章 资格迹（Eligibility Traces）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter13/policy_gradient_methods.html">第13章 策略梯度方法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../partIII/index.html">第三部分 Looking Deeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">强化学习导论</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">第二部分 近似解决方法</a> &raquo;</li>
+        
+      <li>第10章 在策略控制近似方法</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/partII/chapter10/on-policy_control_with_approximation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>第10章 在策略控制近似方法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>在本章中，我们回到控制问题，现在使用动作-价值函数 <span class="math">\(\hat{q}(s,a,\mathbf{w})\approx q_{*}(s, a)\)</span> 的参数近似，
+其中 <span class="math">\(\mathbf{w} \in \mathbb{R}^{d}\)</span> 是有限维权重向量。我们继续只关注在策略情况，将离策略方法留给第11章。
+本章以半梯度Sarsa算法为特征，将半梯度TD(0)（最后一章）自然延伸到动作价值和策略控制。
+在回合案例中，扩展是直截了当的，但在持续的情况下，我们必须向后退几步并重新审视我们如何使用折扣来定义最优策略。
+令人惊讶的是，一旦我们有真正的函数近似，我们就必须放弃折扣并转而使用新的“差异”价值函数来控制问题的新“平均回报”表达式。</p>
+<p>首先从回合案例开始，我们将上一章中提出的函数近似思想从状态值扩展到动作价值。
+然后我们扩展它们以控制遵循策略GPI的一般模式，使用 <span class="math">\(\varepsilon\)</span> 贪婪进行动作选择。
+我们在陡坡汽车问题上显示n步线性Sarsa的结果。然后我们转向持续的情况并对于具有不同价值的平均奖励案例重复开发这些想法。</p>
+<div class="section" id="id2">
+<h2>10.1 回合半梯度控制<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>将第9章的半梯度预测方法扩展到动作价值是很简单的。在这种情况下，它是近似动作价值函数 <span class="math">\(\hat{q} \approx q_{\pi}\)</span>，
+其表示为具有权重向量 <span class="math">\(\mathbf{w}\)</span> 的参数化函数形式。
+而在我们考虑 <span class="math">\(S_{t} \mapsto U_{t}\)</span> 形式的随机训练示例之前，
+现在我们考虑 <span class="math">\(S_{t}, A_{t} \mapsto U_{t}\)</span> 形式的例子。
+更新目标 <span class="math">\(U_{t}\)</span> 可以是 <span class="math">\(q_{\pi}\left(S_{t}, A_{t}\right)\)</span> 的任何近似值，包括通常的备份值，
+例如完整的蒙特卡罗回报（<span class="math">\(G_{t}\)</span>）或任何n步Sarsa回报（7.4）。动作价值预测的一般梯度下降更新是</p>
+<div class="math">
+\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
+\tag{10.1}\]</div>
+<p>例如，一步Sarsa方法的更新是</p>
+<div class="math">
+\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[R_{t+1}+\gamma \hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
+\tag{10.2}\]</div>
+<p>我们将这种方法称为 <em>回合半梯度一步Sarsa</em>。对于常量策略，此方法以与TD(0)相同的方式收敛，
+具有相同类型的误差边界（9.14）。</p>
+<p>为了形成控制方法，我们需要将这些动作价值预测方法与策略改进和行动选择技术相结合。
+适用于连续动作或来自大型离散集的动作的适当技术是正在进行的研究主题，但尚未明确解决。
+另一方面，如果动作集是离散的并且不是太大，那么我们可以使用前面章节中已经开发的技术。
+也就是说，对于当前状态 <span class="math">\(S_t\)</span> 中可用的每个可能动作，
+我们可以计算 <span class="math">\(\hat{q}\left(S_{t}, a, \mathbf{w}_{t}\right)\)</span>，
+然后找到贪婪动作 <span class="math">\(A_t^*=\arg\max _{a} \hat{q}(S_t,a,\mathbf{w}_{t-1})\)</span>。
+然后通过将估计策略更改为贪婪策略（例如 <span class="math">\(\varepsilon\)</span> -贪婪策略）的软近似来完成策略改进
+（在本章中处理的在策略案例中）。根据相同的策略选择动作。完整算法的伪代码于下框中给出。</p>
+<div class="important admonition">
+<p class="first admonition-title">回合半梯度Sarsa估计 <span class="math">\(\hat{q} \approx q_*\)</span></p>
+<p>输入：可微分的动作价值函数参数化 <span class="math">\(\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}\)</span></p>
+<p>算法参数：步长 <span class="math">\(\alpha&gt;0\)</span>，小 <span class="math">\(\varepsilon&gt;0\)</span></p>
+<p>任意初始化价值函数权重 <span class="math">\(\mathbf{w} \in \mathbb{R}^{d}\)</span> （比如 <span class="math">\(\mathbf{w}=\mathbf{0}\)</span>）</p>
+<p>对每个回合循环：</p>
+<blockquote class="last">
+<div><p><span class="math">\(S, A \leftarrow\)</span> 初始回合状态和动作（比如 <span class="math">\(\varepsilon\)</span> -贪婪）</p>
+<p>对回合每一步循环：</p>
+<blockquote>
+<div><p>采取动作 <span class="math">\(A\)</span>，观察 <span class="math">\(R, S^{\prime}\)</span></p>
+<p>如果 <span class="math">\(S^{\prime}\)</span> 不是终点：</p>
+<blockquote>
+<div><p><span class="math">\(\mathbf{w} \leftarrow \mathbf{w}+\alpha[R-\hat{q}(S, A, \mathbf{w})] \nabla \hat{q}(S, A, \mathbf{w})\)</span></p>
+<p>进入下一个回合</p>
+</div></blockquote>
+<p>选择 <span class="math">\(A^{\prime}\)</span> 作为 <span class="math">\(\hat{q}\left(S^{\prime}, \cdot, \mathbf{w}\right)\)</span> 的函数（比如 <span class="math">\(\varepsilon\)</span> -贪婪）</p>
+<p><span class="math">\(\mathbf{w} \leftarrow \mathbf{w}+\alpha\left[R+\gamma \hat{q}\left(S^{\prime}, A^{\prime}, \mathbf{w}\right)-\hat{q}(S, A, \mathbf{w})\right] \nabla \hat{q}(S, A, \mathbf{w})\)</span></p>
+<p><span class="math">\(S \leftarrow S^{\prime}\)</span></p>
+<p><span class="math">\(A \leftarrow A^{\prime}\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</div>
+<p><strong>例10.1：陡坡汽车任务</strong> 考虑如图10.1左上图所示，在陡峭的山路上驾驶动力不足的汽车的任务。
+困难在于重力比汽车的发动机强，即使在全油门时，汽车也无法陡坡加速。
+唯一的解决方案是首先远离目标并向左边相反的斜坡上移动。
+然后，通过应用全油门，汽车可以建立足够的惯性，以便将其带到陡坡上，即使它在整个过程中减速。
+这是一个连续控制任务的简单示例，在某种意义上，事物必须变得更糟（离目标更远）才能变得更好。
+除非得到人类设计师的明确帮助，否则许多控制方法对于此类任务都有很大的困难。</p>
+<div class="figure" id="id12">
+<img alt="../../_images/figure-10.1.png" src="../../_images/figure-10.1.png" />
+<p class="caption"><span class="caption-text"><strong>图10.1：</strong> 陡坡汽车任务（左上图）和一次运行中学习的成本函数 <span class="math">\(-\max _{a} \hat{q}(s, a, \mathbf{w})\)</span>。</span></p>
+</div>
+<p>这个问题的奖励在所有时步都是 <span class="math">\(-1\)</span>，直到汽车越过山顶的目标位置，结束了这一回合。
+有三种可能的动作：全油门前进（<span class="math">\(+1\)</span>），全油门倒车（<span class="math">\(-1\)</span>）和零油门（<span class="math">\(0\)</span>）。
+汽车根据简化的物理学运动。 它的位置 <span class="math">\(x_t\)</span> 和速度 <span class="math">\(\dot{x}_{t}\)</span>，由更新</p>
+<div class="math">
+\[\begin{split}\begin{array}{l}
+{x_{t+1} \doteq \text{bound}\left[x_{t}+\dot{x}_{t+1}\right]} \\
+{\dot{x}_{t+1} \doteq \text{bound}\left[\dot{x}_{t}+0.001 A_{t}-0.0025 \cos \left(3 x_{t}\right)\right]}
+\end{array}\end{split}\]</div>
+<p>其中 <span class="math">\(\text{bound}\)</span> 操作强制 <span class="math">\(-1.2 \leq x_{t+1} \leq 0.5\)</span>
+和 <span class="math">\(-0.07 \leq \dot{x}_{t+1} \leq 0.07\)</span>。
+另外，当 <span class="math">\(\dot{x}_{t+1}\)</span> 到达左边界时，<span class="math">\(\dot{x}_{t+1}\)</span> 被重置为零。
+当它到达右边界时，达到了目标并且回合终止了。每回合从随机位置 <span class="math">\(x_{t} \in[-0.6,-0.4)\)</span> 和零速度开始。
+为了将两个连续状态变量转换为二进制特征，我们使用了网格平铺，如图9.9所示。
+我们使用8个铺片，每个铺片覆盖每个维度中有界距离的1/8，并且如第9.5.4节所述的非对称偏移 <a class="footnote-reference" href="#id10" id="id3">[1]</a>。
+然后通过铺片编码创建的特征向量 <span class="math">\(\mathbf{x}(s, a)\)</span> 与线性组合，用于近似动作价值函数的参数向量：</p>
+<div class="math">
+\[\hat{q}(s, a, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s, a)=\sum_{i=1}^{d} w_{i} \cdot x_{i}(s, a)
+\tag{10.3}\]</div>
+<p>对于每对状态 <span class="math">\(s\)</span> 和动作 <span class="math">\(a\)</span>。</p>
+<p>图10.1显示了在学习使用这种形式的函数近似来解决此任务时通常会发生的情况 <a class="footnote-reference" href="#id11" id="id4">[2]</a>。
+显示的是在单次运行中学习的价值函数（<em>成本（cost- to-go）</em> 函数）的负数。
+初始动作值均为零，这是乐观的（在此任务中所有真值均为负值），即使探测参数 <span class="math">\(\varepsilon\)</span> 为0，也会导致进行大量探索。
+这可以在中间的顶部面板中看到，图中标有“Step 428”。此时甚至没有一个回合完成，但是汽车在山谷中来回摆动，沿着状态空间的圆形轨迹。
+所有经常访问的状态都比未开发状态更糟糕，因为实际的奖励比（不切实际的）预期更糟糕。
+这会不断推动个体远离任何地方，探索新的状态，直到找到解决方案。</p>
+<p>图10.2显示了此问题的半梯度Sarsa的几条学习曲线，具有不同的步长。</p>
+<div class="figure" id="id13">
+<img alt="../../_images/figure-10.2.png" src="../../_images/figure-10.2.png" />
+<p class="caption"><span class="caption-text"><strong>图10.2：</strong> 具有铺片编码函数近似和 <span class="math">\(\varepsilon\)</span> -贪婪动作选择的半梯度Sarsa方法的陡坡汽车任务学习曲线。</span></p>
+</div>
+</div>
+<div class="section" id="nsarsa">
+<h2>10.2 半梯度n步Sarsa<a class="headerlink" href="#nsarsa" title="永久链接至标题">¶</a></h2>
+<p>我们可以通过在半梯度Sarsa更新方程（10.1）中使用n步回报作为更新目标来获得回合半梯度Sarsa的n步版本。
+n步回报立即从其表格形式（7.4）推广到函数近似形式：</p>
+<div class="math">
+\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right), \quad t+n&lt;T
+\tag{10.4}\]</div>
+<p>其中 <span class="math">\(G_{t:t+n}=G_{t}\)</span> 如果 <span class="math">\(t+n \geq T\)</span>，像往常一样。 n步更新方程是</p>
+<div class="math">
+\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t&lt;T
+\tag{10.5}\]</div>
+<p>完整的伪代码在下面的框中给出：</p>
+<div class="important admonition">
+<p class="first admonition-title">回合半梯度n步Sarsa估计 <span class="math">\(\hat{q} \approx q_*\)</span> 或 <span class="math">\(q_\pi\)</span></p>
+<p>输入：可微分的动作价值函数参数化 <span class="math">\(\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}\)</span></p>
+<p>输入：一个策略 <span class="math">\(\pi\)</span> （如果估计 <span class="math">\(q_\pi\)</span>）</p>
+<p>算法参数：步长 <span class="math">\(\alpha&gt;0\)</span>，小 <span class="math">\(\varepsilon&gt;0\)</span>，一个正整数 <span class="math">\(n\)</span></p>
+<p>任意初始化价值函数权重 <span class="math">\(\mathbf{w} \in \mathbb{R}^{d}\)</span> （比如 <span class="math">\(\mathbf{w}=\mathbf{0}\)</span>）</p>
+<p>所有存储和访问操作（<span class="math">\(S_t\)</span>，<span class="math">\(A_t\)</span> 和 <span class="math">\(R_t\)</span>）都可以使用它们的索引 <span class="math">\(mod n+1\)</span></p>
+<p>对每个回合循环：</p>
+<blockquote class="last">
+<div><p>初始化并存储 <span class="math">\(S_0 \ne\)</span> 终点</p>
+<p>选择并存储动作 <span class="math">\(A_0 \sim \pi(\cdot | S_0)\)</span> 或者关于 <span class="math">\(\hat{q}(S_{0}, \cdot, \mathbf{w})\)</span> <span class="math">\(\varepsilon\)</span> -贪婪</p>
+<p><span class="math">\(S, A \leftarrow\)</span> 初始回合状态和动作（比如 <span class="math">\(\varepsilon\)</span> -贪婪）</p>
+<p><span class="math">\(T \leftarrow \infty\)</span></p>
+<p>对 <span class="math">\(t=0,1,2,cdots\)</span> 循环：</p>
+<blockquote>
+<div><p>如果 <span class="math">\(t&lt;T\)</span>，则：</p>
+<blockquote>
+<div><p>采取动作 <span class="math">\(A_t\)</span></p>
+<p>观察和存储下一个奖励为 <span class="math">\(R_{t+1}\)</span> 和下一个状态为 <span class="math">\(S_{t+1}\)</span></p>
+<p>如果 <span class="math">\(S_{t+1}\)</span> 是终点，则：</p>
+<blockquote>
+<div><span class="math">\(T=t+1\)</span></div></blockquote>
+<p>否则：</p>
+<blockquote>
+<div>选择并存储动作 <span class="math">\(A_{t+1} \sim \pi(\cdot | S_{t+1})\)</span> 或者关于 <span class="math">\(\hat{q}(S_{t+1}, \cdot, \mathbf{w})\)</span> <span class="math">\(\varepsilon\)</span> -贪婪</div></blockquote>
+</div></blockquote>
+<p><span class="math">\(\tau \leftarrow t-n+1\)</span> （<span class="math">\(\tau\)</span> 是其估算值正在更新的时间）</p>
+<p>如果 <span class="math">\(\tau \geq 0\)</span>：</p>
+<blockquote>
+<div><p><span class="math">\(G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}\)</span></p>
+<p>如果 <span class="math">\(\tau+n&lt;T\)</span> 则 <span class="math">\(G\leftarrow G+\gamma^n \hat{q}\left(S_{\tau+n}, A_{\tau+n}, \mathbf{w}\right) \quad\)</span> （<span class="math">\(G_{\tau:\tau+n}\)</span>）</p>
+<p><span class="math">\(\mathbf{w} \doteq \mathbf{w}+\alpha\left[G-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}\right)\right] \nabla \hat{q}\left(S_{\tau}, A_{\tau}, \mathbf{w}\right)\)</span></p>
+</div></blockquote>
+</div></blockquote>
+<p>直到 <span class="math">\(\tau=T-1\)</span></p>
+</div></blockquote>
+</div>
+<p>正如我们之前看到的，如果使用中等级别的自举，性能最佳，对应于大于1的n。
+图10.3显示了该算法陡坡汽车任务中在 <span class="math">\(n=8\)</span> 时比在 <span class="math">\(n=\infty\)</span> 处更快地学习并获得更好的渐近性能。
+图10.4显示了参数 <span class="math">\(\alpha\)</span> 和 <span class="math">\(n\)</span> 对该任务学习率的影响的更详细研究结果。</p>
+<div class="figure" id="id14">
+<img alt="../../_images/figure-10.3.png" src="../../_images/figure-10.3.png" />
+<p class="caption"><span class="caption-text"><strong>图10.3：</strong> 陡坡汽车任务中一步与八步半梯度Sarsa的表现。使用了良好的步长：
+<span class="math">\(n=1\)</span> 时 <span class="math">\(\alpha=0.5/8\)</span> 且 <span class="math">\(n=8\)</span> 时 <span class="math">\(\alpha=0.3/8\)</span>。</span></p>
+</div>
+<div class="figure" id="id15">
+<img alt="../../_images/figure-10.4.png" src="../../_images/figure-10.4.png" />
+<p class="caption"><span class="caption-text"><strong>图10.4：</strong> <span class="math">\(\alpha\)</span> 和 <span class="math">\(n\)</span> 对陡坡汽车任务的n步半梯度Sarsa和铺片编码函数近似的早期性能的影响。
+像往常一样，中等的自举（<span class="math">\(n=4\)</span>）表现最佳。这些结果用于选定的 <span class="math">\(\alpha\)</span> 值，以对数刻度，然后通过直线连接。
+对于 <span class="math">\(n=16\)</span>，标准误差范围从 <span class="math">\(n=1\)</span> 时0.5（小于线宽）到大约 <span class="math">\(n=16\)</span> 时4，因此主要影响都是统计上显着的。</span></p>
+</div>
+<p><em>练习10.1</em> 在本章中，我们没有明确考虑或给出任何蒙特卡罗方法的伪代码。他们会是什么样的？
+为什么不为它们提供伪代码是合理的？他们将如何在陡坡汽车任务上表现？</p>
+<p><em>练习10.2</em> 给出关于控制的半梯度一步 <em>预期</em> Sarsa提供伪代码。</p>
+<p><em>练习10.3</em> 为什么图10.4中显示的结果在大 <span class="math">\(n\)</span> 处比在小 <span class="math">\(n\)</span> 处具有更高的标准误差？</p>
+</div>
+<div class="section" id="id5">
+<h2>10.3 平均奖励：持续任务的新问题设置<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>我们现在引入第三个经典设置──与回合和折扣设置一起，用于制定马尔可夫决策问题（MDP）中的目标。
+与折扣设置一样，<em>平均奖励</em> 设置适用于持续存在的问题，即个体与环境之间的交互在没有终止或启动状态的情况下持续进行的问题。
+然而，与那种情况不同的是，没有折扣──个体对延迟奖励的关注与对即时奖励的关注一样多。
+平均奖励设置是经典动态规划理论中常用的主要设置之一，在强化学习中较少见。
+正如我们在下一节中讨论的那样，折扣设置在功能近似方面存在问题，因此需要平均奖励设置来替换它。</p>
+<p>在平均奖励设置中，策略 <span class="math">\(\pi\)</span> 的质量被定义为平均奖励率，或简称为 <em>平均奖励</em>，
+同时遵循该策略，我们将其表示为 <span class="math">\(r(\pi)\)</span>：</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+r(\pi) &amp; \doteq \lim _{h \rightarrow \infty} \frac{1}{h} \sum_{t=1}^{h} \mathbb{E}\left[R_{t} | S_{0}, A_{0 : t-1} \sim \pi\right] &amp;&amp; \text{(10.6)}\\
+&amp;=\lim _{t \rightarrow \infty} \mathbb{E}\left[R_{t} | S_{0}, A_{0 : t-1} \sim \pi\right] &amp;&amp; \text{(10.7)}\\
+&amp;=\sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right) r
+\end{aligned}\end{split}\]</div>
+<p>期望取决于初始状态 <span class="math">\(S_0\)</span>，以及按照 <span class="math">\(\pi\)</span> 的
+后续动作 <span class="math">\(A_{0}, A_{1}, \dots, A_{t-1}\)</span>，<span class="math">\(\mu_\pi\)</span> 是稳态分布，
+<span class="math">\(\mu_{\pi}(s) \doteq \lim_{t \rightarrow \infty} Pr\left\{S_{t}=s | A_{0:t-1} \sim \pi\right\}\)</span>，
+假设存在于任何 <span class="math">\(\pi\)</span> 并且独立于 <span class="math">\(S_0\)</span>。关于MDP的这种假设被称为 <em>遍历性（ergodicity）</em>。
+这意味着MDP启动或个体做出的任何早期决策只会产生暂时影响；从长远来看，处于一个状态的期望仅取决于策略和MDP转移概率。
+遍历性足以保证上述等式中存在极限。</p>
+<p>在未折现的持续情况中，可以在不同类型的最优性之间进行微妙的区分。
+然而，对于大多数实际目的而言，简单地根据每个时间步的平均奖励来订购策略可能就足够了，换句话说，根据他们的 <span class="math">\(r(\pi)\)</span>。
+如（10.7）所示，该数量基本上是 <span class="math">\(\pi\)</span> 下的平均回报。
+特别是，我们认为所有达到 <span class="math">\(r(\pi)\)</span> 最大值的策略都是最优的。</p>
+<p>请注意，稳态分布是特殊分布，在该分布下，如果根据 <span class="math">\(\pi\)</span> 选择动作，则保留在同一分布中。也就是说，为此</p>
+<div class="math">
+\[\sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) p\left(s^{\prime} | s, a\right)=\mu_{\pi}\left(s^{\prime}\right)
+\tag{10.8}\]</div>
+<p>在平均奖励设置中，回报是根据奖励与平均奖励之间的差来定义的：</p>
+<div class="math">
+\[G_{t} \doteq R_{t+1}-r(\pi)+R_{t+2}-r(\pi)+R_{t+3}-r(\pi)+\cdots
+\tag{10.9}\]</div>
+<p>这称为 <em>差分</em> 回报，相应的值函数称为 <em>差分</em> 价值函数。
+它们以相同的方式定义，我们将一如既往地使用相同的符号：
+<span class="math">\(v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right]\)</span> 和
+<span class="math">\(q_{\pi}(s, a) \doteq \mathbb{E}_{\pi}\left[G_t|S_{t}=s, A_{t}=a\right]\)</span>
+（类似于 <span class="math">\(v_*\)</span> 和 <span class="math">\(q_*\)</span>）。 差分价值函数也有Bellman方程，与我们之前看到的略有不同。
+我们只是删除所有 <span class="math">\(\gamma s\)</span> 并通过奖励和真实平均奖励之间的差替换所有奖励</p>
+<div class="math">
+\[\begin{split}\begin{array}{l}
+{v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-r(\pi)+v_{\pi}\left(s^{\prime}\right)\right]} \\
+{q_{\pi}(s, a)=\sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-r(\pi)+\sum_{a^{\prime}} \pi\left(a^{\prime} | s^{\prime}\right) q_{\pi}\left(s^{\prime}, a^{\prime}\right)\right]} \\
+{v_{*}(s)=\max _{a} \sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-\max _{\pi} r(\pi)+v_{*}\left(s^{\prime}\right)\right], \text { 以及 }} \\
+{q_{*}(s, a)=\sum_{r, s^{\prime}} p\left(s^{\prime}, r | s, a\right)\left[r-\max _{\pi} r(\pi)+\max _{a^{\prime}} q_{*}\left(s^{\prime}, a^{\prime}\right)\right]}
+\end{array}\end{split}\]</div>
+<p>（参见（3.14），练习3.17，（3.19）和（3.20））。</p>
+<p>还存在两种TD误差的差分形式：</p>
+<div class="math">
+\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
+\tag{10.10}\]</div>
+<p>以及</p>
+<div class="math">
+\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
+\tag{10.11}\]</div>
+<p>其中 <span class="math">\(\overline{R}_{t}\)</span> 是平均奖励 <span class="math">\(r(\pi)\)</span> 在时间 <span class="math">\(t\)</span> 的估计值。
+通过这些替代定义，我们的大多数算法和许多理论结果都可以在不改变的情况下进行平均奖励设置。</p>
+<p>例如，半梯度Sarsa的平均奖励版本定义如（10.2），除了TD误差版本的不同。也就是说</p>
+<div class="math">
+\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \delta_{t} \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
+\tag{10.12}\]</div>
+<p>由（10.11）给出的 <span class="math">\(t\)</span>。完整算法的伪代码在下框中给出。</p>
+<div class="important admonition">
+<p class="first admonition-title">差分半梯度Sarsa估计 <span class="math">\(\hat{q} \approx q_*\)</span></p>
+<p>输入：可微分的动作价值函数参数化 <span class="math">\(\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}\)</span></p>
+<p>算法参数：步长 <span class="math">\(\alpha,\beta&gt;0\)</span></p>
+<p>任意初始化价值函数权重 <span class="math">\(\mathbf{w} \in \mathbb{R}^{d}\)</span> （比如 <span class="math">\(\mathbf{w}=\mathbf{0}\)</span>）</p>
+<p>任意初始化平均奖励估计 <span class="math">\(\overline{R} \in \mathbb{R}\)</span> （比如 <span class="math">\(\overline{R}=0\)</span>）</p>
+<p>初始化动作 <span class="math">\(S\)</span>，状态 <span class="math">\(A\)</span></p>
+<p>对每个回合循环：</p>
+<blockquote class="last">
+<div><p>采取动作 <span class="math">\(A\)</span>，观察 <span class="math">\(R, S^{\prime}\)</span></p>
+<p>选择 <span class="math">\(A^{\prime}\)</span> 作为 <span class="math">\(\hat{q}\left(S^{\prime}, \cdot, \mathbf{w}\right)\)</span> 的函数（比如 <span class="math">\(\varepsilon\)</span> -贪婪）</p>
+<p><span class="math">\(\delta \leftarrow R-\overline{R}+\hat{q}\left(S^{\prime}, A^{\prime}, \mathbf{w}\right)-\hat{q}(S, A, \mathbf{w})\)</span></p>
+<p><span class="math">\(\overline{R} \leftarrow \overline{R}+\beta \delta\)</span></p>
+<p><span class="math">\(\overline{R} \leftarrow \overline{R}+\beta \delta\)</span></p>
+<p><span class="math">\(\mathbf{w} \leftarrow \mathbf{w}+\alpha \delta \nabla \hat{q}(S, A, \mathbf{w})\)</span></p>
+<p><span class="math">\(S \leftarrow S^{\prime}\)</span></p>
+<p><span class="math">\(A \leftarrow A^{\prime}\)</span></p>
+</div></blockquote>
+</div>
+<p><em>练习10.4</em> 为半梯度Q-learning的差分版本提供伪代码。</p>
+<p><em>练习10.5</em> 需要哪些方程式（除了10.10）来指定TD(0)的差分版本？</p>
+<p><em>练习10.6</em> 假设有一个MDP在任何策略下产生确定性的奖励序列 <span class="math">\(+1,0,+1,0,+1,0, \dots\)</span> 一直继续下去。
+从技术上讲，这是不允许的，因为它违反了遍历性；没有静态极限分布 <span class="math">\(\mu_\pi\)</span>，并且不存在极限（10.7）。
+然而，平均奖励（10.6）是明确的；它是什么？现在考虑这个MDP中的两个状态。
+从 <strong>A</strong> 开始，奖励序列完全如上所述，从 <span class="math">\(+1\)</span> 开始，
+而从 <strong>B</strong> 开始，奖励序列以 <span class="math">\(0\)</span> 开始，然后继续 <span class="math">\(+1,0,+1,0, \ldots\)</span>。
+对于这种情况，差分回报（10.9）没有很好地定义，因为不存在限制。为了修复这个问题，可以交替地将状态值定义为</p>
+<div class="math">
+\[v_{\pi}(s) \doteq \lim _{\gamma \rightarrow 1} \lim _{h \rightarrow \infty} \sum_{t=0}^{h} \gamma^{t}\left(\mathbb{E}_{\pi}\left[R_{t+1} | S_{0}=s\right]-r(\pi)\right)
+\tag{10.13}\]</div>
+<p>根据这个定义，状态 <strong>A</strong> 和 <strong>B</strong> 的值是多少？</p>
+<p><em>练习10.7</em> 考虑马尔可夫奖励过程，该过程由三个状态 <strong>A</strong>，<strong>B</strong> 和 <strong>C</strong> 组成，
+状态转换确定性地围绕环。到达 <strong>A</strong> 时会收到 <span class="math">\(+1\)</span> 的奖励，否则奖励为 <span class="math">\(0\)</span>。
+使用（10.13）的三个状态的差分值是多少？</p>
+<p><em>练习10.8</em> 本节的方框中的伪代码使用 <span class="math">\(\delta_t\)</span> 作为误差而
+不是简单的 <span class="math">\(R_{t+1}-\overline{R}_{t}\)</span> 更新 <span class="math">\(\overline{R}_{t}\)</span>。
+这两个误差都有效，但使用 <span class="math">\(\delta_t\)</span> 更好。要了解原因，请考虑练习10.7中三个状态的环形MRP。
+平均奖励的估计应倾向于其真实值 <span class="math">\(\frac{1}{3}\)</span>。 假设它已经存在并被卡在那里。
+<span class="math">\(R_{t+1}-\overline{R}_{t}\)</span> 误差的序列是什么？
+<span class="math">\(\delta_{t}\)</span> 误差的序列是什么（使用（10.10））？
+如果允许估计价值因误差而改变，哪个误差序列会产生更稳定的平均回报估计值？ 为什么？</p>
+<p><strong>例10.2：访问控制排队任务</strong> 这是一个涉及对一组10台服务器的访问控制的决策任务。
+有四个不同优先级的客户到达一个队列。如果允许访问服务器，则客户向服务器支付1,2,4或8的奖励，
+具体取决于他们的优先级，优先级较高的客户支付更多。
+在每个时步中，队列头部的客户被接受（分配给其中一个服务器）或被拒绝（从队列中移除，奖励为零）。
+在任何一种情况下，在下一个时步中，将考虑队列中的下一个客户。队列永远不会清空，队列中客户的优先级随机分布。
+当然，如果没有免费服务器，则无法提供服务；在这种情况下，客户总是被拒绝。
+每个繁忙的服务器在每个时步都变为空闲，概率 <span class="math">\(p=0.06\)</span>。
+虽然我们刚刚将它们描述为明确，但让我们假设到达和离开的统计数据是未知的。
+任务是根据优先级和免费服务器的数量来决定是接受还是拒绝下一个客户，以便最大化长期奖励而不折扣。</p>
+<p>在这个例子中，我们考虑这个问题的表格解决方案。虽然状态之间没有泛化，
+但我们仍然可以在通用函数近似设置中考虑它，因为此设置泛化了表格设置。
+因此，我们对每对状态（空闲服务器的数量和队列头部的客户的优先级）和操作（接受或拒绝）进行了不同的动作-价值估计。
+图10.5显示了差分半梯度Sarsa求解的解，
+参数 <span class="math">\(\alpha=0.01\)</span>，<span class="math">\(\beta=0.01\)</span>，<span class="math">\(\varepsilon=0.1\)</span>。
+初始动作价值和 <span class="math">\(\overline{R}\)</span> 为零。</p>
+<div class="figure" id="id16">
+<img alt="../../_images/figure-10.5.png" src="../../_images/figure-10.5.png" />
+<p class="caption"><span class="caption-text">图10.5：差分半梯度一步法Sarsa在200万步后的访问控制排队任务中找到的策略和价值函数。
+图表右侧的下降可能是由于数据不完善；许多这些状态从未经历过。<span class="math">\(\overline{R}\)</span> 学习的价值约为2.31。</span></p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>10.4 弃用折扣设置<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>在表格案例中，持续的折扣问题表达非常有用，其中每个状态的回报可以单独识别和平均。
+但在大致情况下，是否应该使用这个问题的表述是值得怀疑的。</p>
+<p>要了解原因，考虑无限的回报序列，没有开始或结束，也没有明确标识的状态。
+状态可能仅由特征向量表示，这可能对于将状态彼此区分起来几乎没有作用。
+作为特殊情况，所有特征向量可以是相同的。因此，实际上只有奖励序列（和行动），并且必须纯粹从这些评估表现。
+怎么可能呢？一种方法是通过长时间间隔的平均奖励──这是平均奖励设置的想法。
+如何使用折扣？那么，对于每个时步，我们可以衡量折扣回报。
+有些回报会很小而且有些大，所以我们必须在很长的时间间隔内对它们进行平均。
+在持续设置中没有开始和结束，也没有特殊的时步，因此没有其他任何事情可以做。
+但是，如果你这样做，结果是折扣回报的平均值与平均回报成正比。
+事实上，对于策略 <span class="math">\(\pi\)</span>，折扣回报的平均值总是 <span class="math">\(r(\pi)/(1-\gamma)\)</span>，
+也就是说，它基本上是平均回报 <span class="math">\(r(\pi)\)</span>。
+特别是，平均折扣回报设置中所有策略的 <em>排序</em> 与平均奖励设置中的排序完全相同。
+因此，折扣率 <span class="math">\(\gamma\)</span> 对问题的表述没有影响。它实际上可能为 <em>零</em>，排名将保持不变。</p>
+<p>这个令人惊讶的事实已在下面的框中得到证实，但基本思想可以通过对称论证来看到。
+每个时步与其他步骤完全相同。通过折扣，每个奖励在某些回报中只会出现在每个位置一次。
+第 <span class="math">\(t\)</span> 次奖励将在第 <span class="math">\(t-1\)</span> 次回报中显示为未折扣，
+在第 <span class="math">\(t-2\)</span> 次回报中折扣一次，在第 <span class="math">\(t-1000\)</span> 次回报中折扣999次。
+第 <span class="math">\(t\)</span> 次奖励的权重是 <span class="math">\(1+\gamma+\gamma^{2}+\gamma^{3}+\cdots=1/(1-\gamma)\)</span>。
+因为所有的状态都是相同的，所以它们都由此加权，
+因此回报的平均值将是此权重乘以平均奖励，或 <span class="math">\(r(\pi)/(1-\gamma)\)</span>。</p>
+<div class="note admonition">
+<p class="first admonition-title">持续问题中折扣的无用性</p>
+<p>也许可以通过选择一个目标来节省折扣，该目标将折扣值与策略下发生状态的分布相加：</p>
+<div class="math">
+\[\begin{split}\begin{aligned}
+J(\pi) &amp;=\sum_{s} \mu_{\pi}(s) v_{\pi}^{\gamma}(s) &amp; \text { (其中 } v_{\pi}^{\gamma} \text { 是折扣价值函数) } \\
+&amp;=\sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}^{\gamma}\left(s^{\prime}\right)\right] &amp;\text {(Bellman 方程)} \\
+&amp;=r(\pi)+\sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) \sum_{s^{\prime}} \sum_{r} p\left(s^{\prime}, r | s, a\right) \gamma v_{\pi}^{\gamma}\left(s^{\prime}\right) &amp;\text{(由10.7)} \\
+&amp;=r(\pi)+\gamma \sum_{s^{\prime}} v_{\pi}^{\gamma}\left(s^{\prime}\right) \sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) p\left(s^{\prime} | s, a\right) &amp;\text{(由3.4)} \\
+&amp;=r(\pi)+\gamma \sum_{s^{\prime}} v_{\pi}^{\gamma}\left(s^{\prime}\right) \mu_{\pi}\left(s^{\prime}\right) &amp;\text{(由10.8)} \\
+&amp;=r(\pi)+\gamma J(\pi) \\
+&amp;=r(\pi)+\gamma r(\pi)+\gamma^{2} J(\pi) \\
+&amp;=r(\pi)+\gamma r(\pi)+\gamma^{2} r(\pi)+\gamma^{3} r(\pi)+\cdots \\
+&amp;=\frac{1}{1-\gamma} r(\pi)
+\end{aligned}\end{split}\]</div>
+<p class="last">提出的折扣目标要求策略与未折现（平均奖励）目标相同。折扣率 <span class="math">\(\gamma\)</span> 不影响排序！</p>
+</div>
+<p>此示例和框中更一般的参数表明，如果我们优化了在策略分布上的折扣值，
+那么效果将与优化 <em>未折扣</em> 的平均奖励相同；<span class="math">\(\gamma\)</span> 的实际值将无效。
+这有力地表明，在函数竟是的控制问题的定义中，折扣没有任何作用。
+然而，人们可以继续在解决方案中使用折扣。折扣参数 <span class="math">\(\gamma\)</span> 从问题参数更改为解决方法方法参数！
+不幸的是，具有函数近似的折扣算法不会优化在策略分布上的折扣值，因此不能保证优化平均奖励。</p>
+<p>折扣控制设置的困难的根本原因是，通过函数近似，我们已经失去了策略提升定理（第4.2节）。
+如果我们改变策略以提高一个状态的折扣值，那么我们就可以保证在任何有用的意义上改善整体策略。
+这种保证是我们强化学习控制方法理论的关键。随着函数近似我们失去了它！</p>
+<p>事实上，缺乏策略提升定理也是总回合和平均奖励设置的理论空白。
+一旦我们引入函数近似，我们就无法再保证任何设置的提升。
+在第13章中，我们介绍了基于参数化策略的另一类强化学习算法，
+并且我们有一个理论上的保证称为“策略梯度定理”，其作用与策略提升定理类似。
+但是对于学习动作价值的方法，我们似乎目前没有局部改进保证（Perkins和Precup（2003）采用的方法可能提供答案的一部分）。
+我们确实知道 <span class="math">\(\varepsilon\)</span> -贪婪化有时可能导致低劣的策略，
+因为策略可能会在好的策略之间振动而不是收敛（Gordon，1996a）。这是一个有多个开放理论问题的领域。</p>
+</div>
+<div class="section" id="id7">
+<h2>10.5 差分半梯度n步Sarsa<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>为了推广到n步自举，我们需要一个TD误差的n步版本。我们首先将n步回报（7.4）推广到其差分形式，并使用函数近似：</p>
+<div class="math">
+\[G_{t : t+n} \doteq R_{t+1}-\overline{R}_{t+n-1}+\cdots+R_{t+n}-\overline{R}_{t+n-1}+\hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right)
+\tag{10.14}\]</div>
+<p>其中 <span class="math">\(\overline{R}\)</span> 是 <span class="math">\(r(\pi)\)</span> 的一个估计，<span class="math">\(n\geq 1\)</span> 且 <span class="math">\(t+n&lt;T\)</span>。
+如果 <span class="math">\(t+n \geq T\)</span> 则我们如通常一样定义 <span class="math">\(G_{t : t+n} \doteq G_{t}\)</span>。
+则n步TD误差为</p>
+<div class="math">
+\[\delta_{t} \doteq G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}\right)
+\tag{10.15}\]</div>
+<p>之后我们可以应用我们通常的半梯度Sarsa更新（10.12）。框中给出了完整算法的伪代码。</p>
+<div class="important admonition">
+<p class="first admonition-title">差分半梯度n步Sarsa估计 <span class="math">\(\hat{q} \approx q_\pi\)</span> 或 <span class="math">\(q_*\)</span></p>
+<p>输入：可微分函数 <span class="math">\(\hat{q} : \mathcal{S} \times \mathcal{A} \times \mathbb{R}^{d} \rightarrow \mathbb{R}\)</span>，策略 <span class="math">\(\pi\)</span></p>
+<p>任意初始化价值函数权重 <span class="math">\(\mathbf{w} \in \mathbb{R}^{d}\)</span> （比如 <span class="math">\(\mathbf{w}=\mathbf{0}\)</span>）</p>
+<p>任意初始化平均奖励估计 <span class="math">\(\overline{R} \in \mathbb{R}\)</span> （比如 <span class="math">\(\overline{R}=0\)</span>）</p>
+<p>算法参数：步长 <span class="math">\(\alpha,\beta&gt;0\)</span>，正整数 <span class="math">\(n\)</span></p>
+<p>所有存储和访问操作（<span class="math">\(S_t\)</span>，<span class="math">\(A_t\)</span> 和 <span class="math">\(R_t\)</span>）都可以使用它们的索引 <span class="math">\(mod n+1\)</span></p>
+<p>初始化动作 <span class="math">\(S_0\)</span>，状态 <span class="math">\(A_0\)</span></p>
+<p>对 <span class="math">\(t=0,1,2, \ldots\)</span> 每步循环：</p>
+<blockquote class="last">
+<div><p>采取动作 <span class="math">\(A_t\)</span></p>
+<p>观察和存储下一个奖励为 <span class="math">\(R_{t+1}\)</span> 和下一个状态为 <span class="math">\(S_{t+1}\)</span></p>
+<p>选择并存储动作 <span class="math">\(A_{t+1} \sim \pi(\cdot | S_{t+1})\)</span> 或者关于 <span class="math">\(\hat{q}(S_{t+1}, \cdot, \mathbf{w})\)</span> <span class="math">\(\varepsilon\)</span> -贪婪</p>
+<p><span class="math">\(\tau \leftarrow t-n+1\)</span> （<span class="math">\(\tau\)</span> 是其估算值正在更新的时间）</p>
+<p>如果 <span class="math">\(\tau&gt;0\)</span>：</p>
+<blockquote>
+<div><p><span class="math">\(\delta \leftarrow \sum_{i=\tau+1}^{\tau+n}\left(R_{i}-\overline{R}\right)+\hat{q}\left(S_{\tau+n}, A_{\tau+n}, \mathbf{w}\right)-\hat{q}\left(S_{\tau}, A_{\tau}, \mathbf{w}\right)\)</span></p>
+<p><span class="math">\(\overline{R} \leftarrow \overline{R}+\beta \delta\)</span></p>
+<p><span class="math">\(\mathbf{w} \leftarrow \mathbf{w}+\alpha \delta \nabla \hat{q}\left(S_{\tau}, A_{\tau}, \mathbf{w}\right)\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</div>
+<p><em>练习10.9</em> 在差分半梯度n步Sarsa算法中，平均奖励的步长参数 <span class="math">\(\beta\)</span> 需要非常小，
+以便 <span class="math">\(\overline{R}\)</span> 成为平均奖励的良好长期估计。
+不幸的是，<span class="math">\(\overline{R}\)</span> 会因许多步骤的初始值而产生偏差，这可能会使学习变得无用。
+或者，我们可以使用 <span class="math">\(\overline{R}\)</span> 观察到的奖励的样本平均值。
+这最初会迅速适应，但从长远来看也会缓慢适应。
+随着策略的缓慢变化，<span class="math">\(\overline{R}\)</span> 也会发生变化；这种长期非平稳性的可能性使得采样平均方法不适合。
+实际上，平均奖励的步长参数是使用练习2.7中无偏的恒定步长技巧的理想场所。
+描述上面的框中差分半梯度n步Sarsa的算法使用此技巧所需的具体变化。</p>
+</div>
+<div class="section" id="id8">
+<h2>10.6 总结<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>在本章中，我们将前一章介绍的参数化函数近似和半梯度下降的思想扩展到控制。
+对于回合案例，延期是即时的，但对于持续的情况，我们必须基于最大化每个时步的 <em>平均奖励设置</em> 来引入全新的问题公式。
+令人惊讶的是，折扣设置不能在存在近似值的情况下进行控制。在大致情况下，大多数策略不能用价值函数表示。
+剩下的任意策略需要排序，标量平均奖励 <span class="math">\(r(\pi)\)</span> 提供了一种有效的方法。</p>
+<p>平均奖励公式包括价值函数的新 <em>差分</em> 版本，Bellman方程和TD误差，但所有这些都与旧的并行，并且概念变化很小。
+对于平均奖励情况，还有一组新的并行的差分算法。</p>
+</div>
+<div class="section" id="id9">
+<h2>书目和历史评论<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p><strong>10.1</strong> Rummery和Niranjan（1994）首次探讨了具有函数近似的半梯度Sarsa。
+具有 <span class="math">\(\varepsilon\)</span> -贪婪动作选择的线性半梯度Sarsa在通常意义上并不收敛，
+但确实进入了最佳解决方案附近的有界区域（Gordon，1996a，2001）。
+Pupcup和Perkins（2003）展示出在可微分作用选择中表现出收敛性。
+可参见Perkins和Pendrith（2002）以及Melo，Meyn和Ribeiro（2008）。
+陡坡汽车的例子是基于Moore（1990）研究的类似任务，但这里使用的确切形式来自Sutton（1996）。</p>
+<p><strong>10.2</strong> 回合n步半梯度Sarsa基于van Seijen（2016）的前向Sarsa(<span class="math">\(\lambda\)</span>)算法。
+此处显示的实证结果是本文第二版的新内容。</p>
+<p><strong>10.3</strong> 已经描述了动态规划的平均奖励表述（例如，Puterman，1994）和强化学习的观点
+（Mahadevan，1996；Tadepalli和Ok，1994；
+Bertsekas和Tsitsiklis，1996；Tsitsiklis和Van Roy，1999年）。
+这里描述的算法是Schwartz（1993）引入的“R-learning”算法的在策略类比。
+R-learning的名称可能是Q-learning的字母继承者，但我们更愿意将其视为学习差分或 <em>相对</em> 价值的参考。
+Carlstr̈om和Nordstr̈om（1997）的工作提出了访问控制排队的例子。</p>
+<p><strong>10.4</strong> 在本文第一版出版后不久，作者对作为具有函数近似的强化学习问题的表述的限制的认识变得明显。
+Singh，Jaakkola和Jordan（1994）可能是第一个在印刷品中注意到它的人。</p>
+<table class="docutils footnote" frame="void" id="id10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>特别地，我们使用了铺片编码软件，可从http://incompleteideas.net/tiles/tiles3.html获得，
+其中 <span class="math">\(\text{int}=\operatorname{IHT}(4096)\)</span> 和
+<span class="math">\(\text{tiles}(\text{iht}, 8,[8*x/(0.5+1.2), 8*xdot/(0.07+0.07)], A)\)</span>
+得到状态 <span class="math">\((x，xdot)\)</span> 和动作 <span class="math">\(A\)</span> 的特征向量中的索引。</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[2]</a></td><td>这个数据实际上来自“半梯度Sarsa(<span class="math">\(\lambda\)</span>)”算法，直到第12章我们都不会遇到，但是半梯度Sarsa的行为类似。</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../chapter11/off-policy_methods_with_approximation.html" class="btn btn-neutral float-right" title="第11章 *离策略近似方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../chapter9/on-policy_prediction_with_approximation.html" class="btn btn-neutral" title="第9章 在策略预测近似方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0.1',
+            LANGUAGE:'zh_CN',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-46660488-5');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 文章末尾广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="6325921777"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+</body>
+</html>

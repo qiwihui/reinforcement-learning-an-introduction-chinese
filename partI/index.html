@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>第一部分 表格解决方法 &mdash; 强化学习导论 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="第2章 多臂赌博机问题" href="chapter2/multi_armed_bandits.html" />
+    <link rel="prev" title="第1章 简介" href="../chapter1/introduction.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> 强化学习导论
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../preface2nd.html">第二版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preface1st.html">第一版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notation.html">符号一览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/introduction.html">第1章 简介</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第一部分 表格解决方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html">第2章 多臂赌博机问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html">第3章 有限马尔可夫决策过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html">第4章 动态规划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html">第5章 蒙特卡洛方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html">第6章 时序差分学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html">第7章 <span class="math">\(n\)</span> 步引导（Bootstrapping）方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html">第8章 表格方法规划和学习</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../partII/index.html">第二部分 近似解决方法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../partIII/index.html">第三部分 Looking Deeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">参考文献</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">强化学习导论</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>第一部分 表格解决方法</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/partI/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>第一部分 表格解决方法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>在本书的这一部分中，我们以最简单的形式描述了强化学习算法的几乎所有核心​​思想：状态和动作空间足够小，可以将近似值函数表示为数组或者 <em>表格</em>。
+在这种情况下，这些方法通常可以找到精确的解决方案，也就是说，它们通常可以找到最佳的价值函数和最优策略。
+这与本书下一部分中描述的近似方法形成对比，后者只能找到近似解，但它可以有效地应用于更大的问题。</p>
+<p>本书这一部分的第一章描述了强化学习问题特殊情况的解决方法，其中只有一个状态，称为赌博机问题。
+第二章描述了我们在本书的其余部分 - 有限马尔可夫决策过程 - 中处理的一般问题公式及其主要思想，包括贝尔曼方程和价值函数。</p>
+<p>接下来的三章描述了解决有限马尔可夫决策问题的三种基本方法：动态规划，蒙特卡洛方法和时序差分学习。
+每类方法都有其优点和缺点。动态规划方法在数学上得到了很好的发展，但需要一个完整而准确的环境模型。
+蒙特卡洛方法不需要模型，并且在概念上很简单，但不适合逐步增量计算。
+最后，时差方法不需要模型，完全是增量的，但分析起来更复杂。这些方法在效率和收敛速度方面也有不同的几种方式。</p>
+<p>剩下的两章描述了如何将这三类方法结合起来以获得每种方法的最佳特征。
+在一章中，我们描述了蒙特卡洛方法的优势如何通过多步自举方法与时间方法的优势相结合。
+在本书这一部分的最后一章中，我们将展示如何将时序差分学习方法与模型学习和规划方法（如动态规划）相结合，以获得表格强化学习问题的完整统一解决方案。</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chapter2/multi_armed_bandits.html">第2章 多臂赌博机问题</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id2">2.1 一个 <span class="math">\(k\)</span> 臂赌博机问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id3">2.2 行动价值方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id4">2.3 10臂赌博机试验</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id5">2.4 增量实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id6">2.5 追踪非平稳问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id7">2.6 乐观的初始值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id8">2.7 上限置信区间动作选择</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id9">2.8 赌博机问题的梯度算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id10">2.9 关联搜索（语境赌博机）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id11">2.10 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter2/multi_armed_bandits.html#id12">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3/finite_markov_decision_process.html">第3章 有限马尔可夫决策过程</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id2">3.1 个体环境接口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id7">3.2 目标和奖励</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id10">3.3 回报和情节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id12">3.4 情节和持续任务的统一符号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id13">3.5 策略和价值函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id14">3.6 最优策略和最优价值函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id15">3.7 优化和近似</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id16">3.8 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter3/finite_markov_decision_process.html#id17">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4/dynamic_programming.html">第4章 动态规划</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id2">4.1 策略评估（预测）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id3">4.2 策略提升</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id4">4.3 策略迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id5">4.4 价值迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id6">4.5 异步动态规划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id7">4.6 广义策略迭代</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id8">4.7 动态规划的效率</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id9">4.8 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter4/dynamic_programming.html#id10">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5/monte_carlo_methods.html">第5章 蒙特卡洛方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id2">5.1 蒙特卡洛预测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id3">5.2 动作价值的蒙特卡洛估计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id4">5.3 蒙特卡洛控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id5">5.4 非探索开端的蒙特卡洛控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id6">5.5 通过重要性采样的离策略预测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id7">5.6 增量式的实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id8">5.7 离策略蒙特卡洛控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id9">5.8 *折扣感知的重要性采样</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id10">5.9 *每决策重要性抽样</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id11">5.10 小结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter5/monte_carlo_methods.html#id12">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter6/temporal_difference_learning.html">第6章 时序差分学习</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#td">6.1 TD预测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#id3">6.2 TD预测方法的优势</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#td-0">6.3 TD(0)的最优性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#sarsa-td">6.4 Sarsa：在策略TD控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#q-learning-td">6.5 Q-learning：离策略TD控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#sarsa">6.6 预期的Sarsa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#id4">6.8 最大化偏差和双学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#afterstates">6.9 游戏，Afterstates和其他特殊情况</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#id5">6.10 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter6/temporal_difference_learning.html#id6">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter7/n_step_bootstrapping.html">第7章 <span class="math">\(n\)</span> 步引导（Bootstrapping）方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#td">7.1 <span class="math">\(n\)</span> 步TD预测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#sarsa">7.2 <span class="math">\(n\)</span> 步Sarsa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#id1">7.3 <span class="math">\(n\)</span> 步离策略学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#per-decision">7.4 *具有控制变量的每个决策（per-decision）方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#n">7.5 无重要性采样的离策略学习：n步树备份算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#id2">7.6 *统一算法：n步 <span class="math">\(Q(\sigma)\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#id3">7.7 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter7/n_step_bootstrapping.html#id4">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html">第8章 表格方法规划和学习</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id2">8.1 模型和规划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#dyna">8.2 Dyna：集成规划，行动和学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id3">8.3 当模型错误时</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id5">8.4 优先扫描</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id6">8.5 预期与样本更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id7">8.6 轨迹采样</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id8">8.7 实时动态规划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id9">8.8 决策时规划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id10">8.9 启发式搜索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#rollout">8.10 Rollout算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id12">8.11 蒙特卡洛树搜索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id13">8.12 本章总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id14">8.13 第一部分总结：维度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter8/planning_and_learning_with_tabular_methods.html#id15">书目和历史评论</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chapter2/multi_armed_bandits.html" class="btn btn-neutral float-right" title="第2章 多臂赌博机问题" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../chapter1/introduction.html" class="btn btn-neutral" title="第1章 简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            LANGUAGE:'zh_CN',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-46660488-5');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 文章末尾广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="6325921777"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>第二部分 近似解决方法 &mdash; 强化学习导论 0.0.1 文档</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="第9章 在策略预测近似方法" href="chapter9/on-policy_prediction_with_approximation.html" />
+    <link rel="prev" title="第8章 表格方法规划和学习" href="../partI/chapter8/planning_and_learning_with_tabular_methods.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> 强化学习导论
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../preface2nd.html">第二版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preface1st.html">第一版前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notation.html">符号一览</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/introduction.html">第1章 简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../partI/index.html">第一部分 表格解决方法</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">第二部分 近似解决方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html">第9章 在策略预测近似方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html">第10章 在策略控制近似方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html">第11章 *离策略近似方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html">第12章 资格迹（Eligibility Traces）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html">第13章 策略梯度方法</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../partIII/index.html">第三部分 Looking Deeper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">参考文献</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">强化学习导论</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>第二部分 近似解决方法</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/partII/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>第二部分 近似解决方法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>在本书的第二部分，我们扩展了第一部分中介绍的表格方法，以适用于任意大的状态空间的问题。
+在我们想要应用强化学习的许多任务中，状态空间是组合的和巨大的；例如，可能的相机图像的数量远大于宇宙中的原子数。
+在这种情况下，即使在无限时间和数据的限制下，我们也不能期望找到最优策略或最优值函数；
+我们的目标是使用有限的计算资源找到一个好的近似解决方案。在本书的这一部分，我们探讨了这种近似的解决方法。</p>
+<p>大状态空间的问题不仅仅是大表格所需的内存，而是准确填充它们所需的时间和数据。
+在我们的许多目标任务中，几乎所遇到的每个状态都将永远不会被看到。
+为了在这种状态下作出明智的决定，有必要从以前的经验中推广出一些与现有状态相似的不同状态。
+换句话说，关键问题是 <em>泛化</em>。如何有效地推广有限状态空间子集的经验，以便在更大的子集上产生良好的近似？</p>
+<p>幸运的是，已经广泛研究了来自实例的泛化，并且我们不需要发明用于强化学习的全新方法。
+在某种程度上，我们只需要将强化学习方法与现有的泛化方法相结合。
+我们需要的泛化类型通常称为 <em>函数近似</em>，因为它从所需函数（例如，价值函数）中获取示例并尝试从它们推广以构造整个函数的近似。
+函数逼近是监督学习的一个实例，是机器学习，人工神经网络，模式识别和统计曲线拟合中研究的主要课题。
+理论上，在这些领域中研究的任何方法都可以成为强化学习算法中的函数近似器的作用，尽管在实践中，某些方法比其他方法更容易适应这个角色。</p>
+<p>具有函数近似的强化学习涉及许多在常规监督学习中通常不会出现的新问题，例如非平稳性，自举和延迟目标。
+我们在本部分的五章中先后介绍了这些问题和其他问题。最初，我们将注意力限制在在策略训练上，
+处理在第9章中的预测案例，其中给出了策略并且仅对其价值函数进行了近似，
+然后在第10章中讨论了控制案例，其中找到了最优策略的近似值。在第11章中讨论了具有函数近似的离策略学习的挑战性问题。
+在这三章的每一章中，我们将不得不回到第一原则并重新审视学习的目标，以考虑函数近似。
+第12章介绍和分析了 <em>资格迹</em> 的算法机制，在很多情况下，它大大提高了多步强化学习方法的计算性能。
+本部分的最后一章探讨了一种不同的控制方法 - <em>策略梯度方法</em>，它直接近似最优策略，并且永远不需要形成近似价值函数
+（如果它们确实接近价值函数和策略，它们可能会更加有效）。</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html">第9章 在策略预测近似方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id2">9.1 价值函数近似</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id3">9.2 预测目标（<span class="math">\(\overline{\mathrm{VE}}\)</span>）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id4">9.3 随机梯度和半梯度方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id6">9.4 线性方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id7">9.5 线性方法的特征构造</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id12">9.6 手动选择步长参数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id13">9.7 非线性函数近似：人工神经网络</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#td">9.8 最小二乘TD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id14">9.9 基于内存的函数近似</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id15">9.10 基于核的函数近似</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id16">9.11 深入研究在策略学习：兴趣和重点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id17">9.12 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter9/on-policy_prediction_with_approximation.html#id18">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html">第10章 在策略控制近似方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html#id2">10.1 回合半梯度控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html#nsarsa">10.2 半梯度n步Sarsa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html#id5">10.3 平均奖励：持续任务的新问题设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html#id6">10.4 弃用折扣设置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html#id7">10.5 差分半梯度n步Sarsa</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html#id8">10.6 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter10/on-policy_control_with_approximation.html#id9">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html">第11章 *离策略近似方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id2">11.1 半梯度方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id3">11.2 离策略发散例子</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id4">11.3 致命的三元组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id5">11.4 线性价值函数几何</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#bellman">11.5 Bellman误差中的梯度下降</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id7">11.6 Bellman误差是不可学习的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#td">11.7 梯度TD方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#td-emphatic-td">11.8 强调TD方法（Emphatic-TD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id11">11.9 减小误差</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id12">11.10 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter11/off-policy_methods_with_approximation.html#id13">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter12/eligibility_traces.html">第12章 资格迹（Eligibility Traces）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id1">12.1 <span class="math">\(\lambda\)</span> 回报</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#td">12.2 TD(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id2">12.3 <span class="math">\(n\)</span> 步截断 <span class="math">\(\lambda\)</span> 回报方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id3">12.4 重做更新：在线 <span class="math">\(\lambda\)</span> 回报算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id4">12.5 真正的在线TD(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#dutch">12.6 蒙特卡洛学习中的Dutch迹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#sarsa">12.7 Sarsa(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id5">12.8 变量 <span class="math">\(\lambda\)</span> 和 <span class="math">\(\gamma\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id6">12.9 具有控制变量的离策略迹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#watkinsq-tree-backup">12.10 Watkins的Q(<span class="math">\(\lambda\)</span>)到Tree-Backup(<span class="math">\(\lambda\)</span>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id7">12.11 具有迹的稳定离策略方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id8">12.12 实施问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id9">12.13 结论</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter12/eligibility_traces.html#id10">书目和历史评论</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter13/policy_gradient_methods.html">第13章 策略梯度方法</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id3">13.1 策略近似及其优势</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id4">13.2 策略梯度定理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id5">13.3 强化：蒙特卡罗策略梯度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id6">13.4 带基线强化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id7">13.5 演员-评论家方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id8">13.6 持续问题的策略梯度</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id9">13.7 持续动作的策略参数化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id10">13.8 总结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter13/policy_gradient_methods.html#id11">书目和历史评论</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="chapter9/on-policy_prediction_with_approximation.html" class="btn btn-neutral float-right" title="第9章 在策略预测近似方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../partI/chapter8/planning_and_learning_with_tabular_methods.html" class="btn btn-neutral" title="第8章 表格方法规划和学习" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.0.1',
+            LANGUAGE:'zh_CN',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/translations.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-46660488-5');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 文章末尾广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="6325921777"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+</body>
+</html>
