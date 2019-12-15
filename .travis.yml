@@ -1,0 +1,31 @@
+language: python
+python:
+- "3.6"
+before_install:
+- git config --global push.default matching
+- git config --global user.name "qiwihui via Travis CI"
+- git config --global user.email "qwh005007@gmail.com"
+- sed -i'' "s~git@github.com:qiwihui/blog.git~https://${GH_TOKEN}:x-oauth-basic@github.com/qiwihui/blog.git~"
+  _config.yml
+install:
+- pip install sphinx==1.5.6 sphinx-autobuild==0.7.1 sphinx-rtd-theme==0.4.1 
+script:
+- make html
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: sh deploy.sh
+  on:
+    branch: master
+branches:
+  only:
+  - master
+env:
+  global:
+  - secure: YQjZubHxeE9KBtc1smdVI56fFViSsYdFAAD6b3s+7u2NyXmKaZPF7Pj11jwWsxbBAqy2sSrqLxnJZq+6ZaFsJtYFbo6f+Zfx+eExfd8gmggyCOq2c6qCzXp0ou+KqYkbwMdZX1zYipOgI/w1l35/9H5irYCHNFSYD7/GcUXkTjrjj1TTQvcklk3kG9sm5J21VZWp8ulkVoCIUij1FG6b38KKxymsdXq7jkjfX52M4ZxZiUqe1s3R0mm7gx8BCbLH7m8/woZUKY8QRX7U4akByYNyw+04LUnW70uh2OOUlzWcWpnxcKlexKMjp1irPqv3/bH7WDcdymc+Nj2PZF7gcXo+B8v+bQp2hJ65F5dBbqSZdXtDvI1S8MPtky/IAGCJ48nwojGRB2BAYoCUEDtelo93aS96buk1e6tAQxApJjnCUNmk6pYX3f2x6JORAxhhSfKGHSIat3NYEO7+jS/4N404vvDL4oZtKaHF+YwdPdz5sRWDpDQT3HRMmomtHijd6JCdgF/nFmApV/VcFD87mG5RDzfwqHi+Njv+qLZuJY/xMAF2uaBj107coVvuNoEEQRyfpZaxGk2u6/0IjNz/S0Bo94BEGHznJpUjfbGXBpSklB85x2jbE/RI1od9JyDnYWk0jhC+ecM76DFi2bwsYgTxWu22/OUTEWKOOQZHE38=
+notifications:
+  email:
+    recipients:
+    - qwh005007@gmail.com
+    on_success: change
+    on_failure: always
