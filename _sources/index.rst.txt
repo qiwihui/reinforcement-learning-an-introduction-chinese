@@ -12,6 +12,14 @@
 
 .. _下载: http://incompleteideas.net/book/the-book-2nd.html
 
+
+深度强化学习
+--------------
+
+OpenAI 推出了 `深度强化学习 Spinning Up 项目 <https://spinningup.qiwihui.com>`_，
+旨在让深度强化学习的学习变得更加简单，可以作为后续强化深度学习入门。
+
+
 版权声明
 --------
 
