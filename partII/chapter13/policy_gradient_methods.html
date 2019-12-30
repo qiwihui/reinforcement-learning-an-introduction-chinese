@@ -17,13 +17,22 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -31,21 +40,16 @@
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第三部分 深入研究" href="../../partIII/index.html" />
     <link rel="prev" title="第12章 资格迹（Eligibility Traces）" href="../chapter12/eligibility_traces.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -198,22 +202,22 @@
   <div class="section" id="id1">
 <h1>第13章 策略梯度方法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <p>在本章中，我们考虑一些新内容。到目前为止，在本书中几乎所有的方法都是 <em>动作价值方法</em>。
-他们了解了动作的价值，然后根据他们估计的行动价值选择行动 <a class="footnote-reference" href="#id12" id="id2">[1]</a>；如果没有动作价值估计，他们的策略甚至将不存在。
+他们了解了动作的价值，然后根据他们估计的行动价值选择行动 <a class="footnote-reference brackets" href="#id12" id="id2">1</a>；如果没有动作价值估计，他们的策略甚至将不存在。
 在本章中，我们考虑的方法是学习 <em>参数化策略</em>，该策略可以选择动作而无需咨询价值函数。
 价值函数仍可用于 <em>学习</em> 策略参数，但动作选择不是必需的。
-我们使用 <span class="math">\(\mathbf{\theta} \in \mathbb{R}^{d^{\prime}}\)</span> 表示策略的参数向量。
-因此假设环境在时间 <span class="math">\(t\)</span> 时处于状态 <span class="math">\(s\)</span>，且参数为 <span class="math">\(\mathbf{\theta}\)</span>，
-则在时间 <span class="math">\(t\)</span> 采取动作 <span class="math">\(a\)</span> 的概率为
-<span class="math">\(\pi(a | s, \mathbf{\theta})={Pr}\{A_{t}=a | S_{t}=s, \mathbf{\theta}_{t}=\mathbf{\theta}\}\)</span>。
-如果一种方法也使用学习的值函数，则该值函数的权重向量将通常表示为 <span class="math">\(\mathbf{w} \in \mathbb{R}^{d}\)</span>，
-如 <span class="math">\(\hat{v}(s, \mathbf{w})\)</span> 所示。</p>
-<p>在本章中，我们考虑基于一些基于标量性能指标 <span class="math">\(J(\mathbf{\theta})\)</span> 梯度的相对于策略参数的学习策略参数的方法。
-这些方法试图使性能 <em>最大化</em>，因此它们的更新近似 <span class="math">\(J\)</span> 中的梯度 <em>上升</em>：</p>
-<div class="math">
+我们使用 <span class="math notranslate nohighlight">\(\mathbf{\theta} \in \mathbb{R}^{d^{\prime}}\)</span> 表示策略的参数向量。
+因此假设环境在时间 <span class="math notranslate nohighlight">\(t\)</span> 时处于状态 <span class="math notranslate nohighlight">\(s\)</span>，且参数为 <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span>，
+则在时间 <span class="math notranslate nohighlight">\(t\)</span> 采取动作 <span class="math notranslate nohighlight">\(a\)</span> 的概率为
+<span class="math notranslate nohighlight">\(\pi(a | s, \mathbf{\theta})={Pr}\{A_{t}=a | S_{t}=s, \mathbf{\theta}_{t}=\mathbf{\theta}\}\)</span>。
+如果一种方法也使用学习的值函数，则该值函数的权重向量将通常表示为 <span class="math notranslate nohighlight">\(\mathbf{w} \in \mathbb{R}^{d}\)</span>，
+如 <span class="math notranslate nohighlight">\(\hat{v}(s, \mathbf{w})\)</span> 所示。</p>
+<p>在本章中，我们考虑基于一些基于标量性能指标 <span class="math notranslate nohighlight">\(J(\mathbf{\theta})\)</span> 梯度的相对于策略参数的学习策略参数的方法。
+这些方法试图使性能 <em>最大化</em>，因此它们的更新近似 <span class="math notranslate nohighlight">\(J\)</span> 中的梯度 <em>上升</em>：</p>
+<div class="math notranslate nohighlight">
 \[\mathbf{\theta}_{t+1}=\mathbf{\theta}_{t}+\alpha \widehat{\nabla J\left(\mathbf{\theta}_{t}\right)}
 \tag{13.1}\]</div>
-<p>其中 <span class="math">\(\widehat{\nabla J\left(\mathbf{\theta}_{t}\right)} \in \mathbb{R}^{d^{\prime}}\)</span> 是一个随机估计，
-其期望近似于性能度量相对于其参数 <span class="math">\(\mathbf{\theta}_{t}\)</span> 的梯度。
+<p>其中 <span class="math notranslate nohighlight">\(\widehat{\nabla J\left(\mathbf{\theta}_{t}\right)} \in \mathbb{R}^{d^{\prime}}\)</span> 是一个随机估计，
+其期望近似于性能度量相对于其参数 <span class="math notranslate nohighlight">\(\mathbf{\theta}_{t}\)</span> 的梯度。
 遵循此一般模式的所有方法，我们都称为 <em>策略梯度方法</em>，无论它们是否也学习近似值函数。
 学习策略和值函数的近似值的方法通常称为 <em>演员-评论家</em> 方法，其中“演员”是指所学策略，而“评论家”是指所学习的值函数，通常是状态价值函数。
 首先，我们处理回合案例，其中性能定义为参数化策略下的开始状态的值，
@@ -221,30 +225,30 @@
 最后，我们能够以非常相似的形式表达两种情况的算法。</p>
 <div class="section" id="id3">
 <h2>13.1 策略近似及其优势<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-<p>在策略梯度方法中，只要 <span class="math">\(\pi(a|s,\boldsymbol{\theta})\)</span> 相对于其参数是可微的，
-即只要 <span class="math">\(\nabla \pi(a|s,\boldsymbol{\theta})\)</span>
-(<span class="math">\(\pi(a|s,\boldsymbol{\theta})\)</span> 相对于 <span class="math">\(\boldsymbol{\theta}\)</span> 的偏导数的列向量)
-存在且对于所有 <span class="math">\(s \in \mathcal{S}\)</span>，<span class="math">\(a \in \mathcal{A}(s)\)</span> 和
-<span class="math">\(\boldsymbol{\theta} \in \mathbb{R}^{d^{\prime}}\)</span> 是有限的。
+<p>在策略梯度方法中，只要 <span class="math notranslate nohighlight">\(\pi(a|s,\boldsymbol{\theta})\)</span> 相对于其参数是可微的，
+即只要 <span class="math notranslate nohighlight">\(\nabla \pi(a|s,\boldsymbol{\theta})\)</span>
+(<span class="math notranslate nohighlight">\(\pi(a|s,\boldsymbol{\theta})\)</span> 相对于 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> 的偏导数的列向量)
+存在且对于所有 <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span>，<span class="math notranslate nohighlight">\(a \in \mathcal{A}(s)\)</span> 和
+<span class="math notranslate nohighlight">\(\boldsymbol{\theta} \in \mathbb{R}^{d^{\prime}}\)</span> 是有限的。
 在实践中，为了确保探索，我们通常要求策略永远不要具有确定性
-（即，对于所有 <span class="math">\(s\)</span>，<span class="math">\(a\)</span>，<span class="math">\(\boldsymbol{\theta}\)</span>，有 <span class="math">\(\pi(a | s, \boldsymbol{\theta}) \in (0,1)\)</span>）。
+（即，对于所有 <span class="math notranslate nohighlight">\(s\)</span>，<span class="math notranslate nohighlight">\(a\)</span>，<span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>，有 <span class="math notranslate nohighlight">\(\pi(a | s, \boldsymbol{\theta}) \in (0,1)\)</span>）。
 在本节中，我们介绍离散动作空间的最常见参数化方法，并指出其相对于动作值方法的优势。
 基于策略的方法还提供了处理连续动作空间的有用方法，这将在后面的13.7节中介绍。</p>
-<p>如果动作空间是离散的并且不是太大，那么自然和常见的一种参数化将是为每个状态-动作对形成参数化的数值偏好（preferences）。 <span class="math">\(h(s, a, \boldsymbol{\theta}) \in \mathbb{R}\)</span>。
+<p>如果动作空间是离散的并且不是太大，那么自然和常见的一种参数化将是为每个状态-动作对形成参数化的数值偏好（preferences）。 <span class="math notranslate nohighlight">\(h(s, a, \boldsymbol{\theta}) \in \mathbb{R}\)</span>。
 在每个状态下，具有最高偏好的动作被赋予最高的选择概率，例如，根据指数soft-max分布：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\pi(a | s, \boldsymbol{\theta}) \doteq \frac{e^{h(s, a, \boldsymbol{\theta})}}{\sum_{b} e^{h(s, b, \boldsymbol{\theta})}}
 \tag{13.2}\]</div>
-<p>其中 <span class="math">\(e \approx 2.71828\)</span> 是自然对数的底数。请注意，这里的分母是所需要的，因此每种状态下的动作概率总和为1。
+<p>其中 <span class="math notranslate nohighlight">\(e \approx 2.71828\)</span> 是自然对数的底数。请注意，这里的分母是所需要的，因此每种状态下的动作概率总和为1。
 我们将这种策略参数化称为 <em>动作偏好soft-max</em> （soft-max in action preferences）。</p>
-<p>动作偏好本身可以任意设置。例如，它们可以由深度人工神经网络（ANN）计算，其中 <span class="math">\(\boldsymbol{\theta}\)</span> 是网络所有连接权重的向量（如第16.6节中所述的AlphaGo系统）。
+<p>动作偏好本身可以任意设置。例如，它们可以由深度人工神经网络（ANN）计算，其中 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> 是网络所有连接权重的向量（如第16.6节中所述的AlphaGo系统）。
 或者简单地，偏好可以在特征上是线性的，</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[h(s, a, \boldsymbol{\theta})=\boldsymbol{\theta}^{\top} \mathbf{x}(s, a)
 \tag{13.3}\]</div>
-<p>使用通过第9.5节中所述的任何方法构造的特征向量 <span class="math">\(\mathbf{x}(s, a) \in \mathbb{R}^{d^{\prime}}\)</span>。</p>
+<p>使用通过第9.5节中所述的任何方法构造的特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s, a) \in \mathbb{R}^{d^{\prime}}\)</span>。</p>
 <p>根据动作偏好中的soft-max参数化策略的一个优点是，近似策略可以接近确定性策略，
-而基于动作选择的 <span class="math">\(\varepsilon\)</span> 贪婪总是有 <span class="math">\(\varepsilon\)</span> 可能性选择随机动作。
+而基于动作选择的 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪总是有 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 可能性选择随机动作。
 当然，人们可以根据基于动作值的soft-max分布进行选择，但是仅此一项就无法使该策略接近确定性策略。
 取而代之的是，动作值估算将收敛到其对应的真实值，这会与之相差一个有限值，转化为除0和1之外的特定概率。
 如果soft-max分布包含温度参数，则温度可以随着时间的推移降低达到确定，
@@ -256,16 +260,16 @@
 最佳玩法通常是用特定的概率来做两种不同的事情，例如在扑克中诈(bluffing)。
 动作值方法没有找到随机最优策略的自然方法，而策略逼近方法却可以，如示例13.1所示。</p>
 <div class="note admonition">
-<p class="first admonition-title">例13.1：带有切换动作的短廊</p>
-<p>考虑下图所示的小走廊网格世界。与往常一样，奖励为每步 <span class="math">\(-1\)</span>。在这三个非终结状态的每一个中，只有两个动作，即 <strong>向右</strong> 和 <strong>向左</strong> 。
+<p class="admonition-title">例13.1：带有切换动作的短廊</p>
+<p>考虑下图所示的小走廊网格世界。与往常一样，奖励为每步 <span class="math notranslate nohighlight">\(-1\)</span>。在这三个非终结状态的每一个中，只有两个动作，即 <strong>向右</strong> 和 <strong>向左</strong> 。
 这些动作在第一状态和第三状态中具有通常的结果（在第一状态中 <strong>向左</strong> 则不移动），但是在第二状态中，它们是相反的，因此右移 <strong>向左</strong> ，左移 <strong>向右</strong> 。
-问题是困难的，因为在函数近似下所有状态看起来都相同。特别地，我们为所有 <span class="math">\(s\)</span> 定义 <span class="math">\($\mathbf{x}(s, \text { right })=[1,0]^{\top}$\)</span> 和
-<span class="math">\(\mathbf{x}(s, \text { left })=[0,1]^{\top}\)</span>。
-具有 <span class="math">\(\varepsilon\)</span> 贪婪动作选择的动作值方法被迫在两个策略之间进行选择：
-在所有步骤上以高概率 <span class="math">\(1-\varepsilon / 2\)</span> 选择 <strong>向右</strong> 或在所有时步上以相同的高概率选择左。
-如果 <span class="math">\(\varepsilon=0.1\)</span>，则这两个策略达到的值（在开始状态下）分别小于 <span class="math">\(-44\)</span> 和 <span class="math">\(-82\)</span>，如图所示。
-如果一种方法可以学习选择 <strong>向右</strong> 的特定概率，则可以做得更好。最佳概率约为0.59，最后值大约为 <span class="math">\(-11.6\)</span>。</p>
-<div class="last figure">
+问题是困难的，因为在函数近似下所有状态看起来都相同。特别地，我们为所有 <span class="math notranslate nohighlight">\(s\)</span> 定义 <span class="math notranslate nohighlight">\($\mathbf{x}(s, \text { right })=[1,0]^{\top}$\)</span> 和
+<span class="math notranslate nohighlight">\(\mathbf{x}(s, \text { left })=[0,1]^{\top}\)</span>。
+具有 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪动作选择的动作值方法被迫在两个策略之间进行选择：
+在所有步骤上以高概率 <span class="math notranslate nohighlight">\(1-\varepsilon / 2\)</span> 选择 <strong>向右</strong> 或在所有时步上以相同的高概率选择左。
+如果 <span class="math notranslate nohighlight">\(\varepsilon=0.1\)</span>，则这两个策略达到的值（在开始状态下）分别小于 <span class="math notranslate nohighlight">\(-44\)</span> 和 <span class="math notranslate nohighlight">\(-82\)</span>，如图所示。
+如果一种方法可以学习选择 <strong>向右</strong> 的特定概率，则可以做得更好。最佳概率约为0.59，最后值大约为 <span class="math notranslate nohighlight">\(-11.6\)</span>。</p>
+<div class="figure align-default">
 <img alt="../../_images/example-13.1.png" src="../../_images/example-13.1.png" />
 </div>
 </div>
@@ -300,13 +304,12 @@
 </div>
 <div class="section" id="id11">
 <h2>书目和历史评论<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
-<table class="docutils footnote" frame="void" id="id12" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>唯一的例外是第2.8节中的梯度赌博机算法。实际上，在单状态赌博机的情况下，该部分将执行许多相同的步骤，就像我们在这里进行完整的MDP一样。
-复习该部分将为充分理解本章做好充分的准备。</td></tr>
-</tbody>
-</table>
+<dl class="footnote brackets">
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>唯一的例外是第2.8节中的梯度赌博机算法。实际上，在单状态赌博机的情况下，该部分将执行许多相同的步骤，就像我们在这里进行完整的MDP一样。
+复习该部分将为充分理解本章做好充分的准备。</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -321,7 +324,7 @@
         <a href="../../partIII/index.html" class="btn btn-neutral float-right" title="第三部分 深入研究" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../chapter12/eligibility_traces.html" class="btn btn-neutral" title="第12章 资格迹（Eligibility Traces）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../chapter12/eligibility_traces.html" class="btn btn-neutral float-left" title="第12章 资格迹（Eligibility Traces）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -330,7 +333,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto
 
     </p>
   </div>
@@ -347,34 +350,16 @@
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'0.0.1',
-            LANGUAGE:'zh_CN',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/translations.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

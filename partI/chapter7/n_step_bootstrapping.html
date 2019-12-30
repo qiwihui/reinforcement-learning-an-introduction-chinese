@@ -17,13 +17,22 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script type="text/javascript" src="../../_static/translations.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -31,21 +40,16 @@
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第8章 表格方法规划和学习" href="../chapter8/planning_and_learning_with_tabular_methods.html" />
     <link rel="prev" title="第6章 时序差分学习" href="../chapter6/temporal_difference_learning.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -95,15 +99,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../chapter4/dynamic_programming.html">第4章 动态规划</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter5/monte_carlo_methods.html">第5章 蒙特卡洛方法</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter6/temporal_difference_learning.html">第6章 时序差分学习</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">第7章 <span class="math">\(n\)</span> 步引导（Bootstrapping）方法</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#td">7.1 <span class="math">\(n\)</span> 步TD预测</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sarsa">7.2 <span class="math">\(n\)</span> 步Sarsa</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">7.3 <span class="math">\(n\)</span> 步离策略学习</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">第7章 <span class="math notranslate nohighlight">\(n\)</span> 步引导（Bootstrapping）方法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#n-td">7.1 <span class="math notranslate nohighlight">\(n\)</span> 步TD预测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#n-sarsa">7.2 <span class="math notranslate nohighlight">\(n\)</span> 步Sarsa</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#n">7.3 <span class="math notranslate nohighlight">\(n\)</span> 步离策略学习</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#per-decision">7.4 *具有控制变量的每个决策（per-decision）方法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#n">7.5 无重要性采样的离策略学习：n步树备份算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">7.6 *统一算法：n步 <span class="math">\(Q(\sigma)\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">7.7 总结</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">书目和历史评论</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">7.5 无重要性采样的离策略学习：n步树备份算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#n-q-sigma">7.6 *统一算法：n步 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">7.7 总结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">书目和历史评论</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../chapter8/planning_and_learning_with_tabular_methods.html">第8章 表格方法规划和学习</a></li>
@@ -177,7 +181,7 @@
         
           <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
         
-      <li>第7章 <span class="math">\(n\)</span> 步引导（Bootstrapping）方法</li>
+      <li>第7章 <span class="math notranslate nohighlight">\(n\)</span> 步引导（Bootstrapping）方法</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -196,8 +200,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="bootstrapping">
-<h1>第7章 <span class="math">\(n\)</span> 步引导（Bootstrapping）方法<a class="headerlink" href="#bootstrapping" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="n-bootstrapping">
+<h1>第7章 <span class="math notranslate nohighlight">\(n\)</span> 步引导（Bootstrapping）方法<a class="headerlink" href="#n-bootstrapping" title="永久链接至标题">¶</a></h1>
 <p>在本章中，我们统一了蒙特卡罗（MC）方法和前两章中介绍的一步时序差分（TD）方法。MC方法和一步法TD方法都不是最好的。
 在本章中，我们将介绍 <em>n步TD方法</em>，这些方法概括了两种方法，以便可以根据需要平滑地从一种方法转换到另一种方法，以满足特定任务的需求。
 n步方法在一端采用MC方法，在另一端采用一步TD方法。最好的方法通常介于两个极端之间。</p>
@@ -211,273 +215,277 @@ n步方法使引导能够在多个步骤中发生，使我们摆脱单一时间�
 在这里，我们反过来考虑n步引导的想法，将资格迹机制的处理推迟到以后。
 这使我们能够更好地分离问题，在更简单的n步设置中处理尽可能多的问题。</p>
 <p>像往常一样，我们首先考虑预测问题，然后考虑控制问题。
-也就是说，我们首先考虑n步方法如何帮助预测作为固定策略的状态函数的回报（即，估计 <span class="math">\(v_\pi\)</span>）。
+也就是说，我们首先考虑n步方法如何帮助预测作为固定策略的状态函数的回报（即，估计 <span class="math notranslate nohighlight">\(v_\pi\)</span>）。
 然后我们将想法扩展到行动价值和控制方法。</p>
-<div class="section" id="td">
-<h2>7.1 <span class="math">\(n\)</span> 步TD预测<a class="headerlink" href="#td" title="永久链接至标题">¶</a></h2>
-<p>蒙特卡罗和TD方法之间的方法空间是什么？考虑使用 <span class="math">\(\pi\)</span> 生成的样本回合估计v⇡。
+<div class="section" id="n-td">
+<h2>7.1 <span class="math notranslate nohighlight">\(n\)</span> 步TD预测<a class="headerlink" href="#n-td" title="永久链接至标题">¶</a></h2>
+<p>蒙特卡罗和TD方法之间的方法空间是什么？考虑使用 <span class="math notranslate nohighlight">\(\pi\)</span> 生成的样本回合估计v⇡。
 蒙特卡罗方法基于从该状态到回合结束的观察到的奖励的整个序列来执行每个状态的更新。
 另一方面，一步法TD方法的更新仅基于下一个奖励，一步之后从状态价值引导作为剩余奖励的代理。
 然后，一种中间方法将基于中间数量的奖励执行更新：多于一个，但是在终止之前少于所有奖励。
 例如，两步更新将基于前两个奖励以及两个步骤后的估计的状态值。
-同样，我们可以进行三步更新，四步更新等。图7.1显示了 <span class="math">\(v_\pi\)</span> 的 <em>n步更新</em> 频谱的备份图，
+同样，我们可以进行三步更新，四步更新等。图7.1显示了 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的 <em>n步更新</em> 频谱的备份图，
 左侧是一步TD更新，右侧是直到最后终止的蒙特卡罗更新。</p>
-<div class="figure" id="id5">
+<div class="figure align-default" id="id4">
 <img alt="../../_images/figure-7.1.png" src="../../_images/figure-7.1.png" />
-<p class="caption"><span class="caption-text"><strong>图7.1：</strong> n步方法的备份图。这些方法组成从一步TD方法到蒙特卡罗方法的频谱范围。</span></p>
+<p class="caption"><span class="caption-text"><strong>图7.1：</strong> n步方法的备份图。这些方法组成从一步TD方法到蒙特卡罗方法的频谱范围。</span><a class="headerlink" href="#id4" title="永久链接至图片">¶</a></p>
 </div>
 <p>使用n步更新的方法仍然是TD方法，因为它们仍然根据它从后来的估计中如何变化来改变先前的估计。
 现在后来的估计不是一步之后，而是n步之后。时序差分在n个步骤上延伸的方法称为 <em>n步TD方法</em>。
 前一章介绍的TD方法都使用了一步更新，这就是我们称之为一步TD方法的原因。</p>
-<p>更正式地，考虑状态 <span class="math">\(S_t\)</span> 的估计值的更新，作为状态奖励序列的结果，
-<span class="math">\(S_{t}, R_{t+1}, S_{t+1}, R_{t+2}, \ldots, R_{T}, S_{T}\)</span> （省略动作）。
-我们知道在蒙特卡洛更新中，<span class="math">\(v_\pi(S_t)\)</span> 的估计值会在完全回报的方向上更新：</p>
-<div class="math">
+<p>更正式地，考虑状态 <span class="math notranslate nohighlight">\(S_t\)</span> 的估计值的更新，作为状态奖励序列的结果，
+<span class="math notranslate nohighlight">\(S_{t}, R_{t+1}, S_{t+1}, R_{t+2}, \ldots, R_{T}, S_{T}\)</span> （省略动作）。
+我们知道在蒙特卡洛更新中，<span class="math notranslate nohighlight">\(v_\pi(S_t)\)</span> 的估计值会在完全回报的方向上更新：</p>
+<div class="math notranslate nohighlight">
 \[G_{t} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} R_{t+3}+\cdots+\gamma^{T-t-1} R_{T}\]</div>
 <p>其中T是回合的最后一个步骤。我们将此数量称为更新的 <em>目标</em>。
 而在蒙特卡洛更新中目标是回报，在一步更新中，目标是第一个奖励加上下一个状态的折扣估计值，我们称之为 <em>一步回报</em>：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+1} \doteq R_{t+1}+\gamma V_{t}\left(S_{t+1}\right)\]</div>
-<p>其中这里的 <span class="math">\(V_{t} : \mathcal{S} \rightarrow \mathbb{R}\)</span> 是 <span class="math">\(v_\pi\)</span> 在时刻t的估计值。
-<span class="math">\(G_{t:t+1}\)</span> 的下标表示它是时间t的截断回报，使用奖励直到时间 <span class="math">\(t+1\)</span>，
-折扣估计 <span class="math">\(\gamma V_{t}\left(S_{t+1}\right)\)</span> 代替其他项
-<span class="math">\(\gamma R_{t+2}+\gamma^{2} R_{t+3}+\cdots+\gamma^{T-t-1} R_{T}\)</span> 的完全回报，
+<p>其中这里的 <span class="math notranslate nohighlight">\(V_{t} : \mathcal{S} \rightarrow \mathbb{R}\)</span> 是 <span class="math notranslate nohighlight">\(v_\pi\)</span> 在时刻t的估计值。
+<span class="math notranslate nohighlight">\(G_{t:t+1}\)</span> 的下标表示它是时间t的截断回报，使用奖励直到时间 <span class="math notranslate nohighlight">\(t+1\)</span>，
+折扣估计 <span class="math notranslate nohighlight">\(\gamma V_{t}\left(S_{t+1}\right)\)</span> 代替其他项
+<span class="math notranslate nohighlight">\(\gamma R_{t+2}+\gamma^{2} R_{t+3}+\cdots+\gamma^{T-t-1} R_{T}\)</span> 的完全回报，
 如前一章所述。我们现在的观点是，这个想法在经过两个步骤之后就像在一个步骤之后一样有意义。
 两步更新的目标是两步回报：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+2} \doteq R_{t+1}+\gamma R_{t+2}+\gamma^{2} V_{t+1}\left(S_{t+2}\right)\]</div>
-<p>其中现在 <span class="math">\(\gamma^{2} V_{t+1}\left(S_{t+2}\right)\)</span> 纠正了项
-<span class="math">\(\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots+\gamma^{T-t-1} R_{T}\)</span> 的缺失。
+<p>其中现在 <span class="math notranslate nohighlight">\(\gamma^{2} V_{t+1}\left(S_{t+2}\right)\)</span> 纠正了项
+<span class="math notranslate nohighlight">\(\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots+\gamma^{T-t-1} R_{T}\)</span> 的缺失。
 同样，任意n步更新的目标是n步回报：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)
 \tag{7.1}\]</div>
-<p>而所有其他状态的值保持不变：对于所有 <span class="math">\(s \neq S_{t}\)</span>，<span class="math">\(V_{t+n}(s)=V_{t+n-1}(s)\)</span>。
+<p>而所有其他状态的值保持不变：对于所有 <span class="math notranslate nohighlight">\(s \neq S_{t}\)</span>，<span class="math notranslate nohighlight">\(V_{t+n}(s)=V_{t+n-1}(s)\)</span>。
 我们将此算法称为 <em>n步TD</em>。 请注意，在每回合的前n-1个步骤中，根本不会进行任何更改。
 为了弥补这一点，在回合结束后，终止后和开始下一集之前，会进行相同数量的额外更新。
 完整的伪代码在下面的框中给出。</p>
 <div class="important admonition">
-<p class="first admonition-title"><span class="math">\(n\)</span> 步TD(0)估计 <span class="math">\(V \approx v_\pi\)</span></p>
-<p>输入：策略 <span class="math">\(\pi\)</span></p>
-<p>算法参数：步长 <span class="math">\(\alpha \in (0,1]\)</span>，正整数 <span class="math">\(n\)</span></p>
-<p>对 <span class="math">\(s \in \mathcal{S}\)</span>，任意初始化 <span class="math">\(V(s)\)</span></p>
-<p>所有存储和访问操作（对于 <span class="math">\(S_t\)</span> 和 <span class="math">\(R_t\)</span>）都可以使其索引 <span class="math">\(mod n + 1\)</span></p>
+<p class="admonition-title"><span class="math notranslate nohighlight">\(n\)</span> 步TD(0)估计 <span class="math notranslate nohighlight">\(V \approx v_\pi\)</span></p>
+<p>输入：策略 <span class="math notranslate nohighlight">\(\pi\)</span></p>
+<p>算法参数：步长 <span class="math notranslate nohighlight">\(\alpha \in (0,1]\)</span>，正整数 <span class="math notranslate nohighlight">\(n\)</span></p>
+<p>对 <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span>，任意初始化 <span class="math notranslate nohighlight">\(V(s)\)</span></p>
+<p>所有存储和访问操作（对于 <span class="math notranslate nohighlight">\(S_t\)</span> 和 <span class="math notranslate nohighlight">\(R_t\)</span>）都可以使其索引 <span class="math notranslate nohighlight">\(mod n + 1\)</span></p>
 <p>对每个回合循环：</p>
-<blockquote class="last">
-<div><p>初始化并存储 <span class="math">\(S_0 \ne\)</span> 终点</p>
-<p><span class="math">\(T \leftarrow \infty\)</span></p>
-<p>对 <span class="math">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>如果 <span class="math">\(t &lt; T\)</span>，则：</p>
+<div><p>初始化并存储 <span class="math notranslate nohighlight">\(S_0 \ne\)</span> 终点</p>
+<p><span class="math notranslate nohighlight">\(T \leftarrow \infty\)</span></p>
+<p>对 <span class="math notranslate nohighlight">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>根据 <span class="math">\(\pi(\cdot|S_t)\)</span> 采取行动</p>
-<p>观察并将下一个奖励存储为 <span class="math">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math">\(S_{t+1}\)</span></p>
-<p>如果 <span class="math">\(S_{t+1}\)</span> 是终点，则 <span class="math">\(T \leftarrow t+1\)</span></p>
-</div></blockquote>
-<p><span class="math">\(\tau \leftarrow t - n + 1\)</span> （<span class="math">\(\tau\)</span> 是状态估计正在更新的时间）</p>
-<p>如果 <span class="math">\(\tau \geq 0\)</span>：</p>
+<div><p>如果 <span class="math notranslate nohighlight">\(t &lt; T\)</span>，则：</p>
 <blockquote>
-<div><p><span class="math">\(G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}\)</span></p>
-<p>如果 <span class="math">\(\tau + n &lt; T\)</span>， 则 <span class="math">\(G \leftarrow G+\gamma^{n} V\left(S_{\tau+n}\right)\)</span></p>
-<p><span class="math">\(V\left(S_{\tau}\right) \leftarrow V\left(S_{\tau}\right)+\alpha\left[G-V\left(S_{\tau}\right)\right]\)</span>  <span class="math">\(\quad\quad\quad\)</span>   <span class="math">\(\left(G_{\tau : \tau+n}\right)\)</span></p>
+<div><p>根据 <span class="math notranslate nohighlight">\(\pi(\cdot|S_t)\)</span> 采取行动</p>
+<p>观察并将下一个奖励存储为 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math notranslate nohighlight">\(S_{t+1}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 是终点，则 <span class="math notranslate nohighlight">\(T \leftarrow t+1\)</span></p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\tau \leftarrow t - n + 1\)</span> （<span class="math notranslate nohighlight">\(\tau\)</span> 是状态估计正在更新的时间）</p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau \geq 0\)</span>：</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau + n &lt; T\)</span>， 则 <span class="math notranslate nohighlight">\(G \leftarrow G+\gamma^{n} V\left(S_{\tau+n}\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(V\left(S_{\tau}\right) \leftarrow V\left(S_{\tau}\right)+\alpha\left[G-V\left(S_{\tau}\right)\right]\)</span>  <span class="math notranslate nohighlight">\(\quad\quad\quad\)</span>   <span class="math notranslate nohighlight">\(\left(G_{\tau : \tau+n}\right)\)</span></p>
 </div></blockquote>
 </div></blockquote>
-<p>直到 <span class="math">\(\tau = T - 1\)</span></p>
+<p>直到 <span class="math notranslate nohighlight">\(\tau = T - 1\)</span></p>
 </div></blockquote>
 </div>
 <p><em>练习7.1</em> 在第6章中，我们注意到如果值估计值不是逐步变化，则蒙特卡罗误差可写为TD误差之和（6.6）。
 证明（7.2）中使用的n步误差也可以写为推导早期结果的总和TD误差（如果值估计没有改变则再次）。</p>
 <p><em>练习7.2（编程）</em> 使用n步法，值估计 <em>会</em> 逐步变化，因此使用TD误差之和（参见上一个练习）代替（7.2）中的误差的算法实际上的算法略有不同。
 它会是一个更好的算法还是更糟糕的算法？设计和编写一个小实验来根据经验回答这个问题。</p>
-<p>n步回报使用价值函数 <span class="math">\(V_{t+n-1}\)</span> 来校正超出 <span class="math">\(R_{t+n}\)</span> 的缺失奖励。
-n步回报的一个重要特性是，在最恶劣的意义上，它们的期望被保证是比 <span class="math">\(V_{t+n-1}\)</span> 更好的 <span class="math">\(v_\pi\)</span> 估计。
-也就是说，对于所有 <span class="math">\(n \ge 1\)</span>，预期的n步回报的最差误差保证小于或等于 <span class="math">\(V_{t+n-1}\)</span> 下最差误差的 <span class="math">\(\gamma^{n}\)</span> 倍：</p>
-<div class="math">
+<p>n步回报使用价值函数 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 来校正超出 <span class="math notranslate nohighlight">\(R_{t+n}\)</span> 的缺失奖励。
+n步回报的一个重要特性是，在最恶劣的意义上，它们的期望被保证是比 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 更好的 <span class="math notranslate nohighlight">\(v_\pi\)</span> 估计。
+也就是说，对于所有 <span class="math notranslate nohighlight">\(n \ge 1\)</span>，预期的n步回报的最差误差保证小于或等于 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 下最差误差的 <span class="math notranslate nohighlight">\(\gamma^{n}\)</span> 倍：</p>
+<div class="math notranslate nohighlight">
 \[\max _{s}\left|\mathbb{E}_{\pi}\left[G_{t : t+n} | S_{t}=s\right]-v_{\pi}(s)\right| \leq \gamma^{n} \max _{s}\left|V_{t+n-1}(s)-v_{\pi}(s)\right|
 \tag{7.3}\]</div>
 <p>这称为 <em>n步回报的误差减少属性</em>。由于误差减少属性，可以正式显示所有n步TD方法在适当的技术条件下收敛到正确的预测。
 因此，n步TD方法形成一系列可靠的（sound）方法，一步法TD方法和蒙特卡罗方法作为其极端情况。</p>
 <p><strong>例7.1：随机行走的n步TD方法</strong> 考虑在例6.2中描述的5个状态随机游走任务中使用n步TD方法。
 假设第一回合直接从中心状态 <strong>C</strong> 向右进行，通过 <strong>D</strong> 和 <strong>E</strong>，然后在右边终止，回报为1。
-回想所有状态的估计值从中间值开始，<span class="math">\(V(s)=0.5\)</span>。
-作为这种经验的结果，一步法只改变最后一个状态 <span class="math">\(V(E)\)</span> 的估计值，该值将增加到1，观察到的返回值。
-另一方面，两步法将增加终止前两个状态的值： <span class="math">\(V(D)\)</span> 和 <span class="math">\(V(E)\)</span> 都将增加到1。
-三步法或任何n步法（对 <span class="math">\(n \ge 2\)</span>），将所有三个访问状态的值增加到1，全部增加相同的量。</p>
+回想所有状态的估计值从中间值开始，<span class="math notranslate nohighlight">\(V(s)=0.5\)</span>。
+作为这种经验的结果，一步法只改变最后一个状态 <span class="math notranslate nohighlight">\(V(E)\)</span> 的估计值，该值将增加到1，观察到的返回值。
+另一方面，两步法将增加终止前两个状态的值： <span class="math notranslate nohighlight">\(V(D)\)</span> 和 <span class="math notranslate nohighlight">\(V(E)\)</span> 都将增加到1。
+三步法或任何n步法（对 <span class="math notranslate nohighlight">\(n \ge 2\)</span>），将所有三个访问状态的值增加到1，全部增加相同的量。</p>
 <p>哪个n的值更好？图7.2显示了对较大随机行走过程进行简单经验测试的结果，其中包含19个状态而不是5个
-（从左侧离开回报为 <span class="math">\(-1\)</span>，所有值都初始化为0），我们在本章中将其用作运行示例。
-结果显示了涉及大范围n和 <span class="math">\(\alpha\)</span> 的值的n步TD方法。
+（从左侧离开回报为 <span class="math notranslate nohighlight">\(-1\)</span>，所有值都初始化为0），我们在本章中将其用作运行示例。
+结果显示了涉及大范围n和 <span class="math notranslate nohighlight">\(\alpha\)</span> 的值的n步TD方法。
 垂直轴上显示的每个参数设置的性能度量是19个状态的回合结束时，预测与其真实值之间的均方误差的平方根，
 然后在整个实验的前10回合和100次重复中取平均值（所有参数设置都使用相同的行走集合）。
 请注意，中间值为n的方法效果最好。
 这说明了TD和蒙特卡罗方法对n步方法的推广能够比两种极端方法中的任何一种方法表现更好。</p>
-<div class="figure" id="id6">
+<div class="figure align-default" id="id5">
 <img alt="../../_images/figure-7.2.png" src="../../_images/figure-7.2.png" />
-<p class="caption"><span class="caption-text"><strong>图7.2：</strong> 对于19个状态的随机行走任务的不同n值，n步TD方法的性能是 <span class="math">\(\alpha\)</span> 的函数（例7.1）。</span></p>
+<p class="caption"><span class="caption-text"><strong>图7.2：</strong> 对于19个状态的随机行走任务的不同n值，n步TD方法的性能是 <span class="math notranslate nohighlight">\(\alpha\)</span> 的函数（例7.1）。</span><a class="headerlink" href="#id5" title="永久链接至图片">¶</a></p>
 </div>
 <p><em>练习7.3</em> 为什么你认为在本章的例子中使用了更大的随机游走任务（19个州而不是5个）？
-较小的步行会将优势转移到不同的n值吗？在较大的步行中左侧结果从0变为 <span class="math">\(-1\)</span> 是怎么发生的？
+较小的步行会将优势转移到不同的n值吗？在较大的步行中左侧结果从0变为 <span class="math notranslate nohighlight">\(-1\)</span> 是怎么发生的？
 你认为这对n的最佳价值有任何不同吗？</p>
 </div>
-<div class="section" id="sarsa">
-<h2>7.2 <span class="math">\(n\)</span> 步Sarsa<a class="headerlink" href="#sarsa" title="永久链接至标题">¶</a></h2>
+<div class="section" id="n-sarsa">
+<h2>7.2 <span class="math notranslate nohighlight">\(n\)</span> 步Sarsa<a class="headerlink" href="#n-sarsa" title="永久链接至标题">¶</a></h2>
 <p>如何使用n步方法不仅用于预测，还用于控制？在本节中，我们将展示如何以简单的方式将n步方法与Sarsa结合以产生一种策略上的TD控制方法。
 Sarsa的n步版本我们称之为n步Sarsa，而前一章中提到的原始版本我们称之为 <em>一步Sarsa</em> 或 <em>Sarsa(0)</em>。</p>
-<p>主要思想是简单地切换动作状态（状态-动作对），然后使用 <span class="math">\(\varepsilon\)</span> -贪婪策略。
+<p>主要思想是简单地切换动作状态（状态-动作对），然后使用 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪策略。
 n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ），是交替状态和动作的字符串，
 除了Sarsa所有都以动作而不是状态开始和结束。我们根据估计的动作值重新定义n步回报（更新目标）：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t&lt;T-n
 \tag{7.4}\]</div>
-<p>如果 <span class="math">\(t+n \geq T\)</span>，则 <span class="math">\(G_{t : t+n} \doteq G_{t}\)</span>。那么自然算法就是</p>
-<div class="math">
+<p>如果 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，则 <span class="math notranslate nohighlight">\(G_{t : t+n} \doteq G_{t}\)</span>。那么自然算法就是</p>
+<div class="math notranslate nohighlight">
 \[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t&lt;T
 \tag{7.5}\]</div>
-<p>而所有其他状态的值保持不变：<span class="math">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
-对于所有 <span class="math">\(s, a\)</span> 使得 <span class="math">\(s \ne S_t\)</span> 或 <span class="math">\(a \ne A_t\)</span>。
+<p>而所有其他状态的值保持不变：<span class="math notranslate nohighlight">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
+对于所有 <span class="math notranslate nohighlight">\(s, a\)</span> 使得 <span class="math notranslate nohighlight">\(s \ne S_t\)</span> 或 <span class="math notranslate nohighlight">\(a \ne A_t\)</span>。
 这是我们称之为 <em>n步Sarsa</em> 的算法。
 伪代码显示在下面的框中，图7.4给出了与一步法相比可以加速学习的原因示例。</p>
-<div class="figure" id="id7">
+<div class="figure align-default" id="id6">
 <img alt="../../_images/figure-7.3.png" src="../../_images/figure-7.3.png" />
 <p class="caption"><span class="caption-text"><strong>图7.3：</strong> 状态-动作值的n步方法频谱的备份图。
 它们的范围从Sarsa(0)的一步更新到蒙特卡罗方法的直到终止更新。
 在两者之间是n步更新，基于实际奖励的n个步骤和第n个下一个状态-动作对的估计值，都被适当地折扣。
-最右边是n步预期Sarsa的备份图。</span></p>
+最右边是n步预期Sarsa的备份图。</span><a class="headerlink" href="#id6" title="永久链接至图片">¶</a></p>
 </div>
 <div class="important admonition">
-<p class="first admonition-title"><span class="math">\(n\)</span> 步Sarsa估计 <span class="math">\(Q \approx q_*\)</span> 或者 <span class="math">\(q_\pi\)</span></p>
-<p>对所有 <span class="math">\(s\in\mathcal(S)\)</span>，<span class="math">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math">\(Q(s,a)\)</span></p>
-<p>初始化 <span class="math">\(\pi\)</span> 关于 <span class="math">\(Q\)</span> 或固定的给定策略为 <span class="math">\(\varepsilon\)</span> -贪婪</p>
-<p>算法参数：步长 <span class="math">\(\alpha \in (0,1]\)</span>，小 <span class="math">\(\varepsilon &gt; 0\)</span>，正整数 <span class="math">\(n\)</span></p>
-<p>所有存储和访问操作（对于 <span class="math">\(S_t\)</span>，<span class="math">\(A_t\)</span> 和 <span class="math">\(R_t\)</span>）都可以使其索引 <span class="math">\(mod n + 1\)</span></p>
+<p class="admonition-title"><span class="math notranslate nohighlight">\(n\)</span> 步Sarsa估计 <span class="math notranslate nohighlight">\(Q \approx q_*\)</span> 或者 <span class="math notranslate nohighlight">\(q_\pi\)</span></p>
+<p>对所有 <span class="math notranslate nohighlight">\(s\in\mathcal(S)\)</span>，<span class="math notranslate nohighlight">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math notranslate nohighlight">\(Q(s,a)\)</span></p>
+<p>初始化 <span class="math notranslate nohighlight">\(\pi\)</span> 关于 <span class="math notranslate nohighlight">\(Q\)</span> 或固定的给定策略为 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪</p>
+<p>算法参数：步长 <span class="math notranslate nohighlight">\(\alpha \in (0,1]\)</span>，小 <span class="math notranslate nohighlight">\(\varepsilon &gt; 0\)</span>，正整数 <span class="math notranslate nohighlight">\(n\)</span></p>
+<p>所有存储和访问操作（对于 <span class="math notranslate nohighlight">\(S_t\)</span>，<span class="math notranslate nohighlight">\(A_t\)</span> 和 <span class="math notranslate nohighlight">\(R_t\)</span>）都可以使其索引 <span class="math notranslate nohighlight">\(mod n + 1\)</span></p>
 <p>对每个回合循环：</p>
-<blockquote class="last">
-<div><p>初始化并存储 <span class="math">\(S_0 \ne\)</span> 终点</p>
-<p>选择并存储动作 <span class="math">\(A_{0} \sim \pi\left(\cdot | S_{0}\right)\)</span></p>
-<p><span class="math">\(T \leftarrow \infty\)</span></p>
-<p>对 <span class="math">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>如果 <span class="math">\(t &lt; T\)</span>，则：</p>
+<div><p>初始化并存储 <span class="math notranslate nohighlight">\(S_0 \ne\)</span> 终点</p>
+<p>选择并存储动作 <span class="math notranslate nohighlight">\(A_{0} \sim \pi\left(\cdot | S_{0}\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(T \leftarrow \infty\)</span></p>
+<p>对 <span class="math notranslate nohighlight">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>采取行动 <span class="math">\(A_t\)</span></p>
-<p>观察并将下一个奖励存储为 <span class="math">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math">\(S_{t+1}\)</span></p>
-<p>如果 <span class="math">\(S_{t+1}\)</span> 是终点，则</p>
+<div><p>如果 <span class="math notranslate nohighlight">\(t &lt; T\)</span>，则：</p>
 <blockquote>
-<div><span class="math">\(T \leftarrow t+1\)</span></div></blockquote>
+<div><p>采取行动 <span class="math notranslate nohighlight">\(A_t\)</span></p>
+<p>观察并将下一个奖励存储为 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math notranslate nohighlight">\(S_{t+1}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 是终点，则</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(T \leftarrow t+1\)</span></p>
+</div></blockquote>
 <p>否则：</p>
 <blockquote>
-<div>选择并存储动作 <span class="math">\(A_{t+1} \sim \pi\left(\cdot | S_{t=1}\right)\)</span></div></blockquote>
+<div><p>选择并存储动作 <span class="math notranslate nohighlight">\(A_{t+1} \sim \pi\left(\cdot | S_{t=1}\right)\)</span></p>
 </div></blockquote>
-<p><span class="math">\(\tau \leftarrow t - n + 1\)</span> （<span class="math">\(\tau\)</span> 是状态估计正在更新的时间）</p>
-<p>如果 <span class="math">\(\tau \geq 0\)</span>：</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\tau \leftarrow t - n + 1\)</span> （<span class="math notranslate nohighlight">\(\tau\)</span> 是状态估计正在更新的时间）</p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau \geq 0\)</span>：</p>
 <blockquote>
-<div><p><span class="math">\(G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}\)</span></p>
-<p>如果 <span class="math">\(\tau + n &lt; T\)</span>， 则 <span class="math">\(G \leftarrow G+\gamma^{n} Q\left(S_{\tau+n}, A_{\tau+n}\right)\)</span> <span class="math">\(\quad\quad\quad\)</span> <span class="math">\(\left(G_{\tau : \tau+n}\right)\)</span></p>
-<p><span class="math">\(Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]\)</span></p>
-<p>如果 <span class="math">\(\pi\)</span> 正在被学习，那么确保 <span class="math">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math">\(Q\)</span> <span class="math">\(\varepsilon\)</span> -贪婪</p>
+<div><p><span class="math notranslate nohighlight">\(G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau + n &lt; T\)</span>， 则 <span class="math notranslate nohighlight">\(G \leftarrow G+\gamma^{n} Q\left(S_{\tau+n}, A_{\tau+n}\right)\)</span> <span class="math notranslate nohighlight">\(\quad\quad\quad\)</span> <span class="math notranslate nohighlight">\(\left(G_{\tau : \tau+n}\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(\pi\)</span> 正在被学习，那么确保 <span class="math notranslate nohighlight">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math notranslate nohighlight">\(Q\)</span> <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪</p>
 </div></blockquote>
 </div></blockquote>
-<p>直到 <span class="math">\(\tau = T - 1\)</span></p>
+<p>直到 <span class="math notranslate nohighlight">\(\tau = T - 1\)</span></p>
 </div></blockquote>
 </div>
-<div class="figure" id="id8">
+<div class="figure align-default" id="id7">
 <img alt="../../_images/figure-7.4.png" src="../../_images/figure-7.4.png" />
 <p class="caption"><span class="caption-text"><strong>图7.4：</strong> 由于使用n步方法而导致的策略学习加速的网格世界示例。
 第一个面板显示了一个个体在单个回合中所采用的路径，在一个高回报的位置结束，用 <strong>G</strong> 标记。
 在这个例子中，这些值最初都是0，除了 <strong>G</strong> 的正奖励，所有奖励都是零。
 其他两个面板中的箭头显示了通过一步Sarsa方法和n步Sarsa方法通过该路径加强了的动作价值。
 一步Sarsa法只强化导致高回报的动作序列的最后一个动作，而n步法强化序列的最后n个动作，
-因此从一个回合中学习了更多。</span></p>
+因此从一个回合中学习了更多。</span><a class="headerlink" href="#id7" title="永久链接至图片">¶</a></p>
 </div>
 <p><em>练习7.4</em> 证明Sarsa（7.4）的n步回报可以完全按照新的TD误差写成如下：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+n}=Q_{t-1}\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n, T)-1} \gamma^{k-t}\left[R_{k+1}+\gamma Q_{k}\left(S_{k+1}, A_{k+1}\right)-Q_{k-1}\left(S_{k}, A_{k}\right)\right]
 \tag{7.6}\]</div>
 <p>那么预期的Sarsa呢？预期Sarsa的n步版本的备份图显示在图7.3的最右侧。
 它由一系列样本动作和状态的线性组成，就像在n步Sarsa中一样，
-除了它的最后一个元素一如既往是在 <span class="math">\(\pi\)</span> 下的概率加权的所有动作可能性的分支。
+除了它的最后一个元素一如既往是在 <span class="math notranslate nohighlight">\(\pi\)</span> 下的概率加权的所有动作可能性的分支。
 该算法可以用与n步Sarsa（上面）相同的等式来描述，除了将n步回报重新定义为</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+n} \doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \overline{V}_{t+n-1}\left(S_{t+n}\right), \quad t+n&lt;T
 \tag{7.7}\]</div>
-<p>对 <span class="math">\(t+n \geq T\)</span>，<span class="math">\(G_{t : t+n} \doteq G_{t}\)</span>。
-其中 <span class="math">\(\overline{V}_{t}(s)\)</span> 是状态s的 <em>预期近似值</em>，使用目标策略下时间 <span class="math">\(t\)</span> 的估计行动值：</p>
-<div class="math">
+<p>对 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，<span class="math notranslate nohighlight">\(G_{t : t+n} \doteq G_{t}\)</span>。
+其中 <span class="math notranslate nohighlight">\(\overline{V}_{t}(s)\)</span> 是状态s的 <em>预期近似值</em>，使用目标策略下时间 <span class="math notranslate nohighlight">\(t\)</span> 的估计行动值：</p>
+<div class="math notranslate nohighlight">
 \[\overline{V}_{t}(s) \doteq \sum_{a} \pi(a | s) Q_{t}(s, a), \quad \text { 对所有 } s \in \mathcal{S}
 \tag{7.8}\]</div>
 <p>在本书的其余部分中，使用预期近似值来开发许多动作价值方法。如果s是终点，则其预期近似值被定义为0。</p>
 </div>
-<div class="section" id="id1">
-<h2>7.3 <span class="math">\(n\)</span> 步离策略学习<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<p>回想一下，离策略学习是学习一项策略的价值函数 <span class="math">\(\pi\)</span>，同时遵循另一项策略 <span class="math">\(b\)</span>。
-通常，<span class="math">\(\pi\)</span> 是当前行动-价值-函数估计的贪婪策略，
-而 <span class="math">\(b\)</span> 是一种更具探索性的策略，也许是 <span class="math">\(\varepsilon\)</span> -贪婪。
-为了使用 <span class="math">\(b\)</span> 中的数据，我们必须考虑到两种策略之间的差异，使用它们采取所采取行动的相对概率（参见第5.5节）。
+<div class="section" id="n">
+<h2>7.3 <span class="math notranslate nohighlight">\(n\)</span> 步离策略学习<a class="headerlink" href="#n" title="永久链接至标题">¶</a></h2>
+<p>回想一下，离策略学习是学习一项策略的价值函数 <span class="math notranslate nohighlight">\(\pi\)</span>，同时遵循另一项策略 <span class="math notranslate nohighlight">\(b\)</span>。
+通常，<span class="math notranslate nohighlight">\(\pi\)</span> 是当前行动-价值-函数估计的贪婪策略，
+而 <span class="math notranslate nohighlight">\(b\)</span> 是一种更具探索性的策略，也许是 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪。
+为了使用 <span class="math notranslate nohighlight">\(b\)</span> 中的数据，我们必须考虑到两种策略之间的差异，使用它们采取所采取行动的相对概率（参见第5.5节）。
 在n步法中，回报是在n个步骤上构建的，因此我们对这些n个动作的相对概率感兴趣。
-例如，在构建n步TD的简单离策略版本，时间 <span class="math">\(t\)</span> 的更新（实际上在时间 <span class="math">\(t+n\)</span> 进行）
-可以简单地通过 <span class="math">\(\rho_{t : t}+n-1\)</span> 加权：</p>
-<div class="math">
+例如，在构建n步TD的简单离策略版本，时间 <span class="math notranslate nohighlight">\(t\)</span> 的更新（实际上在时间 <span class="math notranslate nohighlight">\(t+n\)</span> 进行）
+可以简单地通过 <span class="math notranslate nohighlight">\(\rho_{t : t}+n-1\)</span> 加权：</p>
+<div class="math notranslate nohighlight">
 \[V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t : t+n-1}\left[G_{t : t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t&lt;T
 \tag{7.9}\]</div>
-<p>其中 <span class="math">\(\rho_{t : t}+n-1\)</span> 称为 <em>重要性采样比率</em>，
-是在两个策略下从 <span class="math">\(A_t\)</span> 到 <span class="math">\(A_{t+n-1}\)</span> 采取 <span class="math">\(n\)</span> 个动作的相对概率（参见方程5.3）：</p>
-<div class="math">
+<p>其中 <span class="math notranslate nohighlight">\(\rho_{t : t}+n-1\)</span> 称为 <em>重要性采样比率</em>，
+是在两个策略下从 <span class="math notranslate nohighlight">\(A_t\)</span> 到 <span class="math notranslate nohighlight">\(A_{t+n-1}\)</span> 采取 <span class="math notranslate nohighlight">\(n\)</span> 个动作的相对概率（参见方程5.3）：</p>
+<div class="math notranslate nohighlight">
 \[\rho_{t : h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}
 \tag{7.10}\]</div>
-<p>例如，如果任何一个动作永远不会被 <span class="math">\(\pi\)</span> 占用（即 <span class="math">\(\pi\left(A_{k} | S_{k}\right)=0\)</span>），
+<p>例如，如果任何一个动作永远不会被 <span class="math notranslate nohighlight">\(\pi\)</span> 占用（即 <span class="math notranslate nohighlight">\(\pi\left(A_{k} | S_{k}\right)=0\)</span>），
 那么n步回报应该被赋予零权重并被完全忽略。
-另一方面，如果偶然采取行动，<span class="math">\(\pi\)</span> 将采取比 <span class="math">\(\b\)</span> 更大的概率，那么这将增加否则将给予回报的权重。
-这是有道理的，因为该动作是 <span class="math">\(\pi\)</span> 的特征（因此我们想要了解它），但很少被 <span class="math">\(\b\)</span> 选择，因此很少出现在数据中。
+另一方面，如果偶然采取行动，<span class="math notranslate nohighlight">\(\pi\)</span> 将采取比 <span class="math notranslate nohighlight">\(\b\)</span> 更大的概率，那么这将增加否则将给予回报的权重。
+这是有道理的，因为该动作是 <span class="math notranslate nohighlight">\(\pi\)</span> 的特征（因此我们想要了解它），但很少被 <span class="math notranslate nohighlight">\(\b\)</span> 选择，因此很少出现在数据中。
 为了弥补这一点，我们必须在它发生时增加权重（over-weight）。
 请注意，如果这两个策略实际上是相同的（在策略情况下），则重要性采样比率始终为1。
 因此，我们的新更新（7.9）概括并可以完全取代我们之前的n步TD更新。
 同样，我们之前的n步Sarsa更新可以完全被简单的离策略形式所取代：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1 : t+n}\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]
 \tag{7.11}\]</div>
-<p>对 <span class="math">\(0 \leq t&lt;T\)</span>。注意，这里的重要性采样比率比n步TD（7.9）晚一步开始和结束。
+<p>对 <span class="math notranslate nohighlight">\(0 \leq t&lt;T\)</span>。注意，这里的重要性采样比率比n步TD（7.9）晚一步开始和结束。
 这是因为我们正在更新状态-动作对。我们不必关心我们选择行动的可能性；
 现在我们选择了它，我们希望从发生的事情中充分学习，只对后续行动进行重要性采样。
 完整算法的伪代码如下面的框所示。</p>
 <div class="important admonition">
-<p class="first admonition-title">离策略 <span class="math">\(n\)</span> 步Sarsa估计 <span class="math">\(Q \approx q_*\)</span> 或者 <span class="math">\(q_\pi\)</span></p>
-<p>输入：对所有 <span class="math">\(s\in\mathcal(S)\)</span>，一个任意的行为策略 <span class="math">\(b\)</span> 使得 <span class="math">\(b(a | s)&gt;0\)</span></p>
-<p>对所有 <span class="math">\(s\in\mathcal(S)\)</span>，<span class="math">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math">\(Q(s,a)\)</span></p>
-<p>初始化 <span class="math">\(\pi\)</span> 关于 <span class="math">\(Q\)</span> 或固定的给定策略为贪婪</p>
-<p>算法参数：步长 <span class="math">\(\alpha \in (0,1]\)</span>，正整数 <span class="math">\(n\)</span></p>
-<p>所有存储和访问操作（对于 <span class="math">\(S_t\)</span>，<span class="math">\(A_t\)</span> 和 <span class="math">\(R_t\)</span>）都可以使其索引 <span class="math">\(mod n + 1\)</span></p>
+<p class="admonition-title">离策略 <span class="math notranslate nohighlight">\(n\)</span> 步Sarsa估计 <span class="math notranslate nohighlight">\(Q \approx q_*\)</span> 或者 <span class="math notranslate nohighlight">\(q_\pi\)</span></p>
+<p>输入：对所有 <span class="math notranslate nohighlight">\(s\in\mathcal(S)\)</span>，一个任意的行为策略 <span class="math notranslate nohighlight">\(b\)</span> 使得 <span class="math notranslate nohighlight">\(b(a | s)&gt;0\)</span></p>
+<p>对所有 <span class="math notranslate nohighlight">\(s\in\mathcal(S)\)</span>，<span class="math notranslate nohighlight">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math notranslate nohighlight">\(Q(s,a)\)</span></p>
+<p>初始化 <span class="math notranslate nohighlight">\(\pi\)</span> 关于 <span class="math notranslate nohighlight">\(Q\)</span> 或固定的给定策略为贪婪</p>
+<p>算法参数：步长 <span class="math notranslate nohighlight">\(\alpha \in (0,1]\)</span>，正整数 <span class="math notranslate nohighlight">\(n\)</span></p>
+<p>所有存储和访问操作（对于 <span class="math notranslate nohighlight">\(S_t\)</span>，<span class="math notranslate nohighlight">\(A_t\)</span> 和 <span class="math notranslate nohighlight">\(R_t\)</span>）都可以使其索引 <span class="math notranslate nohighlight">\(mod n + 1\)</span></p>
 <p>对每个回合循环：</p>
-<blockquote class="last">
-<div><p>初始化并存储 <span class="math">\(S_0 \ne\)</span> 终点</p>
-<p>选择并存储动作 <span class="math">\(A_{0} \sim \pi\left(\cdot | S_{0}\right)\)</span></p>
-<p><span class="math">\(T \leftarrow \infty\)</span></p>
-<p>对 <span class="math">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>如果 <span class="math">\(t &lt; T\)</span>，则：</p>
+<div><p>初始化并存储 <span class="math notranslate nohighlight">\(S_0 \ne\)</span> 终点</p>
+<p>选择并存储动作 <span class="math notranslate nohighlight">\(A_{0} \sim \pi\left(\cdot | S_{0}\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(T \leftarrow \infty\)</span></p>
+<p>对 <span class="math notranslate nohighlight">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>采取行动 <span class="math">\(A_t\)</span></p>
-<p>观察并将下一个奖励存储为 <span class="math">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math">\(S_{t+1}\)</span></p>
-<p>如果 <span class="math">\(S_{t+1}\)</span> 是终点，则</p>
+<div><p>如果 <span class="math notranslate nohighlight">\(t &lt; T\)</span>，则：</p>
 <blockquote>
-<div><span class="math">\(T \leftarrow t+1\)</span></div></blockquote>
+<div><p>采取行动 <span class="math notranslate nohighlight">\(A_t\)</span></p>
+<p>观察并将下一个奖励存储为 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math notranslate nohighlight">\(S_{t+1}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 是终点，则</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(T \leftarrow t+1\)</span></p>
+</div></blockquote>
 <p>否则：</p>
 <blockquote>
-<div>选择并存储动作 <span class="math">\(A_{t+1} \sim \pi\left(\cdot | S_{t=1}\right)\)</span></div></blockquote>
+<div><p>选择并存储动作 <span class="math notranslate nohighlight">\(A_{t+1} \sim \pi\left(\cdot | S_{t=1}\right)\)</span></p>
 </div></blockquote>
-<p><span class="math">\(\tau \leftarrow t - n + 1\)</span> （<span class="math">\(\tau\)</span> 是状态估计正在更新的时间）</p>
-<p>如果 <span class="math">\(\tau \geq 0\)</span>：</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\tau \leftarrow t - n + 1\)</span> （<span class="math notranslate nohighlight">\(\tau\)</span> 是状态估计正在更新的时间）</p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau \geq 0\)</span>：</p>
 <blockquote>
-<div><p><span class="math">\(\rho \leftarrow \prod_{i=\tau+1}^{\min (\tau+n-1, T-1)} \frac{\pi\left(A_{i} | S_{i}\right)}{b\left(A_{i} | S_{i}\right)}\)</span> <span class="math">\(\quad\quad\quad\)</span> <span class="math">\(\left(\rho_{\tau}+1 : t+n-1\right)\)</span></p>
-<p><span class="math">\(G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}\)</span></p>
-<p>如果 <span class="math">\(\tau + n &lt; T\)</span>， 则 <span class="math">\(G \leftarrow G+\gamma^{n} Q\left(S_{\tau+n}, A_{\tau+n}\right)\)</span> <span class="math">\(\quad\quad\quad\)</span> <span class="math">\(\left(G_{\tau : \tau+n}\right)\)</span></p>
-<p><span class="math">\(Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha \rho\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]\)</span></p>
-<p>如果 <span class="math">\(\pi\)</span> 正在被学习，那么确保 <span class="math">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math">\(Q\)</span> 贪婪</p>
+<div><p><span class="math notranslate nohighlight">\(\rho \leftarrow \prod_{i=\tau+1}^{\min (\tau+n-1, T-1)} \frac{\pi\left(A_{i} | S_{i}\right)}{b\left(A_{i} | S_{i}\right)}\)</span> <span class="math notranslate nohighlight">\(\quad\quad\quad\)</span> <span class="math notranslate nohighlight">\(\left(\rho_{\tau}+1 : t+n-1\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(G \leftarrow \sum_{i=\tau+1}^{\min (\tau+n, T)} \gamma^{i-\tau-1} R_{i}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau + n &lt; T\)</span>， 则 <span class="math notranslate nohighlight">\(G \leftarrow G+\gamma^{n} Q\left(S_{\tau+n}, A_{\tau+n}\right)\)</span> <span class="math notranslate nohighlight">\(\quad\quad\quad\)</span> <span class="math notranslate nohighlight">\(\left(G_{\tau : \tau+n}\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha \rho\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(\pi\)</span> 正在被学习，那么确保 <span class="math notranslate nohighlight">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math notranslate nohighlight">\(Q\)</span> 贪婪</p>
 </div></blockquote>
 </div></blockquote>
-<p>直到 <span class="math">\(\tau = T - 1\)</span></p>
+<p>直到 <span class="math notranslate nohighlight">\(\tau = T - 1\)</span></p>
 </div></blockquote>
 </div>
 <p>n步预期Sarsa的离策略版本将对n步Sarsa使用与上述相同的更新，除了重要性采样比率将减少一个因素。
-也就是说，上面的等式将使用 <span class="math">\(\rho_{t}+1 : t+n-1\)</span> 而不是 <span class="math">\(\rho_{t}+1 : t+n\)</span>，
+也就是说，上面的等式将使用 <span class="math notranslate nohighlight">\(\rho_{t}+1 : t+n-1\)</span> 而不是 <span class="math notranslate nohighlight">\(\rho_{t}+1 : t+n\)</span>，
 当然它将使用n步回报（7.7）的预期Sarsa版本。这是因为在预期的Sarsa中，在最后一个状态中考虑了所有可能的行为；
 实际采取的那个没有效果，也没有必要纠正。</p>
 </div>
@@ -486,47 +494,47 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 <p>上一节中介绍的多步离策略方法简单且概念清晰，但可能不是最有效的方法。
 更复杂的方法将使用每个决策重要性采样的想法，如第5.9节中介绍的那样。
 要理解这种方法，首先要注意普通的n步回报（7.1），就像所有回报一样，可以递归写入。
-对于以水平线 <span class="math">\(h\)</span> 结束的n个步骤，n步回报可以写成</p>
-<div class="math">
+对于以水平线 <span class="math notranslate nohighlight">\(h\)</span> 结束的n个步骤，n步回报可以写成</p>
+<div class="math notranslate nohighlight">
 \[G_{t : h}=R_{t+1}+\gamma G_{t+1 : h}, \quad t&lt;h&lt;T
 \tag{7.12}\]</div>
-<p>其中 <span class="math">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
-（回想一下，此回报在时间 <span class="math">\(h\)</span> 使用，先前表示为 <span class="math">\(t+n\)</span>。）
-现在考虑遵循与目标策略不同的行为策略 <span class="math">\(b\)</span> 的效果。
-所有得到的经验，包括第一个奖励 <span class="math">\(R_{t+1}\)</span> 和下一个状态 <span class="math">\(S_{t+1}\)</span>，
-必须通过时间 <span class="math">\(t\)</span> 的重要性采样比率加权，
-<span class="math">\(\rho_{t}=\frac{\pi\left(A_{t} | S_{t}\right)}{b\left(A_{t} | S_{t}\right)}\)</span>。
+<p>其中 <span class="math notranslate nohighlight">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
+（回想一下，此回报在时间 <span class="math notranslate nohighlight">\(h\)</span> 使用，先前表示为 <span class="math notranslate nohighlight">\(t+n\)</span>。）
+现在考虑遵循与目标策略不同的行为策略 <span class="math notranslate nohighlight">\(b\)</span> 的效果。
+所有得到的经验，包括第一个奖励 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 和下一个状态 <span class="math notranslate nohighlight">\(S_{t+1}\)</span>，
+必须通过时间 <span class="math notranslate nohighlight">\(t\)</span> 的重要性采样比率加权，
+<span class="math notranslate nohighlight">\(\rho_{t}=\frac{\pi\left(A_{t} | S_{t}\right)}{b\left(A_{t} | S_{t}\right)}\)</span>。
 你可能只想对上面的方程的右侧进行加权，但你可以做得更好。
-假设时间 <span class="math">\(t\)</span> 的动作永远不会被 <span class="math">\(\pi\)</span> 选择，因此 <span class="math">\(\rho_{t}\)</span> 为零。
+假设时间 <span class="math notranslate nohighlight">\(t\)</span> 的动作永远不会被 <span class="math notranslate nohighlight">\(\pi\)</span> 选择，因此 <span class="math notranslate nohighlight">\(\rho_{t}\)</span> 为零。
 然后，简单的加权将导致n步回报为零，这可能导致当它用作目标时的高方差。
-相反，在这种更复杂的方法中，人们使用在水平线 <span class="math">\(h\)</span> 结束的n步回报的替代的离策略定义，即</p>
-<div class="math">
+相反，在这种更复杂的方法中，人们使用在水平线 <span class="math notranslate nohighlight">\(h\)</span> 结束的n步回报的替代的离策略定义，即</p>
+<div class="math notranslate nohighlight">
 \[G_{t : h} \doteq \rho_{t}\left(R_{t+1}+\gamma G_{t+1 : h}\right)+\left(1-\rho_{t}\right) V_{h-1}\left(S_{t}\right), \quad t&lt;h&lt;T
 \tag{7.13}\]</div>
-<p>再次 <span class="math">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
-在这种方法中，如果 <span class="math">\(\rho_{t}\)</span> 为零，则目标与估计相同并且不会导致变化，而不是目标为零并导致估计收缩。
+<p>再次 <span class="math notranslate nohighlight">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
+在这种方法中，如果 <span class="math notranslate nohighlight">\(\rho_{t}\)</span> 为零，则目标与估计相同并且不会导致变化，而不是目标为零并导致估计收缩。
 重要性采样比率为零意味着我们应该忽略样本，因此保持估计不变似乎是合适的。
 （7.13）中的第二个附加项称为 <em>控制变量</em> （由于不明原因）。
 请注意，控制变量不会更改预期的更新；重要性采样比率具有期望值1（第5.9节）并且与估计值不相关，因此控制变量的期望值为零。
 另请注意，离策略定义（7.13）是对n步回报（7.1）的早期在策略定义的严格概括，
-因为这两者在在策略情况下是相同的，其中 <span class="math">\(\rho_{t}\)</span> 永远是1。</p>
+因为这两者在在策略情况下是相同的，其中 <span class="math notranslate nohighlight">\(\rho_{t}\)</span> 永远是1。</p>
 <p>对于传统的n步方法，与（7.13）结合使用的学习规则是n步TD更新（7.2），
 除了嵌入在回报中的那些之外，它没有明确的重要性采样比率。</p>
 <p><em>练习7.5</em> 编写上述离策略状态价值预测算法的伪代码。</p>
 <p>对于动作价值，n步回报的离策略定义略有不同，因为第一个动作在重要性采样中不起作用。
 第一个行动是正在学习的行动；在目标政策下是否不太可能甚至不可能无关紧要──它已被采纳，现在必须对其后的奖励和状态给予全部单位权重。
 重要性采样仅适用于其后的操作。</p>
-<p>首先请注意，对于动作价值，n步在策略回报结束于水平线 <span class="math">\(h\)</span>，期望形式（7.7）可以像（7.12）一样递归写入，
+<p>首先请注意，对于动作价值，n步在策略回报结束于水平线 <span class="math notranslate nohighlight">\(h\)</span>，期望形式（7.7）可以像（7.12）一样递归写入，
 除了对于动作价值，
-递归以 <span class="math">\(G_{h : h} \doteq \overline{V}_{h-1}\left(S_{h}\right)\)</span> 结尾，如（7.8）所示。
+递归以 <span class="math notranslate nohighlight">\(G_{h : h} \doteq \overline{V}_{h-1}\left(S_{h}\right)\)</span> 结尾，如（7.8）所示。
 具有控制变量的离策略形式是</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 G_{t : h} &amp; \doteq R_{t+1}+\gamma\left(\rho_{t+1} G_{t+1 : h}+\overline{V}_{h-1}\left(S_{t+1}\right)-\rho_{t+1} Q_{h-1}\left(S_{t+1}, A_{t+1}\right)\right) \\
 &amp;=R_{t+1}+\gamma \rho_{t+1}\left(G_{t+1 : h}-Q_{h-1}\left(S_{t+1}, A_{t+1}\right)\right)+\gamma \overline{V}_{h-1}\left(S_{t+1}\right), t&lt;h \leq T &amp; \text{(7.14)}
 \end{aligned}\end{split}\]</div>
-<p>如果 <span class="math">\(h&lt;T\)</span>，则递归以 <span class="math">\(G_{h : h} \doteq Q_{h-1}(S_{h}, A_{h})\)</span> 结束，
-而如果是 <span class="math">\(t \geq T\)</span>，递归以 <span class="math">\(G_{T-1 : h} \doteq R_{T}\)</span> 结束。
+<p>如果 <span class="math notranslate nohighlight">\(h&lt;T\)</span>，则递归以 <span class="math notranslate nohighlight">\(G_{h : h} \doteq Q_{h-1}(S_{h}, A_{h})\)</span> 结束，
+而如果是 <span class="math notranslate nohighlight">\(t \geq T\)</span>，递归以 <span class="math notranslate nohighlight">\(G_{T-1 : h} \doteq R_{T}\)</span> 结束。
 得到的预测算法（在与（7.5）组合之后）类似于预期的Sarsa。</p>
 <p><em>练习7.6</em> 证明上述方程中的控制变量不会改变回报的预期值。</p>
 <p>**练习7.7* 为上面描述的离策略动作价值预测算法写下伪代码。在达到水平线或回合结束时，要特别注意递归的终止条件。</p>
@@ -541,8 +549,8 @@ G_{t : h} &amp; \doteq R_{t+1}+\gamma\left(\rho_{t+1} G_{t+1 : h}+\overline{V}_{
 Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方案的一部分。
 在下一节中，我们将考虑一种不使用重要性采样的离策略学习方法。</p>
 </div>
-<div class="section" id="n">
-<h2>7.5 无重要性采样的离策略学习：n步树备份算法<a class="headerlink" href="#n" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id1">
+<h2>7.5 无重要性采样的离策略学习：n步树备份算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <p>没有重要性采样，是否可以进行离策略学习？
 第6章中的Q-learning和预期的Sarsa针对一步式案例进行了此操作，但是是否有相应的多步算法？
 在本节中，我们将介绍一种称为 <em>树备份算法</em> 的n步方法。</p>
@@ -551,7 +559,7 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 </div>
 <p>右侧显示的3步树备份备份图表明了该算法的思想。
 沿中央脊柱向下并在图中标记的是三个样本状态和奖励，以及两个样本动作。
-这些是表示在初始状态-动作对 <span class="math">\(S_t\)</span>，<span class="math">\(A_t\)</span> 之后发生的事件的随机变量。
+这些是表示在初始状态-动作对 <span class="math notranslate nohighlight">\(S_t\)</span>，<span class="math notranslate nohighlight">\(A_t\)</span> 之后发生的事件的随机变量。
 悬挂在每个状态的两侧是 <em>未</em> 选择的行动。（对于最后一个状态，所有操作都被认为尚未被选中。）
 因为我们没有未选择操作的样本数据，所以我们引导并使用它们的值估计来形成更新目标。
 这略微扩展了备份图的概念。到目前为止，我们总是将图表顶部节点的估计值更新为一个目标，
@@ -559,85 +567,90 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 在树形备份更新中，目标包括所有这些内容以及悬挂在各个层面的悬空动作节点的估计值。
 这就是它被称为 <em>树形备份</em> 更新的原因；它是整个估计动作值树的更新。</p>
 <p>更确切地说，更新来自树的 <em>叶节点</em> 的估计动作值。内部的动作节点对应于所采取的实际动作，不参与更新。
-每个叶节点对目标的贡献与其在目标策略 <span class="math">\(\pi\)</span> 下发生的概率成比例。
-因此，每个第一级动作 <span class="math">\(a\)</span> 的权重为 <span class="math">\(\pi\left(a | S_{t+1}\right)\)</span>，
-除了实际采取的动作 <span class="math">\(A_{t+1}\)</span>，根本没有贡献。
-它的概率 <span class="math">\(\pi\left(A_{t+1} | S_{t+1}\right)\)</span> 用于加权所有第二级动作值。
-因此，每个未选择的第二级动作 <span class="math">\(a^{\prime}\)</span> 贡献权重
-<span class="math">\(\pi\left(A_{t+1} | S_{t+1}\right) \pi\left(a^{\prime} | S_{t+2}\right)\)</span>。
-每个第三级动作都有权重 <span class="math">\(\pi\left(A_{t+1} | S_{t+1}\right) \pi\left(A_{t+2} | S_{t+2}\right) \pi\left(a^{\prime \prime} | S_{t+3}\right)\)</span>，依此类推。
+每个叶节点对目标的贡献与其在目标策略 <span class="math notranslate nohighlight">\(\pi\)</span> 下发生的概率成比例。
+因此，每个第一级动作 <span class="math notranslate nohighlight">\(a\)</span> 的权重为 <span class="math notranslate nohighlight">\(\pi\left(a | S_{t+1}\right)\)</span>，
+除了实际采取的动作 <span class="math notranslate nohighlight">\(A_{t+1}\)</span>，根本没有贡献。
+它的概率 <span class="math notranslate nohighlight">\(\pi\left(A_{t+1} | S_{t+1}\right)\)</span> 用于加权所有第二级动作值。
+因此，每个未选择的第二级动作 <span class="math notranslate nohighlight">\(a^{\prime}\)</span> 贡献权重
+<span class="math notranslate nohighlight">\(\pi\left(A_{t+1} | S_{t+1}\right) \pi\left(a^{\prime} | S_{t+2}\right)\)</span>。
+每个第三级动作都有权重 <span class="math notranslate nohighlight">\(\pi\left(A_{t+1} | S_{t+1}\right) \pi\left(A_{t+2} | S_{t+2}\right) \pi\left(a^{\prime \prime} | S_{t+3}\right)\)</span>，依此类推。
 就好像图中动作节点的每个箭头都被动作在目标策略下被选中的概率加权，如果动作下面有一棵树，则该权重适用于树中的所有叶节点。</p>
 <p>我们可以将3步树备份更新视为由6个半步骤组成，在从动作到后续状态的样本半步骤之间交替，
 以及根据策略从该状态考虑所有可能的动作及其概率的预期半步骤。</p>
 <p>现在让我们开发n步树备份算法的详细方程。一步回报（目标）与预期的Sarsa相同，</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+1} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q_{t}\left(S_{t+1}, a\right)
 \tag{7.15}\]</div>
-<p>对 <span class="math">\(t&lt;T-1\)</span>。两步树备份回报为</p>
-<div class="math">
+<p>对 <span class="math notranslate nohighlight">\(t&lt;T-1\)</span>。两步树备份回报为</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 G_{t : t+2} &amp;\doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right) \\
 &amp; \quad +\gamma \pi\left(A_{t+1} | S_{t+1}\right)\left(R_{t+2}+\gamma \sum_{a} \pi\left(a | S_{t+2}\right) Q_{t+1}\left(S_{t+2}, a\right)\right) \\
 &amp;=R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+2}
 \end{align}\end{split}\]</div>
-<p>对 <span class="math">\(t&lt;T-2\)</span>。后一种形式表明了树备份n步回报的一般递归定义：</p>
-<div class="math">
+<p>对 <span class="math notranslate nohighlight">\(t&lt;T-2\)</span>。后一种形式表明了树备份n步回报的一般递归定义：</p>
+<div class="math notranslate nohighlight">
 \[G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}
 \tag{7.16}\]</div>
-<p>对 <span class="math">\(0 \leq t&lt;T\)</span>，而所有其他状态-动作对的值保持不变：
-<span class="math">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
-对于所有 <span class="math">\(s,a\)</span> 使得 <span class="math">\(s\ne S_t\)</span> 或 <span class="math">\(a\ne A_t\)</span>。
+<p>对 <span class="math notranslate nohighlight">\(0 \leq t&lt;T\)</span>，而所有其他状态-动作对的值保持不变：
+<span class="math notranslate nohighlight">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
+对于所有 <span class="math notranslate nohighlight">\(s,a\)</span> 使得 <span class="math notranslate nohighlight">\(s\ne S_t\)</span> 或 <span class="math notranslate nohighlight">\(a\ne A_t\)</span>。
 该算法的伪代码显示在下面的框中。</p>
 <div class="important admonition">
-<p class="first admonition-title">n步树备份估计 <span class="math">\(Q \approx q_*\)</span> 或者 <span class="math">\(q_\pi\)</span></p>
-<p>对所有 <span class="math">\(s\in\mathcal(S)\)</span>，<span class="math">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math">\(Q(s,a)\)</span></p>
-<p>初始化 <span class="math">\(\pi\)</span> 关于 <span class="math">\(Q\)</span> 或固定的给定策略为贪婪</p>
-<p>算法参数：步长 <span class="math">\(\alpha \in (0,1]\)</span>，正整数 <span class="math">\(n\)</span></p>
-<p>所有存储和访问操作都可以使其索引 <span class="math">\(mod n + 1\)</span></p>
+<p class="admonition-title">n步树备份估计 <span class="math notranslate nohighlight">\(Q \approx q_*\)</span> 或者 <span class="math notranslate nohighlight">\(q_\pi\)</span></p>
+<p>对所有 <span class="math notranslate nohighlight">\(s\in\mathcal(S)\)</span>，<span class="math notranslate nohighlight">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math notranslate nohighlight">\(Q(s,a)\)</span></p>
+<p>初始化 <span class="math notranslate nohighlight">\(\pi\)</span> 关于 <span class="math notranslate nohighlight">\(Q\)</span> 或固定的给定策略为贪婪</p>
+<p>算法参数：步长 <span class="math notranslate nohighlight">\(\alpha \in (0,1]\)</span>，正整数 <span class="math notranslate nohighlight">\(n\)</span></p>
+<p>所有存储和访问操作都可以使其索引 <span class="math notranslate nohighlight">\(mod n + 1\)</span></p>
 <p>对每个回合循环：</p>
-<blockquote class="last">
-<div><p>初始化并存储 <span class="math">\(S_0 \ne\)</span> 终点</p>
-<p>选择并存储动作 <span class="math">\(A_{0} \sim \pi\left(\cdot | S_{0}\right)\)</span></p>
-<p>任意选择动作 <span class="math">\(A_{0}\)</span> 作为 <span class="math">\(S_{0}\)</span> 的函数；存储 <span class="math">\(A_{0}\)</span></p>
-<p><span class="math">\(T \leftarrow \infty\)</span></p>
-<p>对 <span class="math">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>如果 <span class="math">\(t &lt; T\)</span>，则：</p>
+<div><p>初始化并存储 <span class="math notranslate nohighlight">\(S_0 \ne\)</span> 终点</p>
+<p>选择并存储动作 <span class="math notranslate nohighlight">\(A_{0} \sim \pi\left(\cdot | S_{0}\right)\)</span></p>
+<p>任意选择动作 <span class="math notranslate nohighlight">\(A_{0}\)</span> 作为 <span class="math notranslate nohighlight">\(S_{0}\)</span> 的函数；存储 <span class="math notranslate nohighlight">\(A_{0}\)</span></p>
+<p><span class="math notranslate nohighlight">\(T \leftarrow \infty\)</span></p>
+<p>对 <span class="math notranslate nohighlight">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>采取行动 <span class="math">\(A_t\)</span>，观察并将下一个奖励存储为 <span class="math">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math">\(S_{t+1}\)</span></p>
-<p>如果 <span class="math">\(S_{t+1}\)</span> 是终点，则</p>
+<div><p>如果 <span class="math notranslate nohighlight">\(t &lt; T\)</span>，则：</p>
 <blockquote>
-<div><span class="math">\(T \leftarrow t+1\)</span></div></blockquote>
+<div><p>采取行动 <span class="math notranslate nohighlight">\(A_t\)</span>，观察并将下一个奖励存储为 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math notranslate nohighlight">\(S_{t+1}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 是终点，则</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(T \leftarrow t+1\)</span></p>
+</div></blockquote>
 <p>否则：</p>
 <blockquote>
-<div>任意选择动作 <span class="math">\(A_{t+1}\)</span> 作为 <span class="math">\(S_{t+1}\)</span> 的函数；存储 <span class="math">\(A_{t+1}\)</span></div></blockquote>
+<div><p>任意选择动作 <span class="math notranslate nohighlight">\(A_{t+1}\)</span> 作为 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 的函数；存储 <span class="math notranslate nohighlight">\(A_{t+1}\)</span></p>
 </div></blockquote>
-<p><span class="math">\(\tau \leftarrow t + 1 -n\)</span> （<span class="math">\(\tau\)</span> 是状态估计正在更新的时间）</p>
-<p>如果 <span class="math">\(\tau \geq 0\)</span>：</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\tau \leftarrow t + 1 -n\)</span> （<span class="math notranslate nohighlight">\(\tau\)</span> 是状态估计正在更新的时间）</p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau \geq 0\)</span>：</p>
 <blockquote>
-<div><p>如果 <span class="math">\(t+1 \geq T\)</span>:</p>
+<div><p>如果 <span class="math notranslate nohighlight">\(t+1 \geq T\)</span>:</p>
 <blockquote>
-<div><span class="math">\(G \leftarrow R_{T}\)</span></div></blockquote>
+<div><p><span class="math notranslate nohighlight">\(G \leftarrow R_{T}\)</span></p>
+</div></blockquote>
 <p>否则：</p>
 <blockquote>
-<div><span class="math">\(G \leftarrow R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q\left(S_{t+1}, a\right)\)</span></div></blockquote>
-<p>对 <span class="math">\(k=\min (t, T-1)\)</span> 下降到 <span class="math">\(\tau + 1\)</span> 循环：</p>
+<div><p><span class="math notranslate nohighlight">\(G \leftarrow R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q\left(S_{t+1}, a\right)\)</span></p>
+</div></blockquote>
+<p>对 <span class="math notranslate nohighlight">\(k=\min (t, T-1)\)</span> 下降到 <span class="math notranslate nohighlight">\(\tau + 1\)</span> 循环：</p>
 <blockquote>
-<div><span class="math">\(G \leftarrow R_{k}+\gamma \sum_{a \neq A_{k}} \pi\left(a | S_{k}\right) Q\left(S_{k}, a\right)+\gamma \pi\left(A_{k} | S_{k}\right) G\)</span></div></blockquote>
-<p>如果 <span class="math">\(\pi\)</span> 正在被学习，那么确保 <span class="math">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math">\(Q\)</span> 贪婪</p>
+<div><p><span class="math notranslate nohighlight">\(G \leftarrow R_{k}+\gamma \sum_{a \neq A_{k}} \pi\left(a | S_{k}\right) Q\left(S_{k}, a\right)+\gamma \pi\left(A_{k} | S_{k}\right) G\)</span></p>
+</div></blockquote>
+<p>如果 <span class="math notranslate nohighlight">\(\pi\)</span> 正在被学习，那么确保 <span class="math notranslate nohighlight">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math notranslate nohighlight">\(Q\)</span> 贪婪</p>
 </div></blockquote>
 </div></blockquote>
-<p>直到 <span class="math">\(\tau = T - 1\)</span></p>
+<p>直到 <span class="math notranslate nohighlight">\(\tau = T - 1\)</span></p>
 </div></blockquote>
 </div>
 <p><em>练习7.11</em> 显示如果近似动作值不变，则树备份返回（7.16）可以写为基于预期的TD误差的总和：</p>
-<div class="math">
+<div class="math notranslate nohighlight">
 \[G_{t : t+n}=Q\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n-1, T-1)} \delta_{k} \prod_{i=t+1}^{k} \gamma \pi\left(A_{i} | S_{i}\right)\]</div>
-<p>其中 <span class="math">\(\delta_{t} \doteq R_{t+1}+\gamma \overline{V}_{t}\left(S_{t+1}\right)-Q\left(S_{t}, A_{t}\right)\)</span>
-并且 <span class="math">\(\overline{V}_{t}\)</span> 由（7.8）给出。</p>
+<p>其中 <span class="math notranslate nohighlight">\(\delta_{t} \doteq R_{t+1}+\gamma \overline{V}_{t}\left(S_{t+1}\right)-Q\left(S_{t}, A_{t}\right)\)</span>
+并且 <span class="math notranslate nohighlight">\(\overline{V}_{t}\)</span> 由（7.8）给出。</p>
 </div>
-<div class="section" id="id2">
-<h2>7.6 *统一算法：n步 <span class="math">\(Q(\sigma)\)</span><a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="n-q-sigma">
+<h2>7.6 *统一算法：n步 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span><a class="headerlink" href="#n-q-sigma" title="永久链接至标题">¶</a></h2>
 <p>到目前为止，在本章中我们已经考虑了三种不同类型的动作价值算法，对应于图7.5中所示的前三个备份图。
 n步Sarsa具有所有样本转换，树备份算法将所有状态-动作转换完全分支而不进行采样，
 n步预期Sarsa具有除最后一个状态到动作之外的所有样本转换，这是完全分支，具有预期值。
@@ -646,96 +659,98 @@ n步预期Sarsa具有除最后一个状态到动作之外的所有样本转换�
 人们可以逐步决定是否想要将动作作为样本，如在Sarsa中，或者考虑对所有动作的期望，如树备份更新。
 然后，如果一个人总是选择采样，那么就会获得Sarsa，而如果一个人选择永远不会采样，那么就会得到树备份算法。
 预期的Sarsa就是这样一种情况，即除了最后一步之外，所有步骤都选择采样。</p>
-<div class="figure" id="id9">
+<div class="figure align-default" id="id8">
 <img alt="../../_images/figure-7.5.png" src="../../_images/figure-7.5.png" />
 <p class="caption"><span class="caption-text"><strong>图7.5：</strong> 本章到目前为止考虑的三种n步动作值更新的备份图（4步案例）以及将它们统一起来的第四种更新的备份图。
-<span class="math">\(\rho\)</span> 表示在离策略情况下需要重要采样的一半过渡。
-第四种更新通过逐个状态地选择是否采样（<span class="math">\(\sigma_{t}=1\)</span>）或不采样（<span class="math">\(\sigma_{t}=0\)</span>）来统一所有其他更新。</span></p>
+<span class="math notranslate nohighlight">\(\rho\)</span> 表示在离策略情况下需要重要采样的一半过渡。
+第四种更新通过逐个状态地选择是否采样（<span class="math notranslate nohighlight">\(\sigma_{t}=1\)</span>）或不采样（<span class="math notranslate nohighlight">\(\sigma_{t}=0\)</span>）来统一所有其他更新。</span><a class="headerlink" href="#id8" title="永久链接至图片">¶</a></p>
 </div>
 <p>当然，如图中的最后一个图所示，还有许多其他可能性。为了进一步提高可能性，我们可以考虑采样和期望之间的连续变化。
-令 <span class="math">\(\sigma_{t} \in[0,1]\)</span> 表示步骤 <span class="math">\(t\)</span> 的采样程度，
-其中 <span class="math">\(\sigma=1\)</span> 表示完全采样，<span class="math">\(\sigma=0\)</span> 表示没有采样的纯期望。
-随机变量 <span class="math">\(\sigma_t\)</span> 可以在时间 <span class="math">\(t\)</span> 被设置为状态，动作或状态 - 动作对的函数。
-我们将这个提议的新算法称为n步 <span class="math">\(Q(\sigma)\)</span>。</p>
-<p>现在让我们开发n步 <span class="math">\(Q(\sigma)\)</span> 的方程。
-首先，我们根据水平线 <span class="math">\(h+n\)</span> 写出树备份n步回报（7.16），然后根据预期的近似值 <span class="math">\(\overline{V}\)</span> （7.8）：</p>
-<div class="math">
+令 <span class="math notranslate nohighlight">\(\sigma_{t} \in[0,1]\)</span> 表示步骤 <span class="math notranslate nohighlight">\(t\)</span> 的采样程度，
+其中 <span class="math notranslate nohighlight">\(\sigma=1\)</span> 表示完全采样，<span class="math notranslate nohighlight">\(\sigma=0\)</span> 表示没有采样的纯期望。
+随机变量 <span class="math notranslate nohighlight">\(\sigma_t\)</span> 可以在时间 <span class="math notranslate nohighlight">\(t\)</span> 被设置为状态，动作或状态 - 动作对的函数。
+我们将这个提议的新算法称为n步 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span>。</p>
+<p>现在让我们开发n步 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span> 的方程。
+首先，我们根据水平线 <span class="math notranslate nohighlight">\(h+n\)</span> 写出树备份n步回报（7.16），然后根据预期的近似值 <span class="math notranslate nohighlight">\(\overline{V}\)</span> （7.8）：</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 G_{t : h} &amp;=R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{h-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : h} \\
 &amp;=R_{t+1}+\gamma \overline{V}_{h-1}\left(S_{t+1}\right)-\gamma \pi\left(A_{t+1} | S_{t+1}\right) Q_{h-1}\left(S_{t+1}, A_{t+1}\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : h} \\
 &amp;=R_{t+1}+\gamma \pi\left(A_{t+1} | S_{t+1}\right)\left(G_{t+1 : h}-Q_{h-1}\left(S_{t+1}, A_{t+1}\right)\right)+\gamma \overline{V}_{h-1}\left(S_{t+1}\right)
 \end{aligned}\end{split}\]</div>
 <p>之后它与控制变量（7.14）的Sarsa的n步回报完全相同，
-除了动作概率 <span class="math">\(\pi\left(A_{t+1} | S_{t+1}\right)\)</span> 代替重要性采样率 <span class="math">\(\rho_{t+1}\)</span>。
-对于 <span class="math">\(Q(\sigma)\)</span>，我们在这两种情况之间线性滑动：</p>
-<div class="math">
+除了动作概率 <span class="math notranslate nohighlight">\(\pi\left(A_{t+1} | S_{t+1}\right)\)</span> 代替重要性采样率 <span class="math notranslate nohighlight">\(\rho_{t+1}\)</span>。
+对于 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span>，我们在这两种情况之间线性滑动：</p>
+<div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
 G_{t : h} \doteq R_{t+1} &amp;+\gamma\left(\sigma_{t+1} \rho_{t+1}+\left(1-\sigma_{t+1}\right) \pi\left(A_{t+1} | S_{t+1}\right)\right)\left(G_{t+1 : h}-Q_{h-1}\left(S_{t+1}, A_{t+1}\right)\right) \\
 &amp;+\gamma \overline{V}_{h-1}\left(S_{t+1}\right) &amp; \text{(7.17)}
 \end{aligned}\end{split}\]</div>
-<p>对 <span class="math">\(t&lt;h \leq T\)</span>。
-如果 <span class="math">\(h &lt; T\)</span>，递归以 <span class="math">\(G_{h : h} \doteq Q_{h-1}\left(S_{h}, A_{h}\right)\)</span> 结束，
-或者如果 <span class="math">\(h = T\)</span>，则以 <span class="math">\(G_{T-1 : T} \doteq R_{T}\)</span>。
+<p>对 <span class="math notranslate nohighlight">\(t&lt;h \leq T\)</span>。
+如果 <span class="math notranslate nohighlight">\(h &lt; T\)</span>，递归以 <span class="math notranslate nohighlight">\(G_{h : h} \doteq Q_{h-1}\left(S_{h}, A_{h}\right)\)</span> 结束，
+或者如果 <span class="math notranslate nohighlight">\(h = T\)</span>，则以 <span class="math notranslate nohighlight">\(G_{T-1 : T} \doteq R_{T}\)</span>。
 那么我们使用n步Sarsa（7.11）的一般（离策略）更新。框中给出了完整的算法。</p>
 <div class="important admonition">
-<p class="first admonition-title">离策略 <span class="math">\(n\)</span> 步Sarsa估计 <span class="math">\(Q \approx q_*\)</span> 或者 <span class="math">\(q_\pi\)</span></p>
-<p>输入：对所有 <span class="math">\(s\in\mathcal(S)\)</span>，一个任意的行为策略 <span class="math">\(b\)</span> 使得 <span class="math">\(b(a | s)&gt;0\)</span></p>
-<p>对所有 <span class="math">\(s\in\mathcal(S)\)</span>，<span class="math">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math">\(Q(s,a)\)</span></p>
-<p>初始化 <span class="math">\(\pi\)</span> 关于 <span class="math">\(Q\)</span> 或固定的给定策略为 <span class="math">\(\varepsilon\)</span> -贪婪</p>
-<p>算法参数：步长 <span class="math">\(\alpha \in (0,1]\)</span>，小 <span class="math">\(\varepsilon&gt;0\)</span>，正整数 <span class="math">\(n\)</span></p>
-<p>所有存储和访问操作都可以使其索引 <span class="math">\(mod n + 1\)</span></p>
+<p class="admonition-title">离策略 <span class="math notranslate nohighlight">\(n\)</span> 步Sarsa估计 <span class="math notranslate nohighlight">\(Q \approx q_*\)</span> 或者 <span class="math notranslate nohighlight">\(q_\pi\)</span></p>
+<p>输入：对所有 <span class="math notranslate nohighlight">\(s\in\mathcal(S)\)</span>，一个任意的行为策略 <span class="math notranslate nohighlight">\(b\)</span> 使得 <span class="math notranslate nohighlight">\(b(a | s)&gt;0\)</span></p>
+<p>对所有 <span class="math notranslate nohighlight">\(s\in\mathcal(S)\)</span>，<span class="math notranslate nohighlight">\(a\in\mathcal(A)\)</span>，任意初始化 <span class="math notranslate nohighlight">\(Q(s,a)\)</span></p>
+<p>初始化 <span class="math notranslate nohighlight">\(\pi\)</span> 关于 <span class="math notranslate nohighlight">\(Q\)</span> 或固定的给定策略为 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪</p>
+<p>算法参数：步长 <span class="math notranslate nohighlight">\(\alpha \in (0,1]\)</span>，小 <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span>，正整数 <span class="math notranslate nohighlight">\(n\)</span></p>
+<p>所有存储和访问操作都可以使其索引 <span class="math notranslate nohighlight">\(mod n + 1\)</span></p>
 <p>对每个回合循环：</p>
-<blockquote class="last">
-<div><p>初始化并存储 <span class="math">\(S_0 \ne\)</span> 终点</p>
-<p>选择并存储动作 <span class="math">\(A_{0} \sim b\left(\cdot | S_{0}\right)\)</span></p>
-<p><span class="math">\(T \leftarrow \infty\)</span></p>
-<p>对 <span class="math">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>如果 <span class="math">\(t &lt; T\)</span>，则：</p>
+<div><p>初始化并存储 <span class="math notranslate nohighlight">\(S_0 \ne\)</span> 终点</p>
+<p>选择并存储动作 <span class="math notranslate nohighlight">\(A_{0} \sim b\left(\cdot | S_{0}\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(T \leftarrow \infty\)</span></p>
+<p>对 <span class="math notranslate nohighlight">\(t=0,1,2, \ldots\)</span> 循环：</p>
 <blockquote>
-<div><p>采取行动 <span class="math">\(A_t\)</span>，观察并将下一个奖励存储为 <span class="math">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math">\(S_{t+1}\)</span></p>
-<p>如果 <span class="math">\(S_{t+1}\)</span> 是终点，则：</p>
+<div><p>如果 <span class="math notranslate nohighlight">\(t &lt; T\)</span>，则：</p>
 <blockquote>
-<div><span class="math">\(T \leftarrow t+1\)</span></div></blockquote>
+<div><p>采取行动 <span class="math notranslate nohighlight">\(A_t\)</span>，观察并将下一个奖励存储为 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>，将下一个状态存储为 <span class="math notranslate nohighlight">\(S_{t+1}\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 是终点，则：</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(T \leftarrow t+1\)</span></p>
+</div></blockquote>
 <p>否则：</p>
 <blockquote>
-<div><p>选择并存储动作 <span class="math">\(A_{t+1} \sim b\left(\cdot | S_{t+1}\right)\)</span></p>
-<p>选择并存储 <span class="math">\(\sigma_{t+1}\)</span></p>
-<p>存储 <span class="math">\(\frac{\pi\left(A_{t+1} | S_{t+1}\right)}{b\left(A_{t+1} | S_{t+1}\right)}\)</span> 为 <span class="math">\(\rho_{t+1}\)</span></p>
+<div><p>选择并存储动作 <span class="math notranslate nohighlight">\(A_{t+1} \sim b\left(\cdot | S_{t+1}\right)\)</span></p>
+<p>选择并存储 <span class="math notranslate nohighlight">\(\sigma_{t+1}\)</span></p>
+<p>存储 <span class="math notranslate nohighlight">\(\frac{\pi\left(A_{t+1} | S_{t+1}\right)}{b\left(A_{t+1} | S_{t+1}\right)}\)</span> 为 <span class="math notranslate nohighlight">\(\rho_{t+1}\)</span></p>
 </div></blockquote>
 </div></blockquote>
-<p><span class="math">\(\tau \leftarrow t - n + 1\)</span> （<span class="math">\(\tau\)</span> 是状态估计正在更新的时间）</p>
-<p>如果 <span class="math">\(\tau \geq 0\)</span>：</p>
+<p><span class="math notranslate nohighlight">\(\tau \leftarrow t - n + 1\)</span> （<span class="math notranslate nohighlight">\(\tau\)</span> 是状态估计正在更新的时间）</p>
+<p>如果 <span class="math notranslate nohighlight">\(\tau \geq 0\)</span>：</p>
 <blockquote>
-<div><p><span class="math">\(G \leftarrow 0\)</span>：</p>
-<p>对 <span class="math">\(k=\min (t+1, T)\)</span> 下降到 <span class="math">\(\tau + 1\)</span> 循环：</p>
+<div><p><span class="math notranslate nohighlight">\(G \leftarrow 0\)</span>：</p>
+<p>对 <span class="math notranslate nohighlight">\(k=\min (t+1, T)\)</span> 下降到 <span class="math notranslate nohighlight">\(\tau + 1\)</span> 循环：</p>
 <blockquote>
-<div><p>如果 <span class="math">\(k=T\)</span>：</p>
+<div><p>如果 <span class="math notranslate nohighlight">\(k=T\)</span>：</p>
 <blockquote>
-<div><span class="math">\(G \leftarrow R_{T}\)</span></div></blockquote>
+<div><p><span class="math notranslate nohighlight">\(G \leftarrow R_{T}\)</span></p>
+</div></blockquote>
 <p>否则：</p>
 <blockquote>
-<div><p><span class="math">\(\overline{V} \leftarrow \sum_{a} \pi\left(a | S_{k}\right) Q\left(S_{k}, a\right)\)</span></p>
-<p><span class="math">\(G \leftarrow R_{k}+\gamma\left(\sigma_{k} \rho_{k}+\left(1-\sigma_{k}\right) \pi\left(A_{k} | S_{k}\right)\right)\left(G-Q\left(S_{k}, A_{k}\right)\right)+\gamma \overline{V}\)</span></p>
+<div><p><span class="math notranslate nohighlight">\(\overline{V} \leftarrow \sum_{a} \pi\left(a | S_{k}\right) Q\left(S_{k}, a\right)\)</span></p>
+<p><span class="math notranslate nohighlight">\(G \leftarrow R_{k}+\gamma\left(\sigma_{k} \rho_{k}+\left(1-\sigma_{k}\right) \pi\left(A_{k} | S_{k}\right)\right)\left(G-Q\left(S_{k}, A_{k}\right)\right)+\gamma \overline{V}\)</span></p>
 </div></blockquote>
 </div></blockquote>
-<p><span class="math">\(Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]\)</span></p>
-<p>如果 <span class="math">\(\pi\)</span> 正在被学习，那么确保 <span class="math">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math">\(Q\)</span> 贪婪</p>
+<p><span class="math notranslate nohighlight">\(Q\left(S_{\tau}, A_{\tau}\right) \leftarrow Q\left(S_{\tau}, A_{\tau}\right)+\alpha\left[G-Q\left(S_{\tau}, A_{\tau}\right)\right]\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(\pi\)</span> 正在被学习，那么确保 <span class="math notranslate nohighlight">\(\pi\left(\cdot | S_{\tau}\right)\)</span> 是关于 <span class="math notranslate nohighlight">\(Q\)</span> 贪婪</p>
 </div></blockquote>
 </div></blockquote>
-<p>直到 <span class="math">\(\tau = T - 1\)</span></p>
+<p>直到 <span class="math notranslate nohighlight">\(\tau = T - 1\)</span></p>
 </div></blockquote>
 </div>
 </div>
-<div class="section" id="id3">
-<h2>7.7 总结<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h2>7.7 总结<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <p>在本章中，我们开发了一系列时序差分学习方法，介于前一章的一步法TD方法和之前章的蒙特卡罗方法之间。
 涉及中间量引导的方法很重要，因为它们通常比任何一个极端都要好。</p>
 <div class="figure align-right">
 <a class="reference internal image-reference" href="../../_images/4-step-TD-and-4-step-Q-sigma.png"><img alt="../../_images/4-step-TD-and-4-step-Q-sigma.png" src="../../_images/4-step-TD-and-4-step-Q-sigma.png" style="width: 120px;" /></a>
 </div>
 <p>我们在本章中的重点是n步方法，它们展望n步奖励，状态和行动。右边的两个4步备份图总结了大多数介绍的方法。
-所示的状态值更新用于具有重要性采样的n步TD，并且动作值更新用于n步 <span class="math">\(Q(\sigma)\)</span>，其概括了预期的Sarsa和Q-learning。
+所示的状态值更新用于具有重要性采样的n步TD，并且动作值更新用于n步 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span>，其概括了预期的Sarsa和Q-learning。
 所有n步方法都涉及在更新之前延迟n个时间步骤，因为只有这样才能知道所有必需的未来事件。
 另一个缺点是它们涉及每个时间步骤比先前方法更多的计算。
 与一步法相比，n步法还需要更多内存来记录最后n个时间步骤中的状态，动作，奖励以及有时其他变量。
@@ -747,8 +762,8 @@ G_{t : h} \doteq R_{t+1} &amp;+\gamma\left(\sigma_{t+1} \rho_{t+1}+\left(1-\sigm
 另一种是基于树形备份更新，是Q-learning到具有随机目标策略的多步情况的自然延伸。
 它不涉及重要性采样，但是，如果目标和行为策略实质上不同，则即使n很大，引导也可能仅跨越几个步骤。</p>
 </div>
-<div class="section" id="id4">
-<h2>书目和历史评论<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h2>书目和历史评论<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>n步回报的概念归功于Watkins（1989），他也首先讨论了它们的误差减少性质。
 在本书的第一版中探讨了n步算法，其中它们被视为概念上的兴趣，但在实践中是不可行的。
 Cichosz（1995）和特别是van Seijen（2016）的工作表明它们实际上是完全实用的算法。
@@ -759,7 +774,7 @@ Cichosz（1995）和特别是van Seijen（2016）的工作表明它们实际上�
 <p><strong>7.3-5</strong> 这些部分的发展基于Precup，Sutton和Singh（2000），Precup，Sutton和Dasgupta（2001）
 以及Sutton，Mahmood，Precup和van Hasselt（2014）的工作。</p>
 <p>树备份算法归功于Precup，Sutton和Singh（2000），但这里的表示是新的。</p>
-<p><strong>7.6</strong> <span class="math">\(Q(\sigma)\)</span> 算法是本文的新内容，
+<p><strong>7.6</strong> <span class="math notranslate nohighlight">\(Q(\sigma)\)</span> 算法是本文的新内容，
 但De Asis，Hernandez-Garcia，Holland和Sutton（2017）进一步探讨了密切相关的算法。</p>
 </div>
 </div>
@@ -775,7 +790,7 @@ Cichosz（1995）和特别是van Seijen（2016）的工作表明它们实际上�
         <a href="../chapter8/planning_and_learning_with_tabular_methods.html" class="btn btn-neutral float-right" title="第8章 表格方法规划和学习" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../chapter6/temporal_difference_learning.html" class="btn btn-neutral" title="第6章 时序差分学习" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../chapter6/temporal_difference_learning.html" class="btn btn-neutral float-left" title="第6章 时序差分学习" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -784,7 +799,7 @@ Cichosz（1995）和特别是van Seijen（2016）的工作表明它们实际上�
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto
 
     </p>
   </div>
@@ -801,34 +816,16 @@ Cichosz（1995）和特别是van Seijen（2016）的工作表明它们实际上�
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'0.0.1',
-            LANGUAGE:'zh_CN',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/translations.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

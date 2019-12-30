@@ -17,13 +17,22 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -31,21 +40,16 @@
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="第一部分 表格解决方法" href="../partI/index.html" />
     <link rel="prev" title="符号一览" href="../notation.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -194,16 +198,15 @@
 无论我们是学习驾驶汽车还是进行交谈，我们都敏锐地意识到我们的环境如何响应我们的行为，并且我们试图通过我们的行为来影响所发生的事情。
 从交互中学习是几乎所有学习和智能理论的基本思想。</p>
 <p>在本书中，我们探索了一种从交互中学习的 <em>计算</em> 方法。
-我们主要探索理想化的学习情境并评估各种学习方法的有效性，而不是直接理解人或动物的学习方式 <a class="footnote-reference" href="#id3" id="id2">[1]</a> 。
+我们主要探索理想化的学习情境并评估各种学习方法的有效性，而不是直接理解人或动物的学习方式 <a class="footnote-reference brackets" href="#id3" id="id2">1</a> 。
 也就是说，我们采用人工智能研究员或工程师的观点。
 我们探索在解决科学或经济效益的学习问题方面有效的机器设计，通过数学分析或计算实验评估设计。
 我们探索的方法称为 <em>强化学习</em>，更侧重于从交互中进行目标导向的学习，而不是其他机器学习方法。</p>
-<table class="docutils footnote" frame="void" id="id3" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>第14章和第15章总结了心理学和神经科学的关系。</td></tr>
-</tbody>
-</table>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>第14章和第15章总结了心理学和神经科学的关系。</p>
+</dd>
+</dl>
 <div class="section" id="id4">
 <h2>1.1 强化学习<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <p>强化学习是一种学习如何将状态映射到动作，以获得最大奖励的学习机制。
@@ -277,18 +280,18 @@
 <h2>1.2 例子<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 <p>理解强化学习的一个好方法是思考指导其发展的一些例子和可能的应用。</p>
 <ul class="simple">
-<li>国际象棋大师落子。落子决定既通过规划 - 期待的回复和逆向回复
-（anticipating possible replies and counterreplies），也出于对特定位置和移动及时直觉的判断。</li>
-<li>自适应控制器实时调节炼油厂操作的参数。控制器在指定的边际成本的基础上优化产量/成本/质量交易，而不严格遵守工程师最初建议的设定。</li>
-<li>一头瞪羚在出生后几分钟挣扎着站起来。半小时后，它能以每小时20英里的速度奔跑。</li>
-<li>移动机器人决定是否应该进入新房间以寻找和收集更多垃圾来，或尝试回到充电站充电。
-它根据电池的当前电池的充电水平，以及过去能够快速轻松地找到充电站的程度做出决定。</li>
-<li>菲尔准备他的早餐。仔细检查，即使是这个看似平凡的行动，也会发现一个复杂的条件行为网和互锁的目标-子目标关系：
+<li><p>国际象棋大师落子。落子决定既通过规划 - 期待的回复和逆向回复
+（anticipating possible replies and counterreplies），也出于对特定位置和移动及时直觉的判断。</p></li>
+<li><p>自适应控制器实时调节炼油厂操作的参数。控制器在指定的边际成本的基础上优化产量/成本/质量交易，而不严格遵守工程师最初建议的设定。</p></li>
+<li><p>一头瞪羚在出生后几分钟挣扎着站起来。半小时后，它能以每小时20英里的速度奔跑。</p></li>
+<li><p>移动机器人决定是否应该进入新房间以寻找和收集更多垃圾来，或尝试回到充电站充电。
+它根据电池的当前电池的充电水平，以及过去能够快速轻松地找到充电站的程度做出决定。</p></li>
+<li><p>菲尔准备他的早餐。仔细检查，即使是这个看似平凡的行动，也会发现一个复杂的条件行为网和互锁的目标-子目标关系：
 走到橱柜，打开它，选择一个麦片盒，然后伸手去拿，抓住并取回盒子。
 拿到碗，勺子和牛奶盒也需要其他复杂的，调整的，交互的行为序列来完成。每个步骤都涉及一系列眼球运动，以获取信息并指导到达和移动。
 它们需要对于如何拿住物品或者在拿其他物品之前将它们中的一些运送到餐桌上做出快速判断。
 每个步骤都以目标为指导并为其他目标服务，例如抓起勺子或走到冰箱，比如一旦麦片准备好就拿勺子吃以最终获得营养。
-无论他是否意识到这一点，菲尔都在获取有关他身体状况的信息，这些信息决定了他的营养需求，饥饿程度和食物偏好。</li>
+无论他是否意识到这一点，菲尔都在获取有关他身体状况的信息，这些信息决定了他的营养需求，饥饿程度和食物偏好。</p></li>
 </ul>
 <p>这些例子共同的特征非常基础，以至于很容易被忽略。
 所有这些都涉及积极的决策个体与其环境之间的 <em>交互</em>，个体于存在不确定性的环境中寻求实现 <em>目标</em>。
@@ -402,25 +405,27 @@
 大多数时候，我们 <em>贪婪地</em> 选择具有最大价值的动作，也就是说，有最高的获胜概率。然而，偶尔我们会从其他动作中随机选择。
 这些被称为 <em>探索性</em> 动作，因为它们使我们体验到我们可能永远不会看到的状态。
 在游戏中移动和考虑的一系列动作可以如图1.1所示。</p>
-<div class="figure" id="id12">
+<div class="figure align-default" id="id12">
 <span id="figure-1-1"></span><img alt="../_images/figure-1.1.png" src="../_images/figure-1.1.png" />
 <p class="caption"><span class="caption-text">图1.1：一系列井字棋移动。黑色实线代表游戏中所采取的动作；虚线表示我们（我们的强化学习者）考虑但未做出的动作。
-我们的第二步移动 <span class="math">\(e^{*}\)</span> 是一次探索性的移动，这意味着 <span class="math">\(e^{*}\)</span> 所表示的移动甚至优于当前移动。
+我们的第二步移动 <span class="math notranslate nohighlight">\(e^{*}\)</span> 是一次探索性的移动，这意味着 <span class="math notranslate nohighlight">\(e^{*}\)</span> 所表示的移动甚至优于当前移动。
 探索性移动不会导致任何学习，但是我们的其他每个移动都会导致更新，如红色箭头弧线所示，
-其估计价值自下而上移动到树的早期节点，如文中详述。</span></p>
+其估计价值自下而上移动到树的早期节点，如文中详述。</span><a class="headerlink" href="#id12" title="永久链接至图片">¶</a></p>
+<div class="legend">
+</div>
 </div>
 <p>在我们比赛期间，我们按游戏中的发现不断改变状态的值。
 我们试图让他们更准确地估计获胜的可能性。
 为此，在贪婪移动后，我们重写前一状态的值，如图1.1中的箭头所示。
 更准确地说，前一状态的当前值被更新为更接近后续状态的值。
 这可以通过将先前状态的值移动到稍后状态的值的一小部分来完成。
-如果我们让 <span class="math">\(S_t\)</span> 表示贪婪移动之前的状态，而 <span class="math">\(S_{t+1}\)</span> 表示移动之后的状态，
-那么将 <span class="math">\(S_t\)</span> 的估计值的更新表示为 <span class="math">\(V(S_t)\)</span>，可以写为</p>
-<div class="math">
+如果我们让 <span class="math notranslate nohighlight">\(S_t\)</span> 表示贪婪移动之前的状态，而 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 表示移动之后的状态，
+那么将 <span class="math notranslate nohighlight">\(S_t\)</span> 的估计值的更新表示为 <span class="math notranslate nohighlight">\(V(S_t)\)</span>，可以写为</p>
+<div class="math notranslate nohighlight">
 \[V(S_t) \leftarrow V(S_t) + \alpha \left[ V(S_{t+1}) - V(S_t) \right]，\]</div>
-<p>其中 <span class="math">\(\alpha\)</span> 是小正分数，称为 <em>步长</em>，它影响学习速度。
+<p>其中 <span class="math notranslate nohighlight">\(\alpha\)</span> 是小正分数，称为 <em>步长</em>，它影响学习速度。
 此更新规则是 <em>时序差分</em> 学习方法的一个例子，之所以称为时序差分，
-是因为其变化基于两个连续时间的估计之间的差，即 <span class="math">\(V(S_{t+1}) - V(S_t)\)</span>。</p>
+是因为其变化基于两个连续时间的估计之间的差，即 <span class="math notranslate nohighlight">\(V(S_{t+1}) - V(S_t)\)</span>。</p>
 <p>上述方法在此任务上表现良好。例如，如果步长参数随着时间的推移而适当减小，那么对于任何固定的对手，
 该方法会收敛于在给定玩家最佳游戏的情况下从每个状态获胜的真实概率。
 此外，采取的动作（探索性动作除外）实际上是针对这个（不完美的）对手的最佳动作。
@@ -447,7 +452,7 @@
 强化学习也适用于甚至不能分解为像井字棋游戏这样的离散时间步骤的问题。
 一般原则也适用于连续时间问题，虽然理论变得更加复杂，我们在这份简介中将不会介绍。</p>
 <p>井字棋游戏具有相对较小的有限状态集，而当状态集非常大或甚至无限时，也可以使用强化学习。
-例如，Gerry Tesauro（1992,1995）将上述算法与人工神经网络相结合，学习玩西洋双子棋，其具有大约 <span class="math">\(10^20\)</span> 个状态。
+例如，Gerry Tesauro（1992,1995）将上述算法与人工神经网络相结合，学习玩西洋双子棋，其具有大约 <span class="math notranslate nohighlight">\(10^20\)</span> 个状态。
 在这么多状态中，只能经历一小部分。Tesauro的规划学得比以前的任何规划都要好得多，最终比世界上最好的人类棋手更好（第16.1节）。
 人工神经网络为程序提供了从其经验中泛化的能力，以便在新状态下，它能根据其网络确定的过去面临的类似状态保存下来的信息来选择移动。
 强化学习系统在如此大型状态集的问题中如何运作，与它从过去的经验中泛化的程度密切相关。
@@ -540,9 +545,10 @@ Werbos（1987）明确提出动态规划和学习方法的相互关系，以及�
 更明确地和英国伦理学家和心理学家Conway Lloyd Morgan的1894年使用该术语来描述他对动物行为的观察进行讨论。
 也许第一个简洁地表达试错学习作为学习原则的本质是Edward Thorndike：</p>
 <blockquote>
-<div>在对同一情况作出的若干回应中，那些伴随或密切关注对动物满意的东西，在其他条件相同的情况下，与情况更紧密地联系在一起，
+<div><p>在对同一情况作出的若干回应中，那些伴随或密切关注对动物满意的东西，在其他条件相同的情况下，与情况更紧密地联系在一起，
 因此，当它再次发生时，它们将更有可能复发; 那些伴随或紧随动物不适的人，在其他条件相同的情况下，会与这种情况的关系减弱，
-因此，当它再次出现时，它们不太可能发生。满意度或不适感越大，粘合剂的强化或弱化程度越大。（Thorndike，1911年，第244页）</div></blockquote>
+因此，当它再次出现时，它们不太可能发生。满意度或不适感越大，粘合剂的强化或弱化程度越大。（Thorndike，1911年，第244页）</p>
+</div></blockquote>
 <p>Thorndike称之为“效果定律（Law of Effect）”，因为它描述了强化事件对选择行为倾向的影响。
 Thorndike后来对定律进行了修改，以更好地考虑后续的动物学习数据（例如奖励和惩罚的影响之间的差异），
 各种形式的定律在学习理论家中产生了相当大的争议
@@ -558,8 +564,9 @@ Thorndike后来对定律进行了修改，以更好地考虑后续的动物学�
 <p>在计算机中实现试错试验的想法似乎是关于人工智能可能性的最早想法。
 在1948年的一份报告中，艾伦·图灵（Alan Turing）描述了一种“快乐 - 痛苦系统”的设计，该系统符合效果法则：</p>
 <blockquote>
-<div>当达到未确定动作的配置时，对缺失数据进行随机选择，并暂时在该描述中进行适当的输入并应用。
-当疼痛刺激发生时，所有暂定条目都被取消，当快乐刺激发生时，它们都是永久性的。（图灵，1948年）</div></blockquote>
+<div><p>当达到未确定动作的配置时，对缺失数据进行随机选择，并暂时在该描述中进行适当的输入并应用。
+当疼痛刺激发生时，所有暂定条目都被取消，当快乐刺激发生时，它们都是永久性的。（图灵，1948年）</p>
+</div></blockquote>
 <p>我们构建了许多巧妙的机电机器以演示试错试验。最早的可能是由托马斯罗斯（Thomas Ross，1933）建造的机器，
 它能够通过一个简单的迷宫找到它的路，并记住通过开关设置的路径。
 1951年，W. Gray Walter建立了他的“机械乌龟”（Walter，1950）的一个版本，能够进行简单的学习。
@@ -679,7 +686,7 @@ Minsky的“步骤”论文和Samuel的跳棋运动员的关系后来才得到�
 这种方法在Sutton（1984）的博士论文中得到了广泛的研究。论文并扩展到Anderson（1986）博士论文中使用反向传播神经网络。
 大约在这个时候，Holland（1986）以他的戽式（bucket-brigade）算法的形式将时序差分思想明确地纳入他的分类器系统。
 Sutton（1988）采取了一个关键步骤，将时序差分学习与控制分开，将其作为一般预测方法。
-该论文还介绍了TD(<span class="math">\(\lambda\)</span>)算法并证明了它的一些收敛性。</p>
+该论文还介绍了TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)算法并证明了它的一些收敛性。</p>
 <p>当我们在1981年完成关于演员 - 评论家架构的工作时，我们发现了Ian Witten（1977,1976a）的一篇论文，
 该论文似乎是时序差分学习规则的最早出版物。
 他提出了我们现在称为表格TD(0)的方法，用作解决MDP的自适应控制器的一部分。
@@ -723,7 +730,7 @@ Weiring和van Otterlo（2012）编辑的卷提供了对最近发展的精彩概�
         <a href="../partI/index.html" class="btn btn-neutral float-right" title="第一部分 表格解决方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../notation.html" class="btn btn-neutral" title="符号一览" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../notation.html" class="btn btn-neutral float-left" title="符号一览" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -732,7 +739,7 @@ Weiring和van Otterlo（2012）编辑的卷提供了对最近发展的精彩概�
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto
 
     </p>
   </div>
@@ -749,34 +756,16 @@ Weiring和van Otterlo（2012）编辑的卷提供了对最近发展的精彩概�
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.0.1',
-            LANGUAGE:'zh_CN',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="../_static/translations.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

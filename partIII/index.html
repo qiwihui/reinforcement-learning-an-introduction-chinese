@@ -17,13 +17,22 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="../_static/translations.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -31,21 +40,16 @@
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="第14章 心理学" href="chapter14/psychology.html" />
     <link rel="prev" title="第13章 策略梯度方法" href="../partII/chapter13/policy_gradient_methods.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -187,8 +191,28 @@
 该部分简要地介绍了它们与心理学和神经科学的关系、强化学习应用的一些案例，以及未来强化学习研究的一些前沿领域。</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="chapter14/psychology.html">第14章 心理学</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter15/neuroscience.html">第15章 神经科学</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter14/psychology.html">第14章 心理学</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter14/psychology.html#id2">14.1 预测与控制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter14/psychology.html#id5">14.2 经典条件反射</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="chapter15/neuroscience.html">第15章 神经科学</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id2">15.1 神经科学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id3">15.2 收益信号、强化信号、价值和预测误差</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id6">15.3 收益预测误差假说</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id9">15.4 多巴胺</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id10">15.5 收益预测误差假说的实验支持</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#td">15.6 TD误差／多巴胺对应</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id11">15.7 神经“行动器-评判器”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id12">15.8 行动器与评判器学习规则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id13">15.9 享乐主义神经元</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id14">15.10 集体强化学习</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id15">15.11 大脑中的基于模型的算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id16">15.12 成瘾</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id17">15.13 本章小结</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter15/neuroscience.html#id18">参考文献和历史评注</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="chapter16/applications_and_case_studies.html">第16章 应用及案例分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter17/frontiers.html">第17章 前沿技术</a></li>
 </ul>
@@ -206,7 +230,7 @@
         <a href="chapter14/psychology.html" class="btn btn-neutral float-right" title="第14章 心理学" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../partII/chapter13/policy_gradient_methods.html" class="btn btn-neutral" title="第13章 策略梯度方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../partII/chapter13/policy_gradient_methods.html" class="btn btn-neutral float-left" title="第13章 策略梯度方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -215,7 +239,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto.
+        &copy; Copyright 2019, Richard S. Sutton，Andrew G. Barto
 
     </p>
   </div>
@@ -232,34 +256,16 @@
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.0.1',
-            LANGUAGE:'zh_CN',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="../_static/translations.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
+  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>
