@@ -624,7 +624,7 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
 
     \begin{align*}
     q_*(s,a) &= \mathbb{E}\left[R_{t+1}+\gamma\sum_{a^\prime}q_*(S_{t+1,a^\prime})|S_t=s,A_t=a\right] \\
-    &=\sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma \sum_{a^\prime}q_*(s^\prime,a^\prime)]
+    &=\sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma \max_{a^\prime}q_*(s^\prime,a^\prime)]
     \end{align*}
 
 下图中的备份图以图像方式显示了在 :math:`v_*` 和 :math:`q_*` 的贝尔曼最优方程中考虑的未来状态和动作的跨度。
