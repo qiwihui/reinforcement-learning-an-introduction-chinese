@@ -572,7 +572,7 @@ v_{k+1}(s)&amp;\doteq \max_a\mathbb{E}[R_{t+1}+\gamma v_{k}(S_{t+1}) | S_t=s,A_t
 <div class="section" id="id6">
 <h2>4.5 异步动态规划<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <p>到目前为止我们所讨论的DP方法一个主要的缺点是他们涉及整个MDP状态集合，也就是说，需要对整个状态集合进行更新。
-如果状态集非常大，即使一次更新也会代价很大。例如，五子棋有多于 <span class="math notranslate nohighlight">\(10^20\)</span> 个状态。
+如果状态集非常大，即使一次更新也会代价很大。例如，五子棋有多于 <span class="math notranslate nohighlight">\(10^{20}\)</span> 个状态。
 即使我们能够一秒钟执行一百万个状态的价值迭代更新，也会花费一千年才能完成一次更新。</p>
 <p><em>异步</em> DP算法是就地迭代DP算法，并没有按照规则的状态集更新步骤进行组织。
 这些算法以任何顺序更新状态值，使用恰好可用的其他状态值。某些状态的值可能会在其他状态的值更新一次之前被更新多次。
