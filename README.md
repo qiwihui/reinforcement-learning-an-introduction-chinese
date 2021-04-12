@@ -1,6 +1,7 @@
-# 弃坑了！！！
+# 说明
 
-因为官方翻译版本已经出版，本项目停止更新维护。请前往查看食用：[强化学习](https://book.douban.com/subject/34809689/)。
+因为官方翻译版本已经出版，本项目进入不定期更新维护。
+请前往查看食用官方翻译版本：[强化学习](https://book.douban.com/subject/34809689/)。
 
 # reinforcement-learning-an-introduction-chinese
 
