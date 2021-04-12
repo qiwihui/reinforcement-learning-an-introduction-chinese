@@ -615,9 +615,9 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 被权重向量 :math:`\mathbf{w}=\left(w_{1}, \dots, w_{n}\right)^{\top}` 参数化为
 
 .. math::
+    :label: 15.1
 
     \hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)
-    \tag{15.1}
 
 每个 :math:`x_{i}(s)` 就像神经元突触的突触前信号，其功效为 :math:`w_{i}`。
 权重由上面公式的规则更新：:math:`\alpha^{\mathbf{w}} \delta_{t} \mathbf{z}_{t}^{\mathbf{w}}`，
@@ -651,9 +651,9 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 通过柔性最大化分布（式13.2）决定了这个单元的动作被选择的概率，对于两个动作的情况即为逻辑回归函数
 
 .. math::
+    :label: 15.2
 
     \pi(1 | s, \boldsymbol{\theta})=1-\pi(0 | s, \boldsymbol{\theta})=\frac{1}{1+\exp (-\boldsymbol{\theta}^{\top} \mathbf{x}(s))}
-    \tag{15.2}
 
 每一个行动器单元的权重通过上面的规则更新：:math:`\boldsymbol{\theta} \leftarrow \boldsymbol{\theta}+\alpha^{\boldsymbol{\theta}} \delta_{t} \mathbf{z}_{t}^{\boldsymbol{\theta}}`，
 这里 :math:`\delta` 依然对应多巴胺信号：送往所有行动器单位突触的相同的强化信号。
@@ -667,9 +667,9 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 对于在时刻 :math:`t` 的动作和状态，答案是
 
 .. math::
+    :label: 15.3
 
     \nabla \ln \pi(A_{t} | S_{t}, \boldsymbol{\theta})=(A_t - \pi(\boldsymbol{1}|S_{t},\boldsymbol{\theta})) \mathbf{x}(S_{t})
-    \tag{15.3}
 
 与评判器突触只累积突触前活动 :math:`\mathbf{x}(S_{t})` 的非偶发资格迹不同，
 行动器单元的资格迹还取决于行动器单元本身的活动，我们称其为 *偶发资格迹*。

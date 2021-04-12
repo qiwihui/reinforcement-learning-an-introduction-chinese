@@ -105,7 +105,7 @@
 
 为了粗略评估贪婪和 :math:`\varepsilon` 贪婪行动价值方法的相对有效性，
 我们在一系列测试问题上对它们进行了数值比较。这是一组2000个随机生成的 :math:`k` 臂赌博机问题，:math:`k = 10`。
-对于每个赌博机问题，如图2.1所示，动作价值 :math:`q_*(a)，a = 1 , \dots, 10`，
+对于每个赌博机问题，如图2.1所示，动作价值 :math:`q_*(a), a = 1, \dots, 10`，
 根据具有均值为0和方差为1的正态（高斯）分布来选择。
 
 .. _figure_2.1:
@@ -150,7 +150,7 @@
 即使基础任务是固定的和确定的，学习者也面临着一系列类似赌博机的决策任务，随着学习的进行和个体的决策制定策略的变化，这些决策随着时间的推移而变化。
 强化学习需要在探索和利用之间取得平衡。
 
-*练习2.2* 赌博机示例 考虑具有 :math:`k=4` 动作的:math:`k` 臂赌博机问题，表示为1，2，3和4。
+*练习2.2* 赌博机示例 考虑具有 :math:`k=4` 动作的 :math:`k` 臂赌博机问题，表示为1，2，3和4。
 对于此问题，考虑使用 :math:`\varepsilon` 贪婪动作选择，样本平均动作值估计的赌博机算法，
 对于所有a，初始估计为 :math:`Q_1(a)=0`。
 假设动作和奖励的初始序列是 :math:`A_1 = 1`，:math:`R_1 = 1`，:math:`A_2 = 2`，
@@ -184,14 +184,14 @@
 .. math::
     :label: 2.3
 
-    \begin{align*}
+    \begin{aligned}
     Q_{n+1} &= \frac{1}{n}\sum_{i=1}^{n}R_i \\
             &= \frac{1}{n}(R_n + \sum_{i=1}^{n-1}R_i) \\
             &= \frac{1}{n}(R_n + (n-1)\frac{1}{n-1} \sum_{i=1}^{n-1}R_i) \\
             &= \frac{1}{n}(R_n + (n-1)Q_n) \\
             &= \frac{1}{n}(R_n + nQ_n-Q_n) \\
             &= Q_n + \frac{1}{n}(R_n - Q_n)
-    \end{align*}
+    \end{aligned}
 
 即使对于 :math:`n=1` 也保持，对于任意 :math:`Q_1`，获得 :math:`Q_2 = R_1`。
 该实现仅需要 :math:`Q_n` 和 n 的存储器，并且每个新的奖励仅需要小的计算（2.3）。
@@ -257,14 +257,14 @@
 .. math::
     :label: 2.6
 
-    \begin{align*}
+    \begin{aligned}
     Q_{n+1} &= Q_n + \alpha(R_n - Q_n) \\
     &= \alpha R_n + (1-\alpha)Q_n \\
     &= \alpha R_n + (1-\alpha)[\alpha R_{n-1} + (1-\alpha)Q_{n-1}] \\
     &= \alpha R_n + (1-\alpha)\alpha R_{n-1} + (1-\alpha)^2 \alpha R_{n-2} + \\
     & \qquad \qquad \dots + (1-\alpha)^{n-1}\alpha R_1 + (1-\alpha)^nQ_1 \\
     &= (1-\alpha)^nQ_1 + \sum_{i=1}^{n}\alpha(1-\alpha)^{n-i}R_i
-    \end{align*}
+    \end{aligned}
 
 我们称之为加权平均值，
 因为权重之和为 :math:`(1-\alpha)^n + \sum_{i=1}^{n}\alpha(1-\alpha)^{n-i} = 1`，
@@ -422,10 +422,10 @@
 .. math::
     :label: 2.12
 
-    \begin{align*}
+    \begin{aligned}
     H_{t+1}(A_t) &\doteq H_t(A_t) + \alpha(R_t-\overline{R}_t)(1-\pi_t(A_t))， &和 \\
     H_{t+1}(a) &\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&对所有 a \ne A_t
-    \end{align*}
+    \end{aligned}
 
 其中 :math:`\alpha>0` 是步长参数，:math:`\overline{R}_t \in \mathbb(R)` 是所有奖励的平均值，
 包括时间t，可以按照第2.4节（或第2.5节，如果问题是非平稳的）所述逐步计算。
@@ -467,11 +467,11 @@
 
     .. math::
 
-        \begin{align*}
+        \begin{aligned}
         \frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\left[\sum_{x}\pi_t(x)q_*(x)\right] \\
         &= \sum_{x}q_*(x)\frac{\partial \pi_t(x)}{\partial H_t(a)} \\
         &= \sum_{x}(q_*(x)-B_t)\frac{\partial \pi_t(x)}{\partial H_t(a)}
-        \end{align*}
+        \end{aligned}
 
     其中 :math:`B_t` 称为 *基线*，可以是任何不依赖于x的标量。我们可以在这里包括基线而不改变相等性，
     因为梯度在所有动作上总和为零，:math:`\sum_{x}\frac{\partial \pi_t(x)}{\partial H_t(a)} = 0`，
@@ -488,10 +488,10 @@
 
     .. math::
 
-        \begin{align*}
+        \begin{aligned}
         &= \mathbb{E}\left[ (q_*(A_t)-B_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right] \\
         &= \mathbb{E}\left[ (R_t-\overline{R}_t)\frac{\partial \pi_t(A_t)}{\partial H_t(a)}/\pi_t(A_t) \right]
-        \end{align*}
+        \end{aligned}
 
     这里我们选择了基线 :math:`B_t=\overline{R}_t` 和替换 :math:`R_t` 为 :math:`q_*(A_t)`，
     这是允许的，因为 :math:`\mathbb{E}[R_t|A_t] = q_*(A_t)`。
@@ -500,10 +500,10 @@
 
     .. math::
 
-        \begin{align*}
+        \begin{aligned}
         &= \mathbb{E}\left[ (R_t-\overline{R}_t) \pi_t(A_t) (\mathbb{1}_{a=A_t}-\pi_t(a))/\pi_t(A_t) \right] \\
         &= \mathbb{E}\left[ (R_t-\overline{R}_t)(\mathbb{1}_{a=A_t}-\pi_t(a)) \right]
-        \end{align*}
+        \end{aligned}
 
     回想一下，我们的计划是将性能梯度编写为我们可以在每个步骤上采样的预期，就像我们刚刚完成的那样，
     然后更新与样本成比例的每个步骤。将上述期望的样本替换为（2.13）中的性能梯度，得出：
@@ -526,7 +526,7 @@
 
     .. math::
 
-        \begin{align*}
+        \begin{aligned}
         \frac{\partial \pi_t(x)}{\partial H_t(a)} &= \frac{\partial}{\partial H_t(a)}\pi_t(x) \\
         &= \frac{\partial}{\partial H_t(a)}\left[ \frac{e^{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} \right] \\
         &= \frac{ \frac{\partial e^{H_t(x)}}{\partial H_t(a)} \sum_{y=1}^{k}e^{H_t(y)} - e^{H_t(x)}\frac{\partial \sum_{y=1}^{k}e^{H_t(y)}}{\partial H_t(a)} }{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
@@ -534,7 +534,7 @@
         &= \frac{\mathbb{1}_{a=x}e_{H_t(x)}}{\sum_{y=1}^{k}e^{H_t(y)}} - \frac{e^{H_t(x)}e^{H_t(a)}}{(\sum_{y=1}^{k}e^{H_t(y)})^2} \\
         &= \mathbb{1}_{a=x}\pi_t(x) - \pi_t(x)\pi_t(a) \\
         &= \pi_t(x)(\mathbb{1}_{a=x} - \pi_t(a)) &Q.E.D.
-        \end{align*}
+        \end{aligned}
 
     我们刚刚表明，梯度赌博机算法的预期更新等于预期奖励的梯度，因此该算法是随机梯度上升的实例。
     这确保了该算法具有稳健的收敛特性。

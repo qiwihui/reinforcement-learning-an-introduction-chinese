@@ -16,9 +16,9 @@
 这些方法试图使性能 *最大化*，因此它们的更新近似 :math:`J` 中的梯度 *上升*：
 
 .. math::
+    :label: 13.1
 
     \mathbf{\theta}_{t+1}=\mathbf{\theta}_{t}+\alpha \widehat{\nabla J\left(\mathbf{\theta}_{t}\right)}
-    \tag{13.1}
 
 其中 :math:`\widehat{\nabla J\left(\mathbf{\theta}_{t}\right)} \in \mathbb{R}^{d^{\prime}}` 是一个随机估计，
 其期望近似于性能度量相对于其参数 :math:`\mathbf{\theta}_{t}` 的梯度。
@@ -46,9 +46,9 @@
 在每个状态下，具有最高偏好的动作被赋予最高的选择概率，例如，根据指数soft-max分布：
 
 .. math::
+    :label: 13.2
 
     \pi(a | s, \boldsymbol{\theta}) \doteq \frac{e^{h(s, a, \boldsymbol{\theta})}}{\sum_{b} e^{h(s, b, \boldsymbol{\theta})}}
-    \tag{13.2}
 
 其中 :math:`e \approx 2.71828` 是自然对数的底数。请注意，这里的分母是所需要的，因此每种状态下的动作概率总和为1。
 我们将这种策略参数化称为 *动作偏好soft-max* （soft-max in action preferences）。
@@ -57,9 +57,9 @@
 或者简单地，偏好可以在特征上是线性的，
 
 .. math::
+    :label: 13.3
 
     h(s, a, \boldsymbol{\theta})=\boldsymbol{\theta}^{\top} \mathbf{x}(s, a)
-    \tag{13.3}
 
 使用通过第9.5节中所述的任何方法构造的特征向量 :math:`\mathbf{x}(s, a) \in \mathbb{R}^{d^{\prime}}`。
 
@@ -82,7 +82,7 @@
 
     考虑下图所示的小走廊网格世界。与往常一样，奖励为每步 :math:`-1`。在这三个非终结状态的每一个中，只有两个动作，即 **向右** 和 **向左** 。
     这些动作在第一状态和第三状态中具有通常的结果（在第一状态中 **向左** 则不移动），但是在第二状态中，它们是相反的，因此右移 **向左** ，左移 **向右** 。
-    问题是困难的，因为在函数近似下所有状态看起来都相同。特别地，我们为所有 :math:`s` 定义 :math:`$\mathbf{x}(s, \text { right })=[1,0]^{\top}$` 和
+    问题是困难的，因为在函数近似下所有状态看起来都相同。特别地，我们为所有 :math:`s` 定义 :math:`\mathbf{x}(s, \text { right })=[1,0]^{\top}` 和
     :math:`\mathbf{x}(s, \text { left })=[0,1]^{\top}`。
     具有 :math:`\varepsilon` 贪婪动作选择的动作值方法被迫在两个策略之间进行选择：
     在所有步骤上以高概率 :math:`1-\varepsilon / 2` 选择 **向右** 或在所有时步上以相同的高概率选择左。

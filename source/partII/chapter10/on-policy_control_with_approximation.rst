@@ -23,16 +23,16 @@
 例如完整的蒙特卡罗回报（:math:`G_{t}`）或任何n步Sarsa回报（7.4）。动作价值预测的一般梯度下降更新是
 
 .. math::
+    :label: 10.1
 
     \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-    \tag{10.1}
 
 例如，一步Sarsa方法的更新是
 
 .. math::
+    :label: 10.2
 
     \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[R_{t+1}+\gamma \hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-    \tag{10.2}
 
 我们将这种方法称为 *回合半梯度一步Sarsa*。对于常量策略，此方法以与TD(0)相同的方式收敛，
 具有相同类型的误差边界（9.14）。
@@ -108,9 +108,9 @@
 然后通过铺片编码创建的特征向量 :math:`\mathbf{x}(s, a)` 与线性组合，用于近似动作价值函数的参数向量：
 
 .. math::
+    :label: 10.3
 
     \hat{q}(s, a, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s, a)=\sum_{i=1}^{d} w_{i} \cdot x_{i}(s, a)
-    \tag{10.3}
 
 对于每对状态 :math:`s` 和动作 :math:`a`。
 
@@ -135,16 +135,16 @@
 n步回报立即从其表格形式（7.4）推广到函数近似形式：
 
 .. math::
+    :label: 10.4
 
     G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right), \quad t+n<T
-    \tag{10.4}
 
 其中 :math:`G_{t:t+n}=G_{t}` 如果 :math:`t+n \geq T`，像往常一样。 n步更新方程是
 
 .. math::
+    :label: 10.5
 
     \mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t<T
-    \tag{10.5}
 
 完整的伪代码在下面的框中给出：
 
@@ -257,16 +257,16 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 请注意，稳态分布是特殊分布，在该分布下，如果根据 :math:`\pi` 选择动作，则保留在同一分布中。也就是说，为此
 
 .. math::
+    :label: 10.8
 
     \sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) p\left(s^{\prime} | s, a\right)=\mu_{\pi}\left(s^{\prime}\right)
-    \tag{10.8}
 
 在平均奖励设置中，回报是根据奖励与平均奖励之间的差来定义的：
 
 .. math::
+    :label: 10.9
 
     G_{t} \doteq R_{t+1}-r(\pi)+R_{t+2}-r(\pi)+R_{t+3}-r(\pi)+\cdots
-    \tag{10.9}
 
 这称为 *差分* 回报，相应的值函数称为 *差分* 价值函数。
 它们以相同的方式定义，我们将一如既往地使用相同的符号：
@@ -289,16 +289,16 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 还存在两种TD误差的差分形式：
 
 .. math::
+    :label: 10.10
 
     \delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-    \tag{10.10}
 
 以及
 
 .. math::
+    :label: 10.11
 
     \delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-    \tag{10.11}
 
 其中 :math:`\overline{R}_{t}` 是平均奖励 :math:`r(\pi)` 在时间 :math:`t` 的估计值。
 通过这些替代定义，我们的大多数算法和许多理论结果都可以在不改变的情况下进行平均奖励设置。
@@ -306,9 +306,9 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 例如，半梯度Sarsa的平均奖励版本定义如（10.2），除了TD误差版本的不同。也就是说
 
 .. math::
+    :label: 10.12
 
     \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \delta_{t} \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-    \tag{10.12}
 
 由（10.11）给出的 :math:`t`。完整算法的伪代码在下框中给出。
 
@@ -355,9 +355,9 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 对于这种情况，差分回报（10.9）没有很好地定义，因为不存在限制。为了修复这个问题，可以交替地将状态值定义为
 
 .. math::
+    :label: 10.13
 
     v_{\pi}(s) \doteq \lim _{\gamma \rightarrow 1} \lim _{h \rightarrow \infty} \sum_{t=0}^{h} \gamma^{t}\left(\mathbb{E}_{\pi}\left[R_{t+1} | S_{0}=s\right]-r(\pi)\right)
-    \tag{10.13}
 
 根据这个定义，状态 **A** 和 **B** 的值是多少？
 
@@ -469,18 +469,18 @@ n步回报立即从其表格形式（7.4）推广到函数近似形式：
 为了推广到n步自举，我们需要一个TD误差的n步版本。我们首先将n步回报（7.4）推广到其差分形式，并使用函数近似：
 
 .. math::
+    :label: 10.14
 
     G_{t : t+n} \doteq R_{t+1}-\overline{R}_{t+n-1}+\cdots+R_{t+n}-\overline{R}_{t+n-1}+\hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right)
-    \tag{10.14}
 
 其中 :math:`\overline{R}` 是 :math:`r(\pi)` 的一个估计，:math:`n\geq 1` 且 :math:`t+n<T`。
 如果 :math:`t+n \geq T` 则我们如通常一样定义 :math:`G_{t : t+n} \doteq G_{t}`。
 则n步TD误差为
 
 .. math::
+    :label: 10.15
 
     \delta_{t} \doteq G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}\right)
-    \tag{10.15}
 
 之后我们可以应用我们通常的半梯度Sarsa更新（10.12）。框中给出了完整算法的伪代码。
 

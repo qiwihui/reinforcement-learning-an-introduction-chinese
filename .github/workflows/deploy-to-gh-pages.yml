@@ -1,37 +1,37 @@
 name: Deploy to GitHub Pages
 on:
   push:
-    branches:
-      - master
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    container:
+      image: qiwihui/docker-sphinx-cjk-pdf
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    
-    - name: Set up Python 3.6
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.6
-
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
+        pip3 install -U -r requirements.txt
     - name: Build sphinx documentation
       run: |
         make html
-        
     - name: Setup github pages domain
       run: |
         touch build/html/.nojekyll
         echo "${{ secrets.GH_DOMAIN }}" > build/html/CNAME
-
+        apt update && apt install -y git rsync
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
         FOLDER: build/html
+    - name: build pdf
+      run: |
+        make latexpdf
+    - uses: actions/upload-artifact@v2
+      if: ${{ always() }}
+      with:
+        name: pdf
+        path: build/latex/reinforcement-learning-an-introduction-chinese.pdf

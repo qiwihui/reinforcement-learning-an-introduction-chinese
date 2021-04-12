@@ -355,7 +355,7 @@ Dyna个体的整体架构，其中Dyna-Q算法就是一个例子，如图8.1所�
 
             :math:`Q(S, A) \leftarrow Q(S, A)+\alpha\left[R+\gamma \max _{a} Q\left(S^{\prime}, a\right)-Q(S, A)\right]`
 
-            循环所有预计导向 :math:`S` 的 :math:`\overline{S], \overline{A}`：
+            循环所有预计导向 :math:`S` 的 :math:`\overline{S}, \overline{A}`：
 
                 :math:`\overline{R} \leftarrow` :math:`\overline{S}, \overline{A}, S` 的预测奖励
 
@@ -439,17 +439,17 @@ Dyna-AC系统使用 :math:`v_\pi` 样本更新和学习策略结构（如第13�
 状态-动作对 :math:`s, a` 的预期更新是：
 
 .. math::
+    :label: 8.1
 
     Q(s, a) \leftarrow \sum_{s^{\prime}, r} \hat{p}\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)\right]
-    \tag{8.1}
 
 对于 :math:`s, a` 的相应样本更新，给定样本下一状态和奖励 :math:`S_0` 和 :math:`R` （来自模型），
 是类似Q-learning的更新：
 
 .. math::
+    :label: 8.2
 
     Q(s, a) \leftarrow Q(s, a)+\alpha\left[R+\gamma \max _{a^{\prime}} Q\left(S^{\prime}, a^{\prime}\right)-Q(s, a)\right]
-    \tag{8.2}
 
 其中 :math:`\alpha` 通常是正步长参数。
 

@@ -44,9 +44,9 @@
 对于任何参数化函数近似器，该等式的一般形式是
 
 .. math::
+    :label: 12.1
 
     G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{v}\left(S_{t+n}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t \leq T-n
-    \tag{12.1}
 
 其中 :math:`\hat{v}(s, \mathbf{w})` 是给定权重向量 :math:`\mathbf{w}` （第9章）的
 状态 :math:`s` 的近似值，:math:`T` 是回合终止的时间（如果有的话）。
@@ -78,9 +78,9 @@ TD(:math:`\lambda`)算法可以理解为平均 :math:`n` 步更新的一种特�
 结果更新是针对回报，称为 :math:`\lambda` *回报*，以其基于状态的形式定义
 
 .. math::
+    :label: 12.2
 
     G_{t}^{\lambda} \doteq(1-\lambda) \sum_{n=1}^{\infty} \lambda^{n-1} G_{t : t+n}
-    \tag{12.2}
 
 .. figure:: images/figure-12.1.png
 
@@ -99,9 +99,9 @@ TD(:math:`\lambda`)算法可以理解为平均 :math:`n` 步更新的一种特�
 如果我们想要，我们可以将这些终止后的项与主要总和分开，产生
 
 .. math::
+    :label: 12.3
 
     G_{t}^{\lambda}=(1-\lambda) \sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t+t+n}+\lambda^{T-t-1} G_{t}
-    \tag{12.3}
 
 正如图所示。这个等式使得当 :math:`\lambda=1` 时会发生什么更清楚。
 在这种情况下，主要总和变为零，并且剩余的项减少到传统的回报。
@@ -124,9 +124,9 @@ TD(:math:`\lambda`)算法可以理解为平均 :math:`n` 步更新的一种特�
 然后，在回合结束时，根据我们通常的半梯度规则，使用 :math:`\lambda` 回报作为目标，进行整个序列的更新：
 
 .. math::
+    :label: 12.4
 
     \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[G_{t}^{\lambda}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right), \quad t=0, \ldots, T-1
-    \tag{12.4}
 
 :math:`\lambda` 回报为我们提供了一种在蒙特卡罗和一步TD方法之间平滑移动的替代方法，可以与第7章中开发的n步自举方式进行比较。
 我们评估了19个状态随机行走任务的有效性（例子7.1，第144页）。
