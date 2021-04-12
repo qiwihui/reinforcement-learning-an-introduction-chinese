@@ -104,6 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2">14.1 预测与控制</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id5">14.2 经典条件反射</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id6">14.2.1 阻塞与高级条件反射</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rescorla-wagner">14.2.2 Rescorla-Wagner模型</a></li>
 </ul>
 </li>
 </ul>
@@ -335,6 +336,85 @@
 <dd><p>与控制组进行对照实验是十分有必要的，这可以充分说明之前声音的条件作用阻塞了动物对光照刺激的学习。
 在对照组的实验中，动物没有接受声音的条件作用，对光照条件的学习没有受到阻塞。
 Moore和 Schmajuk（2008）对这个实验做出了充分的说明。</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="rescorla-wagner">
+<h3>14.2.2 Rescorla-Wagner模型<a class="headerlink" href="#rescorla-wagner" title="永久链接至标题">¶</a></h3>
+<p>Rescorla和Wagner创建这个模型的主要目的是解决阻塞问题。
+Rescorla-Wagner-模型的核心思想是动物只有在事件违背其预期时才会学习，
+换句话说就是当动物感到惊讶时（尽管不一定意味着任何有 <em>意识的</em> 预期与情绪）。
+我们首先使用 Rescorla和 Wagner自己的术语和符号来描述一下他们的模型，然后再使用我们在讲述TD模型时使用的术语和符号。</p>
+<p>Rescorla和 Wagner是这样描述他们的模型的。
+该模型会调整复合CS中每个子刺激物的“关联强度”，关联强度是表示相应子刺激物预测一个US出现的强度和准确程度的数值。
+当使用一个由多种刺激物组成的复合CS进行经典条件反射的实验时，每种子刺激物的关联强度不仅仅取决于自身，
+还在某种程度上取决于整个复合CS的关联强度，即“聚合关联强度”。</p>
+<p>Rescorla和Wagners假设了一个复合CS AX，它由刺激A和X组成，其中动物可能已经经历过刺激A，但是没有经历过刺激X。
+令 <span class="math notranslate nohighlight">\(V_{A}\)</span>、<span class="math notranslate nohighlight">\(V_{X}\)</span> 和 <span class="math notranslate nohighlight">\(V_{AX}\)</span> 分别表示刺激物A，X以及复合刺激物AX的关联强度。
+假设在某个实验中，复合CS AX作用于实验对象后，紧接着用US对实验对象进行刺激，
+这里我们将US标注为刺激物Y。则复合刺激CS中每个部分的关联强度变化的公式如下：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{array}{l}{
+\Delta V_{A}=\alpha_{A} \beta_{Y}\left(R_{Y}-V_{AX}\right)} \\
+{\Delta V_{X}=\alpha_{X} \beta_{Y}\left(R_{Y}-V_{AX}\right)
+}\end{array}\end{split}\]</div>
+<p>其中，<span class="math notranslate nohighlight">\(\alpha_{A} \beta_{Y}\)</span> 和 <span class="math notranslate nohighlight">\(\alpha_{X} \beta_{Y}\)</span> 是步长参数，
+它们取决于US以及CS的各个组成部分，<span class="math notranslate nohighlight">\(R_{Y}\)</span> 是US Y可以支持的关联强度渐近水平
+（Rescorla和 Wagner在这里用 <span class="math notranslate nohighlight">\(\lambda\)</span> 来代替 <span class="math notranslate nohighlight">\(R\)</span>，
+但是在这里我们依然使用 <span class="math notranslate nohighlight">\(R\)</span> 以避免混淆，因为我们通常认为 <span class="math notranslate nohighlight">\(R\)</span> 表示收益信号的大小。
+但需要说明的是，US在经典条件反射中不一定是收益或者惩罚）。
+Hescorla-Wagner模型的一个重要假设是认为聚合关联强度 <span class="math notranslate nohighlight">\(V_{AX}\)</span> 与 <span class="math notranslate nohighlight">\(V_{A}+V_{X}\)</span> 是相等的。
+而由这些 <span class="math notranslate nohighlight">\(\Delta s\)</span> 改变的关联强度则会成为一轮试验时的初始关联强度。</p>
+<p>出于完整性考虑，模型还需要一个反应生成机制这个机制能够将 <span class="math notranslate nohighlight">\(V\)</span> 的值映射到 CR 中。
+由于这种映射可能会取决于实验中的各种细节，Rescorla 和 Wagner 并没有详细说明这种映射关系，
+仅仅简单地假定 <span class="math notranslate nohighlight">\(V\)</span> 的值越大，越有可能产生 CR，若 <span class="math notranslate nohighlight">\(V\)</span> 的值为负数，则不会产生任何 CR。</p>
+<p>Rescorla-Wagner模型考虑了如何获得CR，这在一定程度上解释了阻塞的产生。
+只要复合刺激物的聚合关联强度 <span class="math notranslate nohighlight">\(V_{AX}\)</span> 低于US Y所支持的关联强度渐近水平 <span class="math notranslate nohighlight">\(R_{Y}\)</span>，则预测误差 <span class="math notranslate nohighlight">\(R_{Y}-V_{AX}\)</span> 和 <span class="math notranslate nohighlight">\(V_{X}\)</span> 持续增加，
+直到聚合关联强度 <span class="math notranslate nohighlight">\(V_{AX}\)</span> 与  <span class="math notranslate nohighlight">\(R_{Y}\)</span> 相等为止，此时，子刺激物的关联水平不再变化（除非US变）。
+若动物已经对某种复合CS产生条件反射，那么再向这种复合CS中添加新的刺激物形成增强的CS，
+但是由于预测误差的值已经被减小到0或极低的值，因此增强的CS在被进一步的条件作用时，新添加刺激物的关联强度就会增加很少或者完全不增加。
+因为之前的CS已经可以几乎完美地预测出US的出现，所以新的刺激物出现所引起的误差或意外就变得很小，这就表明之前的知识阻塞了对新刺激物的学习。</p>
+<p>为了从 Rescorla-Wagner 模型过渡到经典条件反射TD模型（我们称之为TD模型），我们首先根据本书中使用的概念来重塑这个模型。
+具体而言，将用于学习线性函数逼近（9.4节）的符号匹配到这个模型中，
+并且我们认为条件作用的过程是一种在复合CS的基础上对“US的大小”的预测学习实验，US Y的大小就是 Rescorla-Wagner 模型在上面给出的 <span class="math notranslate nohighlight">\(R_{Y}\)</span>。
+同时，我们还要引入一些状态。因为 Rescorla-Wagner-模型是一个 <em>试验层面</em> 的模型，
+也就是说它通过连续不断地试验来确定关联强度的变化而不考虑两个试验之间发生的任何细节变化。
+在讲述完整个TD模型之前，无须考虑状态在一次试验中是如何变化的。我们现在只需要把状态看成一种标记方法就可以了，它标记了试验中的复合CS的组成。</p>
+<p>因此，我们假定试验的类型或者状态 <span class="math notranslate nohighlight">\(s\)</span> 由一个实数特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s)=\left(x_{1}(s), x_{2}(s), \ldots, x_{d}(s)\right)^{\top}\)</span> 描述，
+其中，如果复合CS第 <span class="math notranslate nohighlight">\(i\)</span> 个组成成分 <span class="math notranslate nohighlight">\(CS_i\)</span> 在一次试验中存在，则 <span class="math notranslate nohighlight">\(x_{i}(s)=1\)</span> ，否则为0。
+设 <span class="math notranslate nohighlight">\(d\)</span> 维的关联强度向量为 <span class="math notranslate nohighlight">\(mathbf{w}\)</span>，则状态 <span class="math notranslate nohighlight">\(s\)</span> 的聚合关联强度为</p>
+<div class="math notranslate nohighlight">
+\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)
+\tag{14.1}\]</div>
+<p>这与强化学习中的 <em>价值估计</em> 相对应，我们将其视为对 <em>US的预测</em>。</p>
+<p>现在，我们暂时让 <span class="math notranslate nohighlight">\(t\)</span> 表示完整试验的总数，而不是它的通常含义时刻（当我们讲述下面的TD模型时，我们依然使用t的通常含义）。
+同时，<span class="math notranslate nohighlight">\(S+t\)</span> 是对应于试验 <span class="math notranslate nohighlight">\(t\)</span> 的状态。
+条件作用试验 <span class="math notranslate nohighlight">\(t\)</span> 按照如下公式将关联强度向量 <span class="math notranslate nohighlight">\(\mathbf{w}_{t}\)</span> 更新为 <span class="math notranslate nohighlight">\(\mathbf{w}_{t+1}\)</span> ：</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{x}\left(S_{t}\right)
+\tag{14.2}\]</div>
+<p>其中，<span class="math notranslate nohighlight">\(\alpha\)</span> 是步长参数，因为我们正在描述 Rescorla－Wagner 模型，所以这里 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 指 <em>预测误差</em>。</p>
+<div class="math notranslate nohighlight">
+\[\delta_{t}=R_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
+\tag{14.3}\]</div>
+<p><span class="math notranslate nohighlight">\(R_{t}\)</span> 是试验 <span class="math notranslate nohighlight">\(t\)</span> 的预测目标，即 US 的大小，用 Rescorla 和 Wagner 的话来说就是 US 在试验中可以支持的关联强度。
+我们可以注意到，由于式（14.2）中存在因子 <span class="math notranslate nohighlight">\(\mathbf{x}(S_{t})\)</span>，所以在复合CS中，只有在试验中出现的子刺激物的关联强度才会在一次试验后被调整。
+我们可以将预测误差视为对意外程度的度量，而聚合关联强度可以被视为动物的某种期望值，当它不符合目标 US 强度时就意味着动物的期望被违背了。</p>
+<p>从机器学习的角度来看， Rescorla-Wagner 模型是一个基于误差纠正的监督学习模型。
+它本质上与最小均方（LMS）或 Widrow-Hoff（Widrow 和 Hoff, 1960）学习规则一样，
+通过调整权重使得误差的均方差尽可能接近于0，在这个模型中，权重就是关联强度。
+这种“曲线拟合”或者回归算法被广泛地应用于工程和科学应用当中（参见9.4节） <a class="footnote-reference brackets" href="#id10" id="id9">3</a>。</p>
+<p>Rescorla-Wagner 模型在动物学习理论的历史上是非常有影响力的，因为它表明，“机械”理论可以解释关于阻塞的主要事实，而不用诉诸于更复杂的认知学理论。
+例如当动物已经明确感知到另外一种子刺激物出现时，它会根据其之前的短期记忆来评估刺激物与US之间的预测关系。
+Rescorla-Wagner 模型表明了条件反射的连续性理论（即刺激的时间连续性是学习的充分必要条件）经过简单的调整可以用来解释阻塞现象（Moore and Schmajuk, 2008）。</p>
+<p>Rescorla-Wagner 模型对阻塞现象以及条件反射的其他特征做出了简单的解释，但是这并不是一个针对条件反射最完整或最好的模型。
+对于目前所观察到的效应也有许多不同的理论给出了解释，并且为了理解经典条件反射的许多微妙之处，相关方面仍在不断发展。
+我们在下面即将讲解的TD模型，虽然也不是最好或最完整的条件反射模型，但它扩展了 Rescorla-Wagner 模型，
+对试验内和试验间的刺激时序关系对学习效果的影响做出了解释，同时也解释了高级条件反射可能的出现原因。</p>
+<dl class="footnote brackets">
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id9">3</a></span></dt>
+<dd><p>LMS 规则和 Rescorl－Wagner 模型的唯一区别是，对于 LMS，输入向量 <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> 可以由任意多的实数组成，
+并且 <span class="math notranslate nohighlight">\(\alpha\)</span> 不依赖于输入向量以及刺激物的特性（至少在最简单的 LMS 规则中是这样的）。</p>
 </dd>
 </dl>
 </div>
