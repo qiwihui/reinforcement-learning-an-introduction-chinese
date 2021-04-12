@@ -105,6 +105,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">14.2 经典条件反射</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id6">14.2.1 阻塞与高级条件反射</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#rescorla-wagner">14.2.2 Rescorla-Wagner模型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#td">14.2.3 TD模型</a></li>
 </ul>
 </li>
 </ul>
@@ -393,7 +394,7 @@ Hescorla-Wagner模型的一个重要假设是认为聚合关联强度 <span clas
 <div class="math notranslate nohighlight">
 \[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{x}\left(S_{t}\right)
 \tag{14.2}\]</div>
-<p>其中，<span class="math notranslate nohighlight">\(\alpha\)</span> 是步长参数，因为我们正在描述 Rescorla－Wagner 模型，所以这里 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 指 <em>预测误差</em>。</p>
+<p>其中，<span class="math notranslate nohighlight">\(\alpha\)</span> 是步长参数，因为我们正在描述 Rescorla-Wagner 模型，所以这里 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 指 <em>预测误差</em>。</p>
 <div class="math notranslate nohighlight">
 \[\delta_{t}=R_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
 \tag{14.3}\]</div>
@@ -413,10 +414,51 @@ Rescorla-Wagner 模型表明了条件反射的连续性理论（即刺激的时�
 对试验内和试验间的刺激时序关系对学习效果的影响做出了解释，同时也解释了高级条件反射可能的出现原因。</p>
 <dl class="footnote brackets">
 <dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id9">3</a></span></dt>
-<dd><p>LMS 规则和 Rescorl－Wagner 模型的唯一区别是，对于 LMS，输入向量 <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> 可以由任意多的实数组成，
+<dd><p>LMS 规则和 Rescorl-Wagner 模型的唯一区别是，对于 LMS，输入向量 <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> 可以由任意多的实数组成，
 并且 <span class="math notranslate nohighlight">\(\alpha\)</span> 不依赖于输入向量以及刺激物的特性（至少在最简单的 LMS 规则中是这样的）。</p>
 </dd>
 </dl>
+</div>
+<div class="section" id="td">
+<h3>14.2.3 TD模型<a class="headerlink" href="#td" title="永久链接至标题">¶</a></h3>
+<p>与 Rescorla-Wagner 相反，TD模型不是一个试验层面的模型，而是一个 <em>实时</em> 模型。
+在 Rescorla-Wagner 模型中，<span class="math notranslate nohighlight">\(t\)</span> 每增加1则表示经过了一个完整的条件反射试验，因此该模型不适合对试验进程中发生的细节进行描述。
+在每次试验中，动物可能会经历各种在特定时刻产生并持续特定时长的刺激，这些时间关系会对动物的学习效果产生显著的影响。
+同时， Rescorla-Wagner 模型也没有考虑高级条件反射的机制，但是对于TD模型来说，高级条件反射是TD模型的核心思想——自举思想的自然结果。</p>
+<p>我们从 Rescorla-Wagner 模型的结构开始讲述TD模型，但是从现在开始 <span class="math notranslate nohighlight">\(t\)</span> 表示试验中或两次试验之间的时刻，而不是一次完成的试验。
+我们将 <span class="math notranslate nohighlight">\(t\)</span> 和 <span class="math notranslate nohighlight">\(t+1\)</span> 之间的时间视为一个很小的时间间隔，例如 0.01 秒，将一次试验视为一个状态序列，每个状态对应于一个时刻。
+因此，每个 <span class="math notranslate nohighlight">\(t\)</span> 对应的状态表示了在 <span class="math notranslate nohighlight">\(t\)</span> 这个时刻的刺激物的各种细节，而不仅仅是在一次试验中CS各种组成部分出现的标记。
+实际上，我们可以完全抛弃以一次试验为单位的想法。从动物的视角来看，动物与其所处环境之间的交互是连续的，一次试验仅仅是这种连续体验的一个片段。
+按照我们对智能体与其所处环境交互的观点，假设动物正在经历一系列无限的状态 <span class="math notranslate nohighlight">\(s\)</span>，每个状态由一个特征向量 <span class="math notranslate nohighlight">\(mathbf{x}(s)\)</span> 表示。
+这也就是说，我们可以将多次试验视为一个大的试验中的若干时间片段，刺激模式不断在这些时间片段中重复，这样做往往十分方便。</p>
+<p>状态特征不仅可以描述动物所经历的外部刺激，还可以描述外部刺激在动物大脑中产生的神经活动模式，
+而这些模式是历史相关的，这意味着可以通过一系列外部刺激来形成持久的神经活动模式。
+当然，我们并不知道这些模式的具体内容是什么，但是诸如TD模型这样的实时模型可以让我们探究各种关于外部刺激的内部表征的学习假说所呈现的结果。
+综上所述，TD模型并不会确定任何一种特定的状态刺激表示。此外，由于TD模型包含了跨越不同刺激时间间隔的折扣和资格迹，
+因此，该模型还可以让我们探究折扣和资格迹是如何与刺激物的表示进行交互的，这些交互可以用于预测经典条件反射试验的结果。</p>
+<p>下面我们来描述一些与TD模型一起使用的状态表示及其含义，但是我们暂且还不知道状态表示的具体内容，
+因此我们假设每个状态 <span class="math notranslate nohighlight">\(s\)</span> 都是由一个特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s)=\left(x_{1}(s), x_{2}(s), \ldots, x_{n}(s)\right)^{\top}\)</span> 来表示的。
+那么与状态 <span class="math notranslate nohighlight">\(s\)</span> 对应的聚合关联强度和 Rescorla Wagner 相同，都由式（14.1）给出。
+但是TD模型对于关联强度向量 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 的更新方式是不同的。由于参数 <span class="math notranslate nohighlight">\(t\)</span> 目前表示的是一个时刻而不是一次完整的试验，因此TD模型根据如下公式进行更新</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{z}_{t}
+\tag{14.4}\]</div>
+<p>上式将 Rescorla-Wagner 模型更新公式（14.2）中的 <span class="math notranslate nohighlight">\(\mathbf{x}_t(S_t)\)</span> 替换为 <span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span>，<span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span> 是一个资格迹向量。
+同时，这里的 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 与式（14.3）中的不同，其代表TD误差。</p>
+<div class="math notranslate nohighlight">
+\[\delta_{t}=R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
+\tag{14.5}\]</div>
+<p>其中， <span class="math notranslate nohighlight">\(\gamma\)</span> 是折扣系数（介于0和1之间），<span class="math notranslate nohighlight">\(R_t\)</span> 是在 <span class="math notranslate nohighlight">\(t\)</span> 时刻的预测目标，
+<span class="math notranslate nohighlight">\(\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)\)</span> 和 <span class="math notranslate nohighlight">\(\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\)</span> 是在 <span class="math notranslate nohighlight">\(t+1\)</span> 时刻与 <span class="math notranslate nohighlight">\(t\)</span> 时刻对应的聚合关联强度，如式（14.1）中所定义的。</p>
+<p>资格迹向量 <span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span> 的每个分量 <span class="math notranslate nohighlight">\(i\)</span> 根据特征向量 <span class="math notranslate nohighlight">\(x_i(S_t)\)</span> 分量 <span class="math notranslate nohighlight">\(\mathbf{x}(S_t)\)</span> 进行增加或减少，其余的资格迹向量根据系数 <span class="math notranslate nohighlight">\(\gamma\lambda\)</span> 进行衰减</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{z}_{t+1}=\gamma \lambda \mathbf{z}_{t}+\mathbf{x}\left(S_{t}\right)
+\tag{14.6}\]</div>
+<p>这里的 <span class="math notranslate nohighlight">\(\lambda\)</span> 是资格迹的衰减系数。</p>
+<p>这里注意，如果 <span class="math notranslate nohighlight">\(\gamma=0\)</span>，那么TD模型就会退化为 Rescorla-Wagner 模型，
+但是不同之处在于 <span class="math notranslate nohighlight">\(t\)</span> 的含义（在 Rescorla-Wagner 模型中表示一次试验，在TD模型中表示某个时刻）。
+同时，在TD模型中，预测目标 <span class="math notranslate nohighlight">\(R\)</span> 要多出一步TD模型相当于线性函数逼近（第12章）中半梯度 <span class="math notranslate nohighlight">\(TD(\lambda)\)</span> 算法的后向视图，
+但区别在于当使用TD算法学习价值函数来进行策略改进时，<span class="math notranslate nohighlight">\(R_t\)</span> 不必是收益信号。</p>
 </div>
 </div>
 </div>
