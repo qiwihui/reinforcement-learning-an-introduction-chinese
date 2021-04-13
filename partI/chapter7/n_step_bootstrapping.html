@@ -590,11 +590,11 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 \tag{7.15}\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t&lt;T-1\)</span>。两步树备份回报为</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+\[\begin{split}\begin{aligned}
 G_{t : t+2} &amp;\doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right) \\
 &amp; \quad +\gamma \pi\left(A_{t+1} | S_{t+1}\right)\left(R_{t+2}+\gamma \sum_{a} \pi\left(a | S_{t+2}\right) Q_{t+1}\left(S_{t+2}, a\right)\right) \\
 &amp;=R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+2}
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t&lt;T-2\)</span>。后一种形式表明了树备份n步回报的一般递归定义：</p>
 <div class="math notranslate nohighlight">
 \[G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}

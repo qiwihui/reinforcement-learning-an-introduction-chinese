@@ -22,20 +22,20 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 .. math::
     :label: 4.1
 
-    \begin{align*}
+    \begin{aligned}
     v_*(s) &= \max_a\mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1}) | S_t=s,A_t=a] \\
     &= \max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_*(s')]
-    \end{align*}
+    \end{aligned}
 
 或者
 
 .. math::
     :label: 4.2
 
-    \begin{align*}
+    \begin{aligned}
     q_*(s,a)& = \mathbb{E}[R_{t+1}+\gamma \max_{a'} q_*(S_{t+1},a') | S_t=s,A_t=a]\\
     &=\sum_{s',r}p(s',r|s,a)[r+\gamma\max_{a'} q_*(s',a')],
-    \end{align*}
+    \end{aligned}
 
 对于所有的 :math:`s\in\mathcal{S}`，:math:`a\in\mathcal{A}(s)`，
 以及 :math:`s^\prime\in\mathcal{S^+}` 。
@@ -50,12 +50,12 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 
 .. math::
 
-    \begin{align}
+    \begin{aligned}
     v_\pi(s) & \doteq \mathbb{E_\pi}[G_t | S_t=s] \\
     &= \mathbb{E_\pi}[R_{t+1} + \gamma G_{t+1} | S_t=s]  &(从(3.9)) \\
     &= \mathbb{E_\pi}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s] & \tag{4.3} \\
     &= \sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]，& \tag{4.4}
-    \end{align}
+    \end{aligned}
 
 在这里 :math:`\pi(a|s)` 是在状态 :math:`s` 时使用策略 :math:`\pi` 采取动作 :math:`a` 的概率，
 期望下标 :math:`\pi` 用来表明是在策略 :math:`\pi` 的条件下。
@@ -73,10 +73,10 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 .. math::
     :label: 4.5
 
-    \begin{align}
+    \begin{aligned}
     v_{k+1}(s)& \overset{\cdot}{=}\mathbb{E}[R_{t+1}+\gamma v_k(S_{t+1}) | S_t=s] \\
     &= \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma{v_k(s')}],
-    \end{align}
+    \end{aligned}
 
 对于所有的 :math:`s\in\mathcal{S}`。很明显， :math:`v_k=v_\pi` 是这种更新规则下的不动点，
 因为关于 :math:`v_\pi` 贝尔曼方程可以保证等号的成立。实际上，只要在相同的条件下保证 :math:`v_\pi` 的存在，
@@ -175,10 +175,10 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 .. math::
     :label: 4.6
 
-    \begin{align*}
+    \begin{aligned}
     q_\pi(s,a)& \doteq \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a] \\
     &= \sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]
-    \end{align*}
+    \end{aligned}
 
 关键的标准是这等式是大于还是小于 :math:`v_{\pi}`。如果是大于——也就是说，
 在状态 :math:`s` 选择执行一次动作 :math:`a` 然后遵从策略 :math:`\pi`
@@ -214,7 +214,7 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 
 .. math::
 
-   \begin{align}
+   \begin{aligned}
    v_\pi(s)& \leq q_\pi(s,\pi'(s))\\
    &= \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=\pi'(s)]  & (由(4.6))\\
    &= \mathbb{E}_{\pi'}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s]  \\
@@ -225,7 +225,7 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
    &  \vdots \\
    & \leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\gamma^3R_{t+4}+\cdots | S_t=s]  \\
    &=v_{\pi'}(s)
-   \end{align}
+   \end{aligned}
 
 目前为止我们看到当给定一个策略和它的价值函数后，我们可以很容易地对在某个状态的动作改变进行评估。
 很自然就会扩展到考虑所有状态和所有可能的动作，根据 :math:`q_\pi(s,a)` 选择在每个状态最好的动作。
@@ -234,11 +234,11 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
 .. math::
     :label: 4.9
 
-    \begin{align*}
+    \begin{aligned}
     \pi'(s)& \doteq \arg\max_a q_\pi(s,a) \\
     & =\arg \max_a\mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a]\\
     &=\arg\max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')],
-    \end{align*}
+    \end{aligned}
 
 其中 :math:`\arg\max_a` 表示随后的表达式最大化（随意打破关系）的 :math:`a` 的值。
 贪婪策略采取短期内看起来最好的动作——向前展望一步——根据 :math:`v_\pi`。

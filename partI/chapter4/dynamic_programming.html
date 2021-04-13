@@ -226,16 +226,16 @@ DP算法为本书后面章节的理解提供了必要的基础。事实上，那
 本章我们向读者展示DP怎么被用来计算第3章中定义的价值函数。
 在第3章中讨论过的，一旦我们找到最优价值函数 <span class="math notranslate nohighlight">\(v_*\)</span> 或者 <span class="math notranslate nohighlight">\(q_*\)</span>，我们就可以很容易的获得最优策略，这符合贝尔曼最优方程：</p>
 <div class="math notranslate nohighlight" id="equation-4-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-4-1" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(1)<a class="headerlink" href="#equation-4-1" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 v_*(s) &amp;= \max_a\mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1}) | S_t=s,A_t=a] \\
 &amp;= \max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_*(s')]
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>或者</p>
 <div class="math notranslate nohighlight" id="equation-4-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-4-2" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(2)<a class="headerlink" href="#equation-4-2" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 q_*(s,a)&amp; = \mathbb{E}[R_{t+1}+\gamma \max_{a'} q_*(S_{t+1},a') | S_t=s,A_t=a]\\
 &amp;=\sum_{s',r}p(s',r|s,a)[r+\gamma\max_{a'} q_*(s',a')],
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>对于所有的 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>，<span class="math notranslate nohighlight">\(a\in\mathcal{A}(s)\)</span>，
 以及 <span class="math notranslate nohighlight">\(s^\prime\in\mathcal{S^+}\)</span> 。
 我们可以看到，DP算法其实是将贝尔曼方程转换为更新规则以此来提升价值函数的近似效果。</p>
@@ -244,12 +244,12 @@ q_*(s,a)&amp; = \mathbb{E}[R_{t+1}+\gamma \max_{a'} q_*(S_{t+1},a') | S_t=s,A_t=
 <p>首先我们考虑给定任意策略 <span class="math notranslate nohighlight">\(\pi\)</span> 怎样计算状态值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
 这在DP文献中被称作 <em>策略评估</em>。我们把它当作 <em>预测问题</em>。回想第三章，对于所有的 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>，</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+\[\begin{split}\begin{aligned}
 v_\pi(s) &amp; \doteq \mathbb{E_\pi}[G_t | S_t=s] \\
 &amp;= \mathbb{E_\pi}[R_{t+1} + \gamma G_{t+1} | S_t=s]  &amp;(从(3.9)) \\
 &amp;= \mathbb{E_\pi}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s] &amp; \tag{4.3} \\
 &amp;= \sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]，&amp; \tag{4.4}
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>在这里 <span class="math notranslate nohighlight">\(\pi(a|s)\)</span> 是在状态 <span class="math notranslate nohighlight">\(s\)</span> 时使用策略 <span class="math notranslate nohighlight">\(\pi\)</span> 采取动作 <span class="math notranslate nohighlight">\(a\)</span> 的概率，
 期望下标 <span class="math notranslate nohighlight">\(\pi\)</span> 用来表明是在策略 <span class="math notranslate nohighlight">\(\pi\)</span> 的条件下。
 只要 <span class="math notranslate nohighlight">\(\gamma&lt;1\)</span> 或者所有的状态在策略 <span class="math notranslate nohighlight">\(\pi(a|s)\)</span> 下都能达到最终状态，
@@ -262,10 +262,10 @@ v_\pi(s) &amp; \doteq \mathbb{E_\pi}[G_t | S_t=s] \\
 初始的近似值 <span class="math notranslate nohighlight">\(v_0\)</span> 是任意选取的（除了终止状态，如果有的话，需要被赋值为0），
 并通过使用 <span class="math notranslate nohighlight">\(v_\pi (3.12)\)</span> 的贝尔曼方程作为更新规则来获得每个逐次逼近：</p>
 <div class="math notranslate nohighlight" id="equation-4-5">
-<span class="eqno">(3)<a class="headerlink" href="#equation-4-5" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(3)<a class="headerlink" href="#equation-4-5" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 v_{k+1}(s)&amp; \overset{\cdot}{=}\mathbb{E}[R_{t+1}+\gamma v_k(S_{t+1}) | S_t=s] \\
 &amp;= \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma{v_k(s')}],
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>对于所有的 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>。很明显， <span class="math notranslate nohighlight">\(v_k=v_\pi\)</span> 是这种更新规则下的不动点，
 因为关于 <span class="math notranslate nohighlight">\(v_\pi\)</span> 贝尔曼方程可以保证等号的成立。实际上，只要在相同的条件下保证 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的存在，
 随着 <span class="math notranslate nohighlight">\(k\rightarrow\infty\)</span>，<span class="math notranslate nohighlight">\(\{v_k\}\)</span> 序列可以保证在广泛意义下收敛到 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
@@ -343,10 +343,10 @@ v_{k+1}(s)&amp; \overset{\cdot}{=}\mathbb{E}[R_{t+1}+\gamma v_k(S_{t+1}) | S_t=s
 </div>
 <p>这种的方式的值是：</p>
 <div class="math notranslate nohighlight" id="equation-4-6">
-<span class="eqno">(4)<a class="headerlink" href="#equation-4-6" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(4)<a class="headerlink" href="#equation-4-6" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 q_\pi(s,a)&amp; \doteq \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a] \\
 &amp;= \sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>关键的标准是这等式是大于还是小于 <span class="math notranslate nohighlight">\(v_{\pi}\)</span>。如果是大于——也就是说，
 在状态 <span class="math notranslate nohighlight">\(s\)</span> 选择执行一次动作 <span class="math notranslate nohighlight">\(a\)</span> 然后遵从策略 <span class="math notranslate nohighlight">\(\pi\)</span>
 是否会比一直遵从策略 <span class="math notranslate nohighlight">\(\pi\)</span> 好——然后我们当然愿意每次到达状态 <span class="math notranslate nohighlight">\(s\)</span> 选择动作 <span class="math notranslate nohighlight">\(a\)</span> 都会比较好。
@@ -369,7 +369,7 @@ q_\pi(s,a)&amp; \doteq \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a] \
 <p>策略提升理论的证明过程很容易理解。从 <span class="math notranslate nohighlight">\((4.7)\)</span> 开始，
 我们一直扩展 <span class="math notranslate nohighlight">\(q_\pi\)</span> 那一边并且再次应用 <span class="math notranslate nohighlight">\((4.7)\)</span> 直到我们得到 <span class="math notranslate nohighlight">\(v_\pi'(s)\)</span>：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+\[\begin{split}\begin{aligned}
 v_\pi(s)&amp; \leq q_\pi(s,\pi'(s))\\
 &amp;= \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=\pi'(s)]  &amp; (由(4.6))\\
 &amp;= \mathbb{E}_{\pi'}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s]  \\
@@ -380,16 +380,16 @@ v_\pi(s)&amp; \leq q_\pi(s,\pi'(s))\\
 &amp;  \vdots \\
 &amp; \leq \mathbb{E}_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\gamma^3R_{t+4}+\cdots | S_t=s]  \\
 &amp;=v_{\pi'}(s)
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>目前为止我们看到当给定一个策略和它的价值函数后，我们可以很容易地对在某个状态的动作改变进行评估。
 很自然就会扩展到考虑所有状态和所有可能的动作，根据 <span class="math notranslate nohighlight">\(q_\pi(s,a)\)</span> 选择在每个状态最好的动作。
 换句话说，考虑新的 <em>贪婪</em> 策略 <span class="math notranslate nohighlight">\(\pi'\)</span>，如下</p>
 <div class="math notranslate nohighlight" id="equation-4-9">
-<span class="eqno">(7)<a class="headerlink" href="#equation-4-9" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(7)<a class="headerlink" href="#equation-4-9" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 \pi'(s)&amp; \doteq \arg\max_a q_\pi(s,a) \\
 &amp; =\arg \max_a\mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a]\\
 &amp;=\arg\max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')],
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\arg\max_a\)</span> 表示随后的表达式最大化（随意打破关系）的 <span class="math notranslate nohighlight">\(a\)</span> 的值。
 贪婪策略采取短期内看起来最好的动作——向前展望一步——根据 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
 通过构造，贪婪策略满足策略提升理论 <span class="math notranslate nohighlight">\((4.7)\)</span> 的条件，所以我们知道这个策略和初始策略一样或者更好。

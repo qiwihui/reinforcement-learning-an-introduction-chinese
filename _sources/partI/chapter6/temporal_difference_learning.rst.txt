@@ -74,11 +74,11 @@ TD方法需要等到下一个时间步。 在时间 :math:`t+1`，它们立即�
 
 .. math::
 
-    \begin{align}
+    \begin{aligned}
     v_{\pi}(s) & \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right]  \tag{6.3}\\
     &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s\right] & (由(3.9))\\
     &=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) | S_{t}=s\right] \tag{6.4}
-    \end{align}
+    \end{aligned}
 
 粗略地说，蒙特卡罗方法使用（6.3）的估计作为目标，而DP方法使用（6.4）的估计作为目标。
 蒙特卡洛目标是估计，因为（6.3）中的预期值未知；使用样本回报来代替实际预期回报。
@@ -113,14 +113,14 @@ TD目标是估计原因有两个：它在（6.4）中对预期值进行采样，
 
 .. math::
 
-    \begin{align}
+    \begin{aligned}
     G_{t}-V\left(S_{t}\right) &=R_{t+1}+\gamma G_{t+1}-V\left(S_{t}\right)+\gamma V\left(S_{t+1}\right)-\gamma V\left(S_{t+1}\right) & (由(3.9)) \\
     &=\delta_{t}+\gamma\left(G_{t+1}-V\left(S_{t+1}\right)\right) \\
     &=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2}\left(G_{t+2}-V\left(S_{t+2}\right)\right) \\
     &=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2} \delta_{t+2}+\cdots+\gamma^{T-t-1} \delta_{T-1}+\gamma^{T-t}\left(G_{T}-V\left(S_{T}\right)\right) \\
     &=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2} \delta_{t+2}+\cdots+\gamma^{T-t-1} \delta_{T-1}+\gamma^{T-t}(0-0) \\
     &=\sum_{k=t}^{T-1} \gamma^{k-t} \delta_{k} \tag{6.6}
-    \end{align}
+    \end{aligned}
 
 如果在回合期间更新 :math:`V` （因为它在TD(0)中），则此恒等式不准确，但如果步长很小，那么它可能仍然保持近似。
 这种恒等式的一般化在时序差分学习的理论和算法中起着重要作用。

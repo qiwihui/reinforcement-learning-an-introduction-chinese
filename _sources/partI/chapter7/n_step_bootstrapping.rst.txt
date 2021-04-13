@@ -510,11 +510,11 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 
 .. math::
 
-    \begin{align}
+    \begin{aligned}
     G_{t : t+2} &\doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right) \\
     & \quad +\gamma \pi\left(A_{t+1} | S_{t+1}\right)\left(R_{t+2}+\gamma \sum_{a} \pi\left(a | S_{t+2}\right) Q_{t+1}\left(S_{t+2}, a\right)\right) \\
     &=R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+2}
-    \end{align}
+    \end{aligned}
 
 对 :math:`t<T-2`。后一种形式表明了树备份n步回报的一般递归定义：
 

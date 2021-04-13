@@ -548,11 +548,11 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。</p>
 设 <span class="math notranslate nohighlight">\(\pi'\)</span> 为 <span class="math notranslate nohighlight">\(\epsilon -\)</span> 贪心策略。
 策略提升理论能够应用在这里，因为对所有 <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-5-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-5-2" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align}
+<span class="eqno">(2)<a class="headerlink" href="#equation-5-2" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 q_{\pi}\left(s, \pi^{\prime}(s)\right) &amp;=\sum_{a} \pi^{\prime}(a | s) q_{\pi}(s, a) \\
 &amp;=\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \max _{a} q_{\pi}(s, a) \tag{5.2}\\
 &amp; \geq \frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \sum_{a} \frac{\pi(a | s)-\frac{\varepsilon}{|\mathcal{A}(s)|}}{1-\varepsilon} q_{\pi}(s, a)
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>（和是为1的非负权值的加权平均，所以它必须小于等于最大数的求和）</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -745,13 +745,13 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 所有这些回合的回报为 <span class="math notranslate nohighlight">\(1\)</span>，所以 <span class="math notranslate nohighlight">\(G_0\)</span> 可以忽略掉。
 这样，为了得到期望值，我们只需考虑回合的长度，乘以回合发生的可能性，除以重要性采样率的平方，再把他们都加起来：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+\[\begin{split}\begin{aligned}
 &amp;= \frac{1}{2}\cdot 0.1\left(\frac{1}{0.5} \right)^2 \tag{长度为1的回合}\\
 &amp;+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为2的回合}\\
 &amp;+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为3的回合}\\
 &amp;+ \cdots \\
 &amp;= 0.1 \sum_{k=0}^{\infty}0.9^k \cdot 2^k \cdot 2 = 0.2 \sum_{k=0}^{\infty}1.8^k = \infty
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p><em>练习 5.6</em> 给定策略 <span class="math notranslate nohighlight">\(b\)</span> 的回报，
 式5.6中状态价值 <span class="math notranslate nohighlight">\(V(s)\)</span> 换成 <em>动作</em> 价值 <span class="math notranslate nohighlight">\(Q(s,a)\)</span> 的表达式是什么？</p>
 <p><em>练习 5.7</em> 对原始重要性采样方法而言，像图5.3那样，学习曲线中误差是随着训练次数的增加而减少的。
@@ -947,10 +947,10 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 这样的方法即使在没有折扣的情况下（即 <span class="math notranslate nohighlight">\(\gamma = 1\)</span> ）也可以减少方差。
 在离策略估计器5.5和5.6中，和中的每个元素本身也是和：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+\[\begin{split}\begin{aligned}
 \rho_{t : T-1} G_{t} &amp;=\rho_{t : T-1}\left(R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{T-t-1} R_{T}\right) \\
 &amp;=\rho_{t : T-1} R_{t+1}+\gamma \rho_{t : T-1} R_{t+2}+\cdots+\gamma^{T-t-1} \rho_{t : T-1} R_{T} \tag{5.11}
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>离策略估计器依赖于这些值的期望；我们尝试用更简单的方式表达出来。
 注意到，5.11中的每个元素是一个随机奖励和一个随机重要性采样率的乘积。
 比如，第一个元素，我们用5.3式展开，</p>

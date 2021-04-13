@@ -417,11 +417,11 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 .. math::
     :label: 5.2
 
-    \begin{align}
+    \begin{aligned}
     q_{\pi}\left(s, \pi^{\prime}(s)\right) &=\sum_{a} \pi^{\prime}(a | s) q_{\pi}(s, a) \\
     &=\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \max _{a} q_{\pi}(s, a) \tag{5.2}\\
     & \geq \frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \sum_{a} \frac{\pi(a | s)-\frac{\varepsilon}{|\mathcal{A}(s)|}}{1-\varepsilon} q_{\pi}(s, a)
-    \end{align}
+    \end{aligned}
 
 （和是为1的非负权值的加权平均，所以它必须小于等于最大数的求和）
 
@@ -664,13 +664,13 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
 .. math::
 
-   \begin{align}
+   \begin{aligned}
    &= \frac{1}{2}\cdot 0.1\left(\frac{1}{0.5} \right)^2 \tag{长度为1的回合}\\
    &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为2的回合}\\
    &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为3的回合}\\
    &+ \cdots \\
    &= 0.1 \sum_{k=0}^{\infty}0.9^k \cdot 2^k \cdot 2 = 0.2 \sum_{k=0}^{\infty}1.8^k = \infty
-   \end{align}
+   \end{aligned}
 
 *练习 5.6* 给定策略 :math:`b` 的回报，
 式5.6中状态价值 :math:`V(s)` 换成 *动作* 价值 :math:`Q(s,a)` 的表达式是什么？
@@ -929,10 +929,10 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
 .. math::
 
-    \begin{align}
+    \begin{aligned}
     \rho_{t : T-1} G_{t} &=\rho_{t : T-1}\left(R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{T-t-1} R_{T}\right) \\
     &=\rho_{t : T-1} R_{t+1}+\gamma \rho_{t : T-1} R_{t+2}+\cdots+\gamma^{T-t-1} \rho_{t : T-1} R_{T} \tag{5.11}
-    \end{align}
+    \end{aligned}
 
 离策略估计器依赖于这些值的期望；我们尝试用更简单的方式表达出来。
 注意到，5.11中的每个元素是一个随机奖励和一个随机重要性采样率的乘积。

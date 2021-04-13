@@ -277,11 +277,11 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
 .. math::
     :label: 3.9
 
-    \begin{align*}
+    \begin{aligned}
     G_{t} &\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4} + \dots \\
     &= R_{t+1} + \gamma(R_{t+2} + \gamma R_{t+3} + \gamma^2 R_{t+4} + \dots) \\
     &= R_{t+1} + \gamma G_{t+1}
-    \end{align*}
+    \end{aligned}
 
 请注意，这适用于所有时间步骤 :math:`t<T`，即使终止发生在 :math:`t+1`，如果我们定义 :math:`G_T=0`，也是适用的。
 这通常可以很容易地计算奖励序列的回报。
@@ -429,12 +429,12 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
 .. math::
     :label: 3.14
 
-    \begin{align*}
+    \begin{aligned}
     v_\pi(s) &\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
     &= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s] (由 (3.9)) \\
     &= \sum_a\pi(a|s) \sum_{s^\prime}\sum_r p(s^\prime,r|s,a) \left[r+\gamma\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s^\prime]\right] \\
     &= \sum_a\pi(a|s) \sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma v_\pi(s^\prime)], 对所有 s\in\mathcal{S}
-    \end{align*}
+    \end{aligned}
 
 其中隐含的动作 :math:`a` 取自集合 :math:`\mathcal{A}(s)`，
 下一个状态 :math:`s^\prime` 取自集合 :math:`\mathcal{S}`
@@ -609,23 +609,23 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     v_*(s) &= \max_{a\in\mathcal{A}(s)} q_{\pi_*}(s,a) \\
     &=\max_a \mathbb{E}_{\pi_*}[G_t|S_t=s,A_t=a] \\
     &=\max_a \mathbb{E}_{\pi_*}[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] &(由(3.9)式) \\
     &=\max_a \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a] &(3.18) \\
     &=\max_{a\in \mathcal{A}(s)}\sum_{s^\prime,r} p(s^\prime,r|s,a)[r+\gamma v_*(s^\prime)] &(3.19)
-    \end{align*}
+    \end{aligned}
 
 最后两个方程是 :math:`v_*` 的贝尔曼最优方程的两种形式，:math:`q_*` 的贝尔曼最优方程为
 
 .. math::
     :label: 3.20
 
-    \begin{align*}
+    \begin{aligned}
     q_*(s,a) &= \mathbb{E}\left[R_{t+1}+\gamma\sum_{a^\prime}q_*(S_{t+1,a^\prime})|S_t=s,A_t=a\right] \\
     &=\sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma \max_{a^\prime}q_*(s^\prime,a^\prime)]
-    \end{align*}
+    \end{aligned}
 
 下图中的备份图以图像方式显示了在 :math:`v_*` 和 :math:`q_*` 的贝尔曼最优方程中考虑的未来状态和动作的跨度。
 这些与 :math:`v_\pi` 和 :math:`q_\pi` 的备份图相同，只是在个体选择点添加了弧，以表示选择的最大值，而不是给定一些策略的期望值。
@@ -679,7 +679,7 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
 
 .. math::
 
-    \begin{align*}
+    \begin{aligned}
     v_*(h)&=\max\left\{
         \begin{array}{lr}
             p(h|h,s)[r(h,s,h)+\gamma v_*(h)]+p(l|h,s)[r(h,s,l)+\gamma v_*(l)],\\
@@ -695,18 +695,18 @@ MDP框架是从相互作用的目标导向学习的问题中抽象出来的。
             r_s+\gamma[\alpha v_*(h)+(1-\alpha)v_*(l)],\\
             r_w + \gamma v_*(h)
         \end{array}\right\}
-    \end{align*}
+    \end{aligned}
 
 按照与 :math:`v_*(l)` 相同的方式得到等式
 
 .. math::
 
     v_*(l)=\max\left\{
-        \begin{align*}
+        \begin{aligned}
             &\beta r_s - 3(1-\beta)+\gamma[(1-\beta)v_*(h)+\beta v_*(l)], \\
             &r_w + \gamma v_*(l),\\
             &\gamma v_*(h)
-        \end{align*}
+        \end{aligned}
     \right\}
 
 对于任何 :math:`r_s`，:math:`r_w`，:math:`\alpha`，:math:`\beta` 和 :math:`\gamma` 的选择，

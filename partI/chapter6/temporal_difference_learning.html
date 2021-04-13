@@ -264,11 +264,11 @@ TD方法需要等到下一个时间步。 在时间 <span class="math notranslat
 <p>因为TD(0)部分基于现有估计进行更新，所以我们说它是一种 <em>自举（bootstrapping）</em> 方法，就像DP一样。
 我们从第3章知道</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+\[\begin{split}\begin{aligned}
 v_{\pi}(s) &amp; \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right]  \tag{6.3}\\
 &amp;=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1} | S_{t}=s\right] &amp; (由(3.9))\\
 &amp;=\mathbb{E}_{\pi}\left[R_{t+1}+\gamma v_{\pi}\left(S_{t+1}\right) | S_{t}=s\right] \tag{6.4}
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>粗略地说，蒙特卡罗方法使用（6.3）的估计作为目标，而DP方法使用（6.4）的估计作为目标。
 蒙特卡洛目标是估计，因为（6.3）中的预期值未知；使用样本回报来代替实际预期回报。
 DP目标是一个估计，不是因为完全由环境模型提供的预期值，而是因为 <span class="math notranslate nohighlight">\(v_{\pi}(S_{t+1})\)</span> 未知，
@@ -294,14 +294,14 @@ TD目标是估计原因有两个：它在（6.4）中对预期值进行采样，
 也就是说，<span class="math notranslate nohighlight">\(\delta_{t}\)</span> 是 <span class="math notranslate nohighlight">\(V(S_{t+1})\)</span> 中的误差，在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 可用。
 还要注意，如果列表 <span class="math notranslate nohighlight">\(V\)</span> 在回合期间没有改变（因为它不是蒙特卡罗方法(?)），那么蒙特卡罗误差可以写成TD误差的和：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align}
+\[\begin{split}\begin{aligned}
 G_{t}-V\left(S_{t}\right) &amp;=R_{t+1}+\gamma G_{t+1}-V\left(S_{t}\right)+\gamma V\left(S_{t+1}\right)-\gamma V\left(S_{t+1}\right) &amp; (由(3.9)) \\
 &amp;=\delta_{t}+\gamma\left(G_{t+1}-V\left(S_{t+1}\right)\right) \\
 &amp;=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2}\left(G_{t+2}-V\left(S_{t+2}\right)\right) \\
 &amp;=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2} \delta_{t+2}+\cdots+\gamma^{T-t-1} \delta_{T-1}+\gamma^{T-t}\left(G_{T}-V\left(S_{T}\right)\right) \\
 &amp;=\delta_{t}+\gamma \delta_{t+1}+\gamma^{2} \delta_{t+2}+\cdots+\gamma^{T-t-1} \delta_{T-1}+\gamma^{T-t}(0-0) \\
 &amp;=\sum_{k=t}^{T-1} \gamma^{k-t} \delta_{k} \tag{6.6}
-\end{align}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>如果在回合期间更新 <span class="math notranslate nohighlight">\(V\)</span> （因为它在TD(0)中），则此恒等式不准确，但如果步长很小，那么它可能仍然保持近似。
 这种恒等式的一般化在时序差分学习的理论和算法中起着重要作用。</p>
 <p><em>练习6.1</em> 如果 <span class="math notranslate nohighlight">\(V\)</span> 在回合中发生变化，那么（6.6）只能保持近似；等式两边的区别是什么？

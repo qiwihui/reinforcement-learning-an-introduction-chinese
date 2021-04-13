@@ -421,11 +421,11 @@ MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 当 <span class="math notranslate nohighlight">\(\gamma\)</span> 接近1时，回报目标更加强烈地考虑了未来的回报；个体变得更有远见。</p>
 <p>连续时间步骤的回报以一种对强化学习的理论和算法很重要的方式相互关联：</p>
 <div class="math notranslate nohighlight" id="equation-3-9">
-<span class="eqno">(9)<a class="headerlink" href="#equation-3-9" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(9)<a class="headerlink" href="#equation-3-9" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4} + \dots \\
 &amp;= R_{t+1} + \gamma(R_{t+2} + \gamma R_{t+3} + \gamma^2 R_{t+4} + \dots) \\
 &amp;= R_{t+1} + \gamma G_{t+1}
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>请注意，这适用于所有时间步骤 <span class="math notranslate nohighlight">\(t&lt;T\)</span>，即使终止发生在 <span class="math notranslate nohighlight">\(t+1\)</span>，如果我们定义 <span class="math notranslate nohighlight">\(G_T=0\)</span>，也是适用的。
 这通常可以很容易地计算奖励序列的回报。</p>
 <p>请注意，尽管回报公式（3.8）是无穷多个项的总和，但奖励非零并且为常数，如果 <span class="math notranslate nohighlight">\(\gamma &lt; 1\)</span>，则它仍然是有限的。
@@ -529,12 +529,12 @@ G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4}
 <p>在强化学习和动态规划中使用的价值函数的基本属性是它们满足类似于我们已经为返回建立的递归关系（3.9）。
 对于任何策略 <span class="math notranslate nohighlight">\(\pi\)</span> 和任何状态 <span class="math notranslate nohighlight">\(s\)</span>，<span class="math notranslate nohighlight">\(s\)</span> 的值与其可能的后继状态的值之间保持以下一致性条件：</p>
 <div class="math notranslate nohighlight" id="equation-3-14">
-<span class="eqno">(14)<a class="headerlink" href="#equation-3-14" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(14)<a class="headerlink" href="#equation-3-14" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 &amp;= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s] (由 (3.9)) \\
 &amp;= \sum_a\pi(a|s) \sum_{s^\prime}\sum_r p(s^\prime,r|s,a) \left[r+\gamma\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s^\prime]\right] \\
 &amp;= \sum_a\pi(a|s) \sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma v_\pi(s^\prime)], 对所有 s\in\mathcal{S}
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>其中隐含的动作 <span class="math notranslate nohighlight">\(a\)</span> 取自集合 <span class="math notranslate nohighlight">\(\mathcal{A}(s)\)</span>，
 下一个状态 <span class="math notranslate nohighlight">\(s^\prime\)</span> 取自集合 <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>
 （或者在情节问题的情况下取自 <span class="math notranslate nohighlight">\(\mathcal{S}+\)</span>），
@@ -670,19 +670,19 @@ v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 这是 <span class="math notranslate nohighlight">\(v_*\)</span> 的贝尔曼方程，或者说是 <em>贝尔曼最优方程</em>。
 直观上地，贝尔曼最优方程式表达了这样一个事实，即最优策略下的状态价值必须等于来自该状态的最佳行动的预期收益：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
+\[\begin{split}\begin{aligned}
 v_*(s) &amp;= \max_{a\in\mathcal{A}(s)} q_{\pi_*}(s,a) \\
 &amp;=\max_a \mathbb{E}_{\pi_*}[G_t|S_t=s,A_t=a] \\
 &amp;=\max_a \mathbb{E}_{\pi_*}[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] &amp;(由(3.9)式) \\
 &amp;=\max_a \mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a] &amp;(3.18) \\
 &amp;=\max_{a\in \mathcal{A}(s)}\sum_{s^\prime,r} p(s^\prime,r|s,a)[r+\gamma v_*(s^\prime)] &amp;(3.19)
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>最后两个方程是 <span class="math notranslate nohighlight">\(v_*\)</span> 的贝尔曼最优方程的两种形式，<span class="math notranslate nohighlight">\(q_*\)</span> 的贝尔曼最优方程为</p>
 <div class="math notranslate nohighlight" id="equation-3-20">
-<span class="eqno">(18)<a class="headerlink" href="#equation-3-20" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{align*}
+<span class="eqno">(18)<a class="headerlink" href="#equation-3-20" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
 q_*(s,a) &amp;= \mathbb{E}\left[R_{t+1}+\gamma\sum_{a^\prime}q_*(S_{t+1,a^\prime})|S_t=s,A_t=a\right] \\
 &amp;=\sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma \max_{a^\prime}q_*(s^\prime,a^\prime)]
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>下图中的备份图以图像方式显示了在 <span class="math notranslate nohighlight">\(v_*\)</span> 和 <span class="math notranslate nohighlight">\(q_*\)</span> 的贝尔曼最优方程中考虑的未来状态和动作的跨度。
 这些与 <span class="math notranslate nohighlight">\(v_\pi\)</span> 和 <span class="math notranslate nohighlight">\(q_\pi\)</span> 的备份图相同，只是在个体选择点添加了弧，以表示选择的最大值，而不是给定一些策略的期望值。
 图3.4中，左图以图形方式表示贝尔曼最优方程（3.19），右图表示贝尔曼最优方程（3.20）。</p>
@@ -726,7 +726,7 @@ q_*(s,a) &amp;= \mathbb{E}\left[R_{t+1}+\gamma\sum_{a^\prime}q_*(S_{t+1,a^\prime
 以及 <strong>搜索</strong>，<strong>等待</strong> 和 <strong>充电</strong> 三种动作，用 <strong>h</strong>，<strong>l</strong>，<strong>s</strong>，<strong>w</strong> 和 <strong>re</strong> 来分别表示。
 由于只有两个状态，贝尔曼最优方程由两个方程组成。<span class="math notranslate nohighlight">\(v_*(h)\)</span> 的方程可以写成如下：</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
+\[\begin{split}\begin{aligned}
 v_*(h)&amp;=\max\left\{
     \begin{array}{lr}
         p(h|h,s)[r(h,s,h)+\gamma v_*(h)]+p(l|h,s)[r(h,s,l)+\gamma v_*(l)],\\
@@ -742,15 +742,15 @@ v_*(h)&amp;=\max\left\{
         r_s+\gamma[\alpha v_*(h)+(1-\alpha)v_*(l)],\\
         r_w + \gamma v_*(h)
     \end{array}\right\}
-\end{align*}\end{split}\]</div>
+\end{aligned}\end{split}\]</div>
 <p>按照与 <span class="math notranslate nohighlight">\(v_*(l)\)</span> 相同的方式得到等式</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}v_*(l)=\max\left\{
-    \begin{align*}
+    \begin{aligned}
         &amp;\beta r_s - 3(1-\beta)+\gamma[(1-\beta)v_*(h)+\beta v_*(l)], \\
         &amp;r_w + \gamma v_*(l),\\
         &amp;\gamma v_*(h)
-    \end{align*}
+    \end{aligned}
 \right\}\end{split}\]</div>
 <p>对于任何 <span class="math notranslate nohighlight">\(r_s\)</span>，<span class="math notranslate nohighlight">\(r_w\)</span>，<span class="math notranslate nohighlight">\(\alpha\)</span>，<span class="math notranslate nohighlight">\(\beta\)</span> 和 <span class="math notranslate nohighlight">\(\gamma\)</span> 的选择，
 <span class="math notranslate nohighlight">\(0 \le\gamma&lt;1\)</span>，<span class="math notranslate nohighlight">\(0 \le \alpha,\beta\le 1\)</span>；
