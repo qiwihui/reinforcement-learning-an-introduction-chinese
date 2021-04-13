@@ -53,8 +53,8 @@ DP和增强学习思想的核心通常说来是用价值函数去组织构建一
     \begin{aligned}
     v_\pi(s) & \doteq \mathbb{E_\pi}[G_t | S_t=s] \\
     &= \mathbb{E_\pi}[R_{t+1} + \gamma G_{t+1} | S_t=s]  &(从(3.9)) \\
-    &= \mathbb{E_\pi}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s] & \tag{4.3} \\
-    &= \sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]，& \tag{4.4}
+    &= \mathbb{E_\pi}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s] & (4.3) \\
+    &= \sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]，& (4.4)
     \end{aligned}
 
 在这里 :math:`\pi(a|s)` 是在状态 :math:`s` 时使用策略 :math:`\pi` 采取动作 :math:`a` 的概率，

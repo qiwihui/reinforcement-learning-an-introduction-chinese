@@ -247,8 +247,8 @@ q_*(s,a)&amp; = \mathbb{E}[R_{t+1}+\gamma \max_{a'} q_*(S_{t+1},a') | S_t=s,A_t=
 \[\begin{split}\begin{aligned}
 v_\pi(s) &amp; \doteq \mathbb{E_\pi}[G_t | S_t=s] \\
 &amp;= \mathbb{E_\pi}[R_{t+1} + \gamma G_{t+1} | S_t=s]  &amp;(从(3.9)) \\
-&amp;= \mathbb{E_\pi}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s] &amp; \tag{4.3} \\
-&amp;= \sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]，&amp; \tag{4.4}
+&amp;= \mathbb{E_\pi}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s] &amp; (4.3) \\
+&amp;= \sum_a\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]，&amp; (4.4)
 \end{aligned}\end{split}\]</div>
 <p>在这里 <span class="math notranslate nohighlight">\(\pi(a|s)\)</span> 是在状态 <span class="math notranslate nohighlight">\(s\)</span> 时使用策略 <span class="math notranslate nohighlight">\(\pi\)</span> 采取动作 <span class="math notranslate nohighlight">\(a\)</span> 的概率，
 期望下标 <span class="math notranslate nohighlight">\(\pi\)</span> 用来表明是在策略 <span class="math notranslate nohighlight">\(\pi\)</span> 的条件下。
