@@ -1,0 +1,28 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: qiwihui/docker-sphinx-cjk-pdf
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Install dependencies
+      run: |
+        pip3 install -U -r requirements.txt
+    - name: build pdf
+      run: |
+        make latexpdf
+    - name: upload pdf asset
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        draft: false
+        prerelease: false
+        files: ./build/latex/reinforcement-learning-an-introduction-chinese.pdf

@@ -1,6 +1,10 @@
 name: Deploy to GitHub Pages
 on:
   push:
+    branches:
+      - master
+    tags:
+      - 'v*'
 
 jobs:
   build-and-deploy:
@@ -27,11 +31,3 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
         FOLDER: build/html
-    - name: build pdf
-      run: |
-        make latexpdf
-    - uses: actions/upload-artifact@v2
-      if: ${{ always() }}
-      with:
-        name: pdf
-        path: build/latex/reinforcement-learning-an-introduction-chinese.pdf
