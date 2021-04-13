@@ -220,9 +220,8 @@
 如 <span class="math notranslate nohighlight">\(\hat{v}(s, \mathbf{w})\)</span> 所示。</p>
 <p>在本章中，我们考虑基于一些基于标量性能指标 <span class="math notranslate nohighlight">\(J(\mathbf{\theta})\)</span> 梯度的相对于策略参数的学习策略参数的方法。
 这些方法试图使性能 <em>最大化</em>，因此它们的更新近似 <span class="math notranslate nohighlight">\(J\)</span> 中的梯度 <em>上升</em>：</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{\theta}_{t+1}=\mathbf{\theta}_{t}+\alpha \widehat{\nabla J\left(\mathbf{\theta}_{t}\right)}
-\tag{13.1}\]</div>
+<div class="math notranslate nohighlight" id="equation-13-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-13-1" title="公式的永久链接">¶</a></span>\[\mathbf{\theta}_{t+1}=\mathbf{\theta}_{t}+\alpha \widehat{\nabla J\left(\mathbf{\theta}_{t}\right)}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\widehat{\nabla J\left(\mathbf{\theta}_{t}\right)} \in \mathbb{R}^{d^{\prime}}\)</span> 是一个随机估计，
 其期望近似于性能度量相对于其参数 <span class="math notranslate nohighlight">\(\mathbf{\theta}_{t}\)</span> 的梯度。
 遵循此一般模式的所有方法，我们都称为 <em>策略梯度方法</em>，无论它们是否也学习近似值函数。
@@ -243,16 +242,14 @@
 基于策略的方法还提供了处理连续动作空间的有用方法，这将在后面的13.7节中介绍。</p>
 <p>如果动作空间是离散的并且不是太大，那么自然和常见的一种参数化将是为每个状态-动作对形成参数化的数值偏好（preferences）。 <span class="math notranslate nohighlight">\(h(s, a, \boldsymbol{\theta}) \in \mathbb{R}\)</span>。
 在每个状态下，具有最高偏好的动作被赋予最高的选择概率，例如，根据指数soft-max分布：</p>
-<div class="math notranslate nohighlight">
-\[\pi(a | s, \boldsymbol{\theta}) \doteq \frac{e^{h(s, a, \boldsymbol{\theta})}}{\sum_{b} e^{h(s, b, \boldsymbol{\theta})}}
-\tag{13.2}\]</div>
+<div class="math notranslate nohighlight" id="equation-13-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-13-2" title="公式的永久链接">¶</a></span>\[\pi(a | s, \boldsymbol{\theta}) \doteq \frac{e^{h(s, a, \boldsymbol{\theta})}}{\sum_{b} e^{h(s, b, \boldsymbol{\theta})}}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(e \approx 2.71828\)</span> 是自然对数的底数。请注意，这里的分母是所需要的，因此每种状态下的动作概率总和为1。
 我们将这种策略参数化称为 <em>动作偏好soft-max</em> （soft-max in action preferences）。</p>
 <p>动作偏好本身可以任意设置。例如，它们可以由深度人工神经网络（ANN）计算，其中 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> 是网络所有连接权重的向量（如第16.6节中所述的AlphaGo系统）。
 或者简单地，偏好可以在特征上是线性的，</p>
-<div class="math notranslate nohighlight">
-\[h(s, a, \boldsymbol{\theta})=\boldsymbol{\theta}^{\top} \mathbf{x}(s, a)
-\tag{13.3}\]</div>
+<div class="math notranslate nohighlight" id="equation-13-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-13-3" title="公式的永久链接">¶</a></span>\[h(s, a, \boldsymbol{\theta})=\boldsymbol{\theta}^{\top} \mathbf{x}(s, a)\]</div>
 <p>使用通过第9.5节中所述的任何方法构造的特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s, a) \in \mathbb{R}^{d^{\prime}}\)</span>。</p>
 <p>根据动作偏好中的soft-max参数化策略的一个优点是，近似策略可以接近确定性策略，
 而基于动作选择的 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪总是有 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 可能性选择随机动作。

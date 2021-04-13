@@ -384,20 +384,17 @@ Hescorla-Wagner模型的一个重要假设是认为聚合关联强度 <span clas
 <p>因此，我们假定试验的类型或者状态 <span class="math notranslate nohighlight">\(s\)</span> 由一个实数特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s)=\left(x_{1}(s), x_{2}(s), \ldots, x_{d}(s)\right)^{\top}\)</span> 描述，
 其中，如果复合CS第 <span class="math notranslate nohighlight">\(i\)</span> 个组成成分 <span class="math notranslate nohighlight">\(CS_i\)</span> 在一次试验中存在，则 <span class="math notranslate nohighlight">\(x_{i}(s)=1\)</span> ，否则为0。
 设 <span class="math notranslate nohighlight">\(d\)</span> 维的关联强度向量为 <span class="math notranslate nohighlight">\(mathbf{w}\)</span>，则状态 <span class="math notranslate nohighlight">\(s\)</span> 的聚合关联强度为</p>
-<div class="math notranslate nohighlight">
-\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)
-\tag{14.1}\]</div>
+<div class="math notranslate nohighlight" id="equation-14-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-14-1" title="公式的永久链接">¶</a></span>\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)\]</div>
 <p>这与强化学习中的 <em>价值估计</em> 相对应，我们将其视为对 <em>US的预测</em>。</p>
 <p>现在，我们暂时让 <span class="math notranslate nohighlight">\(t\)</span> 表示完整试验的总数，而不是它的通常含义时刻（当我们讲述下面的TD模型时，我们依然使用t的通常含义）。
 同时，<span class="math notranslate nohighlight">\(S+t\)</span> 是对应于试验 <span class="math notranslate nohighlight">\(t\)</span> 的状态。
 条件作用试验 <span class="math notranslate nohighlight">\(t\)</span> 按照如下公式将关联强度向量 <span class="math notranslate nohighlight">\(\mathbf{w}_{t}\)</span> 更新为 <span class="math notranslate nohighlight">\(\mathbf{w}_{t+1}\)</span> ：</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{x}\left(S_{t}\right)
-\tag{14.2}\]</div>
+<div class="math notranslate nohighlight" id="equation-14-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-14-2" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{x}\left(S_{t}\right)\]</div>
 <p>其中，<span class="math notranslate nohighlight">\(\alpha\)</span> 是步长参数，因为我们正在描述 Rescorla-Wagner 模型，所以这里 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 指 <em>预测误差</em>。</p>
-<div class="math notranslate nohighlight">
-\[\delta_{t}=R_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-\tag{14.3}\]</div>
+<div class="math notranslate nohighlight" id="equation-14-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-14-3" title="公式的永久链接">¶</a></span>\[\delta_{t}=R_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p><span class="math notranslate nohighlight">\(R_{t}\)</span> 是试验 <span class="math notranslate nohighlight">\(t\)</span> 的预测目标，即 US 的大小，用 Rescorla 和 Wagner 的话来说就是 US 在试验中可以支持的关联强度。
 我们可以注意到，由于式（14.2）中存在因子 <span class="math notranslate nohighlight">\(\mathbf{x}(S_{t})\)</span>，所以在复合CS中，只有在试验中出现的子刺激物的关联强度才会在一次试验后被调整。
 我们可以将预测误差视为对意外程度的度量，而聚合关联强度可以被视为动物的某种期望值，当它不符合目标 US 强度时就意味着动物的期望被违背了。</p>
@@ -440,20 +437,17 @@ Rescorla-Wagner 模型表明了条件反射的连续性理论（即刺激的时�
 因此我们假设每个状态 <span class="math notranslate nohighlight">\(s\)</span> 都是由一个特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s)=\left(x_{1}(s), x_{2}(s), \ldots, x_{n}(s)\right)^{\top}\)</span> 来表示的。
 那么与状态 <span class="math notranslate nohighlight">\(s\)</span> 对应的聚合关联强度和 Rescorla Wagner 相同，都由式（14.1）给出。
 但是TD模型对于关联强度向量 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 的更新方式是不同的。由于参数 <span class="math notranslate nohighlight">\(t\)</span> 目前表示的是一个时刻而不是一次完整的试验，因此TD模型根据如下公式进行更新</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{z}_{t}
-\tag{14.4}\]</div>
+<div class="math notranslate nohighlight" id="equation-14-4">
+<span class="eqno">(4)<a class="headerlink" href="#equation-14-4" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{z}_{t}\]</div>
 <p>上式将 Rescorla-Wagner 模型更新公式（14.2）中的 <span class="math notranslate nohighlight">\(\mathbf{x}_t(S_t)\)</span> 替换为 <span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span>，<span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span> 是一个资格迹向量。
 同时，这里的 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 与式（14.3）中的不同，其代表TD误差。</p>
-<div class="math notranslate nohighlight">
-\[\delta_{t}=R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-\tag{14.5}\]</div>
+<div class="math notranslate nohighlight" id="equation-14-5">
+<span class="eqno">(5)<a class="headerlink" href="#equation-14-5" title="公式的永久链接">¶</a></span>\[\delta_{t}=R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>其中， <span class="math notranslate nohighlight">\(\gamma\)</span> 是折扣系数（介于0和1之间），<span class="math notranslate nohighlight">\(R_t\)</span> 是在 <span class="math notranslate nohighlight">\(t\)</span> 时刻的预测目标，
 <span class="math notranslate nohighlight">\(\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)\)</span> 和 <span class="math notranslate nohighlight">\(\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\)</span> 是在 <span class="math notranslate nohighlight">\(t+1\)</span> 时刻与 <span class="math notranslate nohighlight">\(t\)</span> 时刻对应的聚合关联强度，如式（14.1）中所定义的。</p>
 <p>资格迹向量 <span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span> 的每个分量 <span class="math notranslate nohighlight">\(i\)</span> 根据特征向量 <span class="math notranslate nohighlight">\(x_i(S_t)\)</span> 分量 <span class="math notranslate nohighlight">\(\mathbf{x}(S_t)\)</span> 进行增加或减少，其余的资格迹向量根据系数 <span class="math notranslate nohighlight">\(\gamma\lambda\)</span> 进行衰减</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{z}_{t+1}=\gamma \lambda \mathbf{z}_{t}+\mathbf{x}\left(S_{t}\right)
-\tag{14.6}\]</div>
+<div class="math notranslate nohighlight" id="equation-14-6">
+<span class="eqno">(6)<a class="headerlink" href="#equation-14-6" title="公式的永久链接">¶</a></span>\[\mathbf{z}_{t+1}=\gamma \lambda \mathbf{z}_{t}+\mathbf{x}\left(S_{t}\right)\]</div>
 <p>这里的 <span class="math notranslate nohighlight">\(\lambda\)</span> 是资格迹的衰减系数。</p>
 <p>这里注意，如果 <span class="math notranslate nohighlight">\(\gamma=0\)</span>，那么TD模型就会退化为 Rescorla-Wagner 模型，
 但是不同之处在于 <span class="math notranslate nohighlight">\(t\)</span> 的含义（在 Rescorla-Wagner 模型中表示一次试验，在TD模型中表示某个时刻）。

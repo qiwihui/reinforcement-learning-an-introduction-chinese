@@ -222,13 +222,11 @@
 现在我们考虑 <span class="math notranslate nohighlight">\(S_{t}, A_{t} \mapsto U_{t}\)</span> 形式的例子。
 更新目标 <span class="math notranslate nohighlight">\(U_{t}\)</span> 可以是 <span class="math notranslate nohighlight">\(q_{\pi}\left(S_{t}, A_{t}\right)\)</span> 的任何近似值，包括通常的备份值，
 例如完整的蒙特卡罗回报（<span class="math notranslate nohighlight">\(G_{t}\)</span>）或任何n步Sarsa回报（7.4）。动作价值预测的一般梯度下降更新是</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-\tag{10.1}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-10-1" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>例如，一步Sarsa方法的更新是</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[R_{t+1}+\gamma \hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-\tag{10.2}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-10-2" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[R_{t+1}+\gamma \hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>我们将这种方法称为 <em>回合半梯度一步Sarsa</em>。对于常量策略，此方法以与TD(0)相同的方式收敛，
 具有相同类型的误差边界（9.14）。</p>
 <p>为了形成控制方法，我们需要将这些动作价值预测方法与策略改进和行动选择技术相结合。
@@ -287,9 +285,8 @@
 为了将两个连续状态变量转换为二进制特征，我们使用了网格平铺，如图9.9所示。
 我们使用8个铺片，每个铺片覆盖每个维度中有界距离的1/8，并且如第9.5.4节所述的非对称偏移 <a class="footnote-reference brackets" href="#id10" id="id3">1</a>。
 然后通过铺片编码创建的特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s, a)\)</span> 与线性组合，用于近似动作价值函数的参数向量：</p>
-<div class="math notranslate nohighlight">
-\[\hat{q}(s, a, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s, a)=\sum_{i=1}^{d} w_{i} \cdot x_{i}(s, a)
-\tag{10.3}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-10-3" title="公式的永久链接">¶</a></span>\[\hat{q}(s, a, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s, a)=\sum_{i=1}^{d} w_{i} \cdot x_{i}(s, a)\]</div>
 <p>对于每对状态 <span class="math notranslate nohighlight">\(s\)</span> 和动作 <span class="math notranslate nohighlight">\(a\)</span>。</p>
 <p>图10.1显示了在学习使用这种形式的函数近似来解决此任务时通常会发生的情况 <a class="footnote-reference brackets" href="#id11" id="id4">2</a>。
 显示的是在单次运行中学习的价值函数（<em>成本（cost- to-go）</em> 函数）的负数。
@@ -307,13 +304,11 @@
 <h2>10.2 半梯度n步Sarsa<a class="headerlink" href="#nsarsa" title="永久链接至标题">¶</a></h2>
 <p>我们可以通过在半梯度Sarsa更新方程（10.1）中使用n步回报作为更新目标来获得回合半梯度Sarsa的n步版本。
 n步回报立即从其表格形式（7.4）推广到函数近似形式：</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right), \quad t+n&lt;T
-\tag{10.4}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-4">
+<span class="eqno">(4)<a class="headerlink" href="#equation-10-4" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right), \quad t+n&lt;T\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(G_{t:t+n}=G_{t}\)</span> 如果 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，像往常一样。 n步更新方程是</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t&lt;T
-\tag{10.5}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-5">
+<span class="eqno">(5)<a class="headerlink" href="#equation-10-5" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t&lt;T\]</div>
 <p>完整的伪代码在下面的框中给出：</p>
 <div class="important admonition">
 <p class="admonition-title">回合半梯度n步Sarsa估计 <span class="math notranslate nohighlight">\(\hat{q} \approx q_*\)</span> 或 <span class="math notranslate nohighlight">\(q_\pi\)</span></p>
@@ -399,13 +394,11 @@ r(\pi) &amp; \doteq \lim _{h \rightarrow \infty} \frac{1}{h} \sum_{t=1}^{h} \mat
 如（10.7）所示，该数量基本上是 <span class="math notranslate nohighlight">\(\pi\)</span> 下的平均回报。
 特别是，我们认为所有达到 <span class="math notranslate nohighlight">\(r(\pi)\)</span> 最大值的策略都是最优的。</p>
 <p>请注意，稳态分布是特殊分布，在该分布下，如果根据 <span class="math notranslate nohighlight">\(\pi\)</span> 选择动作，则保留在同一分布中。也就是说，为此</p>
-<div class="math notranslate nohighlight">
-\[\sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) p\left(s^{\prime} | s, a\right)=\mu_{\pi}\left(s^{\prime}\right)
-\tag{10.8}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-8">
+<span class="eqno">(6)<a class="headerlink" href="#equation-10-8" title="公式的永久链接">¶</a></span>\[\sum_{s} \mu_{\pi}(s) \sum_{a} \pi(a | s) p\left(s^{\prime} | s, a\right)=\mu_{\pi}\left(s^{\prime}\right)\]</div>
 <p>在平均奖励设置中，回报是根据奖励与平均奖励之间的差来定义的：</p>
-<div class="math notranslate nohighlight">
-\[G_{t} \doteq R_{t+1}-r(\pi)+R_{t+2}-r(\pi)+R_{t+3}-r(\pi)+\cdots
-\tag{10.9}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-9">
+<span class="eqno">(7)<a class="headerlink" href="#equation-10-9" title="公式的永久链接">¶</a></span>\[G_{t} \doteq R_{t+1}-r(\pi)+R_{t+2}-r(\pi)+R_{t+3}-r(\pi)+\cdots\]</div>
 <p>这称为 <em>差分</em> 回报，相应的值函数称为 <em>差分</em> 价值函数。
 它们以相同的方式定义，我们将一如既往地使用相同的符号：
 <span class="math notranslate nohighlight">\(v_{\pi}(s) \doteq \mathbb{E}_{\pi}\left[G_{t} | S_{t}=s\right]\)</span> 和
@@ -421,19 +414,16 @@ r(\pi) &amp; \doteq \lim _{h \rightarrow \infty} \frac{1}{h} \sum_{t=1}^{h} \mat
 \end{array}\end{split}\]</div>
 <p>（参见（3.14），练习3.17，（3.19）和（3.20））。</p>
 <p>还存在两种TD误差的差分形式：</p>
-<div class="math notranslate nohighlight">
-\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-\tag{10.10}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-10">
+<span class="eqno">(8)<a class="headerlink" href="#equation-10-10" title="公式的永久链接">¶</a></span>\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>以及</p>
-<div class="math notranslate nohighlight">
-\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-\tag{10.11}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-11">
+<span class="eqno">(9)<a class="headerlink" href="#equation-10-11" title="公式的永久链接">¶</a></span>\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{q}\left(S_{t+1}, A_{t+1}, \mathbf{w}_{t}\right)-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\overline{R}_{t}\)</span> 是平均奖励 <span class="math notranslate nohighlight">\(r(\pi)\)</span> 在时间 <span class="math notranslate nohighlight">\(t\)</span> 的估计值。
 通过这些替代定义，我们的大多数算法和许多理论结果都可以在不改变的情况下进行平均奖励设置。</p>
 <p>例如，半梯度Sarsa的平均奖励版本定义如（10.2），除了TD误差版本的不同。也就是说</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \delta_{t} \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)
-\tag{10.12}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-12">
+<span class="eqno">(10)<a class="headerlink" href="#equation-10-12" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \delta_{t} \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>由（10.11）给出的 <span class="math notranslate nohighlight">\(t\)</span>。完整算法的伪代码在下框中给出。</p>
 <div class="important admonition">
 <p class="admonition-title">差分半梯度Sarsa估计 <span class="math notranslate nohighlight">\(\hat{q} \approx q_*\)</span></p>
@@ -462,9 +452,8 @@ r(\pi) &amp; \doteq \lim _{h \rightarrow \infty} \frac{1}{h} \sum_{t=1}^{h} \mat
 从 <strong>A</strong> 开始，奖励序列完全如上所述，从 <span class="math notranslate nohighlight">\(+1\)</span> 开始，
 而从 <strong>B</strong> 开始，奖励序列以 <span class="math notranslate nohighlight">\(0\)</span> 开始，然后继续 <span class="math notranslate nohighlight">\(+1,0,+1,0, \ldots\)</span>。
 对于这种情况，差分回报（10.9）没有很好地定义，因为不存在限制。为了修复这个问题，可以交替地将状态值定义为</p>
-<div class="math notranslate nohighlight">
-\[v_{\pi}(s) \doteq \lim _{\gamma \rightarrow 1} \lim _{h \rightarrow \infty} \sum_{t=0}^{h} \gamma^{t}\left(\mathbb{E}_{\pi}\left[R_{t+1} | S_{0}=s\right]-r(\pi)\right)
-\tag{10.13}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-13">
+<span class="eqno">(11)<a class="headerlink" href="#equation-10-13" title="公式的永久链接">¶</a></span>\[v_{\pi}(s) \doteq \lim _{\gamma \rightarrow 1} \lim _{h \rightarrow \infty} \sum_{t=0}^{h} \gamma^{t}\left(\mathbb{E}_{\pi}\left[R_{t+1} | S_{0}=s\right]-r(\pi)\right)\]</div>
 <p>根据这个定义，状态 <strong>A</strong> 和 <strong>B</strong> 的值是多少？</p>
 <p><em>练习10.7</em> 考虑马尔可夫奖励过程，该过程由三个状态 <strong>A</strong>，<strong>B</strong> 和 <strong>C</strong> 组成，
 状态转换确定性地围绕环。到达 <strong>A</strong> 时会收到 <span class="math notranslate nohighlight">\(+1\)</span> 的奖励，否则奖励为 <span class="math notranslate nohighlight">\(0\)</span>。
@@ -556,15 +545,13 @@ J(\pi) &amp;=\sum_{s} \mu_{\pi}(s) v_{\pi}^{\gamma}(s) &amp; \text { (其中 } v
 <div class="section" id="id7">
 <h2>10.5 差分半梯度n步Sarsa<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 <p>为了推广到n步自举，我们需要一个TD误差的n步版本。我们首先将n步回报（7.4）推广到其差分形式，并使用函数近似：</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n} \doteq R_{t+1}-\overline{R}_{t+n-1}+\cdots+R_{t+n}-\overline{R}_{t+n-1}+\hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right)
-\tag{10.14}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-14">
+<span class="eqno">(12)<a class="headerlink" href="#equation-10-14" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}-\overline{R}_{t+n-1}+\cdots+R_{t+n}-\overline{R}_{t+n-1}+\hat{q}\left(S_{t+n}, A_{t+n}, \mathbf{w}_{t+n-1}\right)\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\overline{R}\)</span> 是 <span class="math notranslate nohighlight">\(r(\pi)\)</span> 的一个估计，<span class="math notranslate nohighlight">\(n\geq 1\)</span> 且 <span class="math notranslate nohighlight">\(t+n&lt;T\)</span>。
 如果 <span class="math notranslate nohighlight">\(t+n \geq T\)</span> 则我们如通常一样定义 <span class="math notranslate nohighlight">\(G_{t : t+n} \doteq G_{t}\)</span>。
 则n步TD误差为</p>
-<div class="math notranslate nohighlight">
-\[\delta_{t} \doteq G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}\right)
-\tag{10.15}\]</div>
+<div class="math notranslate nohighlight" id="equation-10-15">
+<span class="eqno">(13)<a class="headerlink" href="#equation-10-15" title="公式的永久链接">¶</a></span>\[\delta_{t} \doteq G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}\right)\]</div>
 <p>之后我们可以应用我们通常的半梯度Sarsa更新（10.12）。框中给出了完整算法的伪代码。</p>
 <div class="important admonition">
 <p class="admonition-title">差分半梯度n步Sarsa估计 <span class="math notranslate nohighlight">\(\hat{q} \approx q_\pi\)</span> 或 <span class="math notranslate nohighlight">\(q_*\)</span></p>

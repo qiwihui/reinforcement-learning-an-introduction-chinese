@@ -66,9 +66,9 @@ n步TD更新为 :math:`S_{t} \mapsto G_{t:t+n}`。在DP（动态规划）中策�
 通过 :math:`\mu` 对状态空间加权，我们得到一个自然目标函数，*均方误差*，表示为 :math:`\overline{\mathrm{VE}}`：
 
 .. math::
+    :label: 9.1
 
     \overline{\mathrm{VE}}(\mathbf{w}) \doteq \sum_{s \in \mathcal{S}} \mu(s)\left[v_{\pi}(s)-\hat{v}(s, \mathbf{w})\right]^{2}
-    \tag{9.1}
 
 该度量的平方根（根 :math:`\overline{\mathrm{VE}}`）粗略地衡量了近似值与真实值的差异，并且通常用于图中。
 通常 :math:`\mu(s)` 被选择为 :math:`s` 中花费的时间的一部分。
@@ -84,16 +84,16 @@ n步TD更新为 :math:`S_{t} \mapsto G_{t:t+n}`。在DP（动态规划）中策�
     如果回合以 :math:`s` 开头，或者如果从之前的状态 :math:`\overline{s}` 转换为 :math:`s`，则花费时间在状态 :math:`s` 中：
 
     .. math::
+        :label: 9.2
 
         \eta(s)=h(s)+\sum_{\overline{s}} \eta(\overline{s}) \sum_{a} \pi(a | \overline{s}) p(s | \overline{s}, a), \text { 对所有 } s \in \mathcal{S}
-        \tag{9.2}
 
     可以针对预期的访问次数 :math:`\eta(s)` 求解该方程组。 然后，在策略分布是每个状态所花费的时间的一小部分，标准化和为一：
 
     .. math::
+        :label: 9.3
 
         \mu(s)=\frac{\eta(s)}{\sum_{s^{\prime}} \eta(s^{\prime})}, \quad \text { 对所有 } s \in \mathcal{S}
-        \tag{9.3}
 
     这是没有折扣的自然选择。如果存在折扣（:math:`\gamma<1`），则应将其视为终止形式，
     这可以简单通过在（9.2）的第二项中包含因子 :math:`\gamma` 来完成。
@@ -162,9 +162,9 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 表达式的偏导数的列向量，向量分量为：
 
 .. math::
+    :label: 9.6
 
     \nabla f(\mathbf{w}) \doteq\left(\frac{\partial f(\mathbf{w})}{\partial w_{1}}, \frac{\partial f(\mathbf{w})}{\partial w_{2}}, \dots, \frac{\partial f(\mathbf{w})}{\partial w_{d}}\right)^{\top}
-    \tag{9.6}
 
 该导数向量是 math:`f` 相对于 :math:`\mathbf{w}` 的梯度。SGD方法是“梯度下降”方法，
 因为 :math:`\mathbf{w}_t` 中的整个步长与示例的平方误差（9.4）的负梯度成比例。这是误差下降最快的方向。
@@ -186,9 +186,9 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 这产生了以下用于状态价值预测的一般SGD方法：
 
 .. math::
+    :label: 9.7
 
     \mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-    \tag{9.7}
 
 如果 :math:`U_t` 是无偏估计，即，如果对于每个 :math:`t` 有
 :math:`\mathbb{E}\left[U_{t} | S_{t}=s\right]=v_{\pi}(S_{t})`，
@@ -307,9 +307,9 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 线性方法通过 :math:`\mathbf{w}` 和 :math:`\mathbf{x}(s)` 之间的内积近似状态值函数：
 
 .. math::
+    :label: 9.8
 
     \hat{v}(s, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s) \doteq \sum_{i=1}^{d} w_{i} x_{i}(s)
-    \tag{9.8}
 
 在这种情况下，近似价值函数被称为 *权重线性（linear in the weights）*，或简单地称为 *线性*。
 
@@ -356,16 +356,16 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 一旦系统达到稳定状态，对于任何给定的 :math:`\mathbf{w}_t`，下一个权重向量的期望可以写成：
 
 .. math::
+    :label: 9.10
 
     \mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=\mathbf{w}_{t}+\alpha\left(\mathbf{b}-\mathbf{A} \mathbf{w}_{t}\right)
-    \tag{9.10}
 
 其中
 
 .. math::
+    :label: 9.11
 
     \mathbf{b} \doteq \mathbb{E}\left[R_{t+1} \mathbf{x}_{t}\right] \in \mathbb{R}^{d} \quad \text { 和 } \quad \mathbf{A} \doteq \mathbb{E}\left[\mathbf{x}_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right)^{\top}\right] \in \mathbb{R}^{d} \times \mathbb{R}^{d}
-    \tag{9.11}
 
 从（9.10）可以清楚地看出，如果系统收敛，它必须收敛到权重向量 :math:`\mathbf{W}_{\mathrm{TD}}`
 
@@ -385,9 +385,9 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
     什么属性确保线性TD(0)算法（9.9）的收敛？通过重写（9.10）可以获得一些见解
 
     .. math::
+        :label: 9.13
 
         \mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=(\mathbf{I}-\alpha \mathbf{A}) \mathbf{w}_{t}+\alpha \mathbf{b}
-        \tag{9.13}
 
     注意到矩阵 :math:`\mathbf{A}` 乘以权重向量 :math:`\mathbf{w}_t` 而不是 :math:`\mathbf{b}`；
     只有 :math:`\mathbf{A}` 对收敛很重要。
@@ -450,9 +450,9 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 在TD固定点，已经证明（在持续情况下） :math:`\overline{\mathrm{VE}}` 在最低可能误差的有限扩展内：
 
 .. math::
+    :label: 9.14
 
     \overline{\mathrm{VE}}\left(\mathbf{w}_{\mathrm{TD}}\right) \leq \frac{1}{1-\gamma} \min _{\mathbf{w}} \overline{\mathrm{VE}}(\mathbf{w})
-    \tag{9.14}
 
 也就是说，TD方法的渐近误差不超过最小可能误差的 :math:`\frac{1}{1-\gamma}` 倍，这是通过蒙特卡罗方法达到的极限值。
 因为 :math:`\gamma` 通常接近1，所以这个扩展因子可能非常大，因此TD方法的渐近性能存在很大的潜在损失。
@@ -535,16 +535,16 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 类似于（7.2），这个算法的关键方程是
 
 .. math::
+    :label: 9.15
 
     \mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t<T
-    \tag{9.15}
 
 其中n步回报从（7.1）推广到
 
 .. math::
+    :label: 9.16
 
     G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{v}\left(S_{t+n}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t \leq T-n 
-    \tag{9.16}
 
 **练习9.1** 展示本书第一部分中介绍的表格方法是线性函数近似的一种特殊情况。特征向量是什么？
 
@@ -591,9 +591,9 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
     对于这个 :math:`k` 维状态空间，每个有阶-n（order-n）多项式基特征 :math:`x_i` 可以写为
 
     .. math::
+        :label: 9.17
 
         x_{i}(s)=\Pi_{j=1}^{k} s_{j}^{c_{i, j}}
-        \tag{9.17}
 
     其中每个 :math:`c_{i,j}` 是集合 :math:`\{0,1, \ldots, n\}` 中的整数，:math:`n>0`。
     这些特征构成维数 :math:`k` 的阶-n多项式基，其中包含 :math:`(n+1)^k` 个不同的特征。
@@ -655,9 +655,9 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
     然后可以写出阶n傅里叶余弦基的第 :math:`i` 个特征
 
     .. math::
+        :label: 9.18
 
         x_{i}(s)=\cos (\pi \mathbf{s}^{\top} \mathbf{c}^{i})
-        \tag{9.18}
 
     其中 :math:`\mathbf{c}^{i}=(c_{1}^{i}, \ldots, c_{k}^{i})^{\top}`，
     其中对 :math:`j=1, \dots, k` 和 :math:`i=1, \dots,(n+1)^{k}`，:math:`c_{j}^{i} \in\{0, \dots, n\}` 。
@@ -920,9 +920,9 @@ RBF网络，特别是非线性RBF网络的缺点是计算复杂度更高，并�
 然后，设置线性SGD方法的步长参数的一个好的经验法则是
 
 .. math::
+    :label: 9.19
 
     \alpha \doteq\left(\tau \mathbb{E}\left[\mathbf{x}^{\top} \mathbf{x}\right]\right)^{-1}
-    \tag{9.19}
 
 其中，:math:`\mathbf{x}` 是从与SGD中的输入矢量相同的分布中选择的随机特征向量。
 如果特征向量的长度变化不大，则此方法效果最佳；理想情况下，:math:`\mathbf{x}^{\top} \mathbf{x}` 是常数。
@@ -1081,9 +1081,9 @@ Ioffe和Szegedy（2015）使用来自训练样例的子集或“小批量”的�
 *最小二乘TD* 算法，通常称为LSTD，就是这样做的。它形成了自然估计
 
 .. math::
+    :label: 9.20
 
     \widehat{\mathbf{A}}_{t} \doteq \sum_{k=0}^{t-1} \mathbf{x}_{k}\left(\mathbf{x}_{k}-\gamma \mathbf{x}_{k+1}\right)^{\top}+\varepsilon \mathbf{I} \quad \text { 和 } \quad \widehat{\mathbf{b}}_{t} \doteq \sum_{k=0}^{t-1} R_{k+1} \mathbf{x}_{k}
-    \tag{9.20}
 
 其中 :math:`\mathbf{I}` 是单位矩阵，对于一些小 :math:`\varepsilon>0`，
 :math:`\varepsilon\mathbf{I}` 确保 :math:`\widehat{\mathbf{A}}_{t}` 始终是可逆的。
@@ -1092,9 +1092,9 @@ Ioffe和Szegedy（2015）使用来自训练样例的子集或“小批量”的�
 然而，当LSTD使用这些估计来估计TD固定点时，额外的 :math:`t` 因子抵消了
 
 .. math::
+    :label: 9.21
 
     \mathbf{w}_{t} \doteq \widehat{\mathbf{A}}_{t}^{-1} \widehat{\mathbf{b}}_{t}
-    \tag{9.21}
 
 该算法是线性TD(0)的最具数据效率的形式，但它在计算上也更昂贵。 回想一下，半梯度TD(0)需要仅仅 :math:`O(d)` 的内存和每步计算。
 
@@ -1241,9 +1241,9 @@ LSTD不需要步长参数的事实有时也被吹捧，但这可能被夸大了�
 则核回归近似目标函数，在这种情况下是取决于 :math:`\mathcal{D}` 的价值函数，即
 
 .. math::
+    :label: 9.23
 
     \hat{v}(s, \mathcal{D})=\sum_{s^{\prime} \in \mathcal{D}} k\left(s, s^{\prime}\right) g\left(s^{\prime}\right)
-    \tag{9.23}
 
 上述加权平均方法是一种特殊情况，其中 :math:`k(s, s^{\prime})` 仅在 :math:`s`
 和 :math:`s^{\prime}` 彼此接近时才为非零，因此不需要在所有 :math:`\mathcal{D}` 上计算总和。
@@ -1261,9 +1261,9 @@ LSTD不需要步长参数的事实有时也被吹捧，但这可能被夸大了�
 特征向量表示的内积；即
 
 .. math::
+    :label: 9.24
 
     k\left(s, s^{\prime}\right)=\mathbf{x}(s)^{\top} \mathbf{x}\left(s^{\prime}\right)
-    \tag{9.24}
 
 使用此核函数的核回归产生与线性参数方法相同的近似值，如果它使用这些特征向量并使用相同的训练数据进行学习。
 
@@ -1301,16 +1301,16 @@ LSTD不需要步长参数的事实有时也被吹捧，但这可能被夸大了�
 该标量乘以学习更新，从而强调或不强调在时间 :math:`t` 完成的学习。替换（9.15）的一般n步学习规则是
 
 .. math::
+    :label: 9.25
 
     \mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha M_{t}\left[G_{t : t+n}-\hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t<T
-    \tag{9.25}
 
 由（9.16）给出的n步回报，并且通过以下方式从兴趣中递归确定重点：
 
 .. math::
+    :label: 9.26
 
     M_{t}=I_{t}+\gamma^{n} M_{t-n}, \quad 0 \leq t<T
-    \tag{9.26}
 
 其中对于所有 :math:`t<0`，:math:`M_t\doteq 0`。这些等式被认为包括蒙特卡罗情况，
 其中 :math:`G_{t:t+n}=G_{t}`，所有更新都在回合结束时进行，:math:`n=T-t`，并且 :math:`M_{t}=I_{t}`。

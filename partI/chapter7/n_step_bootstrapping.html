@@ -260,9 +260,8 @@ n步方法使引导能够在多个步骤中发生，使我们摆脱单一时间�
 <p>其中现在 <span class="math notranslate nohighlight">\(\gamma^{2} V_{t+1}\left(S_{t+2}\right)\)</span> 纠正了项
 <span class="math notranslate nohighlight">\(\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots+\gamma^{T-t-1} R_{T}\)</span> 的缺失。
 同样，任意n步更新的目标是n步回报：</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)
-\tag{7.1}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-7-1" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)\]</div>
 <p>而所有其他状态的值保持不变：对于所有 <span class="math notranslate nohighlight">\(s \neq S_{t}\)</span>，<span class="math notranslate nohighlight">\(V_{t+n}(s)=V_{t+n-1}(s)\)</span>。
 我们将此算法称为 <em>n步TD</em>。 请注意，在每回合的前n-1个步骤中，根本不会进行任何更改。
 为了弥补这一点，在回合结束后，终止后和开始下一集之前，会进行相同数量的额外更新。
@@ -303,9 +302,8 @@ n步方法使引导能够在多个步骤中发生，使我们摆脱单一时间�
 <p>n步回报使用价值函数 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 来校正超出 <span class="math notranslate nohighlight">\(R_{t+n}\)</span> 的缺失奖励。
 n步回报的一个重要特性是，在最恶劣的意义上，它们的期望被保证是比 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 更好的 <span class="math notranslate nohighlight">\(v_\pi\)</span> 估计。
 也就是说，对于所有 <span class="math notranslate nohighlight">\(n \ge 1\)</span>，预期的n步回报的最差误差保证小于或等于 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 下最差误差的 <span class="math notranslate nohighlight">\(\gamma^{n}\)</span> 倍：</p>
-<div class="math notranslate nohighlight">
-\[\max _{s}\left|\mathbb{E}_{\pi}\left[G_{t : t+n} | S_{t}=s\right]-v_{\pi}(s)\right| \leq \gamma^{n} \max _{s}\left|V_{t+n-1}(s)-v_{\pi}(s)\right|
-\tag{7.3}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-3">
+<span class="eqno">(2)<a class="headerlink" href="#equation-7-3" title="公式的永久链接">¶</a></span>\[\max _{s}\left|\mathbb{E}_{\pi}\left[G_{t : t+n} | S_{t}=s\right]-v_{\pi}(s)\right| \leq \gamma^{n} \max _{s}\left|V_{t+n-1}(s)-v_{\pi}(s)\right|\]</div>
 <p>这称为 <em>n步回报的误差减少属性</em>。由于误差减少属性，可以正式显示所有n步TD方法在适当的技术条件下收敛到正确的预测。
 因此，n步TD方法形成一系列可靠的（sound）方法，一步法TD方法和蒙特卡罗方法作为其极端情况。</p>
 <p><strong>例7.1：随机行走的n步TD方法</strong> 考虑在例6.2中描述的5个状态随机游走任务中使用n步TD方法。
@@ -336,13 +334,11 @@ Sarsa的n步版本我们称之为n步Sarsa，而前一章中提到的原始版�
 <p>主要思想是简单地切换动作状态（状态-动作对），然后使用 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪策略。
 n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ），是交替状态和动作的字符串，
 除了Sarsa所有都以动作而不是状态开始和结束。我们根据估计的动作值重新定义n步回报（更新目标）：</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t&lt;T-n
-\tag{7.4}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-4">
+<span class="eqno">(3)<a class="headerlink" href="#equation-7-4" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t&lt;T-n\]</div>
 <p>如果 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，则 <span class="math notranslate nohighlight">\(G_{t : t+n} \doteq G_{t}\)</span>。那么自然算法就是</p>
-<div class="math notranslate nohighlight">
-\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t&lt;T
-\tag{7.5}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-5">
+<span class="eqno">(4)<a class="headerlink" href="#equation-7-5" title="公式的永久链接">¶</a></span>\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t&lt;T\]</div>
 <p>而所有其他状态的值保持不变：<span class="math notranslate nohighlight">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
 对于所有 <span class="math notranslate nohighlight">\(s, a\)</span> 使得 <span class="math notranslate nohighlight">\(s \ne S_t\)</span> 或 <span class="math notranslate nohighlight">\(a \ne A_t\)</span>。
 这是我们称之为 <em>n步Sarsa</em> 的算法。
@@ -402,21 +398,18 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 因此从一个回合中学习了更多。</span><a class="headerlink" href="#id7" title="永久链接至图片">¶</a></p>
 </div>
 <p><em>练习7.4</em> 证明Sarsa（7.4）的n步回报可以完全按照新的TD误差写成如下：</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n}=Q_{t-1}\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n, T)-1} \gamma^{k-t}\left[R_{k+1}+\gamma Q_{k}\left(S_{k+1}, A_{k+1}\right)-Q_{k-1}\left(S_{k}, A_{k}\right)\right]
-\tag{7.6}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-6">
+<span class="eqno">(5)<a class="headerlink" href="#equation-7-6" title="公式的永久链接">¶</a></span>\[G_{t : t+n}=Q_{t-1}\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n, T)-1} \gamma^{k-t}\left[R_{k+1}+\gamma Q_{k}\left(S_{k+1}, A_{k+1}\right)-Q_{k-1}\left(S_{k}, A_{k}\right)\right]\]</div>
 <p>那么预期的Sarsa呢？预期Sarsa的n步版本的备份图显示在图7.3的最右侧。
 它由一系列样本动作和状态的线性组成，就像在n步Sarsa中一样，
 除了它的最后一个元素一如既往是在 <span class="math notranslate nohighlight">\(\pi\)</span> 下的概率加权的所有动作可能性的分支。
 该算法可以用与n步Sarsa（上面）相同的等式来描述，除了将n步回报重新定义为</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n} \doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \overline{V}_{t+n-1}\left(S_{t+n}\right), \quad t+n&lt;T
-\tag{7.7}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-7">
+<span class="eqno">(6)<a class="headerlink" href="#equation-7-7" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \overline{V}_{t+n-1}\left(S_{t+n}\right), \quad t+n&lt;T\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，<span class="math notranslate nohighlight">\(G_{t : t+n} \doteq G_{t}\)</span>。
 其中 <span class="math notranslate nohighlight">\(\overline{V}_{t}(s)\)</span> 是状态s的 <em>预期近似值</em>，使用目标策略下时间 <span class="math notranslate nohighlight">\(t\)</span> 的估计行动值：</p>
-<div class="math notranslate nohighlight">
-\[\overline{V}_{t}(s) \doteq \sum_{a} \pi(a | s) Q_{t}(s, a), \quad \text { 对所有 } s \in \mathcal{S}
-\tag{7.8}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-8">
+<span class="eqno">(7)<a class="headerlink" href="#equation-7-8" title="公式的永久链接">¶</a></span>\[\overline{V}_{t}(s) \doteq \sum_{a} \pi(a | s) Q_{t}(s, a), \quad \text { 对所有 } s \in \mathcal{S}\]</div>
 <p>在本书的其余部分中，使用预期近似值来开发许多动作价值方法。如果s是终点，则其预期近似值被定义为0。</p>
 </div>
 <div class="section" id="n">
@@ -428,14 +421,12 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 在n步法中，回报是在n个步骤上构建的，因此我们对这些n个动作的相对概率感兴趣。
 例如，在构建n步TD的简单离策略版本，时间 <span class="math notranslate nohighlight">\(t\)</span> 的更新（实际上在时间 <span class="math notranslate nohighlight">\(t+n\)</span> 进行）
 可以简单地通过 <span class="math notranslate nohighlight">\(\rho_{t : t}+n-1\)</span> 加权：</p>
-<div class="math notranslate nohighlight">
-\[V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t : t+n-1}\left[G_{t : t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t&lt;T
-\tag{7.9}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-9">
+<span class="eqno">(8)<a class="headerlink" href="#equation-7-9" title="公式的永久链接">¶</a></span>\[V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t : t+n-1}\left[G_{t : t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t&lt;T\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\rho_{t : t}+n-1\)</span> 称为 <em>重要性采样比率</em>，
 是在两个策略下从 <span class="math notranslate nohighlight">\(A_t\)</span> 到 <span class="math notranslate nohighlight">\(A_{t+n-1}\)</span> 采取 <span class="math notranslate nohighlight">\(n\)</span> 个动作的相对概率（参见方程5.3）：</p>
-<div class="math notranslate nohighlight">
-\[\rho_{t : h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}
-\tag{7.10}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-10">
+<span class="eqno">(9)<a class="headerlink" href="#equation-7-10" title="公式的永久链接">¶</a></span>\[\rho_{t : h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}\]</div>
 <p>例如，如果任何一个动作永远不会被 <span class="math notranslate nohighlight">\(\pi\)</span> 占用（即 <span class="math notranslate nohighlight">\(\pi\left(A_{k} | S_{k}\right)=0\)</span>），
 那么n步回报应该被赋予零权重并被完全忽略。
 另一方面，如果偶然采取行动，<span class="math notranslate nohighlight">\(\pi\)</span> 将采取比 <span class="math notranslate nohighlight">\(\b\)</span> 更大的概率，那么这将增加否则将给予回报的权重。
@@ -444,9 +435,8 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 请注意，如果这两个策略实际上是相同的（在策略情况下），则重要性采样比率始终为1。
 因此，我们的新更新（7.9）概括并可以完全取代我们之前的n步TD更新。
 同样，我们之前的n步Sarsa更新可以完全被简单的离策略形式所取代：</p>
-<div class="math notranslate nohighlight">
-\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1 : t+n}\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]
-\tag{7.11}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-11">
+<span class="eqno">(10)<a class="headerlink" href="#equation-7-11" title="公式的永久链接">¶</a></span>\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1 : t+n}\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]\]</div>
 <p>对 <span class="math notranslate nohighlight">\(0 \leq t&lt;T\)</span>。注意，这里的重要性采样比率比n步TD（7.9）晚一步开始和结束。
 这是因为我们正在更新状态-动作对。我们不必关心我们选择行动的可能性；
 现在我们选择了它，我们希望从发生的事情中充分学习，只对后续行动进行重要性采样。
@@ -502,9 +492,8 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 更复杂的方法将使用每个决策重要性采样的想法，如第5.9节中介绍的那样。
 要理解这种方法，首先要注意普通的n步回报（7.1），就像所有回报一样，可以递归写入。
 对于以水平线 <span class="math notranslate nohighlight">\(h\)</span> 结束的n个步骤，n步回报可以写成</p>
-<div class="math notranslate nohighlight">
-\[G_{t : h}=R_{t+1}+\gamma G_{t+1 : h}, \quad t&lt;h&lt;T
-\tag{7.12}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-12">
+<span class="eqno">(11)<a class="headerlink" href="#equation-7-12" title="公式的永久链接">¶</a></span>\[G_{t : h}=R_{t+1}+\gamma G_{t+1 : h}, \quad t&lt;h&lt;T\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
 （回想一下，此回报在时间 <span class="math notranslate nohighlight">\(h\)</span> 使用，先前表示为 <span class="math notranslate nohighlight">\(t+n\)</span>。）
 现在考虑遵循与目标策略不同的行为策略 <span class="math notranslate nohighlight">\(b\)</span> 的效果。
@@ -515,9 +504,8 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 假设时间 <span class="math notranslate nohighlight">\(t\)</span> 的动作永远不会被 <span class="math notranslate nohighlight">\(\pi\)</span> 选择，因此 <span class="math notranslate nohighlight">\(\rho_{t}\)</span> 为零。
 然后，简单的加权将导致n步回报为零，这可能导致当它用作目标时的高方差。
 相反，在这种更复杂的方法中，人们使用在水平线 <span class="math notranslate nohighlight">\(h\)</span> 结束的n步回报的替代的离策略定义，即</p>
-<div class="math notranslate nohighlight">
-\[G_{t : h} \doteq \rho_{t}\left(R_{t+1}+\gamma G_{t+1 : h}\right)+\left(1-\rho_{t}\right) V_{h-1}\left(S_{t}\right), \quad t&lt;h&lt;T
-\tag{7.13}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-13">
+<span class="eqno">(12)<a class="headerlink" href="#equation-7-13" title="公式的永久链接">¶</a></span>\[G_{t : h} \doteq \rho_{t}\left(R_{t+1}+\gamma G_{t+1 : h}\right)+\left(1-\rho_{t}\right) V_{h-1}\left(S_{t}\right), \quad t&lt;h&lt;T\]</div>
 <p>再次 <span class="math notranslate nohighlight">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
 在这种方法中，如果 <span class="math notranslate nohighlight">\(\rho_{t}\)</span> 为零，则目标与估计相同并且不会导致变化，而不是目标为零并导致估计收缩。
 重要性采样比率为零意味着我们应该忽略样本，因此保持估计不变似乎是合适的。
@@ -585,9 +573,8 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 <p>我们可以将3步树备份更新视为由6个半步骤组成，在从动作到后续状态的样本半步骤之间交替，
 以及根据策略从该状态考虑所有可能的动作及其概率的预期半步骤。</p>
 <p>现在让我们开发n步树备份算法的详细方程。一步回报（目标）与预期的Sarsa相同，</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+1} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q_{t}\left(S_{t+1}, a\right)
-\tag{7.15}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-15">
+<span class="eqno">(13)<a class="headerlink" href="#equation-7-15" title="公式的永久链接">¶</a></span>\[G_{t : t+1} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q_{t}\left(S_{t+1}, a\right)\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t&lt;T-1\)</span>。两步树备份回报为</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -596,9 +583,8 @@ G_{t : t+2} &amp;\doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1
 &amp;=R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+2}
 \end{aligned}\end{split}\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t&lt;T-2\)</span>。后一种形式表明了树备份n步回报的一般递归定义：</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}
-\tag{7.16}\]</div>
+<div class="math notranslate nohighlight" id="equation-7-16">
+<span class="eqno">(14)<a class="headerlink" href="#equation-7-16" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}\]</div>
 <p>对 <span class="math notranslate nohighlight">\(0 \leq t&lt;T\)</span>，而所有其他状态-动作对的值保持不变：
 <span class="math notranslate nohighlight">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
 对于所有 <span class="math notranslate nohighlight">\(s,a\)</span> 使得 <span class="math notranslate nohighlight">\(s\ne S_t\)</span> 或 <span class="math notranslate nohighlight">\(a\ne A_t\)</span>。

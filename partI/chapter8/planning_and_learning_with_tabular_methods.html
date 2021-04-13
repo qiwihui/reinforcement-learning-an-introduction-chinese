@@ -576,14 +576,12 @@ Dyna-AC系统使用 <span class="math notranslate nohighlight">\(v_\pi\)</span> 
 <p>具体来说，考虑近似 <span class="math notranslate nohighlight">\(q_*\)</span> 的预期和样本更新，离散状态和动作的特殊情况，近似值函数 :math`Q` 的表查找表示，
 以及估计动态形式的模型 <span class="math notranslate nohighlight">\(\hat{p}\left(s^{\prime}, r | s, a\right)\)</span>。
 状态-动作对 <span class="math notranslate nohighlight">\(s, a\)</span> 的预期更新是：</p>
-<div class="math notranslate nohighlight">
-\[Q(s, a) \leftarrow \sum_{s^{\prime}, r} \hat{p}\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)\right]
-\tag{8.1}\]</div>
+<div class="math notranslate nohighlight" id="equation-8-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-8-1" title="公式的永久链接">¶</a></span>\[Q(s, a) \leftarrow \sum_{s^{\prime}, r} \hat{p}\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)\right]\]</div>
 <p>对于 <span class="math notranslate nohighlight">\(s, a\)</span> 的相应样本更新，给定样本下一状态和奖励 <span class="math notranslate nohighlight">\(S_0\)</span> 和 <span class="math notranslate nohighlight">\(R\)</span> （来自模型），
 是类似Q-learning的更新：</p>
-<div class="math notranslate nohighlight">
-\[Q(s, a) \leftarrow Q(s, a)+\alpha\left[R+\gamma \max _{a^{\prime}} Q\left(S^{\prime}, a^{\prime}\right)-Q(s, a)\right]
-\tag{8.2}\]</div>
+<div class="math notranslate nohighlight" id="equation-8-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-8-2" title="公式的永久链接">¶</a></span>\[Q(s, a) \leftarrow Q(s, a)+\alpha\left[R+\gamma \max _{a^{\prime}} Q\left(S^{\prime}, a^{\prime}\right)-Q(s, a)\right]\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\alpha\)</span> 通常是正步长参数。</p>
 <p>这些预期和样本更新之间的差异在环境是随机的程度上是显着的，
 具体地，在给定状态和动作的情况下，可能以各种概率发生许多可能的下一状态。

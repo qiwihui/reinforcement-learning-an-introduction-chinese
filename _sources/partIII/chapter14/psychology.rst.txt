@@ -209,9 +209,9 @@ Rescorla-Wagner模型考虑了如何获得CR，这在一定程度上解释了阻
 设 :math:`d` 维的关联强度向量为 :math:`mathbf{w}`，则状态 :math:`s` 的聚合关联强度为
 
 .. math::
+    :label: 14.1
 
     \hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)
-    \tag{14.1}
 
 这与强化学习中的 *价值估计* 相对应，我们将其视为对 *US的预测*。
 
@@ -220,16 +220,16 @@ Rescorla-Wagner模型考虑了如何获得CR，这在一定程度上解释了阻
 条件作用试验 :math:`t` 按照如下公式将关联强度向量 :math:`\mathbf{w}_{t}` 更新为 :math:`\mathbf{w}_{t+1}` ：
 
 .. math::
+    :label: 14.2
 
     \mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{x}\left(S_{t}\right)
-    \tag{14.2}
 
 其中，:math:`\alpha` 是步长参数，因为我们正在描述 Rescorla-Wagner 模型，所以这里 :math:`\delta_{t}` 指 *预测误差*。
 
 .. math::
+    :label: 14.3
 
     \delta_{t}=R_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-    \tag{14.3}
 
 :math:`R_{t}` 是试验 :math:`t` 的预测目标，即 US 的大小，用 Rescorla 和 Wagner 的话来说就是 US 在试验中可以支持的关联强度。
 我们可以注意到，由于式（14.2）中存在因子 :math:`\mathbf{x}(S_{t})`，所以在复合CS中，只有在试验中出现的子刺激物的关联强度才会在一次试验后被调整。
@@ -281,17 +281,17 @@ Rescorla-Wagner 模型对阻塞现象以及条件反射的其他特征做出了�
 但是TD模型对于关联强度向量 :math:`\mathbf{w}` 的更新方式是不同的。由于参数 :math:`t` 目前表示的是一个时刻而不是一次完整的试验，因此TD模型根据如下公式进行更新
 
 .. math::
+    :label: 14.4
 
     \mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{z}_{t}
-    \tag{14.4}
 
 上式将 Rescorla-Wagner 模型更新公式（14.2）中的 :math:`\mathbf{x}_t(S_t)` 替换为 :math:`\mathbf{z}_t`，:math:`\mathbf{z}_t` 是一个资格迹向量。
 同时，这里的 :math:`\delta_{t}` 与式（14.3）中的不同，其代表TD误差。
 
 .. math::
+    :label: 14.5
 
     \delta_{t}=R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-    \tag{14.5}
 
 其中， :math:`\gamma` 是折扣系数（介于0和1之间），:math:`R_t` 是在 :math:`t` 时刻的预测目标，
 :math:`\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)` 和 :math:`\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)` 是在 :math:`t+1` 时刻与 :math:`t` 时刻对应的聚合关联强度，如式（14.1）中所定义的。
@@ -299,8 +299,9 @@ Rescorla-Wagner 模型对阻塞现象以及条件反射的其他特征做出了�
 资格迹向量 :math:`\mathbf{z}_t` 的每个分量 :math:`i` 根据特征向量 :math:`x_i(S_t)` 分量 :math:`\mathbf{x}(S_t)` 进行增加或减少，其余的资格迹向量根据系数 :math:`\gamma\lambda` 进行衰减
 
 .. math::
+    :label: 14.6
+
     \mathbf{z}_{t+1}=\gamma \lambda \mathbf{z}_{t}+\mathbf{x}\left(S_{t}\right)
-    \tag{14.6}
 
 这里的 :math:`\lambda` 是资格迹的衰减系数。
 

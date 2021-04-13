@@ -741,9 +741,8 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 从而，价值函数就是表示状态 <span class="math notranslate nohighlight">\(s\)</span> 的特征向量的线性函数，
 <span class="math notranslate nohighlight">\(\mathbf{x}(s)=\left(x_{1}(s), \ldots, x_{n}(s)\right)^{\top}\)</span> 价值函数
 被权重向量 <span class="math notranslate nohighlight">\(\mathbf{w}=\left(w_{1}, \dots, w_{n}\right)^{\top}\)</span> 参数化为</p>
-<div class="math notranslate nohighlight">
-\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)
-\tag{15.1}\]</div>
+<div class="math notranslate nohighlight" id="equation-15-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-15-1" title="公式的永久链接">¶</a></span>\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)\]</div>
 <p>每个 <span class="math notranslate nohighlight">\(x_{i}(s)\)</span> 就像神经元突触的突触前信号，其功效为 <span class="math notranslate nohighlight">\(w_{i}\)</span>。
 权重由上面公式的规则更新：<span class="math notranslate nohighlight">\(\alpha^{\mathbf{w}} \delta_{t} \mathbf{z}_{t}^{\mathbf{w}}\)</span>，
 这里强化信号 <span class="math notranslate nohighlight">\(\delta_t\)</span> 对应于广播到所有评判器单元的多巴胺信号。
@@ -771,9 +770,8 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 把值1看作神经元的放电，即放出一个动作电位。
 一个单元的输入向量的加权和 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{\top} \mathbf{x}(S_{t})\)</span>
 通过柔性最大化分布（式13.2）决定了这个单元的动作被选择的概率，对于两个动作的情况即为逻辑回归函数</p>
-<div class="math notranslate nohighlight">
-\[\pi(1 | s, \boldsymbol{\theta})=1-\pi(0 | s, \boldsymbol{\theta})=\frac{1}{1+\exp (-\boldsymbol{\theta}^{\top} \mathbf{x}(s))}
-\tag{15.2}\]</div>
+<div class="math notranslate nohighlight" id="equation-15-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-15-2" title="公式的永久链接">¶</a></span>\[\pi(1 | s, \boldsymbol{\theta})=1-\pi(0 | s, \boldsymbol{\theta})=\frac{1}{1+\exp (-\boldsymbol{\theta}^{\top} \mathbf{x}(s))}\]</div>
 <p>每一个行动器单元的权重通过上面的规则更新：<span class="math notranslate nohighlight">\(\boldsymbol{\theta} \leftarrow \boldsymbol{\theta}+\alpha^{\boldsymbol{\theta}} \delta_{t} \mathbf{z}_{t}^{\boldsymbol{\theta}}\)</span>，
 这里 <span class="math notranslate nohighlight">\(\delta\)</span> 依然对应多巴胺信号：送往所有行动器单位突触的相同的强化信号。
 图15.5a中展示了 <span class="math notranslate nohighlight">\(\delta_t\)</span> 广播到了每一个行动器单位的突触
@@ -784,9 +782,8 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 练习要求你通过计算梯度用 <span class="math notranslate nohighlight">\(a\)</span>、<span class="math notranslate nohighlight">\(\mathbf{x}(s)\)</span> 和 <span class="math notranslate nohighlight">\(\pi(a|s,\boldsymbol{\theta})\)</span>
 这些项表示 <span class="math notranslate nohighlight">\(\nabla \ln \pi(a|s, \boldsymbol{\theta})\)</span>。
 对于在时刻 <span class="math notranslate nohighlight">\(t\)</span> 的动作和状态，答案是</p>
-<div class="math notranslate nohighlight">
-\[\nabla \ln \pi(A_{t} | S_{t}, \boldsymbol{\theta})=(A_t - \pi(\boldsymbol{1}|S_{t},\boldsymbol{\theta})) \mathbf{x}(S_{t})
-\tag{15.3}\]</div>
+<div class="math notranslate nohighlight" id="equation-15-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-15-3" title="公式的永久链接">¶</a></span>\[\nabla \ln \pi(A_{t} | S_{t}, \boldsymbol{\theta})=(A_t - \pi(\boldsymbol{1}|S_{t},\boldsymbol{\theta})) \mathbf{x}(S_{t})\]</div>
 <p>与评判器突触只累积突触前活动 <span class="math notranslate nohighlight">\(\mathbf{x}(S_{t})\)</span> 的非偶发资格迹不同，
 行动器单元的资格迹还取决于行动器单元本身的活动，我们称其为 <em>偶发资格迹</em>。
 资格迹在每一个突触都会持续衰减，但是会根据突触前活动以及突触后神经元是否放电增加或减少。

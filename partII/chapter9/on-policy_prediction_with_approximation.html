@@ -274,9 +274,8 @@ n步TD更新为 <span class="math notranslate nohighlight">\(S_{t} \mapsto G_{t:
 通过状态 <span class="math notranslate nohighlight">\(s\)</span> 中的误差，我们指的是近似值 <span class="math notranslate nohighlight">\(\hat{v}(s, \mathbf{w})\)</span> 与
 真值 <span class="math notranslate nohighlight">\(v_\pi(s)\)</span> 之间的差的平方。
 通过 <span class="math notranslate nohighlight">\(\mu\)</span> 对状态空间加权，我们得到一个自然目标函数，<em>均方误差</em>，表示为 <span class="math notranslate nohighlight">\(\overline{\mathrm{VE}}\)</span>：</p>
-<div class="math notranslate nohighlight">
-\[\overline{\mathrm{VE}}(\mathbf{w}) \doteq \sum_{s \in \mathcal{S}} \mu(s)\left[v_{\pi}(s)-\hat{v}(s, \mathbf{w})\right]^{2}
-\tag{9.1}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-9-1" title="公式的永久链接">¶</a></span>\[\overline{\mathrm{VE}}(\mathbf{w}) \doteq \sum_{s \in \mathcal{S}} \mu(s)\left[v_{\pi}(s)-\hat{v}(s, \mathbf{w})\right]^{2}\]</div>
 <p>该度量的平方根（根 <span class="math notranslate nohighlight">\(\overline{\mathrm{VE}}\)</span>）粗略地衡量了近似值与真实值的差异，并且通常用于图中。
 通常 <span class="math notranslate nohighlight">\(\mu(s)\)</span> 被选择为 <span class="math notranslate nohighlight">\(s\)</span> 中花费的时间的一部分。
 在在策略训练中，这被称为 <em>在策略分布</em>；我们在本章中完全关注这个案例。
@@ -287,13 +286,11 @@ n步TD更新为 <span class="math notranslate nohighlight">\(S_{t} \mapsto G_{t:
 设 ;math:<cite>h(s)</cite> 表示回合在每个状态 <span class="math notranslate nohighlight">\(s\)</span> 中开始的概率，
 <span class="math notranslate nohighlight">\(\eta(s)\)</span> 表示在一个回合中状态 <span class="math notranslate nohighlight">\(s\)</span> 中平均花费的时间步数。
 如果回合以 <span class="math notranslate nohighlight">\(s\)</span> 开头，或者如果从之前的状态 <span class="math notranslate nohighlight">\(\overline{s}\)</span> 转换为 <span class="math notranslate nohighlight">\(s\)</span>，则花费时间在状态 <span class="math notranslate nohighlight">\(s\)</span> 中：</p>
-<div class="math notranslate nohighlight">
-\[\eta(s)=h(s)+\sum_{\overline{s}} \eta(\overline{s}) \sum_{a} \pi(a | \overline{s}) p(s | \overline{s}, a), \text { 对所有 } s \in \mathcal{S}
-\tag{9.2}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-9-2" title="公式的永久链接">¶</a></span>\[\eta(s)=h(s)+\sum_{\overline{s}} \eta(\overline{s}) \sum_{a} \pi(a | \overline{s}) p(s | \overline{s}, a), \text { 对所有 } s \in \mathcal{S}\]</div>
 <p>可以针对预期的访问次数 <span class="math notranslate nohighlight">\(\eta(s)\)</span> 求解该方程组。 然后，在策略分布是每个状态所花费的时间的一小部分，标准化和为一：</p>
-<div class="math notranslate nohighlight">
-\[\mu(s)=\frac{\eta(s)}{\sum_{s^{\prime}} \eta(s^{\prime})}, \quad \text { 对所有 } s \in \mathcal{S}
-\tag{9.3}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-9-3" title="公式的永久链接">¶</a></span>\[\mu(s)=\frac{\eta(s)}{\sum_{s^{\prime}} \eta(s^{\prime})}, \quad \text { 对所有 } s \in \mathcal{S}\]</div>
 <p>这是没有折扣的自然选择。如果存在折扣（<span class="math notranslate nohighlight">\(\gamma&lt;1\)</span>），则应将其视为终止形式，
 这可以简单通过在（9.2）的第二项中包含因子 <span class="math notranslate nohighlight">\(\gamma\)</span> 来完成。</p>
 </div>
@@ -349,9 +346,8 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 <p>其中 <span class="math notranslate nohighlight">\(\alpha\)</span> 是正步长参数，对于作为向量函数（这里是 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>）的
 任何标量表达式 <span class="math notranslate nohighlight">\(f(\mathbf{w})\)</span>，<span class="math notranslate nohighlight">\(\nabla f(\mathbf{w})\)</span> 定义为关于向量分量
 表达式的偏导数的列向量，向量分量为：</p>
-<div class="math notranslate nohighlight">
-\[\nabla f(\mathbf{w}) \doteq\left(\frac{\partial f(\mathbf{w})}{\partial w_{1}}, \frac{\partial f(\mathbf{w})}{\partial w_{2}}, \dots, \frac{\partial f(\mathbf{w})}{\partial w_{d}}\right)^{\top}
-\tag{9.6}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-6">
+<span class="eqno">(4)<a class="headerlink" href="#equation-9-6" title="公式的永久链接">¶</a></span>\[\nabla f(\mathbf{w}) \doteq\left(\frac{\partial f(\mathbf{w})}{\partial w_{1}}, \frac{\partial f(\mathbf{w})}{\partial w_{2}}, \dots, \frac{\partial f(\mathbf{w})}{\partial w_{d}}\right)^{\top}\]</div>
 <p>该导数向量是 math:<cite>f</cite> 相对于 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 的梯度。SGD方法是“梯度下降”方法，
 因为 <span class="math notranslate nohighlight">\(\mathbf{w}_t\)</span> 中的整个步长与示例的平方误差（9.4）的负梯度成比例。这是误差下降最快的方向。
 当像这儿仅在单个可能是随机选择的样例上完成更新时，梯度下降方法被称为“随机”。
@@ -368,9 +364,8 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 在这些情况下，我们无法执行精确更新（9.5），因为 <span class="math notranslate nohighlight">\(v_\pi(S_t)\)</span> 是未知的，
 但我们可以通过用 <span class="math notranslate nohighlight">\(U_t\)</span> 代替 <span class="math notranslate nohighlight">\(v_\pi(S_t)\)</span> 来近似它。
 这产生了以下用于状态价值预测的一般SGD方法：</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right)
-\tag{9.7}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-7">
+<span class="eqno">(5)<a class="headerlink" href="#equation-9-7" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[U_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>如果 <span class="math notranslate nohighlight">\(U_t\)</span> 是无偏估计，即，如果对于每个 <span class="math notranslate nohighlight">\(t\)</span> 有
 <span class="math notranslate nohighlight">\(\mathbb{E}\left[U_{t} | S_{t}=s\right]=v_{\pi}(S_{t})\)</span>，
 则 <span class="math notranslate nohighlight">\(\mathbf{w}_t\)</span> 保证对于减小的 <span class="math notranslate nohighlight">\(\alpha\)</span> 在通常的随机近似条件（2.7）下收敛到局部最优值。</p>
@@ -465,9 +460,8 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 <span class="math notranslate nohighlight">\(\mathbf{x}(s) \doteq(x_{1}(s), x_{2}(s), \ldots, x_{d}(s))^{\top}\)</span>，
 具有与 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 相同数量的分量。
 线性方法通过 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 和 <span class="math notranslate nohighlight">\(\mathbf{x}(s)\)</span> 之间的内积近似状态值函数：</p>
-<div class="math notranslate nohighlight">
-\[\hat{v}(s, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s) \doteq \sum_{i=1}^{d} w_{i} x_{i}(s)
-\tag{9.8}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-8">
+<span class="eqno">(6)<a class="headerlink" href="#equation-9-8" title="公式的永久链接">¶</a></span>\[\hat{v}(s, \mathbf{w}) \doteq \mathbf{w}^{\top} \mathbf{x}(s) \doteq \sum_{i=1}^{d} w_{i} x_{i}(s)\]</div>
 <p>在这种情况下，近似价值函数被称为 <em>权重线性（linear in the weights）</em>，或简单地称为 <em>线性</em>。</p>
 <p>向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s)\)</span> 被称为表示状态 <span class="math notranslate nohighlight">\(s\)</span> 的 <em>特征向量</em>。
 <span class="math notranslate nohighlight">\(\mathbf{x}(s)\)</span> 的每个分量 <span class="math notranslate nohighlight">\(x_{i}(s)\)</span> 是
@@ -498,13 +492,11 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 \end{aligned}\end{split}\]</div>
 <p>这里我们使用了符号缩写 <span class="math notranslate nohighlight">\(\mathbf{x}_{t}=\mathbf{x}\left(S_{t}\right)\)</span>。
 一旦系统达到稳定状态，对于任何给定的 <span class="math notranslate nohighlight">\(\mathbf{w}_t\)</span>，下一个权重向量的期望可以写成：</p>
-<div class="math notranslate nohighlight">
-\[\mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=\mathbf{w}_{t}+\alpha\left(\mathbf{b}-\mathbf{A} \mathbf{w}_{t}\right)
-\tag{9.10}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-10">
+<span class="eqno">(7)<a class="headerlink" href="#equation-9-10" title="公式的永久链接">¶</a></span>\[\mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=\mathbf{w}_{t}+\alpha\left(\mathbf{b}-\mathbf{A} \mathbf{w}_{t}\right)\]</div>
 <p>其中</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{b} \doteq \mathbb{E}\left[R_{t+1} \mathbf{x}_{t}\right] \in \mathbb{R}^{d} \quad \text { 和 } \quad \mathbf{A} \doteq \mathbb{E}\left[\mathbf{x}_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right)^{\top}\right] \in \mathbb{R}^{d} \times \mathbb{R}^{d}
-\tag{9.11}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-11">
+<span class="eqno">(8)<a class="headerlink" href="#equation-9-11" title="公式的永久链接">¶</a></span>\[\mathbf{b} \doteq \mathbb{E}\left[R_{t+1} \mathbf{x}_{t}\right] \in \mathbb{R}^{d} \quad \text { 和 } \quad \mathbf{A} \doteq \mathbb{E}\left[\mathbf{x}_{t}\left(\mathbf{x}_{t}-\gamma \mathbf{x}_{t+1}\right)^{\top}\right] \in \mathbb{R}^{d} \times \mathbb{R}^{d}\]</div>
 <p>从（9.10）可以清楚地看出，如果系统收敛，它必须收敛到权重向量 <span class="math notranslate nohighlight">\(\mathbf{W}_{\mathrm{TD}}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -516,9 +508,8 @@ SGD方法是所有函数近似方法中使用最广泛的方法之一，尤其�
 <div class="note admonition">
 <p class="admonition-title">线性TD(0)的收敛性证明</p>
 <p>什么属性确保线性TD(0)算法（9.9）的收敛？通过重写（9.10）可以获得一些见解</p>
-<div class="math notranslate nohighlight">
-\[\mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=(\mathbf{I}-\alpha \mathbf{A}) \mathbf{w}_{t}+\alpha \mathbf{b}
-\tag{9.13}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-13">
+<span class="eqno">(9)<a class="headerlink" href="#equation-9-13" title="公式的永久链接">¶</a></span>\[\mathbb{E}\left[\mathbf{w}_{t+1} | \mathbf{w}_{t}\right]=(\mathbf{I}-\alpha \mathbf{A}) \mathbf{w}_{t}+\alpha \mathbf{b}\]</div>
 <p>注意到矩阵 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> 乘以权重向量 <span class="math notranslate nohighlight">\(\mathbf{w}_t\)</span> 而不是 <span class="math notranslate nohighlight">\(\mathbf{b}\)</span>；
 只有 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> 对收敛很重要。
 为了发展直觉，考虑 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> 是对角矩阵的特殊情况。如果任何对角元素为负，
@@ -569,9 +560,8 @@ Sutton（1988，p.27）基于两个先前建立的定理证明了这一点。
 （需要附加条件和随时间推移减少 <span class="math notranslate nohighlight">\(\alpha\)</span> 的时间表来证明收敛概率为1。）</p>
 </div>
 <p>在TD固定点，已经证明（在持续情况下） <span class="math notranslate nohighlight">\(\overline{\mathrm{VE}}\)</span> 在最低可能误差的有限扩展内：</p>
-<div class="math notranslate nohighlight">
-\[\overline{\mathrm{VE}}\left(\mathbf{w}_{\mathrm{TD}}\right) \leq \frac{1}{1-\gamma} \min _{\mathbf{w}} \overline{\mathrm{VE}}(\mathbf{w})
-\tag{9.14}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-14">
+<span class="eqno">(10)<a class="headerlink" href="#equation-9-14" title="公式的永久链接">¶</a></span>\[\overline{\mathrm{VE}}\left(\mathbf{w}_{\mathrm{TD}}\right) \leq \frac{1}{1-\gamma} \min _{\mathbf{w}} \overline{\mathrm{VE}}(\mathbf{w})\]</div>
 <p>也就是说，TD方法的渐近误差不超过最小可能误差的 <span class="math notranslate nohighlight">\(\frac{1}{1-\gamma}\)</span> 倍，这是通过蒙特卡罗方法达到的极限值。
 因为 <span class="math notranslate nohighlight">\(\gamma\)</span> 通常接近1，所以这个扩展因子可能非常大，因此TD方法的渐近性能存在很大的潜在损失。
 另一方面，回想一下，与蒙特卡罗方法相比，TD方法的方差通常大大减少，因此更快，正如我们在第6章和第7章中看到的那样。
@@ -634,13 +624,11 @@ Sutton（1988，p.27）基于两个先前建立的定理证明了这一点。
 </div></blockquote>
 </div>
 <p>类似于（7.2），这个算法的关键方程是</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t&lt;T
-\tag{9.15}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-15">
+<span class="eqno">(11)<a class="headerlink" href="#equation-9-15" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t&lt;T\]</div>
 <p>其中n步回报从（7.1）推广到</p>
-<div class="math notranslate nohighlight">
-\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{v}\left(S_{t+n}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t \leq T-n
-\tag{9.16}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-16">
+<span class="eqno">(12)<a class="headerlink" href="#equation-9-16" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{v}\left(S_{t+n}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t \leq T-n\]</div>
 <p><strong>练习9.1</strong> 展示本书第一部分中介绍的表格方法是线性函数近似的一种特殊情况。特征向量是什么？</p>
 </div>
 <div class="section" id="id6">
@@ -677,9 +665,8 @@ Sutton（1988，p.27）基于两个先前建立的定理证明了这一点。
 <p class="admonition-title">注解</p>
 <p>假设每个状态 <span class="math notranslate nohighlight">\(s\)</span> 对应于 <span class="math notranslate nohighlight">\(k\)</span> 个数，<span class="math notranslate nohighlight">\(s_1,s_2,\ldots,s_k\)</span>，每个 <span class="math notranslate nohighlight">\(s_{i} \in \mathbb{R}\)</span>。
 对于这个 <span class="math notranslate nohighlight">\(k\)</span> 维状态空间，每个有阶-n（order-n）多项式基特征 <span class="math notranslate nohighlight">\(x_i\)</span> 可以写为</p>
-<div class="math notranslate nohighlight">
-\[x_{i}(s)=\Pi_{j=1}^{k} s_{j}^{c_{i, j}}
-\tag{9.17}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-17">
+<span class="eqno">(13)<a class="headerlink" href="#equation-9-17" title="公式的永久链接">¶</a></span>\[x_{i}(s)=\Pi_{j=1}^{k} s_{j}^{c_{i, j}}\]</div>
 <p>其中每个 <span class="math notranslate nohighlight">\(c_{i,j}\)</span> 是集合 <span class="math notranslate nohighlight">\(\{0,1, \ldots, n\}\)</span> 中的整数，<span class="math notranslate nohighlight">\(n&gt;0\)</span>。
 这些特征构成维数 <span class="math notranslate nohighlight">\(k\)</span> 的阶-n多项式基，其中包含 <span class="math notranslate nohighlight">\((n+1)^k\)</span> 个不同的特征。</p>
 </div>
@@ -727,9 +714,8 @@ Sutton（1988，p.27）基于两个先前建立的定理证明了这一点。
 <p>假设每个状态 <span class="math notranslate nohighlight">\(s\)</span> 对应于 <span class="math notranslate nohighlight">\(k\)</span> 个数的矢量，
 <span class="math notranslate nohighlight">\(\mathbf{s}=(s_{1},s_{2},\ldots,s_{k})^{\top}\)</span>，每个 <span class="math notranslate nohighlight">\(s_{i}\in[0,1]\)</span>。
 然后可以写出阶n傅里叶余弦基的第 <span class="math notranslate nohighlight">\(i\)</span> 个特征</p>
-<div class="math notranslate nohighlight">
-\[x_{i}(s)=\cos (\pi \mathbf{s}^{\top} \mathbf{c}^{i})
-\tag{9.18}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-18">
+<span class="eqno">(14)<a class="headerlink" href="#equation-9-18" title="公式的永久链接">¶</a></span>\[x_{i}(s)=\cos (\pi \mathbf{s}^{\top} \mathbf{c}^{i})\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\mathbf{c}^{i}=(c_{1}^{i}, \ldots, c_{k}^{i})^{\top}\)</span>，
 其中对 <span class="math notranslate nohighlight">\(j=1, \dots, k\)</span> 和 <span class="math notranslate nohighlight">\(i=1, \dots,(n+1)^{k}\)</span>，<span class="math notranslate nohighlight">\(c_{j}^{i} \in\{0, \dots, n\}\)</span> 。
 这为 <span class="math notranslate nohighlight">\((n+1)^{k}\)</span> 个可能的整数向量 <span class="math notranslate nohighlight">\(\mathbf{c}^{i}\)</span> 中的每一个定义了一个特征。
@@ -955,9 +941,8 @@ RBF网络，特别是非线性RBF网络的缺点是计算复杂度更高，并�
 <p>对于一般函数近似，没有关于状态的经验 <em>数量</em> 的这种明确概念，因为每个状态可能与所有其他状态在不同程度上相似和不相似。
 然而，在线性函数近似的情况下，存在类似的规则。假设你想在 <span class="math notranslate nohighlight">\(\tau\)</span> 个经验内用大致相同的特征向量来学习。
 然后，设置线性SGD方法的步长参数的一个好的经验法则是</p>
-<div class="math notranslate nohighlight">
-\[\alpha \doteq\left(\tau \mathbb{E}\left[\mathbf{x}^{\top} \mathbf{x}\right]\right)^{-1}
-\tag{9.19}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-19">
+<span class="eqno">(15)<a class="headerlink" href="#equation-9-19" title="公式的永久链接">¶</a></span>\[\alpha \doteq\left(\tau \mathbb{E}\left[\mathbf{x}^{\top} \mathbf{x}\right]\right)^{-1}\]</div>
 <p>其中，<span class="math notranslate nohighlight">\(\mathbf{x}\)</span> 是从与SGD中的输入矢量相同的分布中选择的随机特征向量。
 如果特征向量的长度变化不大，则此方法效果最佳；理想情况下，<span class="math notranslate nohighlight">\(\mathbf{x}^{\top} \mathbf{x}\)</span> 是常数。</p>
 <p><em>练习9.5</em> 假设你正在使用铺片编码将七维连续状态空间转换为二元特征向量，
@@ -1085,17 +1070,15 @@ LeCun，Bottou，Bengio和Haffner，第86卷，1998年；通过Copyright Clearan
 <p>有人可能会问，为什么我们必须迭代地计算这个解决方案？这浪费了数据！
 通过计算 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> 和 <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> 的估计值，然后直接计算TD固定点，可能会做得更好吗？
 <em>最小二乘TD</em> 算法，通常称为LSTD，就是这样做的。它形成了自然估计</p>
-<div class="math notranslate nohighlight">
-\[\widehat{\mathbf{A}}_{t} \doteq \sum_{k=0}^{t-1} \mathbf{x}_{k}\left(\mathbf{x}_{k}-\gamma \mathbf{x}_{k+1}\right)^{\top}+\varepsilon \mathbf{I} \quad \text { 和 } \quad \widehat{\mathbf{b}}_{t} \doteq \sum_{k=0}^{t-1} R_{k+1} \mathbf{x}_{k}
-\tag{9.20}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-20">
+<span class="eqno">(16)<a class="headerlink" href="#equation-9-20" title="公式的永久链接">¶</a></span>\[\widehat{\mathbf{A}}_{t} \doteq \sum_{k=0}^{t-1} \mathbf{x}_{k}\left(\mathbf{x}_{k}-\gamma \mathbf{x}_{k+1}\right)^{\top}+\varepsilon \mathbf{I} \quad \text { 和 } \quad \widehat{\mathbf{b}}_{t} \doteq \sum_{k=0}^{t-1} R_{k+1} \mathbf{x}_{k}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> 是单位矩阵，对于一些小 <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span>，
 <span class="math notranslate nohighlight">\(\varepsilon\mathbf{I}\)</span> 确保 <span class="math notranslate nohighlight">\(\widehat{\mathbf{A}}_{t}\)</span> 始终是可逆的。
 似乎这些估计值都应该除以 <span class="math notranslate nohighlight">\(t\)</span>，实际上它们应该是; 如这里定义的，
 这些实际上是 <span class="math notranslate nohighlight">\(t\)</span> <em>乘</em> <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> 和 <span class="math notranslate nohighlight">\(t\)</span> <em>乘</em> <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> 的估计。
 然而，当LSTD使用这些估计来估计TD固定点时，额外的 <span class="math notranslate nohighlight">\(t\)</span> 因子抵消了</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t} \doteq \widehat{\mathbf{A}}_{t}^{-1} \widehat{\mathbf{b}}_{t}
-\tag{9.21}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-21">
+<span class="eqno">(17)<a class="headerlink" href="#equation-9-21" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t} \doteq \widehat{\mathbf{A}}_{t}^{-1} \widehat{\mathbf{b}}_{t}\]</div>
 <p>该算法是线性TD(0)的最具数据效率的形式，但它在计算上也更昂贵。 回想一下，半梯度TD(0)需要仅仅 <span class="math notranslate nohighlight">\(O(d)\)</span> 的内存和每步计算。</p>
 <p>LSTD有多复杂？如上所述，复杂性似乎随着 <span class="math notranslate nohighlight">\(t\)</span> 增加，但是（9.20）中的两个近似
 可以使用我们之前介绍的技术（例如，在第2章中）逐步实现，以便它们每步可以在恒定时间内完成。
@@ -1209,9 +1192,8 @@ LSTD不需要步长参数的事实有时也被吹捧，但这可能被夸大了�
 如果 <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> 是存储示例的集合，
 并且 <span class="math notranslate nohighlight">\(g(s^{\prime})\)</span> 表示存储示例中状态 <span class="math notranslate nohighlight">\(s^{\prime}\)</span> 的目标，
 则核回归近似目标函数，在这种情况下是取决于 <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> 的价值函数，即</p>
-<div class="math notranslate nohighlight">
-\[\hat{v}(s, \mathcal{D})=\sum_{s^{\prime} \in \mathcal{D}} k\left(s, s^{\prime}\right) g\left(s^{\prime}\right)
-\tag{9.23}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-23">
+<span class="eqno">(18)<a class="headerlink" href="#equation-9-23" title="公式的永久链接">¶</a></span>\[\hat{v}(s, \mathcal{D})=\sum_{s^{\prime} \in \mathcal{D}} k\left(s, s^{\prime}\right) g\left(s^{\prime}\right)\]</div>
 <p>上述加权平均方法是一种特殊情况，其中 <span class="math notranslate nohighlight">\(k(s, s^{\prime})\)</span> 仅在 <span class="math notranslate nohighlight">\(s\)</span>
 和 <span class="math notranslate nohighlight">\(s^{\prime}\)</span> 彼此接近时才为非零，因此不需要在所有 <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> 上计算总和。</p>
 <p>常见的核是在第9.5.5节中描述的RBF函数近似中使用的高斯径向基函数（RBF）。
@@ -1224,9 +1206,8 @@ LSTD不需要步长参数的事实有时也被吹捧，但这可能被夸大了�
 状态由特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s)=(x_{1}(s), x_{2}(s), \ldots, x_{d}(s))^{\top}\)</span> 表示，
 可以重铸为核回归，其中 <span class="math notranslate nohighlight">\(k(s, s^{\prime})\)</span> 是 <span class="math notranslate nohighlight">\(s\)</span> 和 <span class="math notranslate nohighlight">\(s^{\prime}\)</span> 的
 特征向量表示的内积；即</p>
-<div class="math notranslate nohighlight">
-\[k\left(s, s^{\prime}\right)=\mathbf{x}(s)^{\top} \mathbf{x}\left(s^{\prime}\right)
-\tag{9.24}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-24">
+<span class="eqno">(19)<a class="headerlink" href="#equation-9-24" title="公式的永久链接">¶</a></span>\[k\left(s, s^{\prime}\right)=\mathbf{x}(s)^{\top} \mathbf{x}\left(s^{\prime}\right)\]</div>
 <p>使用此核函数的核回归产生与线性参数方法相同的近似值，如果它使用这些特征向量并使用相同的训练数据进行学习。</p>
 <p>我们跳过了数学上的理由，这可以在任何现代机器学习文本中找到，例如Bishop（2006），并简单地指出一个重要的含义。
 与其为线性参数函数近似器构造特征，我们可以直接构造核函数而不必完全引用特征向量。
@@ -1256,13 +1237,11 @@ LSTD不需要步长参数的事实有时也被吹捧，但这可能被夸大了�
 在遵循目标策略时遇到的状态分布，由兴趣加权。
 其次，我们引入另一个非负标量随机变量，称为 <em>重点</em> <span class="math notranslate nohighlight">\(M_t\)</span>。
 该标量乘以学习更新，从而强调或不强调在时间 <span class="math notranslate nohighlight">\(t\)</span> 完成的学习。替换（9.15）的一般n步学习规则是</p>
-<div class="math notranslate nohighlight">
-\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha M_{t}\left[G_{t : t+n}-\hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t&lt;T
-\tag{9.25}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-25">
+<span class="eqno">(20)<a class="headerlink" href="#equation-9-25" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha M_{t}\left[G_{t : t+n}-\hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t&lt;T\]</div>
 <p>由（9.16）给出的n步回报，并且通过以下方式从兴趣中递归确定重点：</p>
-<div class="math notranslate nohighlight">
-\[M_{t}=I_{t}+\gamma^{n} M_{t-n}, \quad 0 \leq t&lt;T
-\tag{9.26}\]</div>
+<div class="math notranslate nohighlight" id="equation-9-26">
+<span class="eqno">(21)<a class="headerlink" href="#equation-9-26" title="公式的永久链接">¶</a></span>\[M_{t}=I_{t}+\gamma^{n} M_{t-n}, \quad 0 \leq t&lt;T\]</div>
 <p>其中对于所有 <span class="math notranslate nohighlight">\(t&lt;0\)</span>，<span class="math notranslate nohighlight">\(M_t\doteq 0\)</span>。这些等式被认为包括蒙特卡罗情况，
 其中 <span class="math notranslate nohighlight">\(G_{t:t+n}=G_{t}\)</span>，所有更新都在回合结束时进行，<span class="math notranslate nohighlight">\(n=T-t\)</span>，并且 <span class="math notranslate nohighlight">\(M_{t}=I_{t}\)</span>。</p>
 <p>例9.4说明了兴趣和重点如何能够产生更准确的价值估计。</p>

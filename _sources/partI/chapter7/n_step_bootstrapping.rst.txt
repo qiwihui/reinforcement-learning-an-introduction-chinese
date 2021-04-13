@@ -71,9 +71,9 @@ n步方法的概念通常用作 *资格迹* （第12章）算法思想的介绍�
 同样，任意n步更新的目标是n步回报：
 
 .. math::
+    :label: 7.1
 
     G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)
-    \tag{7.1}
 
 而所有其他状态的值保持不变：对于所有 :math:`s \neq S_{t}`，:math:`V_{t+n}(s)=V_{t+n-1}(s)`。
 我们将此算法称为 *n步TD*。 请注意，在每回合的前n-1个步骤中，根本不会进行任何更改。
@@ -131,9 +131,9 @@ n步回报的一个重要特性是，在最恶劣的意义上，它们的期望�
 也就是说，对于所有 :math:`n \ge 1`，预期的n步回报的最差误差保证小于或等于 :math:`V_{t+n-1}` 下最差误差的 :math:`\gamma^{n}` 倍：
 
 .. math::
+    :label: 7.3
 
     \max _{s}\left|\mathbb{E}_{\pi}\left[G_{t : t+n} | S_{t}=s\right]-v_{\pi}(s)\right| \leq \gamma^{n} \max _{s}\left|V_{t+n-1}(s)-v_{\pi}(s)\right|
-    \tag{7.3}
 
 这称为 *n步回报的误差减少属性*。由于误差减少属性，可以正式显示所有n步TD方法在适当的技术条件下收敛到正确的预测。
 因此，n步TD方法形成一系列可靠的（sound）方法，一步法TD方法和蒙特卡罗方法作为其极端情况。
@@ -173,16 +173,16 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 除了Sarsa所有都以动作而不是状态开始和结束。我们根据估计的动作值重新定义n步回报（更新目标）：
 
 .. math::
+    :label: 7.4
 
     G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t<T-n
-    \tag{7.4}
 
 如果 :math:`t+n \geq T`，则 :math:`G_{t : t+n} \doteq G_{t}`。那么自然算法就是
 
 .. math::
+    :label: 7.5
 
     Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t<T
-    \tag{7.5}
 
 而所有其他状态的值保持不变：:math:`Q_{t+n}(s, a)=Q_{t+n-1}(s, a)`，
 对于所有 :math:`s, a` 使得 :math:`s \ne S_t` 或 :math:`a \ne A_t`。
@@ -257,9 +257,9 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 *练习7.4* 证明Sarsa（7.4）的n步回报可以完全按照新的TD误差写成如下：
 
 .. math::
+    :label: 7.6
 
     G_{t : t+n}=Q_{t-1}\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n, T)-1} \gamma^{k-t}\left[R_{k+1}+\gamma Q_{k}\left(S_{k+1}, A_{k+1}\right)-Q_{k-1}\left(S_{k}, A_{k}\right)\right]
-    \tag{7.6}
 
 那么预期的Sarsa呢？预期Sarsa的n步版本的备份图显示在图7.3的最右侧。
 它由一系列样本动作和状态的线性组成，就像在n步Sarsa中一样，
@@ -267,17 +267,17 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 该算法可以用与n步Sarsa（上面）相同的等式来描述，除了将n步回报重新定义为
 
 .. math::
+    :label: 7.7
 
     G_{t : t+n} \doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \overline{V}_{t+n-1}\left(S_{t+n}\right), \quad t+n<T
-    \tag{7.7}
 
 对 :math:`t+n \geq T`，:math:`G_{t : t+n} \doteq G_{t}`。
 其中 :math:`\overline{V}_{t}(s)` 是状态s的 *预期近似值*，使用目标策略下时间 :math:`t` 的估计行动值：
 
 .. math::
+    :label: 7.8
 
     \overline{V}_{t}(s) \doteq \sum_{a} \pi(a | s) Q_{t}(s, a), \quad \text { 对所有 } s \in \mathcal{S}
-    \tag{7.8}
 
 在本书的其余部分中，使用预期近似值来开发许多动作价值方法。如果s是终点，则其预期近似值被定义为0。
 
@@ -294,17 +294,17 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 可以简单地通过 :math:`\rho_{t : t}+n-1` 加权：
 
 .. math::
+    :label: 7.9
 
     V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t : t+n-1}\left[G_{t : t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t<T
-    \tag{7.9}
 
 其中 :math:`\rho_{t : t}+n-1` 称为 *重要性采样比率*，
 是在两个策略下从 :math:`A_t` 到 :math:`A_{t+n-1}` 采取 :math:`n` 个动作的相对概率（参见方程5.3）：
 
 .. math::
+    :label: 7.10
 
     \rho_{t : h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}
-    \tag{7.10}
 
 例如，如果任何一个动作永远不会被 :math:`\pi` 占用（即 :math:`\pi\left(A_{k} | S_{k}\right)=0`），
 那么n步回报应该被赋予零权重并被完全忽略。
@@ -316,9 +316,9 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 同样，我们之前的n步Sarsa更新可以完全被简单的离策略形式所取代：
 
 .. math::
+    :label: 7.11
 
     Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1 : t+n}\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]
-    \tag{7.11}
 
 对 :math:`0 \leq t<T`。注意，这里的重要性采样比率比n步TD（7.9）晚一步开始和结束。
 这是因为我们正在更新状态-动作对。我们不必关心我们选择行动的可能性；
@@ -393,9 +393,9 @@ n步预期Sarsa的离策略版本将对n步Sarsa使用与上述相同的更新�
 对于以水平线 :math:`h` 结束的n个步骤，n步回报可以写成
 
 .. math::
+    :label: 7.12
 
     G_{t : h}=R_{t+1}+\gamma G_{t+1 : h}, \quad t<h<T
-    \tag{7.12}
 
 其中 :math:`G_{h : h} \doteq V_{h-1}\left(S_{h}\right)`。
 （回想一下，此回报在时间 :math:`h` 使用，先前表示为 :math:`t+n`。）
@@ -409,9 +409,9 @@ n步预期Sarsa的离策略版本将对n步Sarsa使用与上述相同的更新�
 相反，在这种更复杂的方法中，人们使用在水平线 :math:`h` 结束的n步回报的替代的离策略定义，即
 
 .. math::
+    :label: 7.13
 
     G_{t : h} \doteq \rho_{t}\left(R_{t+1}+\gamma G_{t+1 : h}\right)+\left(1-\rho_{t}\right) V_{h-1}\left(S_{t}\right), \quad t<h<T
-    \tag{7.13}
 
 再次 :math:`G_{h : h} \doteq V_{h-1}\left(S_{h}\right)`。
 在这种方法中，如果 :math:`\rho_{t}` 为零，则目标与估计相同并且不会导致变化，而不是目标为零并导致估计收缩。
@@ -502,9 +502,9 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 现在让我们开发n步树备份算法的详细方程。一步回报（目标）与预期的Sarsa相同，
 
 .. math::
+    :label: 7.15
 
     G_{t : t+1} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q_{t}\left(S_{t+1}, a\right)
-    \tag{7.15}
 
 对 :math:`t<T-1`。两步树备份回报为
 
@@ -519,9 +519,9 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 对 :math:`t<T-2`。后一种形式表明了树备份n步回报的一般递归定义：
 
 .. math::
+    :label: 7.16
 
     G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}
-    \tag{7.16}
 
 对 :math:`0 \leq t<T`，而所有其他状态-动作对的值保持不变：
 :math:`Q_{t+n}(s, a)=Q_{t+n-1}(s, a)`，
