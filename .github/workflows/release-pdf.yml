@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Release PDF
 on:
   push:
     tags:
