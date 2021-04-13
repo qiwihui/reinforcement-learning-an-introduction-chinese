@@ -240,7 +240,6 @@ MC 和首次访问 MC）都会以二次方收敛到期望值。
     :label: 5.1
 
     \pi(s) \dot{=} arg \space \underset{a}{max} \space q(s,a)
-    \tag{5.1}
 
 之后我们可以做策略提升，我们构建每个 :math:`\pi_{k+1}` 为 :math:`q_{\pi_k}` 的贪婪策略。
 策略提升理论（见4.2节）可以应用到 :math:`\pi_k` 和 :math:`\pi_{k+1}` 上，
@@ -419,7 +418,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
     \begin{aligned}
     q_{\pi}\left(s, \pi^{\prime}(s)\right) &=\sum_{a} \pi^{\prime}(a | s) q_{\pi}(s, a) \\
-    &=\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \max _{a} q_{\pi}(s, a) \tag{5.2}\\
+    &=\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \max _{a} q_{\pi}(s, a) (5.2)\\
     & \geq \frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \sum_{a} \frac{\pi(a | s)-\frac{\varepsilon}{|\mathcal{A}(s)|}}{1-\varepsilon} q_{\pi}(s, a)
     \end{aligned}
 
@@ -526,11 +525,11 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 因此，在目标策略和行为策略下的该轨迹的发生的相对概率为（即重要性采样率）
 
 .. math::
+    :label: 5.3
 
     \rho_{t:T-1} \doteq \frac{\prod_{k=t}^{T-1} \pi(A_k|S_k)p(S_{k+1}|S_k,A_k)}
     {\prod_{k=t}^{T-1} b(A_k|S_k)p(S_{k+1}|S_k,A_k)}
     = \prod_{k=t}^{T-1} \frac{\pi(A_k|S_k)}{b(A_k|S_k)}
-    \tag {5.3}
 
 注意到上式中的轨迹的概率依赖于MDP的转移概率（常常是未知的），但是它们在分子和分母中都是相同的，能够被消掉。
 即是说，重要性采样率最终仅仅依赖于两个策略和序列，而与MDP无关。
@@ -540,9 +539,9 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 这是重要性抽样的来源。比率 :math:`rho_{t:T-1}` 将收益转换为具有正确的期望值：
 
 .. math::
+    :label: 5.4
 
     \mathbb{E}[\rho_{t:T-1}G_t|S_t=s]=v_{\pi}(s)
-    \tag {5.4}
 
 现在我们准备好给出蒙特卡洛算法，算法使用在策略 :math:`b` 下的一批观察到的回合来估计 :math:`v_\pi(s)`。
 为了方便，我们将时间步调设置为穿过回合的递增形式，即下一个回合开始时的时间步调不清零，而是接着上个回合的末尾加一。
@@ -556,18 +555,18 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 为了估计 :math:`v_\pi(s)` ，我们用重要性采样率来缩放回报，然后求平均：
 
 .. math::
+    :label: 5.5
 
     V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{|\cal{T}(s)|}.
-    \tag{5.5}
 
 当重要性采样只是以上面的简单的方式求平均时，我们称为 *原始重要性采样（ordinary importance sampling）* 。
 
 另一个选择是 *加权重要性采样（weighted importance sampling）* ，它使用了加权平均，定义为
 
 .. math::
+    :label: 5.6
 
-   V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1}},
-   \tag{5.6}
+    V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1}},
 
 若分母为零，加权重要性采样也为零。
 为了了解这两种不同的重要性采样方法，在观察状态 :math:`s` 的单一回报后，我们考虑其首次访问方法的估计。
@@ -665,9 +664,9 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 .. math::
 
    \begin{aligned}
-   &= \frac{1}{2}\cdot 0.1\left(\frac{1}{0.5} \right)^2 \tag{长度为1的回合}\\
-   &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为2的回合}\\
-   &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \frac{1}{0.5} \right)^2 \tag{长度为3的回合}\\
+   &= \frac{1}{2}\cdot 0.1\left(\frac{1}{0.5} \right)^2 (长度为1的回合)\\
+   &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \right)^2 (长度为2的回合)\\
+   &+ \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.9 \cdot \frac{1}{2} \cdot 0.1\left(\frac{1}{0.5} \frac{1}{0.5} \frac{1}{0.5} \right)^2 (长度为3的回合)\\
    &+ \cdots \\
    &= 0.1 \sum_{k=0}^{\infty}0.9^k \cdot 2^k \cdot 2 = 0.2 \sum_{k=0}^{\infty}1.8^k = \infty
    \end{aligned}
@@ -698,17 +697,16 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 且每个回报值对应一个随机的权值 :math:`W_i` （比如 :math:`W_i = \rho_{t_i:T(t_i)-1}`）。我们希望表示估计值
 
 .. math::
-
+    :label: 5.7
     V_n \doteq \frac{\sum_{k=1}^{n-1}W_k G_k}{\sum_{k=1}^{n-1}W_k}, \quad n \geq 2,
-    \tag{5.7}
 
 然后在每获得一个额外的回报 :math:`G_n` 时保持更新。除了跟踪 :math:`V_n`，
 我们还必须保持给定前 :math:`n` 个回报下每个状态的累积权值 :math:`C_n`。:math:`V_n` 的更新规则是
 
 .. math::
+    :label: 5.8
 
-   V_{n+1} \doteq V_n +\frac{W_n}{C_n}\left[G_n - V_n \right], \quad n \geq 1,
-   \tag{5.8}
+    V_{n+1} \doteq V_n +\frac{W_n}{C_n}\left[G_n - V_n \right], \quad n \geq 1,
 
 且
 
@@ -898,24 +896,24 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 现在像式5.5那样，我们定义一个原始重要性采样估计器，如下
 
 .. math::
+    :label: 5.9
 
     V(s) \doteq \frac{
     \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1} \overline{G}_{t : h}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1} \overline{G}_{t : T(t)}\right)
     }{
     |\mathcal{T}(s)|
     }
-    \tag{5.9}
 
 像式5.6那样，定义一个加权重要性采样估计器，如下
 
 .. math::
+    :label: 5.10
 
     V(s) \doteq \frac{
     \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1} \overline{G}_{t : h}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1} \overline{G}_{t : T(t)}\right)
     }{
     \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1}\right)
     }
-    \tag{5.10}
 
 我们称上述两种估计器 *折扣感知（discounting-aware）* 重要性采样估计器。
 它们考虑了折扣率，但如果 :math:`\gamma = 1` 则没有影响（与5.5节离策略估计器一样）。
@@ -931,7 +929,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
     \begin{aligned}
     \rho_{t : T-1} G_{t} &=\rho_{t : T-1}\left(R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{T-t-1} R_{T}\right) \\
-    &=\rho_{t : T-1} R_{t+1}+\gamma \rho_{t : T-1} R_{t+2}+\cdots+\gamma^{T-t-1} \rho_{t : T-1} R_{T} \tag{5.11}
+    &=\rho_{t : T-1} R_{t+1}+\gamma \rho_{t : T-1} R_{t+2}+\cdots+\gamma^{T-t-1} \rho_{t : T-1} R_{T} (5.11)
     \end{aligned}
 
 离策略估计器依赖于这些值的期望；我们尝试用更简单的方式表达出来。
@@ -939,24 +937,24 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 比如，第一个元素，我们用5.3式展开，
 
 .. math::
+    :label: 5.12
 
     \rho_{t : T-1} R_{t+1} = \frac{\pi(A_t|S_t)}{b(A_t|S_t)} \frac{\pi(A_{t+1}|S_{t+1})}{b(A_{t+1}|S_{t+1})} \frac{\pi(A_{t+2}|S_{t+2})}{b(A_{t+2}|S_{t+2})} \cdots \frac{\pi(A_{T-1}|S_{T-1})}{b(A_{T-1}|S_{T-1})}R_{t+1}.
-    \tag{5.12}
 
 在所有这些项中，我们可以猜想，上式中只有第一项和最后一项（奖励）是相关的；所有其他都是与奖励后发生的事件有关，他们的期望值是：
 
 .. math::
+    :label: 5.13
 
    \mathbb{E}\left[\frac{\pi(A_k|S_k)}{b(A_k|S_k)}\right]
    = \sum_a b(a|S_k)\frac{\pi(a|S_k)}{b(a|S_k)} = \sum_a \pi(a|S_k) = 1.
-   \tag{5.13}
 
 通过更多几个步骤可以证明，如所猜想的那样，所有这些其他项对期望没有影响，换句话说，
 
 .. math::
+    :label: 5.14
 
-   \mathbb E[\rho_{t:T-1} R_{t+1}] = \mathbb E[\rho_{t:t} R_{t+1}].
-   \tag{5.14}
+    \mathbb E[\rho_{t:T-1} R_{t+1}] = \mathbb E[\rho_{t:t} R_{t+1}].
 
 如果对5.11中第k项重复上述的分析，我们得到
 
@@ -980,9 +978,9 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 同样是无偏差的，就像5.5的原始重要性采样估计器一样，它使用了 :math:`\tilde{G}_{t}` ：
 
 .. math::
+    :label: 5.11
 
-   V(s) \doteq \frac{\sum_{t \in \mathcal T(s)} \tilde{G}_t}{|\mathcal T(s)|},
-   \tag{5.11}
+    V(s) \doteq \frac{\sum_{t \in \mathcal T(s)} \tilde{G}_t}{|\mathcal T(s)|},
 
 我们可能会期望有时会降低方差。
 

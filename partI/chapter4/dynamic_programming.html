@@ -354,13 +354,11 @@ q_\pi(s,a)&amp; \doteq \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a] \
 <p>这种方法是正确的，只是 <em>策略提升理论</em> 的一种特殊情况。<span class="math notranslate nohighlight">\(\pi\)</span> 和 <span class="math notranslate nohighlight">\(\pi'\)</span> 是任意一对确定性的策略，
 这样一来，对于所有的 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-4-7">
-<span class="eqno">(5)<a class="headerlink" href="#equation-4-7" title="公式的永久链接">¶</a></span>\[q_\pi(s,\pi'(s)) \geq v_\pi(s)
-\tag{4.7}\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-4-7" title="公式的永久链接">¶</a></span>\[q_\pi(s,\pi'(s)) \geq v_\pi(s)\]</div>
 <p>那么策略 <span class="math notranslate nohighlight">\(\pi'\)</span> 必须与策略 <span class="math notranslate nohighlight">\(\pi\)</span> 同样好或者比策略 <span class="math notranslate nohighlight">\(\pi\)</span> 更好。
 也就是说，必须从所有的状态 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span> 取得更好或者相等的期望回报:</p>
 <div class="math notranslate nohighlight" id="equation-4-8">
-<span class="eqno">(6)<a class="headerlink" href="#equation-4-8" title="公式的永久链接">¶</a></span>\[v_\pi'(s) \geq v_\pi(s)
-\tag{4.8}\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-4-8" title="公式的永久链接">¶</a></span>\[v_\pi'(s) \geq v_\pi(s)\]</div>
 <p>另外，如果 <span class="math notranslate nohighlight">\((4.7)\)</span> 在任意状态严格不等，那么 <span class="math notranslate nohighlight">\((4.8)\)</span> 也应该至少在一个状态严格等。
 这个结果尤其适用于我们在之前考虑的两种策略，一个最初的确定的策略 <span class="math notranslate nohighlight">\(\pi\)</span> 和一个改变的策略 <span class="math notranslate nohighlight">\(\pi'\)</span>，
 除了 <span class="math notranslate nohighlight">\(\pi'(s)=a\not=\pi(s)\)</span>，都与 <span class="math notranslate nohighlight">\(\pi\)</span> 相同。
