@@ -14,14 +14,14 @@
 
 
 深度强化学习
---------------
+^^^^^^^^^^^^
 
 OpenAI 推出了 `深度强化学习 Spinning Up 项目 <https://spinningup.qiwihui.com>`_，
 旨在让深度强化学习的学习变得更加简单，可以作为后续强化深度学习入门。
 
 
 版权声明
---------
+^^^^^^^^
 
 本书的著作权归作者(Richard S. Sutton 和 Andrew G. Barto)所有。你可以：
 
@@ -35,10 +35,6 @@ OpenAI 推出了 `深度强化学习 Spinning Up 项目 <https://spinningup.qiwi
   - 擅自印刷、出版本书
   - 以纸媒出版为目的，改写、改编以及摘抄本书的内容
   - 在课程设计、毕业设计以及作业中大段摘抄本书文字，或直接使用本书的程序代码
-
-
-目录
-----
 
 .. toctree::
    :maxdepth: 3
