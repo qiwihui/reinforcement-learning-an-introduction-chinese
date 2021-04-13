@@ -531,12 +531,10 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。</p>
 <p>对所有 <span class="math notranslate nohighlight">\(a \in\mathcal{A}(S_t)\)</span>:</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[\begin{split}\pi(a|S_t) \leftarrow \left\{
-\begin{array}{rcl}
-    1 - \epsilon + \frac{\epsilon}{|\mathcal{A}(S_t)|} &amp; &amp; if &amp;a=A^* \\
-    \frac{\epsilon}{|\mathcal{A}(S_t)|} &amp; &amp; if &amp;a \neq A^*
-\end{array}
-\right.\end{split}\]</div>
+\[\begin{split}\pi\left(a \mid S_{t}\right) \leftarrow\left\{\begin{array}{ll}
+1-\varepsilon+\varepsilon /\left|\mathcal{A}\left(S_{t}\right)\right| &amp; \text { if } a=A^{*} \\
+\varepsilon /\left|\mathcal{A}\left(S_{t}\right)\right| &amp; \text { if } a \neq A^{*}
+\end{array}\right.\end{split}\]</div>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>

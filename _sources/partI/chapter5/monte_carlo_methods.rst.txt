@@ -400,12 +400,10 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
                     .. math::
 
-                        \pi(a|S_t) \leftarrow \left\{
-                        \begin{array}{rcl}
-                            1 - \epsilon + \frac{\epsilon}{|\mathcal{A}(S_t)|} & & if &a=A^* \\
-                            \frac{\epsilon}{|\mathcal{A}(S_t)|} & & if &a \neq A^*
-                        \end{array}
-                        \right.
+                        \pi\left(a \mid S_{t}\right) \leftarrow\left\{\begin{array}{ll}
+                        1-\varepsilon+\varepsilon /\left|\mathcal{A}\left(S_{t}\right)\right| & \text { if } a=A^{*} \\
+                        \varepsilon /\left|\mathcal{A}\left(S_{t}\right)\right| & \text { if } a \neq A^{*}
+                        \end{array}\right.
 
 
 由于策略提升理论的保证，:math:`q_\pi` 对应的任意的 :math:`\epsilon -` 贪心策略
