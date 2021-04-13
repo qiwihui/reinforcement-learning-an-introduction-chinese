@@ -506,11 +506,11 @@ Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerli
 <div><p><span class="math notranslate nohighlight">\(S, A \leftarrow \text { first }(PQueue)\)</span></p>
 <p><span class="math notranslate nohighlight">\(R, S^{\prime} \leftarrow Model(S, A)\)</span></p>
 <p><span class="math notranslate nohighlight">\(Q(S, A) \leftarrow Q(S, A)+\alpha\left[R+\gamma \max _{a} Q\left(S^{\prime}, a\right)-Q(S, A)\right]\)</span></p>
-<p>循环所有预计导向 <span class="math notranslate nohighlight">\(S\)</span> 的 <span class="math notranslate nohighlight">\(\bar{S], \bar{A}\)</span>：</p>
+<p>循环所有预计导向 <span class="math notranslate nohighlight">\(S\)</span> 的 <span class="math notranslate nohighlight">\(\overline{S}, \overline{A}\)</span>：</p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(\bar{R} \leftarrow\)</span> <span class="math notranslate nohighlight">\(\bar{S}, \bar{A}, S\)</span> 的预测奖励</p>
-<p><span class="math notranslate nohighlight">\(P \leftarrow\left|\bar{R}+\gamma \max _{a} Q(S, a)-Q(\bar{S}, \bar{A})\right|\)</span></p>
-<p>如果 <span class="math notranslate nohighlight">\(P&gt;\theta\)</span>，则将 <span class="math notranslate nohighlight">\(\bar{S}, \bar{A}\)</span> 插入 <span class="math notranslate nohighlight">\(PQueue\)</span>，优先级为 <span class="math notranslate nohighlight">\(P\)</span></p>
+<div><p><span class="math notranslate nohighlight">\(\overline{R} \leftarrow\)</span> <span class="math notranslate nohighlight">\(\overline{S}, \overline{A}, S\)</span> 的预测奖励</p>
+<p><span class="math notranslate nohighlight">\(P \leftarrow\left|\overline{R}+\gamma \max _{a} Q(S, a)-Q(\overline{S}, \overline{A})\right|\)</span></p>
+<p>如果 <span class="math notranslate nohighlight">\(P&gt;\theta\)</span>，则将 <span class="math notranslate nohighlight">\(\overline{S}, \overline{A}\)</span> 插入 <span class="math notranslate nohighlight">\(PQueue\)</span>，优先级为 <span class="math notranslate nohighlight">\(P\)</span></p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>

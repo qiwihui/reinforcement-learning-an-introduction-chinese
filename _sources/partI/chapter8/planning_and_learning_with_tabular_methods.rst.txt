@@ -355,13 +355,13 @@ Dyna个体的整体架构，其中Dyna-Q算法就是一个例子，如图8.1所�
 
             :math:`Q(S, A) \leftarrow Q(S, A)+\alpha\left[R+\gamma \max _{a} Q\left(S^{\prime}, a\right)-Q(S, A)\right]`
 
-            循环所有预计导向 :math:`S` 的 :math:`\bar{S], \bar{A}`：
+            循环所有预计导向 :math:`S` 的 :math:`\overline{S}, \overline{A}`：
 
-                :math:`\bar{R} \leftarrow` :math:`\bar{S}, \bar{A}, S` 的预测奖励
+                :math:`\overline{R} \leftarrow` :math:`\overline{S}, \overline{A}, S` 的预测奖励
 
-                :math:`P \leftarrow\left|\bar{R}+\gamma \max _{a} Q(S, a)-Q(\bar{S}, \bar{A})\right|`
+                :math:`P \leftarrow\left|\overline{R}+\gamma \max _{a} Q(S, a)-Q(\overline{S}, \overline{A})\right|`
 
-                如果 :math:`P>\theta`，则将 :math:`\bar{S}, \bar{A}` 插入 :math:`PQueue`，优先级为 :math:`P`
+                如果 :math:`P>\theta`，则将 :math:`\overline{S}, \overline{A}` 插入 :math:`PQueue`，优先级为 :math:`P`
 
 .. figure:: images/example-8.4-prioritized-sweeping-on-mazes.png
     :width: 350px
