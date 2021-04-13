@@ -446,12 +446,12 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。</p>
 <p>一直循环（对每一个回合）：</p>
 <blockquote>
 <div><p>随机选择状态 <span class="math notranslate nohighlight">\(S_0 \in \mathcal{S}\)</span> 和动作 <span class="math notranslate nohighlight">\(A_0 \in \mathcal{A}(S_0)\)</span> 使得所有状态-动作对的概率大于0</p>
-<p>从 <span class="math notranslate nohighlight">\(S_0, A_0\)</span> 开始，遵循策略 <span class="math notranslate nohighlight">\(\pi\)</span> ，生成一个回合：<span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{T-1|, A_{T-1}, R_T\)</span></p>
+<p>从 <span class="math notranslate nohighlight">\(S_0, A_0\)</span> 开始，遵循策略 <span class="math notranslate nohighlight">\(\pi\)</span> ，生成一个回合：<span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{T-1}, A_{T-1}, R_T\)</span></p>
 <p><span class="math notranslate nohighlight">\(G \leftarrow 0\)</span></p>
 <p>对于这个回合中的每一步，<span class="math notranslate nohighlight">\(t=T-1, T-2, \dots, 0\)</span>：</p>
 <blockquote>
 <div><p><span class="math notranslate nohighlight">\(G \leftarrow \gamma G + R_{t+1}\)</span></p>
-<p>除非 <span class="math notranslate nohighlight">\(S_t, A_t\)</span> 出现在 <span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{t-1|, A_{t-1}\)</span> 中：</p>
+<p>除非 <span class="math notranslate nohighlight">\(S_t, A_t\)</span> 出现在 <span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{t-1}, A_{t-1}\)</span> 中：</p>
 <blockquote>
 <div><p>将 <span class="math notranslate nohighlight">\(G\)</span> 添加到 <span class="math notranslate nohighlight">\(Returns(S_t, A_t)\)</span> 中</p>
 <p><span class="math notranslate nohighlight">\(Q(S_t, A_t) \leftarrow average(Returns(S_t, A_t))\)</span></p>
@@ -518,12 +518,12 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。</p>
 </div></blockquote>
 <p>一直循环：</p>
 <blockquote>
-<div><p>遵循策略 <span class="math notranslate nohighlight">\(\pi\)</span> ，生成一个回合：<span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{T-1|, A_{T-1}, R_T\)</span></p>
+<div><p>遵循策略 <span class="math notranslate nohighlight">\(\pi\)</span> ，生成一个回合：<span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{T-1}, A_{T-1}, R_T\)</span></p>
 <p><span class="math notranslate nohighlight">\(G \leftarrow 0\)</span></p>
 <p>对于这个回合中的每一步，<span class="math notranslate nohighlight">\(t=T-1, T-2, \dots, 0\)</span>：</p>
 <blockquote>
 <div><p><span class="math notranslate nohighlight">\(G \leftarrow \gamma G + R_{t+1}\)</span></p>
-<p>除非 <span class="math notranslate nohighlight">\(S_t, A_t\)</span> 出现在 <span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{t-1|, A_{t-1}\)</span> 中：</p>
+<p>除非 <span class="math notranslate nohighlight">\(S_t, A_t\)</span> 出现在 <span class="math notranslate nohighlight">\(S_0, A_0, R_1, \dots , S_{t-1}, A_{t-1}\)</span> 中：</p>
 <blockquote>
 <div><p>将 <span class="math notranslate nohighlight">\(G\)</span> 添加到 <span class="math notranslate nohighlight">\(Returns(S_t, A_t)\)</span> 中</p>
 <p><span class="math notranslate nohighlight">\(Q(S_t, A_t) \leftarrow average(Returns(S_t, A_t))\)</span></p>

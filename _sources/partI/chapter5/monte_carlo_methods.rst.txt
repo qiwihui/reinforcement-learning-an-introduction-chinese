@@ -294,7 +294,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
         随机选择状态 :math:`S_0 \in \mathcal{S}` 和动作 :math:`A_0 \in \mathcal{A}(S_0)` 使得所有状态-动作对的概率大于0
 
-        从 :math:`S_0, A_0` 开始，遵循策略 :math:`\pi` ，生成一个回合：:math:`S_0, A_0, R_1, \dots , S_{T-1|, A_{T-1}, R_T`
+        从 :math:`S_0, A_0` 开始，遵循策略 :math:`\pi` ，生成一个回合：:math:`S_0, A_0, R_1, \dots , S_{T-1}, A_{T-1}, R_T`
 
         :math:`G \leftarrow 0`
 
@@ -302,7 +302,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
             :math:`G \leftarrow \gamma G + R_{t+1}`
 
-            除非 :math:`S_t, A_t` 出现在 :math:`S_0, A_0, R_1, \dots , S_{t-1|, A_{t-1}` 中：
+            除非 :math:`S_t, A_t` 出现在 :math:`S_0, A_0, R_1, \dots , S_{t-1}, A_{t-1}` 中：
 
                 将 :math:`G` 添加到 :math:`Returns(S_t, A_t)` 中
 
@@ -380,7 +380,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
     一直循环：
 
-        遵循策略 :math:`\pi` ，生成一个回合：:math:`S_0, A_0, R_1, \dots , S_{T-1|, A_{T-1}, R_T`
+        遵循策略 :math:`\pi` ，生成一个回合：:math:`S_0, A_0, R_1, \dots , S_{T-1}, A_{T-1}, R_T`
 
         :math:`G \leftarrow 0`
 
@@ -388,7 +388,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。
 
             :math:`G \leftarrow \gamma G + R_{t+1}`
 
-            除非 :math:`S_t, A_t` 出现在 :math:`S_0, A_0, R_1, \dots , S_{t-1|, A_{t-1}` 中：
+            除非 :math:`S_t, A_t` 出现在 :math:`S_0, A_0, R_1, \dots , S_{t-1}, A_{t-1}` 中：
 
                 将 :math:`G` 添加到 :math:`Returns(S_t, A_t)` 中
 
