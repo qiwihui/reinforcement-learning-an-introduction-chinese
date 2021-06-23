@@ -216,6 +216,7 @@ epub_exclude_files = ['search.html']
 # -- Extension configuration -------------------------------------------------
 
 def setup(app):
-    app.add_stylesheet('css/custom.css')
+    app.add_css_file('css/custom.css')
+    #app.add_stylesheet('css/custom.css')
 
 # googleanalytics_id = 'UA-46660488-5'
