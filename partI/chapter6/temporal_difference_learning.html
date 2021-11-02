@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第6章 时序差分学习 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第7章 \(n\) 步引导（Bootstrapping）方法" href="../chapter7/n_step_bootstrapping.html" />
     <link rel="prev" title="第5章 蒙特卡洛方法" href="../chapter5/monte_carlo_methods.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -124,8 +75,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -145,72 +94,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
-        
       <li>第6章 时序差分学习</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partI/chapter6/temporal_difference_learning.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partI/chapter6/temporal_difference_learning.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第6章 时序差分学习<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第6章 时序差分学习<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>如果必须将一个想法确定为强化学习的核心和新颖，那么毫无疑问它将是 <em>时序差分</em> （TD）学习。
 TD学习是蒙特卡洛思想和动态规划（DP）思想的结合。与蒙特卡洛方法一样，TD方法可以直接从原始经验中学习，而无需环境动态模型。
 与DP一样，TD方法部分基于其他学习估计更新估计，而无需等待最终结果（它们是自举）。
@@ -222,13 +131,13 @@ TD，DP和蒙特卡洛方法之间的关系是强化学习理论中反复出现�
 对于控制问题（找到最优策略），DP、TD和蒙特卡洛方法都使用广义策略迭代（GPI）的一些变体。
 方法的差异主要在于它们对预测问题的方法的差异。</p>
 <div class="section" id="td">
-<h2>6.1 TD预测<a class="headerlink" href="#td" title="永久链接至标题">¶</a></h2>
+<h2>6.1 TD预测<a class="headerlink" href="#td" title="永久链接至标题"></a></h2>
 <p>TD和蒙特卡罗方法都使用经验来解决预测问题。对于基于策略 <span class="math notranslate nohighlight">\(\pi\)</span> 的一些经验，
 两种方法都更新了他们对该经验中发生的非终结状态 <span class="math notranslate nohighlight">\(S_t\)</span> 的 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的估计 <span class="math notranslate nohighlight">\(V\)</span>。
 粗略地说，蒙特卡罗方法一直等到访问后的回报已知，然后使用该回报作为 <span class="math notranslate nohighlight">\(V(S_t)\)</span> 的目标。
 适用于非平稳环境的简单的每次访问蒙特卡罗方法是</p>
 <div class="math notranslate nohighlight" id="equation-6-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-6-1" title="公式的永久链接">¶</a></span>\[V(S_{t}) \leftarrow V(S_{t})+\alpha\left[ G_{t}-V(S_{t})\right]\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-6-1" title="公式的永久链接"></a></span>\[V(S_{t}) \leftarrow V(S_{t})+\alpha\left[ G_{t}-V(S_{t})\right]\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(G_t\)</span> 是跟随时间t的实际回报，<span class="math notranslate nohighlight">\(\alpha\)</span> 是一个恒定的步长参数（参见方程2.4）。
 我们将此方法称为恒定 <span class="math notranslate nohighlight">\(\alpha\)</span> MC。
 蒙特卡罗方法必须等到回合结束才能确定 <span class="math notranslate nohighlight">\(V(S_t)\)</span> 的增量（这时只有 <span class="math notranslate nohighlight">\(G_t\)</span> 已知），
@@ -236,7 +145,7 @@ TD方法需要等到下一个时间步。 在时间 <span class="math notranslat
 使用观察到的奖励 <span class="math notranslate nohighlight">\(R_{t+1}\)</span> 进行有用的更新。
 最简单的TD方法立即进行更新</p>
 <div class="math notranslate nohighlight" id="equation-6-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-6-2" title="公式的永久链接">¶</a></span>\[V(S_{t}) \leftarrow V(S_{t})+\alpha\left[R_{t+1}+\gamma V(S_{t+1})-V(S_{t})\right]\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-6-2" title="公式的永久链接"></a></span>\[V(S_{t}) \leftarrow V(S_{t})+\alpha\left[R_{t+1}+\gamma V(S_{t+1})-V(S_{t})\right]\]</div>
 <p>过渡到 <span class="math notranslate nohighlight">\(S_{t+1}\)</span> 并接收 <span class="math notranslate nohighlight">\(R_{t+1}\)</span>。
 在实际中，蒙特卡洛更新的目标是 <span class="math notranslate nohighlight">\(G_t\)</span>，而TD更新的目标是 <span class="math notranslate nohighlight">\(R_{t+1} + \gamma V(S_{t+1})\)</span>。
 这种TD方法称为 <em>TD(0)</em> 或 <em>一步TD</em>，因为它是第12章和第7章中开发的 TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)和n步TD方法的特例。
@@ -286,7 +195,7 @@ TD目标是估计原因有两个：它在（6.4）中对预期值进行采样，
 衡量 <span class="math notranslate nohighlight">\(S_t\)</span> 的估计值与更好的估计 <span class="math notranslate nohighlight">\(R_{t+1} + \gamma V(S_{t+1})\)</span> 之间的差异。
 这个数量称为 <em>TD误差</em>，在整个强化学习过程中以各种形式出现：</p>
 <div class="math notranslate nohighlight" id="equation-6-5">
-<span class="eqno">(3)<a class="headerlink" href="#equation-6-5" title="公式的永久链接">¶</a></span>\[\delta_{t} \doteq R_{t+1}+\gamma V\left(S_{t+1}\right)-V\left(S_{t}\right)\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-6-5" title="公式的永久链接"></a></span>\[\delta_{t} \doteq R_{t+1}+\gamma V\left(S_{t+1}\right)-V\left(S_{t}\right)\]</div>
 <p>请注意，每次TD误差都是 <em>当时估算</em> 的误差。因为TD误差取决于下一个状态和下一个奖励，所以直到一个步骤之后才可用。
 也就是说，<span class="math notranslate nohighlight">\(\delta_{t}\)</span> 是 <span class="math notranslate nohighlight">\(V(S_{t+1})\)</span> 中的误差，在时间 <span class="math notranslate nohighlight">\(t+1\)</span> 可用。
 还要注意，如果列表 <span class="math notranslate nohighlight">\(V\)</span> 在回合期间没有改变（因为它不是蒙特卡罗方法(?)），那么蒙特卡罗误差可以写成TD误差的和：</p>
@@ -371,7 +280,7 @@ G_{t}-V\left(S_{t}\right) &amp;=R_{t+1}+\gamma G_{t+1}-V\left(S_{t}\right)+\gamm
 无论如何，只有在你到家之后才能进行变更。只有在这一点上你才知道任何实际的回报。</p>
 <div class="figure align-default" id="id8">
 <img alt="../../_images/figure-6.1.png" src="../../_images/figure-6.1.png" />
-<p class="caption"><span class="caption-text"><strong>图6.1</strong> 通过蒙特卡罗方法（左）和TD方法（右）在开车回家示例中推荐的变化。</span><a class="headerlink" href="#id8" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图6.1</strong> 通过蒙特卡罗方法（左）和TD方法（右）在开车回家示例中推荐的变化。</span><a class="headerlink" href="#id8" title="永久链接至图片"></a></p>
 </div>
 <p>在学习开始之前，是否有必要等到最终结果已知？
 假设在另一天你再次估计离开你的办公室时需要30分钟才能开车回家，但是你会陷入大规模的交通堵塞之中。
@@ -392,7 +301,7 @@ G_{t}-V\left(S_{t}\right) &amp;=R_{t+1}+\gamma G_{t+1}-V\left(S_{t}\right)+\gamm
 在这种情况下，你能看出为什么TD更新可能会好得多，至少初始是这样吗？在原始场景中发生同样的事情可能吗？</p>
 </div>
 <div class="section" id="id3">
-<h2>6.2 TD预测方法的优势<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>6.2 TD预测方法的优势<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>TD方法部分基于其他估计更新其估计。他们通过猜测来学习猜测 - 他们 <em>引导</em>。这是一件好事吗？
 TD方法与蒙特卡罗和DP方法相比有哪些优势？开发和回答这些问题将涉及本书的其余部分以及更多内容。
 在本节中，我们简要地预测一些答案。</p>
@@ -451,7 +360,7 @@ TD方法不太容易受到这些问题的影响，因为无论采取何种后续
 您认为我们实际使用哪个？为什么？</p>
 </div>
 <div class="section" id="td-0">
-<h2>6.3 TD(0)的最优性<a class="headerlink" href="#td-0" title="永久链接至标题">¶</a></h2>
+<h2>6.3 TD(0)的最优性<a class="headerlink" href="#td-0" title="永久链接至标题"></a></h2>
 <p>假设只有有限的经验，比如10个回合或100个时间步。在这种情况下，使用增量学习方法的常见方法是重复呈现经验，直到该方法收敛于答案。
 给定近似值函数 <span class="math notranslate nohighlight">\(V\)</span>，对于访问非终结状态的每个时间步长 <span class="math notranslate nohighlight">\(t\)</span> 计算由（6.1）或（6.2）指定的增量，
 但是值函数仅通过所有增量的总和改变一次。
@@ -468,7 +377,7 @@ TD方法不太容易受到这些问题的影响，因为无论采取何种后续
 请注意，批处理TD方法始终优于批量蒙特卡罗方法。</p>
 <div class="figure align-right" id="id9">
 <a class="reference internal image-reference" href="../../_images/figure-6.2.png"><img alt="../../_images/figure-6.2.png" src="../../_images/figure-6.2.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><strong>图6.2</strong> 在随机行走任务的批量训练下TD(0)和常数- <span class="math notranslate nohighlight">\(\alpha\)</span> MC的性能。</span><a class="headerlink" href="#id9" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图6.2</strong> 在随机行走任务的批量训练下TD(0)和常数- <span class="math notranslate nohighlight">\(\alpha\)</span> MC的性能。</span><a class="headerlink" href="#id9" title="永久链接至图片"></a></p>
 </div>
 <p>在批量训练中，常数- <span class="math notranslate nohighlight">\(\alpha\)</span> MC收敛于值 <span class="math notranslate nohighlight">\(V(s)\)</span>，这是在访问每个状态之后经历的实际回报的样本平均值。
 这些是最佳估计，因为它们最小化了训练集中实际回报的均方误差。从这个意义上来说，令人惊讶的是，
@@ -536,7 +445,7 @@ TD方法不太容易受到这些问题的影响，因为无论采取何种后续
 <p><em>*练习6.7</em> 设计TD（0）更新的非策略版本，可以与任意目标策略⇡一起使用并覆盖行为策略b，在每个步骤t使用重要性采样率（5.3）。</p>
 </div>
 <div class="section" id="sarsa-td">
-<h2>6.4 Sarsa：在策略TD控制<a class="headerlink" href="#sarsa-td" title="永久链接至标题">¶</a></h2>
+<h2>6.4 Sarsa：在策略TD控制<a class="headerlink" href="#sarsa-td" title="永久链接至标题"></a></h2>
 <p>我们现在转向使用TD预测方法来解决控制问题。像往常一样，我们遵循广义策略迭代（GPI）的模式，这次只使用TD方法解决评估或预测部分。
 与蒙特卡罗方法一样，我们面临着对探索和利用进行权衡的需要，并且再次采用的方法分为两大类：在策略和离策略。
 在本节中，我们将介绍在策略上的TD控制方法。</p>
@@ -552,7 +461,7 @@ TD方法不太容易受到这些问题的影响，因为无论采取何种后续
 这些案例在形式上是相同的：它们都是具有奖励过程的马尔可夫链。
 确保TD(0)下状态价值收敛的定理也适用于相应的动作价值算法：</p>
 <div class="math notranslate nohighlight" id="equation-6-7">
-<span class="eqno">(4)<a class="headerlink" href="#equation-6-7" title="公式的永久链接">¶</a></span>\[Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma Q\left(S_{t+1}, A_{t+1}\right)-Q\left(S_{t}, A_{t}\right)\right].\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-6-7" title="公式的永久链接"></a></span>\[Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma Q\left(S_{t+1}, A_{t+1}\right)-Q\left(S_{t}, A_{t}\right)\right].\]</div>
 <div class="figure align-right">
 <a class="reference internal image-reference" href="../../_images/backup_of_sarsa.png"><img alt="../../_images/backup_of_sarsa.png" src="../../_images/backup_of_sarsa.png" style="width: 50px;" /></a>
 </div>
@@ -617,10 +526,10 @@ Sarsa等在线学习方法没有这个问题，因为他们很快就会在这一
 三分之一的时间将移动到目标上方两个单元格，最后三分之一的时间你移动到目标。</p>
 </div>
 <div class="section" id="q-learning-td">
-<h2>6.5 Q-learning：离策略TD控制<a class="headerlink" href="#q-learning-td" title="永久链接至标题">¶</a></h2>
+<h2>6.5 Q-learning：离策略TD控制<a class="headerlink" href="#q-learning-td" title="永久链接至标题"></a></h2>
 <p>强化学习的早期突破之一是开发了一种名为 <em>Q-learning</em> （Watkins，1989）的离策略TD控制算法，由以下定义：</p>
 <div class="math notranslate nohighlight" id="equation-6-8">
-<span class="eqno">(5)<a class="headerlink" href="#equation-6-8" title="公式的永久链接">¶</a></span>\[Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \max _{a} Q\left(S_{t+1}, a\right)-Q\left(S_{t}, A_{t}\right)\right].\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-6-8" title="公式的永久链接"></a></span>\[Q\left(S_{t}, A_{t}\right) \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\left[R_{t+1}+\gamma \max _{a} Q\left(S_{t+1}, a\right)-Q\left(S_{t}, A_{t}\right)\right].\]</div>
 <p>在这种情况下，学习的动作-价值函数 <span class="math notranslate nohighlight">\(Q\)</span> 直接近似 <span class="math notranslate nohighlight">\(q_*\)</span>，即最佳动作-价值函数，与所遵循的策略无关。
 这极大地简化了算法的分析并实现了早期的收敛证明。该策略仍然具有一个效果，即它确定访问和更新哪些状态-动作对。
 但是，正确收敛所需的只是所有动作-价值对继续更新。正如我们在第5章中所观察到的那样，这是一个最小要求，
@@ -667,7 +576,7 @@ Q-learning算法以程序形式显示如下。</p>
 <p><em>练习6.12</em> 假设动作选择是贪婪的。Q-learning与Sarsa的算法完全相同吗？他们会做出完全相同的动作选择和权重更新吗？</p>
 </div>
 <div class="section" id="sarsa">
-<h2>6.6 预期的Sarsa<a class="headerlink" href="#sarsa" title="永久链接至标题">¶</a></h2>
+<h2>6.6 预期的Sarsa<a class="headerlink" href="#sarsa" title="永久链接至标题"></a></h2>
 <p>考虑与Q-learning一样的学习算法，区别在于其考虑到当前策略下每个动作的可能性，使用预期值而不是最大化下一个状态-动作对。
 也就是说，考虑具有如下更新规则的算法</p>
 <div class="math notranslate nohighlight">
@@ -691,11 +600,11 @@ Q\left(S_{t}, A_{t}\right) &amp; \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\le
 所有算法都使用 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪策略，其中 <span class="math notranslate nohighlight">\(\varepsilon=0.1\)</span>。
 渐近性能是超过100,000回合的平均，而临时性能是前100回合的平均值。
 这些数据分别是临时和渐近情况的超过50,000回合和10次运行的平均。
-实心圆圈标志着每种方法的最佳临时性能。改编自van Seijen et al.(2009)。</span><a class="headerlink" href="#id10" title="永久链接至图片">¶</a></p>
+实心圆圈标志着每种方法的最佳临时性能。改编自van Seijen et al.(2009)。</span><a class="headerlink" href="#id10" title="永久链接至图片"></a></p>
 </div>
 <div class="figure align-default" id="id11">
 <img alt="../../_images/figure-6.4.png" src="../../_images/figure-6.4.png" />
-<p class="caption"><span class="caption-text">图6.4：Q-learning和预期Sarsa的备份图。</span><a class="headerlink" href="#id11" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">图6.4：Q-learning和预期Sarsa的备份图。</span><a class="headerlink" href="#id11" title="永久链接至图片"></a></p>
 </div>
 <p>在这些悬崖行走任务结果中，预期的Sarsa被用于策略，但总的来说，它可能使用与目标策略 <span class="math notranslate nohighlight">\(\pi\)</span> 不同的策略来产生行为，
 在这种情况下，它成为一种离策略算法。例如，假设 <span class="math notranslate nohighlight">\(\pi\)</span> 是贪婪的策略，而行为更具探索性；
@@ -703,7 +612,7 @@ Q\left(S_{t}, A_{t}\right) &amp; \leftarrow Q\left(S_{t}, A_{t}\right)+\alpha\le
 除了额外的计算成本之外，预期的Sarsa可能完全支配其他更著名的TD控制算法。</p>
 </div>
 <div class="section" id="id4">
-<h2>6.8 最大化偏差和双学习<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>6.8 最大化偏差和双学习<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>到目前为止，我们讨论的所有控制算法都涉及最大化其目标策略的构建。
 例如，在Q-learning中，目标策略是给定当前操作值的贪婪策略，其中使用max定义，
 而在Sarsa中，策略通常是 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪，这也涉及最大化操作。
@@ -727,7 +636,7 @@ MDP有两个非终端状态 <strong>A</strong> 和 <strong>B</strong>，回合�
 Q-learning最初学习比 <strong>右</strong> 动作更经常地学习 <strong>左</strong> 动作，并且总是比 <span class="math notranslate nohighlight">\(\varepsilon=0.1\)</span>
 的 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪动作选择强制执行的最小概率的5％更经常地学习。
 相比之下，双Q-learning基本上不受最大化偏差的影响。这些数据是超过10,000次运行的平均。
-初始动作价值估计为零。<span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪动作选择中的任何关系都是随机打破的。</span><a class="headerlink" href="#id12" title="永久链接至图片">¶</a></p>
+初始动作价值估计为零。<span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪动作选择中的任何关系都是随机打破的。</span><a class="headerlink" href="#id12" title="永久链接至图片"></a></p>
 </div>
 <p>是否存在避免最大化偏差的算法？首先，考虑一个赌博机例子，其中我们对许多行为中的每一个的价值进行噪声估计，
 获得作为每个行动的所有游戏所获得的奖励的样本平均值。如上所述，如果我们使用估计的最大值作为真值的最大值的估计，
@@ -743,7 +652,7 @@ Q-learning最初学习比 <strong>右</strong> 动作更经常地学习 <strong>
 <p>双学习的想法自然地延伸到完整MDP的算法。例如，类似于Q-learning的双学习算法，称为双Q-learning，
 将时间步长分为两步，可能通过在每一步上投硬币。如果硬币为正面，那么更新就是</p>
 <div class="math notranslate nohighlight" id="equation-6-10">
-<span class="eqno">(6)<a class="headerlink" href="#equation-6-10" title="公式的永久链接">¶</a></span>\[Q_{1}(S_{t}, A_{t}) \leftarrow Q_{1}(S_{t}, A_{t})+\alpha\left[R_{t+1}+\gamma Q_{2}\left(S_{t+1}, \underset{a}{\arg \max } Q_{1}(S_{t+1}, a\right))-Q_{1}(S_{t}, A_{t})\right]\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-6-10" title="公式的永久链接"></a></span>\[Q_{1}(S_{t}, A_{t}) \leftarrow Q_{1}(S_{t}, A_{t})+\alpha\left[R_{t+1}+\gamma Q_{2}\left(S_{t+1}, \underset{a}{\arg \max } Q_{1}(S_{t+1}, a\right))-Q_{1}(S_{t}, A_{t})\right]\]</div>
 <p>如果硬币出现反面，则在 <span class="math notranslate nohighlight">\(Q_1\)</span> 和 <span class="math notranslate nohighlight">\(Q_2\)</span> 切换时进行相同的更新，以便更新 <span class="math notranslate nohighlight">\(Q_2\)</span>。
 两个近似值函数完全对称地处理。行为策略可以使用行为价值估计。
 例如，双Q-learning的 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪策略可以基于两个动作价值估计的平均值（或总和）。
@@ -777,7 +686,7 @@ Q-learning最初学习比 <strong>右</strong> 动作更经常地学习 <strong>
 <p><em>*练习6.13</em> 具有 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪目标策略的双预期Sarsa的更新方程是什么？</p>
 </div>
 <div class="section" id="afterstates">
-<h2>6.9 游戏，Afterstates和其他特殊情况<a class="headerlink" href="#afterstates" title="永久链接至标题">¶</a></h2>
+<h2>6.9 游戏，Afterstates和其他特殊情况<a class="headerlink" href="#afterstates" title="永久链接至标题"></a></h2>
 <p>在本书中，我们尝试对一系列任务提出统一的方法，但当然总是有一些特殊的任务可以通过专门的方式得到更好的处理。
 例如，我们的一般方法涉及学习一个 <em>动作</em> -价值函数，
 但是在第一章中我们提出了一种学习玩井字棋的TD方法，它学到的东西更像是一个 <em>状态</em> -价值函数。
@@ -803,7 +712,7 @@ afterstate价值函数是利用这种知识的自然方式，从而产生更有�
 <p><em>练习6.14</em> 描述杰克汽车租赁（例4.2）的任务如何用afterstates重写。就这一具体任务而言，为什么这样的重写可能会加速收敛？</p>
 </div>
 <div class="section" id="id5">
-<h2>6.10 总结<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>6.10 总结<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>在本章中，我们介绍了一种新的学习方法，即时序差分（TD）学习，并展示了如何将其应用于强化学习问题。
 像往常一样，我们将整体问题分为预测问题和控制问题。TD方法是用于解决预测问题的蒙特卡罗方法的替代方法。
 在这两种情况下，控制问题的扩展都是通过我们从动态规划中抽象出来的通用策略迭代（GPI）的概念。
@@ -829,7 +738,7 @@ Sarsa是一种在策略的方法，而Q-learning是一种离策略的方法。�
 即便如此，TD学习方法的这些其他潜在应用尚未得到广泛探索。</p>
 </div>
 <div class="section" id="id6">
-<h2>书目和历史评论<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p>正如我们在第1章中所概述的那样，TD学习的概念早期源于动物学习心理学和人工智能，
 最着名的是Samuel（1959）和Klopf（1972）的工作。
 Samuel的工作被描述为第16.2节中的案例研究。与TD学习有关的还有Holland（1975,1976）早期关于价值预测一致性的想法。
@@ -877,50 +786,33 @@ van Hasselt（2011）注意到了预期的Sarsa的一般离策略视角，他称
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter7/n_step_bootstrapping.html" class="btn btn-neutral float-right" title="第7章 \(n\) 步引导（Bootstrapping）方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter5/monte_carlo_methods.html" class="btn btn-neutral float-left" title="第5章 蒙特卡洛方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter5/monte_carlo_methods.html" class="btn btn-neutral float-left" title="第5章 蒙特卡洛方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter7/n_step_bootstrapping.html" class="btn btn-neutral float-right" title="第7章 \(n\) 步引导（Bootstrapping）方法" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第13章 策略梯度方法 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第三部分 深入研究" href="../../partIII/index.html" />
     <link rel="prev" title="第12章 资格迹（Eligibility Traces）" href="../chapter12/eligibility_traces.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -121,8 +72,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -142,72 +91,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第二部分 近似解决方法</a> &raquo;</li>
-        
       <li>第13章 策略梯度方法</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partII/chapter13/policy_gradient_methods.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partII/chapter13/policy_gradient_methods.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第13章 策略梯度方法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第13章 策略梯度方法<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>在本章中，我们考虑一些新内容。到目前为止，在本书中几乎所有的方法都是 <em>动作价值方法</em>。
 他们了解了动作的价值，然后根据他们估计的行动价值选择行动 <a class="footnote-reference brackets" href="#id12" id="id2">1</a>；如果没有动作价值估计，他们的策略甚至将不存在。
 在本章中，我们考虑的方法是学习 <em>参数化策略</em>，该策略可以选择动作而无需咨询价值函数。
@@ -221,7 +130,7 @@
 <p>在本章中，我们考虑基于一些基于标量性能指标 <span class="math notranslate nohighlight">\(J(\mathbf{\theta})\)</span> 梯度的相对于策略参数的学习策略参数的方法。
 这些方法试图使性能 <em>最大化</em>，因此它们的更新近似 <span class="math notranslate nohighlight">\(J\)</span> 中的梯度 <em>上升</em>：</p>
 <div class="math notranslate nohighlight" id="equation-13-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-13-1" title="公式的永久链接">¶</a></span>\[\mathbf{\theta}_{t+1}=\mathbf{\theta}_{t}+\alpha \widehat{\nabla J\left(\mathbf{\theta}_{t}\right)}\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-13-1" title="公式的永久链接"></a></span>\[\mathbf{\theta}_{t+1}=\mathbf{\theta}_{t}+\alpha \widehat{\nabla J\left(\mathbf{\theta}_{t}\right)}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\widehat{\nabla J\left(\mathbf{\theta}_{t}\right)} \in \mathbb{R}^{d^{\prime}}\)</span> 是一个随机估计，
 其期望近似于性能度量相对于其参数 <span class="math notranslate nohighlight">\(\mathbf{\theta}_{t}\)</span> 的梯度。
 遵循此一般模式的所有方法，我们都称为 <em>策略梯度方法</em>，无论它们是否也学习近似值函数。
@@ -230,7 +139,7 @@
 然后再继续考虑持续案例，其中性能定义为平均奖励率，如10.3节所述。
 最后，我们能够以非常相似的形式表达两种情况的算法。</p>
 <div class="section" id="id3">
-<h2>13.1 策略近似及其优势<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>13.1 策略近似及其优势<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>在策略梯度方法中，只要 <span class="math notranslate nohighlight">\(\pi(a|s,\boldsymbol{\theta})\)</span> 相对于其参数是可微的，
 即只要 <span class="math notranslate nohighlight">\(\nabla \pi(a|s,\boldsymbol{\theta})\)</span>
 (<span class="math notranslate nohighlight">\(\pi(a|s,\boldsymbol{\theta})\)</span> 相对于 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> 的偏导数的列向量)
@@ -243,13 +152,13 @@
 <p>如果动作空间是离散的并且不是太大，那么自然和常见的一种参数化将是为每个状态-动作对形成参数化的数值偏好（preferences）。 <span class="math notranslate nohighlight">\(h(s, a, \boldsymbol{\theta}) \in \mathbb{R}\)</span>。
 在每个状态下，具有最高偏好的动作被赋予最高的选择概率，例如，根据指数soft-max分布：</p>
 <div class="math notranslate nohighlight" id="equation-13-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-13-2" title="公式的永久链接">¶</a></span>\[\pi(a | s, \boldsymbol{\theta}) \doteq \frac{e^{h(s, a, \boldsymbol{\theta})}}{\sum_{b} e^{h(s, b, \boldsymbol{\theta})}}\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-13-2" title="公式的永久链接"></a></span>\[\pi(a | s, \boldsymbol{\theta}) \doteq \frac{e^{h(s, a, \boldsymbol{\theta})}}{\sum_{b} e^{h(s, b, \boldsymbol{\theta})}}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(e \approx 2.71828\)</span> 是自然对数的底数。请注意，这里的分母是所需要的，因此每种状态下的动作概率总和为1。
 我们将这种策略参数化称为 <em>动作偏好soft-max</em> （soft-max in action preferences）。</p>
 <p>动作偏好本身可以任意设置。例如，它们可以由深度人工神经网络（ANN）计算，其中 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> 是网络所有连接权重的向量（如第16.6节中所述的AlphaGo系统）。
 或者简单地，偏好可以在特征上是线性的，</p>
 <div class="math notranslate nohighlight" id="equation-13-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-13-3" title="公式的永久链接">¶</a></span>\[h(s, a, \boldsymbol{\theta})=\boldsymbol{\theta}^{\top} \mathbf{x}(s, a)\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-13-3" title="公式的永久链接"></a></span>\[h(s, a, \boldsymbol{\theta})=\boldsymbol{\theta}^{\top} \mathbf{x}(s, a)\]</div>
 <p>使用通过第9.5节中所述的任何方法构造的特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s, a) \in \mathbb{R}^{d^{\prime}}\)</span>。</p>
 <p>根据动作偏好中的soft-max参数化策略的一个优点是，近似策略可以接近确定性策略，
 而基于动作选择的 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪总是有 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 可能性选择随机动作。
@@ -286,28 +195,28 @@
 <p><em>练习13.1</em> 用你对网格世界及其动力学的知识来确定一个精确的符号表达式，以获取示例13.1中选择 <strong>向右</strong> 动作的最佳概率。</p>
 </div>
 <div class="section" id="id4">
-<h2>13.2 策略梯度定理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>13.2 策略梯度定理<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id5">
-<h2>13.3 强化：蒙特卡罗策略梯度<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>13.3 强化：蒙特卡罗策略梯度<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id6">
-<h2>13.4 带基线强化<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>13.4 带基线强化<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id7">
-<h2>13.5 演员-评论家方法<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>13.5 演员-评论家方法<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id8">
-<h2>13.6 持续问题的策略梯度<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<h2>13.6 持续问题的策略梯度<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id9">
-<h2>13.7 持续动作的策略参数化<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<h2>13.7 持续动作的策略参数化<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id10">
-<h2>13.8 总结<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2>13.8 总结<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id11">
-<h2>书目和历史评论<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <dl class="footnote brackets">
 <dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
 <dd><p>唯一的例外是第2.8节中的梯度赌博机算法。实际上，在单状态赌博机的情况下，该部分将执行许多相同的步骤，就像我们在这里进行完整的MDP一样。
@@ -319,50 +228,33 @@
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../../partIII/index.html" class="btn btn-neutral float-right" title="第三部分 深入研究" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter12/eligibility_traces.html" class="btn btn-neutral float-left" title="第12章 资格迹（Eligibility Traces）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter12/eligibility_traces.html" class="btn btn-neutral float-left" title="第12章 资格迹（Eligibility Traces）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../../partIII/index.html" class="btn btn-neutral float-right" title="第三部分 深入研究" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

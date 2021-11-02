@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第12章 资格迹（Eligibility Traces） &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第13章 策略梯度方法" href="../chapter13/policy_gradient_methods.html" />
     <link rel="prev" title="第11章 *离策略近似方法" href="../chapter11/off-policy_methods_with_approximation.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -126,8 +77,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -147,72 +96,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第二部分 近似解决方法</a> &raquo;</li>
-        
       <li>第12章 资格迹（Eligibility Traces）</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partII/chapter12/eligibility_traces.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partII/chapter12/eligibility_traces.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="eligibility-traces">
-<h1>第12章 资格迹（Eligibility Traces）<a class="headerlink" href="#eligibility-traces" title="永久链接至标题">¶</a></h1>
+<h1>第12章 资格迹（Eligibility Traces）<a class="headerlink" href="#eligibility-traces" title="永久链接至标题"></a></h1>
 <p>资格迹是强化学习的基本机制之一。例如，在流行的TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)算法中，<span class="math notranslate nohighlight">\(\lambda\)</span> 指的是使用资格迹。
 几乎任何时序差分（TD）方法，例如Q-learning或Sarsa，都可以与资格迹相结合，以获得可以更有效地学习的更通用的方法。</p>
 <p>资格迹统一并泛化了TD和蒙特卡罗方法。当TD方法用资格迹进行增强时，它们会产生一系列方法，
@@ -243,11 +152,11 @@
 我们的处理特别关注线性函数近似的情况，其中具有资格迹的结果更强。
 所有这些结果也适用于表格和状态聚合情况，因为这些是线性函数近似的特殊情况。</p>
 <div class="section" id="lambda">
-<h2>12.1 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报<a class="headerlink" href="#lambda" title="永久链接至标题">¶</a></h2>
+<h2>12.1 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报<a class="headerlink" href="#lambda" title="永久链接至标题"></a></h2>
 <p>在第7章中，我们将n步回报定义为前n个奖励的总和加上在n个步骤中达到的状态的估计值，每个步骤都适当地折扣（7.1）。
 对于任何参数化函数近似器，该等式的一般形式是</p>
 <div class="math notranslate nohighlight" id="equation-12-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-12-1" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{v}\left(S_{t+n}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t \leq T-n\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-12-1" title="公式的永久链接"></a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \hat{v}\left(S_{t+n}, \mathbf{w}_{t+n-1}\right), \quad 0 \leq t \leq T-n\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\hat{v}(s, \mathbf{w})\)</span> 是给定权重向量 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> （第9章）的
 状态 <span class="math notranslate nohighlight">\(s\)</span> 的近似值，<span class="math notranslate nohighlight">\(T\)</span> 是回合终止的时间（如果有的话）。
 我们在第7章中注意到，对于 <span class="math notranslate nohighlight">\(n \ge 1\)</span>，每个 <span class="math notranslate nohighlight">\(n\)</span> 步回报是表格学习更新的有效更新目标，
@@ -273,16 +182,16 @@
 （其中 <span class="math notranslate nohighlight">\(\lambda \in[0,1]\)</span>），并按因子 <span class="math notranslate nohighlight">\(1-\lambda\)</span> 归一化，以确保权重总和为1（图12.1）。
 结果更新是针对回报，称为 <span class="math notranslate nohighlight">\(\lambda\)</span> <em>回报</em>，以其基于状态的形式定义</p>
 <div class="math notranslate nohighlight" id="equation-12-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-12-2" title="公式的永久链接">¶</a></span>\[G_{t}^{\lambda} \doteq(1-\lambda) \sum_{n=1}^{\infty} \lambda^{n-1} G_{t : t+n}\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-12-2" title="公式的永久链接"></a></span>\[G_{t}^{\lambda} \doteq(1-\lambda) \sum_{n=1}^{\infty} \lambda^{n-1} G_{t : t+n}\]</div>
 <div class="figure align-default" id="id8">
 <img alt="../../_images/figure-12.1.png" src="../../_images/figure-12.1.png" />
 <p class="caption"><span class="caption-text"><strong>图12.1：</strong> TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)的备份图。
 如果 <span class="math notranslate nohighlight">\(\lambda=0\)</span>，则整体更新减少到其第一个分量，即一步TD更新，
-而如果 <span class="math notranslate nohighlight">\(\lambda=0\)</span>，则整体更新减少到其最后一个分量，即蒙特卡洛更新。</span><a class="headerlink" href="#id8" title="永久链接至图片">¶</a></p>
+而如果 <span class="math notranslate nohighlight">\(\lambda=0\)</span>，则整体更新减少到其最后一个分量，即蒙特卡洛更新。</span><a class="headerlink" href="#id8" title="永久链接至图片"></a></p>
 </div>
 <div class="figure align-default" id="id9">
 <img alt="../../_images/figure-12.2.png" src="../../_images/figure-12.2.png" />
-<p class="caption"><span class="caption-text"><strong>图12.2：</strong> 每个 <span class="math notranslate nohighlight">\(n\)</span> 步回报的 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报给出的加权。</span><a class="headerlink" href="#id9" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图12.2：</strong> 每个 <span class="math notranslate nohighlight">\(n\)</span> 步回报的 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报给出的加权。</span><a class="headerlink" href="#id9" title="永久链接至图片"></a></p>
 </div>
 <p>图12.2进一步说明了 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报中 <span class="math notranslate nohighlight">\(n\)</span> 步回报序列的加权。
 一步回报给出最大权重，<span class="math notranslate nohighlight">\(1-\lambda\)</span>；两步返回给出下一个最大权重，<span class="math notranslate nohighlight">\((1-\lambda) \lambda\)</span>；
@@ -290,7 +199,7 @@
 每增加一步，权重就会减去 <span class="math notranslate nohighlight">\(\lambda\)</span>。在达到终止状态之后，所有后续的n步回报等于传统的返回 <span class="math notranslate nohighlight">\(G_t\)</span>。
 如果我们想要，我们可以将这些终止后的项与主要总和分开，产生</p>
 <div class="math notranslate nohighlight" id="equation-12-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-12-3" title="公式的永久链接">¶</a></span>\[G_{t}^{\lambda}=(1-\lambda) \sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t+t+n}+\lambda^{T-t-1} G_{t}\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-12-3" title="公式的永久链接"></a></span>\[G_{t}^{\lambda}=(1-\lambda) \sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t+t+n}+\lambda^{T-t-1} G_{t}\]</div>
 <p>正如图所示。这个等式使得当 <span class="math notranslate nohighlight">\(\lambda=1\)</span> 时会发生什么更清楚。
 在这种情况下，主要总和变为零，并且剩余的项减少到传统的回报。
 因此，对于 <span class="math notranslate nohighlight">\(\lambda=1\)</span>，根据 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报的更新是蒙特卡罗算法。
@@ -308,7 +217,7 @@
 作为一种离线算法，它在回合期间不会改变权重向量。
 然后，在回合结束时，根据我们通常的半梯度规则，使用 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报作为目标，进行整个序列的更新：</p>
 <div class="math notranslate nohighlight" id="equation-12-4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-12-4" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[G_{t}^{\lambda}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right), \quad t=0, \ldots, T-1\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-12-4" title="公式的永久链接"></a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha\left[G_{t}^{\lambda}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\right] \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right), \quad t=0, \ldots, T-1\]</div>
 <p><span class="math notranslate nohighlight">\(\lambda\)</span> 回报为我们提供了一种在蒙特卡罗和一步TD方法之间平滑移动的替代方法，可以与第7章中开发的n步自举方式进行比较。
 我们评估了19个状态随机行走任务的有效性（例子7.1，第144页）。
 图12.3显示了该任务的离线 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报算法与n步方法的性能（从图7.2重复）。
@@ -321,7 +230,7 @@
 <p class="caption"><span class="caption-text"><strong>图12.3：</strong> 19个状态随机行走结果（例7.1）：与n步TD方法一致的离线 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报算法的性能。
 在这两种情况下，自举参数（或n）的中间值执行得最好。
 使用离线 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报算法的结果在 <span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\lambda\)</span> 的最佳值
-以及高 <span class="math notranslate nohighlight">\(\alpha\)</span> 处稍微好一些。。</span><a class="headerlink" href="#id10" title="永久链接至图片">¶</a></p>
+以及高 <span class="math notranslate nohighlight">\(\alpha\)</span> 处稍微好一些。。</span><a class="headerlink" href="#id10" title="永久链接至图片"></a></p>
 </div>
 <p>到目前为止，我们采用的方法是我们称之为学习算法的理论或 <em>前向</em> 视图。
 对于每个访问过的状态，我们及时期待所有未来的奖励，并决定如何最好地将它们结合起来。
@@ -330,96 +239,79 @@
 另一方面，未来状态从其前面的每个有利位置重复查看和处理。</p>
 <div class="figure align-default" id="id11">
 <img alt="../../_images/figure-12.4.png" src="../../_images/figure-12.4.png" />
-<p class="caption"><span class="caption-text"><strong>图12.4：</strong> 前向视图。我们决定如何通过期待未来的奖励和状态来更新每个状态。</span><a class="headerlink" href="#id11" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图12.4：</strong> 前向视图。我们决定如何通过期待未来的奖励和状态来更新每个状态。</span><a class="headerlink" href="#id11" title="永久链接至图片"></a></p>
 </div>
 </div>
 <div class="section" id="td-lambda">
-<h2>12.2 TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#td-lambda" title="永久链接至标题">¶</a></h2>
+<h2>12.2 TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#td-lambda" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="n-lambda">
-<h2>12.3 <span class="math notranslate nohighlight">\(n\)</span> 步截断 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报方法<a class="headerlink" href="#n-lambda" title="永久链接至标题">¶</a></h2>
+<h2>12.3 <span class="math notranslate nohighlight">\(n\)</span> 步截断 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报方法<a class="headerlink" href="#n-lambda" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id1">
-<h2>12.4 重做更新：在线 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2>12.4 重做更新：在线 <span class="math notranslate nohighlight">\(\lambda\)</span> 回报算法<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id2">
-<h2>12.5 真正的在线TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>12.5 真正的在线TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="dutch">
-<h2>12.6 蒙特卡洛学习中的Dutch迹<a class="headerlink" href="#dutch" title="永久链接至标题">¶</a></h2>
+<h2>12.6 蒙特卡洛学习中的Dutch迹<a class="headerlink" href="#dutch" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="sarsa-lambda">
-<h2>12.7 Sarsa(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#sarsa-lambda" title="永久链接至标题">¶</a></h2>
+<h2>12.7 Sarsa(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#sarsa-lambda" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="lambda-gamma">
-<h2>12.8 变量 <span class="math notranslate nohighlight">\(\lambda\)</span> 和 <span class="math notranslate nohighlight">\(\gamma\)</span><a class="headerlink" href="#lambda-gamma" title="永久链接至标题">¶</a></h2>
+<h2>12.8 变量 <span class="math notranslate nohighlight">\(\lambda\)</span> 和 <span class="math notranslate nohighlight">\(\gamma\)</span><a class="headerlink" href="#lambda-gamma" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id3">
-<h2>12.9 具有控制变量的离策略迹<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>12.9 具有控制变量的离策略迹<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="watkinsq-lambda-tree-backup-lambda">
-<h2>12.10 Watkins的Q(<span class="math notranslate nohighlight">\(\lambda\)</span>)到Tree-Backup(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#watkinsq-lambda-tree-backup-lambda" title="永久链接至标题">¶</a></h2>
+<h2>12.10 Watkins的Q(<span class="math notranslate nohighlight">\(\lambda\)</span>)到Tree-Backup(<span class="math notranslate nohighlight">\(\lambda\)</span>)<a class="headerlink" href="#watkinsq-lambda-tree-backup-lambda" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id4">
-<h2>12.11 具有迹的稳定离策略方法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>12.11 具有迹的稳定离策略方法<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id5">
-<h2>12.12 实施问题<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>12.12 实施问题<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id6">
-<h2>12.13 结论<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>12.13 结论<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 </div>
 <div class="section" id="id7">
-<h2>书目和历史评论<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 </div>
 </div>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter13/policy_gradient_methods.html" class="btn btn-neutral float-right" title="第13章 策略梯度方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter11/off-policy_methods_with_approximation.html" class="btn btn-neutral float-left" title="第11章 *离策略近似方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter11/off-policy_methods_with_approximation.html" class="btn btn-neutral float-left" title="第11章 *离策略近似方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter13/policy_gradient_methods.html" class="btn btn-neutral float-right" title="第13章 策略梯度方法" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

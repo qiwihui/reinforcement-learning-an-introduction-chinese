@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第11章 *离策略近似方法 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第12章 资格迹（Eligibility Traces）" href="../chapter12/eligibility_traces.html" />
     <link rel="prev" title="第10章 在策略控制近似方法" href="../chapter10/on-policy_control_with_approximation.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -123,8 +74,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -144,72 +93,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第二部分 近似解决方法</a> &raquo;</li>
-        
       <li>第11章 *离策略近似方法</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partII/chapter11/off-policy_methods_with_approximation.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partII/chapter11/off-policy_methods_with_approximation.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第11章 *离策略近似方法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第11章 *离策略近似方法<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>自第5章以来，本书主要将处理在策略和离策略学习方法作为处理广义策略迭代学习形式中固有的利用与探索之间冲突的两种替代方法。
 前面的两章已经用函数近似处理了在策略情况，在本章中我们用函数近似来处理离策略情况。
 与在策略学习相比，函数近似的扩展与离策略学习相比显着不同且更难。
@@ -233,7 +142,7 @@
 另一种是开发真正的梯度方法，不依赖于任何特殊的稳定性分布。
 我们提出了基于这两种方法的方法。这是一个前沿的研究领域，目前尚不清楚这些方法中哪一个在实践中最有效。</p>
 <div class="section" id="id2">
-<h2>11.1 半梯度方法<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>11.1 半梯度方法<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>我们首先描述在前面的章节中为离策略案例开发的方法作为半梯度方法，如何容易地扩展到函数近似。
 这些方法解决了离策略学习挑战的第一部分（更改更新目标），而不是第二部分（更改更新分布）。
 因此，这些方法在某些情况下可能会发散，并且在这种意义上不是合理的，但它们仍然经常被成功使用。
@@ -244,15 +153,15 @@
 及其梯度将更新替换为数组（<span class="math notranslate nohighlight">\(V\)</span> 或 <span class="math notranslate nohighlight">\(Q\)</span>）以更新权重向量（<span class="math notranslate nohighlight">\(\mathbf{w}\)</span>）。
 其中许多的算法使用每步重要性采样率：</p>
 <div class="math notranslate nohighlight" id="equation-11-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-11-1" title="公式的永久链接">¶</a></span>\[\rho_{t} \doteq \rho_{t : t}=\frac{\pi\left(A_{t} | S_{t}\right)}{b\left(A_{t} | S_{t}\right)}\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-11-1" title="公式的永久链接"></a></span>\[\rho_{t} \doteq \rho_{t : t}=\frac{\pi\left(A_{t} | S_{t}\right)}{b\left(A_{t} | S_{t}\right)}\]</div>
 <p>例如，一步状态价值算法是半梯度离策略TD(0)，这与相应的在策略算法（第203页9.3节）类似，除了添加 <span class="math notranslate nohighlight">\(\rho_t\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-11-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-11-2" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \rho_{t} \delta_{t} \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-11-2" title="公式的永久链接"></a></span>\[\mathbf{w}_{t+1} \doteq \mathbf{w}_{t}+\alpha \rho_{t} \delta_{t} \nabla \hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\rho_t\)</span> 的定义取决于问题是否是回合的和折扣的，还是使用平均奖励持续的和未折扣：</p>
 <div class="math notranslate nohighlight" id="equation-11-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-11-3" title="公式的永久链接">¶</a></span>\[\delta_{t} \doteq R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right), \text { 或者 }\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-11-3" title="公式的永久链接"></a></span>\[\delta_{t} \doteq R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right), \text { 或者 }\]</div>
 <div class="math notranslate nohighlight" id="equation-11-4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-11-4" title="公式的永久链接">¶</a></span>\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-11-4" title="公式的永久链接"></a></span>\[\delta_{t} \doteq R_{t+1}-\overline{R}_{t}+\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>对于动作价值，一步算法是半梯度预期Sarsa：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
@@ -266,7 +175,7 @@
 正确解决这个问题等待对强化学习中函数近似理论的更透彻理解。</p>
 <p>在这些算法的多步泛化中，状态价值和动作价值算法都涉及重要性采样。例如，半梯度Sarsa的n步版本是</p>
 <div class="math notranslate nohighlight" id="equation-11-6">
-<span class="eqno">(5)<a class="headerlink" href="#equation-11-6" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha \rho_{t+1} \cdots \rho_{t+n-1}\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-11-6" title="公式的永久链接"></a></span>\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha \rho_{t+1} \cdots \rho_{t+n-1}\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\]</div>
 <p>以及</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -279,9 +188,9 @@ G_{t : t+n} &amp;\doteq R_{t+1}-\overline{R}_{t}+\cdots+R_{t+n}-\overline{R}_{t+
 而如果 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，<span class="math notranslate nohighlight">\(G_{t:n}\)</span> 应该取 <span class="math notranslate nohighlight">\(G_{t}\)</span>。</p>
 <p>回想一下，我们在第7章中还提出了一种不涉及重要性采样的离策略算法：n步树备份算法。这是它的半梯度版本：</p>
 <div class="math notranslate nohighlight" id="equation-11-7">
-<span class="eqno">(6)<a class="headerlink" href="#equation-11-7" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-11-7" title="公式的永久链接"></a></span>\[\mathbf{w}_{t+n} \doteq \mathbf{w}_{t+n-1}+\alpha\left[G_{t : t+n}-\hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\right] \nabla \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t+n-1}\right)\]</div>
 <div class="math notranslate nohighlight" id="equation-11-8">
-<span class="eqno">(7)<a class="headerlink" href="#equation-11-8" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t-1}\right)+\sum_{k=t}^{t+n-1} \delta_{k} \prod_{i=t+1}^{k} \gamma \pi\left(A_{i} | S_{i}\right)\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-11-8" title="公式的永久链接"></a></span>\[G_{t : t+n} \doteq \hat{q}\left(S_{t}, A_{t}, \mathbf{w}_{t-1}\right)+\sum_{k=t}^{t+n-1} \delta_{k} \prod_{i=t+1}^{k} \gamma \pi\left(A_{i} | S_{i}\right)\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\rho_t\)</span> 在本页顶部为预期的Sarsa定义。
 我们还在第7章中定义了一种统一所有动作价值算法的算法：n步Q(<span class="math notranslate nohighlight">\(\sigma\)</span>)。
 我们保留该算法的半梯度形式，以及n步状态价值算法，作为读者的练习。</p>
@@ -289,7 +198,7 @@ G_{t : t+n} &amp;\doteq R_{t+1}-\overline{R}_{t}+\cdots+R_{t+n}-\overline{R}_{t+
 <em>练习11.2</em> 将n步Q(<span class="math notranslate nohighlight">\(\sigma\)</span>)（7.11和7.17）的方程转换为半梯度形式。给出涵盖情节和持续情况的定义。</p>
 </div>
 <div class="section" id="id3">
-<h2>11.2 离策略发散例子<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>11.2 离策略发散例子<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>在本节中，我们将开始讨论使用函数近似的离策略学习挑战的第二部分──更新的分布与在策略上的分布不匹配。
 我们描述了一些有针对性的离策略学习反例，即半梯度和其他简单算法不稳定和发散的情况。</p>
 <p>为了建立直觉，最好先考虑一个非常简单的例子。假设，可能作为较大MDP的一部分，存在两个状态，
@@ -337,7 +246,7 @@ G_{t : t+n} &amp;\doteq R_{t+1}-\overline{R}_{t}+\cdots+R_{t+n}-\overline{R}_{t+
 <div class="figure align-default" id="id18">
 <img alt="../../_images/figure-11.1.png" src="../../_images/figure-11.1.png" />
 <p class="caption"><span class="caption-text"><strong>图11.1：</strong> Baird的反例。该马尔可夫过程的近似状态价值函数具有每个状态内的线性表达式所示的形式。
-<strong>实线</strong> 动作通常导致第七状态，并且 <strong>虚线</strong> 动作通常导致其他六个状态中的一个，每个状态具有相等的概率。奖励总是零。</span><a class="headerlink" href="#id18" title="永久链接至图片">¶</a></p>
+<strong>实线</strong> 动作通常导致第七状态，并且 <strong>虚线</strong> 动作通常导致其他六个状态中的一个，每个状态具有相等的概率。奖励总是零。</span><a class="headerlink" href="#id18" title="永久链接至图片"></a></p>
 </div>
 <p>考虑估计由每个状态圆中所示的表达式指示的线性参数化下的状态值。
 例如，最左边状态的估计值是 <span class="math notranslate nohighlight">\(2 w_{1}+w_{8}\)</span>，
@@ -353,13 +262,13 @@ G_{t : t+n} &amp;\doteq R_{t+1}-\overline{R}_{t}+\cdots+R_{t+n}-\overline{R}_{t+
 事实上，如果在动态规划（DP）中完成预期的更新，甚至会发生这种情况，如图11.2（右）所示。
 也就是说，如果使用DP（基于期望的）目标，以半梯度方式同时为所有状态更新权重向量 <span class="math notranslate nohighlight">\(\mathbf{w}_{k}\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-11-9">
-<span class="eqno">(8)<a class="headerlink" href="#equation-11-9" title="公式的永久链接">¶</a></span>\[\mathbf{w}_{k+1} \doteq \mathbf{w}_{k}+\frac{\alpha}{|\mathcal{S}|} \sum_{s}\left(\mathbb{E}_{\pi}\left[R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{k}\right) | S_{t}=s\right]-\hat{v}\left(s, \mathbf{w}_{k}\right)\right) \nabla \hat{v}\left(s, \mathbf{w}_{k}\right)\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-11-9" title="公式的永久链接"></a></span>\[\mathbf{w}_{k+1} \doteq \mathbf{w}_{k}+\frac{\alpha}{|\mathcal{S}|} \sum_{s}\left(\mathbb{E}_{\pi}\left[R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{k}\right) | S_{t}=s\right]-\hat{v}\left(s, \mathbf{w}_{k}\right)\right) \nabla \hat{v}\left(s, \mathbf{w}_{k}\right)\]</div>
 <p>在这种情况下，没有随机性，也没有异步，就像在传统的DP更新中一样。
 除了使用半梯度函数近似之外，该方法是常规的。但系统仍然不稳定。</p>
 <div class="figure align-default" id="id19">
 <img alt="../../_images/figure-11.2.png" src="../../_images/figure-11.2.png" />
 <p class="caption"><span class="caption-text"><strong>图11.2：</strong> Baird反例的不稳定性证明。示出了两个半梯度算法的参数矢量 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 的分量的演变。
-步长为 <span class="math notranslate nohighlight">\(\alpha=0.01\)</span>，初始重量为 <span class="math notranslate nohighlight">\(\mathbf{w}=(1,1,1,1,1,1,10,1)^{\top}\)</span>。</span><a class="headerlink" href="#id19" title="永久链接至图片">¶</a></p>
+步长为 <span class="math notranslate nohighlight">\(\alpha=0.01\)</span>，初始重量为 <span class="math notranslate nohighlight">\(\mathbf{w}=(1,1,1,1,1,1,10,1)^{\top}\)</span>。</span><a class="headerlink" href="#id19" title="永久链接至图片"></a></p>
 </div>
 <p>如果我们只改变Baird反例中DP更新的分布，从均匀分布到在策略分布（通常需要异步更新），那么收敛就保证了一个误差受限于（9.14）的解决方案。
 这个例子很引人注目，因为所使用的TD和DP方法可以说是最简单和最好理解的自举方法，所使用的线性，半梯度方法可以说是最简单和最容易理解的函数近似。
@@ -395,7 +304,7 @@ w_{k+1} &amp;=\underset{w \in \mathbb{R}}{\arg\min} \sum_{s \in \mathcal{S}}\lef
 <p><em>练习11.3（编程）</em> 将一步半梯度Q-learning应用于Baird的反例，并凭经验证明其权重不同。</p>
 </div>
 <div class="section" id="id4">
-<h2>11.3 致命的三元组<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>11.3 致命的三元组<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>到目前为止，我们的讨论可以总结为，只要我们将以下三个要素结合起来，构成我们称之为 <em>致命的三元组</em>，就会产生不稳定和分歧的危险：</p>
 <p><strong>函数近似</strong> 从比内存和计算资源（例如，线性函数近似或ANN）大得多的状态空间泛化的强大和可扩展的方式。</p>
 <p><strong>自举</strong> 更新目标包括现有估计（如动态编程或TD方法），而不是完全依赖实际奖励和完整回报（如MC方法）。</p>
@@ -440,7 +349,7 @@ w_{k+1} &amp;=\underset{w \in \mathbb{R}}{\arg\min} \sum_{s \in \mathcal{S}}\lef
 然而，并行学习在概念上是可能的，因为行为策略可能部分地与许多目标策略重叠。要充分利用这一点，需要进行离策略学习。</p>
 </div>
 <div class="section" id="id5">
-<h2>11.4 线性价值函数几何<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>11.4 线性价值函数几何<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>为了更好地理解离策略学习的稳定性挑战，有必要更加抽象思考价值函数近似，以及学习是如何独立地完成的。
 我们可以想象所有可能的状态价值函数的空间──从状态到实数的所有函数 <span class="math notranslate nohighlight">\(v:\mathcal{S}\rightarrow\mathbb{R}\)</span>。
 这些价值函数中的大多数都与任何策略都不对应。对我们来说更重要的是大多数都不能用函数近似器表示，它在设计上的参数远远少于状态。</p>
@@ -465,7 +374,7 @@ w_{k+1} &amp;=\underset{w \in \mathbb{R}}{\arg\min} \sum_{s \in \mathcal{S}}\lef
 Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE）意义的最佳近似值都可能不同，并在右下方显示。
 （VE，BE和PBE都被视为该图中的相应向量。）Bellman算子将平面中的价值函数带到一个外部，然后可以将其投射回去。
 如果你在空间外迭代地应用Bellman算子（如上面的灰色所示），你将获得真值函数，就像在传统的动态规划中一样。
-相反，如果你在每个步骤中保持投射回子空间，如灰色所示的下部步骤，则不动点将是向量零PBE的点。</span><a class="headerlink" href="#id20" title="永久链接至图片">¶</a></p>
+相反，如果你在每个步骤中保持投射回子空间，如灰色所示的下部步骤，则不动点将是向量零PBE的点。</span><a class="headerlink" href="#id20" title="永久链接至图片"></a></p>
 </div>
 <p>现在考虑一个单一的固定策略 <span class="math notranslate nohighlight">\(\pi\)</span>。我们假设它的真值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span> 太复杂而不能完全表示为近似值。
 因此 <span class="math notranslate nohighlight">\(v_\pi\)</span> 不在子空间中；在图中，它被描绘为在可表示函数的平面子空间之上。</p>
@@ -477,32 +386,32 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 如第9.2节所述，让我们使用分布 <span class="math notranslate nohighlight">\(\mu : \mathcal{S} \rightarrow[0,1]\)</span>
 指定我们关心不同状态被准确估价的程度（通常被视为在策略上的分布）。然后我们可以使用范数定义价值函数之间的距离</p>
 <div class="math notranslate nohighlight" id="equation-11-11">
-<span class="eqno">(9)<a class="headerlink" href="#equation-11-11" title="公式的永久链接">¶</a></span>\[\|v\|_{\mu}^{2} \doteq \sum_{s \in \mathcal{S}} \mu(s) v(s)^{2}\]</div>
+<span class="eqno">(9)<a class="headerlink" href="#equation-11-11" title="公式的永久链接"></a></span>\[\|v\|_{\mu}^{2} \doteq \sum_{s \in \mathcal{S}} \mu(s) v(s)^{2}\]</div>
 <p>请注意，9.2节中的 <span class="math notranslate nohighlight">\(\overline{\mathrm{VE}}\)</span> 可以简单地使用此范数表示，
 因为 <span class="math notranslate nohighlight">\(\overline{\mathrm{VE}}(\mathbf{w})=\left\|v_{\mathbf{w}}-v_{\pi}\right\|_{\mu}^{2}\)</span>。
 对于任何价值函数 <span class="math notranslate nohighlight">\(v\)</span>，在可表示价值函数的子空间中找到其最接近的价值函数的操作是投影操作。
 我们定义一个投影算子 <span class="math notranslate nohighlight">\(\Pi\)</span>，它将任意价值函数带到我们范数中最接近的可表示函数：</p>
 <div class="math notranslate nohighlight" id="equation-11-12">
-<span class="eqno">(10)<a class="headerlink" href="#equation-11-12" title="公式的永久链接">¶</a></span>\[\Pi v \doteq v_{\mathbf{w}} \quad \text { 其中 } \quad \mathbf{w}=\underset{\mathbf{w} \in \mathbb{R}^{d}}{\arg\min}\left\|v-v_{\mathbf{w}}\right\|_{\mu}^{2}\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-11-12" title="公式的永久链接"></a></span>\[\Pi v \doteq v_{\mathbf{w}} \quad \text { 其中 } \quad \mathbf{w}=\underset{\mathbf{w} \in \mathbb{R}^{d}}{\arg\min}\left\|v-v_{\mathbf{w}}\right\|_{\mu}^{2}\]</div>
 <p>因此，最接近真值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的可表示价值函数是其投影 <span class="math notranslate nohighlight">\(\Pi_{v_\pi}\)</span>，如图11.3所示。
 这是蒙特卡罗方法渐近发现的解决方案，尽管通常非常缓慢。投影操作将在下面的框中更全面地讨论。</p>
 <div class="note admonition">
 <p class="admonition-title">投影矩阵</p>
 <p>对于线性函数近似器，投影操作是线性的，这意味着它可以表示为 <span class="math notranslate nohighlight">\(|\mathcal{S}|\times|\mathcal{S}|\)</span> 矩阵：</p>
 <div class="math notranslate nohighlight" id="equation-11-14">
-<span class="eqno">(11)<a class="headerlink" href="#equation-11-14" title="公式的永久链接">¶</a></span>\[\Pi \doteq \mathbf{X}\left(\mathbf{X}^{\top} \mathbf{D} \mathbf{X}\right)^{-1} \mathbf{X}^{\top} \mathbf{D}\]</div>
+<span class="eqno">(11)<a class="headerlink" href="#equation-11-14" title="公式的永久链接"></a></span>\[\Pi \doteq \mathbf{X}\left(\mathbf{X}^{\top} \mathbf{D} \mathbf{X}\right)^{-1} \mathbf{X}^{\top} \mathbf{D}\]</div>
 <p>其中，如9.4节所示，<span class="math notranslate nohighlight">\(\mathbf{D}\)</span> 表示 <span class="math notranslate nohighlight">\(|\mathcal{S}|\times|\mathcal{S}|\)</span> 对角线矩阵，<span class="math notranslate nohighlight">\(\mu(s)\)</span> 在对角线上，
 <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> 表示 <span class="math notranslate nohighlight">\(|\mathcal{S}|\times d\)</span> 矩阵，其行是特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}(s)^{\top}\)</span>，每个状态 <span class="math notranslate nohighlight">\(s\)</span> 有一个。
 如果（11.14）中的逆不存在，则替换伪逆。使用这些矩阵，可以写出向量的平方范数</p>
 <div class="math notranslate nohighlight" id="equation-11-15">
-<span class="eqno">(12)<a class="headerlink" href="#equation-11-15" title="公式的永久链接">¶</a></span>\[\|v\|_{\mu}^{2}=v^{\top} \mathbf{D} v\]</div>
+<span class="eqno">(12)<a class="headerlink" href="#equation-11-15" title="公式的永久链接"></a></span>\[\|v\|_{\mu}^{2}=v^{\top} \mathbf{D} v\]</div>
 <p>并且可以写出近似线性价值函数</p>
 <div class="math notranslate nohighlight" id="equation-11-16">
-<span class="eqno">(13)<a class="headerlink" href="#equation-11-16" title="公式的永久链接">¶</a></span>\[v_{\mathbf{w}}=\mathbf{X} \mathbf{w}\]</div>
+<span class="eqno">(13)<a class="headerlink" href="#equation-11-16" title="公式的永久链接"></a></span>\[v_{\mathbf{w}}=\mathbf{X} \mathbf{w}\]</div>
 </div>
 <p>TD方法找到不同的解决方案。为了理解它们的基本原理，请回想一下价值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的Bellman方程</p>
 <div class="math notranslate nohighlight" id="equation-11-13">
-<span class="eqno">(14)<a class="headerlink" href="#equation-11-13" title="公式的永久链接">¶</a></span>\[v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right], \quad \text { 对所有 } s \in \mathcal{S}\]</div>
+<span class="eqno">(14)<a class="headerlink" href="#equation-11-13" title="公式的永久链接"></a></span>\[v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right], \quad \text { 对所有 } s \in \mathcal{S}\]</div>
 <p>真值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span> 是唯一能够精确求解（11.13）的价值函数。
 如果用近似价值函数 <span class="math notranslate nohighlight">\(v_{\mathbf{w}}\)</span> 代替 <span class="math notranslate nohighlight">\(v_\pi\)</span>，
 则修改的方程的右侧和左侧之间的差可以用作 <span class="math notranslate nohighlight">\(v_{\mathbf{w}}\)</span> 与 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的距离的度量。
@@ -518,7 +427,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 被称为 <em>Bellman误差向量</em> （在图11.3中显示为BE）。
 这个向量的总体大小，在范数中，是价值函数中误差的总体度量，称为 <em>均方Bellman误差</em>：</p>
 <div class="math notranslate nohighlight" id="equation-11-19">
-<span class="eqno">(15)<a class="headerlink" href="#equation-11-19" title="公式的永久链接">¶</a></span>\[\overline{\mathrm{BE}}(\mathbf{w})=\left\|\overline{\delta}_{\mathbf{w}}\right\|_{\mu}^{2}\]</div>
+<span class="eqno">(15)<a class="headerlink" href="#equation-11-19" title="公式的永久链接"></a></span>\[\overline{\mathrm{BE}}(\mathbf{w})=\left\|\overline{\delta}_{\mathbf{w}}\right\|_{\mu}^{2}\]</div>
 <p>通常不可能将 <span class="math notranslate nohighlight">\(\overline{\mathrm{BE}}\)</span> 减小到零（此时 <span class="math notranslate nohighlight">\(v_{\mathbf{w}}=v_\pi\)</span>），
 但是对于线性函数近似，存在 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 的唯一值，<span class="math notranslate nohighlight">\(\overline{\mathrm{BE}}\)</span> 被最小化。
 可表示函数子空间中的这一点（图11.3中标记为 <span class="math notranslate nohighlight">\(\min \overline{\mathrm{BE}}\)</span>）
@@ -528,7 +437,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 <span class="math notranslate nohighlight">\(B_{\pi}:\mathbb{R}^{|\mathcal{S}|}\rightarrow\mathbb{R}^{|\mathcal{S}|}\)</span>
 到近似价值函数的结果。Bellman算子的定义是</p>
 <div class="math notranslate nohighlight" id="equation-11-20">
-<span class="eqno">(16)<a class="headerlink" href="#equation-11-20" title="公式的永久链接">¶</a></span>\[\left(B_{\pi} v\right)(s) \doteq \sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v\left(s^{\prime}\right)\right]\]</div>
+<span class="eqno">(16)<a class="headerlink" href="#equation-11-20" title="公式的永久链接"></a></span>\[\left(B_{\pi} v\right)(s) \doteq \sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v\left(s^{\prime}\right)\right]\]</div>
 <p>对于所有 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span> 和 <span class="math notranslate nohighlight">\(v:\mathcal{S} \rightarrow \mathbb{R}\)</span>。
 <span class="math notranslate nohighlight">\(v\)</span> 的Bellman误差向量可以写成
 <span class="math notranslate nohighlight">\(\overline{\delta}_{\mathbf{w}}=B_{\pi} v_{\mathbf{w}}-v_{\mathbf{w}}\)</span>。</p>
@@ -536,7 +445,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 在动态规划中（没有函数近似），该算子被重复应用于可表示空间之外的点，如图11.3顶部的灰色箭头所示。
 最终，该过程收敛于真值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span>，这是Bellman算子唯一的不动点，是唯一的价值函数</p>
 <div class="math notranslate nohighlight" id="equation-11-21">
-<span class="eqno">(17)<a class="headerlink" href="#equation-11-21" title="公式的永久链接">¶</a></span>\[v_{\pi}=B_{\pi} v_{\pi}\]</div>
+<span class="eqno">(17)<a class="headerlink" href="#equation-11-21" title="公式的永久链接"></a></span>\[v_{\pi}=B_{\pi} v_{\pi}\]</div>
 <p>这只是 <span class="math notranslate nohighlight">\(\pi\)</span> （11.13）的Bellman方程的另一种写法。</p>
 <p>然而，利用函数近似，不能表示位于子空间之外的中间价值函数。
 无法遵循图11.3上半部分中的灰色箭头，因为在第一次更新（暗线）之后，必须将价值函数投影回可表示的内容。
@@ -547,7 +456,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 在正常情况下，该向量的大小是近似价值函数中的另一个误差度量。对于任何近似价值函数 <span class="math notranslate nohighlight">\(v\)</span>，
 我们定义 <em>均方投影Bellman误差</em>，表示为 <span class="math notranslate nohighlight">\(\overline{\mathrm{PBE}}\)</span> 如下</p>
 <div class="math notranslate nohighlight" id="equation-11-22">
-<span class="eqno">(18)<a class="headerlink" href="#equation-11-22" title="公式的永久链接">¶</a></span>\[\overline{\mathrm{PBE}}(\mathbf{w})=\left\|\Pi \overline{\delta}_{\mathbf{w}}\right\|_{\mu}^{2}\]</div>
+<span class="eqno">(18)<a class="headerlink" href="#equation-11-22" title="公式的永久链接"></a></span>\[\overline{\mathrm{PBE}}(\mathbf{w})=\left\|\Pi \overline{\delta}_{\mathbf{w}}\right\|_{\mu}^{2}\]</div>
 <p>对于线性函数近似，总是存在具有零 <span class="math notranslate nohighlight">\(\overline{\mathrm{PBE}}\)</span> 的近似价值函数（在子空间内）；
 这是第9.4节中介绍的TD的不动点 <span class="math notranslate nohighlight">\(\mathbf{w}_{TD}\)</span>。
 正如我们所看到的，在半梯度TD方法和离策略训练下，这一点并不总是稳定的。
@@ -556,7 +465,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 保证收敛于它的方法在第11.7节和第11.8节中讨论。</p>
 </div>
 <div class="section" id="bellman">
-<h2>11.5 Bellman误差中的梯度下降<a class="headerlink" href="#bellman" title="永久链接至标题">¶</a></h2>
+<h2>11.5 Bellman误差中的梯度下降<a class="headerlink" href="#bellman" title="永久链接至标题"></a></h2>
 <p>通过更好地理解价值函数近似及其各种目标，我们现在回到了离策略学习的稳定性挑战。
 我们希望应用随机梯度下降（SGD，第9.3节）的方法，其中依据期望等于目标函数的负梯度进行更新。
 这些方法总是在目标中下坡（期望），因此通常具有优异的收敛特性。
@@ -691,7 +600,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 与第二种方式一样，第三种方式也是 <span class="math notranslate nohighlight">\(\overline{\mathrm{BE}}\)</span> 目标本身的问题，而不是用于实现它的任何特定算法。</p>
 </div>
 <div class="section" id="id7">
-<h2>11.6 Bellman误差是不可学习的<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>11.6 Bellman误差是不可学习的<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>我们在本节中介绍的可学习性概念与机器学习中常用的概念不同。
 在机器学习中，如果一个假设具有 <em>高效（effciently）</em> 可学性，则可以说它是“可学习的”，这意味着它可以在多项式而不是指数个例子中学习。
 在这里，我们以更基本的方式使用该术语，意味着可以学习，具有任何经验。
@@ -745,7 +654,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 此外，这个相同的 <span class="math notranslate nohighlight">\(\mathbf{w}^{*}\)</span> 可以从另一个目标 <span class="math notranslate nohighlight">\(\overline{\mathrm{RE}}\)</span> 确定，该目标是从数据分布中唯一确定的。
 因此即使 <span class="math notranslate nohighlight">\(\overline{\mathrm{VE}}\)</span> 不是，<span class="math notranslate nohighlight">\(\mathbf{w}^{*}\)</span> 和 <span class="math notranslate nohighlight">\(\overline{\mathrm{RE}}\)</span> 也是可学习的。
 <strong>右，引导目标：</strong> 两个不同的MDP可以产生相同的数据分布，但也产生不同的 <span class="math notranslate nohighlight">\(\overline{\mathrm{BE}}\)</span> 并具有不同的最小化参数向量；
-这些都无法从数据分布中学习。<span class="math notranslate nohighlight">\(\overline{\mathrm{PBE}}\)</span> 和 <span class="math notranslate nohighlight">\(\overline{\mathrm{TDE}}\)</span> 目标及其（不同的）最小值可以直接根据数据确定，因此是可学习的。</span><a class="headerlink" href="#id21" title="永久链接至图片">¶</a></p>
+这些都无法从数据分布中学习。<span class="math notranslate nohighlight">\(\overline{\mathrm{PBE}}\)</span> 和 <span class="math notranslate nohighlight">\(\overline{\mathrm{TDE}}\)</span> 目标及其（不同的）最小值可以直接根据数据确定，因此是可学习的。</span><a class="headerlink" href="#id21" title="永久链接至图片"></a></p>
 </div>
 <p><em>练习11.4</em> 证明（11.24）。提示：将 <span class="math notranslate nohighlight">\(\overline{\mathrm{RE}}\)</span> 写为
 对 <span class="math notranslate nohighlight">\(S_t=s\)</span> 的平方误差期望的可能状态 <span class="math notranslate nohighlight">\(s\)</span> 的期望。
@@ -801,7 +710,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 所有这些都引起了对 <span class="math notranslate nohighlight">\(\overline{\mathrm{PBE}}\)</span> 的更多关注。</p>
 </div>
 <div class="section" id="td">
-<h2>11.7 梯度TD方法<a class="headerlink" href="#td" title="永久链接至标题">¶</a></h2>
+<h2>11.7 梯度TD方法<a class="headerlink" href="#td" title="永久链接至标题"></a></h2>
 <p>我们现在考虑用于最小化 <span class="math notranslate nohighlight">\(\overline{\mathrm{PBE}}\)</span> 的SGD方法。
 作为真正的SGD方法，即使在非策略训练和非线性函数近似下，这些 <em>梯度-TD方法</em> 也具有稳健的收敛特性。
 请记住，在线性情况下，始终存在精确解，
@@ -839,7 +748,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 \[\mathbf{X}^{\top} \mathbf{D X}=\sum_{s} \mu(s) \mathbf{x}_{s} \mathbf{x}_{s}^{\top}=\mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]\]</div>
 <p>将这些期望替换为我们表达 <span class="math notranslate nohighlight">\(\overline{\mathrm{PBE}}\)</span> 梯度的三个因子，我们得到了</p>
 <div class="math notranslate nohighlight" id="equation-11-27">
-<span class="eqno">(19)<a class="headerlink" href="#equation-11-27" title="公式的永久链接">¶</a></span>\[\nabla \overline{\mathrm{PBE}}(\mathbf{w})=2 \mathbb{E}\left[\rho_{t}\left(\gamma \mathbf{x}_{t+1}-\mathbf{x}_{t}\right) \mathbf{x}_{t}^{\top}\right] \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]\]</div>
+<span class="eqno">(19)<a class="headerlink" href="#equation-11-27" title="公式的永久链接"></a></span>\[\nabla \overline{\mathrm{PBE}}(\mathbf{w})=2 \mathbb{E}\left[\rho_{t}\left(\gamma \mathbf{x}_{t+1}-\mathbf{x}_{t}\right) \mathbf{x}_{t}^{\top}\right] \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]\]</div>
 <p>我们通过以这种形式编写梯度来取得任何进展可能并不明显。它是三个表达式的乘积，第一个和最后一个不是独立的。
 它们都依赖于下一个特征向量 <span class="math notranslate nohighlight">\(\mathbf{x}_{t+1}\)</span>；我们不能简单地对这两个期望进行抽样，然后将样本相乘。
 这将为我们提供梯度的有偏估计，就像在朴素残差梯度算法中一样。</p>
@@ -853,7 +762,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 这些因子是 <span class="math notranslate nohighlight">\(d \times d\)</span> 矩阵和 <span class="math notranslate nohighlight">\(d\)</span> 维向量，因此它们的乘积只是一个 <span class="math notranslate nohighlight">\(d\)</span> 维向量，
 就像 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 本身一样。我们将第二个学习的向量表示为 <span class="math notranslate nohighlight">\(\mathbf{v}\)</span>：</p>
 <div class="math notranslate nohighlight" id="equation-11-28">
-<span class="eqno">(20)<a class="headerlink" href="#equation-11-28" title="公式的永久链接">¶</a></span>\[\mathbf{v} \approx \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]\]</div>
+<span class="eqno">(20)<a class="headerlink" href="#equation-11-28" title="公式的永久链接"></a></span>\[\mathbf{v} \approx \mathbb{E}\left[\mathbf{x}_{t} \mathbf{x}_{t}^{\top}\right]^{-1} \mathbb{E}\left[\rho_{t} \delta_{t} \mathbf{x}_{t}\right]\]</div>
 <p>这种形式对于线性监督学习的学生来说是熟悉的。
 它是线性最小二乘问题的解决方案，试图从特征中近似 <span class="math notranslate nohighlight">\(\rho_{t} \delta_{t}\)</span>。
 用于递增地找到最小化预期平方误差
@@ -898,7 +807,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 <img alt="../../_images/figure-11.5.png" src="../../_images/figure-11.5.png" />
 <p class="caption"><span class="caption-text"><strong>图11.5：</strong> 关于Baird反例的TDC算法的行为。在左侧显示典型的单次运行，在右侧显示该算法的预期行为，
 如果更新是同步完成的（类似于（11.9），除了两个TDC参数向量）。
-步长为 <span class="math notranslate nohighlight">\(\alpha=0.005\)</span> 且 <span class="math notranslate nohighlight">\(\beta=0.05\)</span>。</span><a class="headerlink" href="#id22" title="永久链接至图片">¶</a></p>
+步长为 <span class="math notranslate nohighlight">\(\alpha=0.005\)</span> 且 <span class="math notranslate nohighlight">\(\beta=0.05\)</span>。</span><a class="headerlink" href="#id22" title="永久链接至图片"></a></p>
 </div>
 <p>GTD2和TDC都涉及两个学习过程，
 一个用于 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 的主要学习过程和一个用于 <span class="math notranslate nohighlight">\(\mathbf{v}\)</span> 的次要学习过程。
@@ -917,7 +826,7 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 最后，将梯度TD思想与近端方法和控制变量的思想相结合，以产生更有效的方法（Mahadevan等，2014；Du等，2017）。</p>
 </div>
 <div class="section" id="td-emphatic-td">
-<h2>11.8 强调TD方法（Emphatic-TD）<a class="headerlink" href="#td-emphatic-td" title="永久链接至标题">¶</a></h2>
+<h2>11.8 强调TD方法（Emphatic-TD）<a class="headerlink" href="#td-emphatic-td" title="永久链接至标题"></a></h2>
 <p>我们现在转向第二个主要策略，该策略已被广泛探索，以获得具有函数近似的廉价且有效的离策略学习方法。
 回想一下线性半梯度TD方法在策略分布下训练时是有效和稳定的，
 我们在9.4节中说明这与矩阵 <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> （9.11） <a class="footnote-reference brackets" href="#id17" id="id10">4</a> 的正定性
@@ -953,11 +862,11 @@ Bellman误差（BE），投影Bellman误差（PBE）和时序差分误差（TDE�
 该算法在理论上收敛于该问题的最优解，但实际上并没有。我们将在下一节中讨论减少所有这些算法的方差的主题。</p>
 <div class="figure align-default" id="id23">
 <img alt="../../_images/figure-11.6.png" src="../../_images/figure-11.6.png" />
-<p class="caption"><span class="caption-text"><strong>图11.6：</strong> 一步强调TD算法对Baird反例的期望的行为。步长为 <span class="math notranslate nohighlight">\(\alpha=0.03\)</span>。</span><a class="headerlink" href="#id23" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图11.6：</strong> 一步强调TD算法对Baird反例的期望的行为。步长为 <span class="math notranslate nohighlight">\(\alpha=0.03\)</span>。</span><a class="headerlink" href="#id23" title="永久链接至图片"></a></p>
 </div>
 </div>
 <div class="section" id="id11">
-<h2>11.9 减小误差<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2>11.9 减小误差<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>与在策略学习相比，离策略学习本质上具有更大的差异。
 这并不奇怪；如果你收到与策略关系不太密切的数据，您应该期望减少对策略价值的学习。
 在极端情况下，人们可能无法学到任何东西。例如，你不能期望通过烹饪晚餐学习如何开车。
@@ -984,7 +893,7 @@ Karampatziakis和Langford（2010）的“重要性权重意识”更新也是如
 例如，可以通过参考行为策略来定义目标策略，如在Precup等人（2006年）提出的“识别器”中那样。</p>
 </div>
 <div class="section" id="id12">
-<h2>11.10 总结<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<h2>11.10 总结<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>离策略学习是一个诱人的挑战，测试我们在设计稳定和有效的学习算法方面的独创性。
 表格式Q-learning使得离策略学习看起来很容易，并且它对预期的Sarsa和树备份算法有自然的概括。
 但正如我们在本章中所看到的，将这些思想扩展到显着的函数近似，甚至线性函数近似，都涉及新的挑战，并迫使我们加深对强化学习算法的理解。</p>
@@ -1010,7 +919,7 @@ TD学习似乎提供了并行学习多个事物的可能性，即使用一种经
 离策略学习的潜力仍然很诱人，实现这一目标的最佳途径仍然是个谜。</p>
 </div>
 <div class="section" id="id13">
-<h2>书目和历史评论<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p><strong>11.1</strong> 第一种半梯度方法是线性TD(<span class="math notranslate nohighlight">\(\lambda\)</span>)（Sutton，1988）。
 “半梯度”这个名字是最近的（Sutton，2015a）。
 在Sutton，Mahmood和White（2016）之前，可能尚未明确说明具有一般重要性采样率的半梯度离策略TD(0)，
@@ -1063,50 +972,33 @@ Yu（2015; 2016; Yu，Mahmood和Sutton，2017），Hallak，Tamar和Mannor（201
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter12/eligibility_traces.html" class="btn btn-neutral float-right" title="第12章 资格迹（Eligibility Traces）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter10/on-policy_control_with_approximation.html" class="btn btn-neutral float-left" title="第10章 在策略控制近似方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter10/on-policy_control_with_approximation.html" class="btn btn-neutral float-left" title="第10章 在策略控制近似方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter12/eligibility_traces.html" class="btn btn-neutral float-right" title="第12章 资格迹（Eligibility Traces）" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

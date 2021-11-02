@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第7章 \(n\) 步引导（Bootstrapping）方法 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第8章 表格方法规划和学习" href="../chapter8/planning_and_learning_with_tabular_methods.html" />
     <link rel="prev" title="第6章 时序差分学习" href="../chapter6/temporal_difference_learning.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -122,8 +73,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -143,72 +92,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
-        
       <li>第7章 <span class="math notranslate nohighlight">\(n\)</span> 步引导（Bootstrapping）方法</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partI/chapter7/n_step_bootstrapping.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partI/chapter7/n_step_bootstrapping.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="n-bootstrapping">
-<h1>第7章 <span class="math notranslate nohighlight">\(n\)</span> 步引导（Bootstrapping）方法<a class="headerlink" href="#n-bootstrapping" title="永久链接至标题">¶</a></h1>
+<h1>第7章 <span class="math notranslate nohighlight">\(n\)</span> 步引导（Bootstrapping）方法<a class="headerlink" href="#n-bootstrapping" title="永久链接至标题"></a></h1>
 <p>在本章中，我们统一了蒙特卡罗（MC）方法和前两章中介绍的一步时序差分（TD）方法。MC方法和一步法TD方法都不是最好的。
 在本章中，我们将介绍 <em>n步TD方法</em>，这些方法概括了两种方法，以便可以根据需要平滑地从一种方法转换到另一种方法，以满足特定任务的需求。
 n步方法在一端采用MC方法，在另一端采用一步TD方法。最好的方法通常介于两个极端之间。</p>
@@ -225,7 +134,7 @@ n步方法使引导能够在多个步骤中发生，使我们摆脱单一时间�
 也就是说，我们首先考虑n步方法如何帮助预测作为固定策略的状态函数的回报（即，估计 <span class="math notranslate nohighlight">\(v_\pi\)</span>）。
 然后我们将想法扩展到行动价值和控制方法。</p>
 <div class="section" id="n-td">
-<h2>7.1 <span class="math notranslate nohighlight">\(n\)</span> 步TD预测<a class="headerlink" href="#n-td" title="永久链接至标题">¶</a></h2>
+<h2>7.1 <span class="math notranslate nohighlight">\(n\)</span> 步TD预测<a class="headerlink" href="#n-td" title="永久链接至标题"></a></h2>
 <p>蒙特卡罗和TD方法之间的方法空间是什么？考虑使用 <span class="math notranslate nohighlight">\(\pi\)</span> 生成的样本回合估计 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
 蒙特卡罗方法基于从该状态到回合结束的观察到的奖励的整个序列来执行每个状态的更新。
 另一方面，一步法TD方法的更新仅基于下一个奖励，一步之后从状态价值引导作为剩余奖励的代理。
@@ -235,7 +144,7 @@ n步方法使引导能够在多个步骤中发生，使我们摆脱单一时间�
 左侧是一步TD更新，右侧是直到最后终止的蒙特卡罗更新。</p>
 <div class="figure align-default" id="id4">
 <img alt="../../_images/figure-7.1.png" src="../../_images/figure-7.1.png" />
-<p class="caption"><span class="caption-text"><strong>图7.1：</strong> n步方法的备份图。这些方法组成从一步TD方法到蒙特卡罗方法的频谱范围。</span><a class="headerlink" href="#id4" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图7.1：</strong> n步方法的备份图。这些方法组成从一步TD方法到蒙特卡罗方法的频谱范围。</span><a class="headerlink" href="#id4" title="永久链接至图片"></a></p>
 </div>
 <p>使用n步更新的方法仍然是TD方法，因为它们仍然根据它从后来的估计中如何变化来改变先前的估计。
 现在后来的估计不是一步之后，而是n步之后。时序差分在n个步骤上延伸的方法称为 <em>n步TD方法</em>。
@@ -261,7 +170,7 @@ n步方法使引导能够在多个步骤中发生，使我们摆脱单一时间�
 <span class="math notranslate nohighlight">\(\gamma^{2} R_{t+3}+\gamma^{3} R_{t+4}+\cdots+\gamma^{T-t-1} R_{T}\)</span> 的缺失。
 同样，任意n步更新的目标是n步回报：</p>
 <div class="math notranslate nohighlight" id="equation-7-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-7-1" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-7-1" title="公式的永久链接"></a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} V_{t+n-1}\left(S_{t+n}\right)\]</div>
 <p>而所有其他状态的值保持不变：对于所有 <span class="math notranslate nohighlight">\(s \neq S_{t}\)</span>，<span class="math notranslate nohighlight">\(V_{t+n}(s)=V_{t+n-1}(s)\)</span>。
 我们将此算法称为 <em>n步TD</em>。 请注意，在每回合的前n-1个步骤中，根本不会进行任何更改。
 为了弥补这一点，在回合结束后，终止后和开始下一集之前，会进行相同数量的额外更新。
@@ -303,7 +212,7 @@ n步方法使引导能够在多个步骤中发生，使我们摆脱单一时间�
 n步回报的一个重要特性是，在最恶劣的意义上，它们的期望被保证是比 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 更好的 <span class="math notranslate nohighlight">\(v_\pi\)</span> 估计。
 也就是说，对于所有 <span class="math notranslate nohighlight">\(n \ge 1\)</span>，预期的n步回报的最差误差保证小于或等于 <span class="math notranslate nohighlight">\(V_{t+n-1}\)</span> 下最差误差的 <span class="math notranslate nohighlight">\(\gamma^{n}\)</span> 倍：</p>
 <div class="math notranslate nohighlight" id="equation-7-3">
-<span class="eqno">(2)<a class="headerlink" href="#equation-7-3" title="公式的永久链接">¶</a></span>\[\max _{s}\left|\mathbb{E}_{\pi}\left[G_{t : t+n} | S_{t}=s\right]-v_{\pi}(s)\right| \leq \gamma^{n} \max _{s}\left|V_{t+n-1}(s)-v_{\pi}(s)\right|\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-7-3" title="公式的永久链接"></a></span>\[\max _{s}\left|\mathbb{E}_{\pi}\left[G_{t : t+n} | S_{t}=s\right]-v_{\pi}(s)\right| \leq \gamma^{n} \max _{s}\left|V_{t+n-1}(s)-v_{\pi}(s)\right|\]</div>
 <p>这称为 <em>n步回报的误差减少属性</em>。由于误差减少属性，可以正式显示所有n步TD方法在适当的技术条件下收敛到正确的预测。
 因此，n步TD方法形成一系列可靠的（sound）方法，一步法TD方法和蒙特卡罗方法作为其极端情况。</p>
 <p><strong>例7.1：随机行走的n步TD方法</strong> 考虑在例6.2中描述的5个状态随机游走任务中使用n步TD方法。
@@ -321,24 +230,24 @@ n步回报的一个重要特性是，在最恶劣的意义上，它们的期望�
 这说明了TD和蒙特卡罗方法对n步方法的推广能够比两种极端方法中的任何一种方法表现更好。</p>
 <div class="figure align-default" id="id5">
 <img alt="../../_images/figure-7.2.png" src="../../_images/figure-7.2.png" />
-<p class="caption"><span class="caption-text"><strong>图7.2：</strong> 对于19个状态的随机行走任务的不同n值，n步TD方法的性能是 <span class="math notranslate nohighlight">\(\alpha\)</span> 的函数（例7.1）。</span><a class="headerlink" href="#id5" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图7.2：</strong> 对于19个状态的随机行走任务的不同n值，n步TD方法的性能是 <span class="math notranslate nohighlight">\(\alpha\)</span> 的函数（例7.1）。</span><a class="headerlink" href="#id5" title="永久链接至图片"></a></p>
 </div>
 <p><em>练习7.3</em> 为什么你认为在本章的例子中使用了更大的随机游走任务（19个州而不是5个）？
 较小的步行会将优势转移到不同的n值吗？在较大的步行中左侧结果从0变为 <span class="math notranslate nohighlight">\(-1\)</span> 是怎么发生的？
 你认为这对n的最佳价值有任何不同吗？</p>
 </div>
 <div class="section" id="n-sarsa">
-<h2>7.2 <span class="math notranslate nohighlight">\(n\)</span> 步Sarsa<a class="headerlink" href="#n-sarsa" title="永久链接至标题">¶</a></h2>
+<h2>7.2 <span class="math notranslate nohighlight">\(n\)</span> 步Sarsa<a class="headerlink" href="#n-sarsa" title="永久链接至标题"></a></h2>
 <p>如何使用n步方法不仅用于预测，还用于控制？在本节中，我们将展示如何以简单的方式将n步方法与Sarsa结合以产生一种策略上的TD控制方法。
 Sarsa的n步版本我们称之为n步Sarsa，而前一章中提到的原始版本我们称之为 <em>一步Sarsa</em> 或 <em>Sarsa(0)</em>。</p>
 <p>主要思想是简单地切换动作状态（状态-动作对），然后使用 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪策略。
 n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ），是交替状态和动作的字符串，
 除了Sarsa所有都以动作而不是状态开始和结束。我们根据估计的动作值重新定义n步回报（更新目标）：</p>
 <div class="math notranslate nohighlight" id="equation-7-4">
-<span class="eqno">(3)<a class="headerlink" href="#equation-7-4" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t&lt;T-n\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-7-4" title="公式的永久链接"></a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma R_{t+2}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} Q_{t+n-1}\left(S_{t+n}, A_{t+n}\right), \quad n \geq 1,0 \leq t&lt;T-n\]</div>
 <p>如果 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，则 <span class="math notranslate nohighlight">\(G_{t : t+n} \doteq G_{t}\)</span>。那么自然算法就是</p>
 <div class="math notranslate nohighlight" id="equation-7-5">
-<span class="eqno">(4)<a class="headerlink" href="#equation-7-5" title="公式的永久链接">¶</a></span>\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t&lt;T\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-7-5" title="公式的永久链接"></a></span>\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right], \quad 0 \leq t&lt;T\]</div>
 <p>而所有其他状态的值保持不变：<span class="math notranslate nohighlight">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
 对于所有 <span class="math notranslate nohighlight">\(s, a\)</span> 使得 <span class="math notranslate nohighlight">\(s \ne S_t\)</span> 或 <span class="math notranslate nohighlight">\(a \ne A_t\)</span>。
 这是我们称之为 <em>n步Sarsa</em> 的算法。
@@ -348,7 +257,7 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 <p class="caption"><span class="caption-text"><strong>图7.3：</strong> 状态-动作值的n步方法频谱的备份图。
 它们的范围从Sarsa(0)的一步更新到蒙特卡罗方法的直到终止更新。
 在两者之间是n步更新，基于实际奖励的n个步骤和第n个下一个状态-动作对的估计值，都被适当地折扣。
-最右边是n步预期Sarsa的备份图。</span><a class="headerlink" href="#id6" title="永久链接至图片">¶</a></p>
+最右边是n步预期Sarsa的备份图。</span><a class="headerlink" href="#id6" title="永久链接至图片"></a></p>
 </div>
 <div class="important admonition">
 <p class="admonition-title"><span class="math notranslate nohighlight">\(n\)</span> 步Sarsa估计 <span class="math notranslate nohighlight">\(Q \approx q_*\)</span> 或者 <span class="math notranslate nohighlight">\(q_\pi\)</span></p>
@@ -395,25 +304,25 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 在这个例子中，这些值最初都是0，除了 <strong>G</strong> 的正奖励，所有奖励都是零。
 其他两个面板中的箭头显示了通过一步Sarsa方法和n步Sarsa方法通过该路径加强了的动作价值。
 一步Sarsa法只强化导致高回报的动作序列的最后一个动作，而n步法强化序列的最后n个动作，
-因此从一个回合中学习了更多。</span><a class="headerlink" href="#id7" title="永久链接至图片">¶</a></p>
+因此从一个回合中学习了更多。</span><a class="headerlink" href="#id7" title="永久链接至图片"></a></p>
 </div>
 <p><em>练习7.4</em> 证明Sarsa（7.4）的n步回报可以完全按照新的TD误差写成如下：</p>
 <div class="math notranslate nohighlight" id="equation-7-6">
-<span class="eqno">(5)<a class="headerlink" href="#equation-7-6" title="公式的永久链接">¶</a></span>\[G_{t : t+n}=Q_{t-1}\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n, T)-1} \gamma^{k-t}\left[R_{k+1}+\gamma Q_{k}\left(S_{k+1}, A_{k+1}\right)-Q_{k-1}\left(S_{k}, A_{k}\right)\right]\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-7-6" title="公式的永久链接"></a></span>\[G_{t : t+n}=Q_{t-1}\left(S_{t}, A_{t}\right)+\sum_{k=t}^{\min (t+n, T)-1} \gamma^{k-t}\left[R_{k+1}+\gamma Q_{k}\left(S_{k+1}, A_{k+1}\right)-Q_{k-1}\left(S_{k}, A_{k}\right)\right]\]</div>
 <p>那么预期的Sarsa呢？预期Sarsa的n步版本的备份图显示在图7.3的最右侧。
 它由一系列样本动作和状态的线性组成，就像在n步Sarsa中一样，
 除了它的最后一个元素一如既往是在 <span class="math notranslate nohighlight">\(\pi\)</span> 下的概率加权的所有动作可能性的分支。
 该算法可以用与n步Sarsa（上面）相同的等式来描述，除了将n步回报重新定义为</p>
 <div class="math notranslate nohighlight" id="equation-7-7">
-<span class="eqno">(6)<a class="headerlink" href="#equation-7-7" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \overline{V}_{t+n-1}\left(S_{t+n}\right), \quad t+n&lt;T\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-7-7" title="公式的永久链接"></a></span>\[G_{t : t+n} \doteq R_{t+1}+\cdots+\gamma^{n-1} R_{t+n}+\gamma^{n} \overline{V}_{t+n-1}\left(S_{t+n}\right), \quad t+n&lt;T\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t+n \geq T\)</span>，<span class="math notranslate nohighlight">\(G_{t : t+n} \doteq G_{t}\)</span>。
 其中 <span class="math notranslate nohighlight">\(\overline{V}_{t}(s)\)</span> 是状态s的 <em>预期近似值</em>，使用目标策略下时间 <span class="math notranslate nohighlight">\(t\)</span> 的估计行动值：</p>
 <div class="math notranslate nohighlight" id="equation-7-8">
-<span class="eqno">(7)<a class="headerlink" href="#equation-7-8" title="公式的永久链接">¶</a></span>\[\overline{V}_{t}(s) \doteq \sum_{a} \pi(a | s) Q_{t}(s, a), \quad \text { 对所有 } s \in \mathcal{S}\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-7-8" title="公式的永久链接"></a></span>\[\overline{V}_{t}(s) \doteq \sum_{a} \pi(a | s) Q_{t}(s, a), \quad \text { 对所有 } s \in \mathcal{S}\]</div>
 <p>在本书的其余部分中，使用预期近似值来开发许多动作价值方法。如果s是终点，则其预期近似值被定义为0。</p>
 </div>
 <div class="section" id="n">
-<h2>7.3 <span class="math notranslate nohighlight">\(n\)</span> 步离策略学习<a class="headerlink" href="#n" title="永久链接至标题">¶</a></h2>
+<h2>7.3 <span class="math notranslate nohighlight">\(n\)</span> 步离策略学习<a class="headerlink" href="#n" title="永久链接至标题"></a></h2>
 <p>回想一下，离策略学习是学习一项策略的价值函数 <span class="math notranslate nohighlight">\(\pi\)</span>，同时遵循另一项策略 <span class="math notranslate nohighlight">\(b\)</span>。
 通常，<span class="math notranslate nohighlight">\(\pi\)</span> 是当前行动-价值-函数估计的贪婪策略，
 而 <span class="math notranslate nohighlight">\(b\)</span> 是一种更具探索性的策略，也许是 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪。
@@ -422,11 +331,11 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 例如，在构建n步TD的简单离策略版本，时间 <span class="math notranslate nohighlight">\(t\)</span> 的更新（实际上在时间 <span class="math notranslate nohighlight">\(t+n\)</span> 进行）
 可以简单地通过 <span class="math notranslate nohighlight">\(\rho_{t : t}+n-1\)</span> 加权：</p>
 <div class="math notranslate nohighlight" id="equation-7-9">
-<span class="eqno">(8)<a class="headerlink" href="#equation-7-9" title="公式的永久链接">¶</a></span>\[V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t : t+n-1}\left[G_{t : t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t&lt;T\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-7-9" title="公式的永久链接"></a></span>\[V_{t+n}\left(S_{t}\right) \doteq V_{t+n-1}\left(S_{t}\right)+\alpha \rho_{t : t+n-1}\left[G_{t : t+n}-V_{t+n-1}\left(S_{t}\right)\right], \quad 0 \leq t&lt;T\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\rho_{t : t}+n-1\)</span> 称为 <em>重要性采样比率</em>，
 是在两个策略下从 <span class="math notranslate nohighlight">\(A_t\)</span> 到 <span class="math notranslate nohighlight">\(A_{t+n-1}\)</span> 采取 <span class="math notranslate nohighlight">\(n\)</span> 个动作的相对概率（参见方程5.3）：</p>
 <div class="math notranslate nohighlight" id="equation-7-10">
-<span class="eqno">(9)<a class="headerlink" href="#equation-7-10" title="公式的永久链接">¶</a></span>\[\rho_{t : h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}\]</div>
+<span class="eqno">(9)<a class="headerlink" href="#equation-7-10" title="公式的永久链接"></a></span>\[\rho_{t : h} \doteq \prod_{k=t}^{\min (h, T-1)} \frac{\pi\left(A_{k} | S_{k}\right)}{b\left(A_{k} | S_{k}\right)}\]</div>
 <p>例如，如果任何一个动作永远不会被 <span class="math notranslate nohighlight">\(\pi\)</span> 占用（即 <span class="math notranslate nohighlight">\(\pi\left(A_{k} | S_{k}\right)=0\)</span>），
 那么n步回报应该被赋予零权重并被完全忽略。
 另一方面，如果偶然采取行动，<span class="math notranslate nohighlight">\(\pi\)</span> 将采取比 <span class="math notranslate nohighlight">\(\b\)</span> 更大的概率，那么这将增加否则将给予回报的权重。
@@ -436,7 +345,7 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 因此，我们的新更新（7.9）概括并可以完全取代我们之前的n步TD更新。
 同样，我们之前的n步Sarsa更新可以完全被简单的离策略形式所取代：</p>
 <div class="math notranslate nohighlight" id="equation-7-11">
-<span class="eqno">(10)<a class="headerlink" href="#equation-7-11" title="公式的永久链接">¶</a></span>\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1 : t+n}\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-7-11" title="公式的永久链接"></a></span>\[Q_{t+n}\left(S_{t}, A_{t}\right) \doteq Q_{t+n-1}\left(S_{t}, A_{t}\right)+\alpha \rho_{t+1 : t+n}\left[G_{t : t+n}-Q_{t+n-1}\left(S_{t}, A_{t}\right)\right]\]</div>
 <p>对 <span class="math notranslate nohighlight">\(0 \leq t&lt;T\)</span>。注意，这里的重要性采样比率比n步TD（7.9）晚一步开始和结束。
 这是因为我们正在更新状态-动作对。我们不必关心我们选择行动的可能性；
 现在我们选择了它，我们希望从发生的事情中充分学习，只对后续行动进行重要性采样。
@@ -487,13 +396,13 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 实际采取的那个没有效果，也没有必要纠正。</p>
 </div>
 <div class="section" id="per-decision">
-<h2>7.4 *具有控制变量的每个决策（per-decision）方法<a class="headerlink" href="#per-decision" title="永久链接至标题">¶</a></h2>
+<h2>7.4 *具有控制变量的每个决策（per-decision）方法<a class="headerlink" href="#per-decision" title="永久链接至标题"></a></h2>
 <p>上一节中介绍的多步离策略方法简单且概念清晰，但可能不是最有效的方法。
 更复杂的方法将使用每个决策重要性采样的想法，如第5.9节中介绍的那样。
 要理解这种方法，首先要注意普通的n步回报（7.1），就像所有回报一样，可以递归写入。
 对于以水平线 <span class="math notranslate nohighlight">\(h\)</span> 结束的n个步骤，n步回报可以写成</p>
 <div class="math notranslate nohighlight" id="equation-7-12">
-<span class="eqno">(11)<a class="headerlink" href="#equation-7-12" title="公式的永久链接">¶</a></span>\[G_{t : h}=R_{t+1}+\gamma G_{t+1 : h}, \quad t&lt;h&lt;T\]</div>
+<span class="eqno">(11)<a class="headerlink" href="#equation-7-12" title="公式的永久链接"></a></span>\[G_{t : h}=R_{t+1}+\gamma G_{t+1 : h}, \quad t&lt;h&lt;T\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
 （回想一下，此回报在时间 <span class="math notranslate nohighlight">\(h\)</span> 使用，先前表示为 <span class="math notranslate nohighlight">\(t+n\)</span>。）
 现在考虑遵循与目标策略不同的行为策略 <span class="math notranslate nohighlight">\(b\)</span> 的效果。
@@ -505,7 +414,7 @@ n步Sarsa的备份图（如图7.3所示），就像n步TD一样（图7.1） ）�
 然后，简单的加权将导致n步回报为零，这可能导致当它用作目标时的高方差。
 相反，在这种更复杂的方法中，人们使用在水平线 <span class="math notranslate nohighlight">\(h\)</span> 结束的n步回报的替代的离策略定义，即</p>
 <div class="math notranslate nohighlight" id="equation-7-13">
-<span class="eqno">(12)<a class="headerlink" href="#equation-7-13" title="公式的永久链接">¶</a></span>\[G_{t : h} \doteq \rho_{t}\left(R_{t+1}+\gamma G_{t+1 : h}\right)+\left(1-\rho_{t}\right) V_{h-1}\left(S_{t}\right), \quad t&lt;h&lt;T\]</div>
+<span class="eqno">(12)<a class="headerlink" href="#equation-7-13" title="公式的永久链接"></a></span>\[G_{t : h} \doteq \rho_{t}\left(R_{t+1}+\gamma G_{t+1 : h}\right)+\left(1-\rho_{t}\right) V_{h-1}\left(S_{t}\right), \quad t&lt;h&lt;T\]</div>
 <p>再次 <span class="math notranslate nohighlight">\(G_{h : h} \doteq V_{h-1}\left(S_{h}\right)\)</span>。
 在这种方法中，如果 <span class="math notranslate nohighlight">\(\rho_{t}\)</span> 为零，则目标与估计相同并且不会导致变化，而不是目标为零并导致估计收缩。
 重要性采样比率为零意味着我们应该忽略样本，因此保持估计不变似乎是合适的。
@@ -545,7 +454,7 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 在下一节中，我们将考虑一种不使用重要性采样的离策略学习方法。</p>
 </div>
 <div class="section" id="id1">
-<h2>7.5 无重要性采样的离策略学习：n步树备份算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2>7.5 无重要性采样的离策略学习：n步树备份算法<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
 <p>没有重要性采样，是否可以进行离策略学习？
 第6章中的Q-learning和预期的Sarsa针对一步式案例进行了此操作，但是是否有相应的多步算法？
 在本节中，我们将介绍一种称为 <em>树备份算法</em> 的n步方法。</p>
@@ -574,7 +483,7 @@ Mahmood（2017；Mahmood和Sutton，2015）的使用技巧也可能是解决方�
 以及根据策略从该状态考虑所有可能的动作及其概率的预期半步骤。</p>
 <p>现在让我们开发n步树备份算法的详细方程。一步回报（目标）与预期的Sarsa相同，</p>
 <div class="math notranslate nohighlight" id="equation-7-15">
-<span class="eqno">(13)<a class="headerlink" href="#equation-7-15" title="公式的永久链接">¶</a></span>\[G_{t : t+1} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q_{t}\left(S_{t+1}, a\right)\]</div>
+<span class="eqno">(13)<a class="headerlink" href="#equation-7-15" title="公式的永久链接"></a></span>\[G_{t : t+1} \doteq R_{t+1}+\gamma \sum_{a} \pi\left(a | S_{t+1}\right) Q_{t}\left(S_{t+1}, a\right)\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t&lt;T-1\)</span>。两步树备份回报为</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -584,7 +493,7 @@ G_{t : t+2} &amp;\doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1
 \end{aligned}\end{split}\]</div>
 <p>对 <span class="math notranslate nohighlight">\(t&lt;T-2\)</span>。后一种形式表明了树备份n步回报的一般递归定义：</p>
 <div class="math notranslate nohighlight" id="equation-7-16">
-<span class="eqno">(14)<a class="headerlink" href="#equation-7-16" title="公式的永久链接">¶</a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}\]</div>
+<span class="eqno">(14)<a class="headerlink" href="#equation-7-16" title="公式的永久链接"></a></span>\[G_{t : t+n} \doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1}\right) Q_{t+n-1}\left(S_{t+1}, a\right)+\gamma \pi\left(A_{t+1} | S_{t+1}\right) G_{t+1 : t+n}\]</div>
 <p>对 <span class="math notranslate nohighlight">\(0 \leq t&lt;T\)</span>，而所有其他状态-动作对的值保持不变：
 <span class="math notranslate nohighlight">\(Q_{t+n}(s, a)=Q_{t+n-1}(s, a)\)</span>，
 对于所有 <span class="math notranslate nohighlight">\(s,a\)</span> 使得 <span class="math notranslate nohighlight">\(s\ne S_t\)</span> 或 <span class="math notranslate nohighlight">\(a\ne A_t\)</span>。
@@ -643,7 +552,7 @@ G_{t : t+2} &amp;\doteq R_{t+1}+\gamma \sum_{a \neq A_{t+1}} \pi\left(a | S_{t+1
 并且 <span class="math notranslate nohighlight">\(\overline{V}_{t}\)</span> 由（7.8）给出。</p>
 </div>
 <div class="section" id="n-q-sigma">
-<h2>7.6 *统一算法：n步 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span><a class="headerlink" href="#n-q-sigma" title="永久链接至标题">¶</a></h2>
+<h2>7.6 *统一算法：n步 <span class="math notranslate nohighlight">\(Q(\sigma)\)</span><a class="headerlink" href="#n-q-sigma" title="永久链接至标题"></a></h2>
 <p>到目前为止，在本章中我们已经考虑了三种不同类型的动作价值算法，对应于图7.5中所示的前三个备份图。
 n步Sarsa具有所有样本转换，树备份算法将所有状态-动作转换完全分支而不进行采样，
 n步预期Sarsa具有除最后一个状态到动作之外的所有样本转换，这是完全分支，具有预期值。
@@ -656,7 +565,7 @@ n步预期Sarsa具有除最后一个状态到动作之外的所有样本转换�
 <img alt="../../_images/figure-7.5.png" src="../../_images/figure-7.5.png" />
 <p class="caption"><span class="caption-text"><strong>图7.5：</strong> 本章到目前为止考虑的三种n步动作值更新的备份图（4步案例）以及将它们统一起来的第四种更新的备份图。
 <span class="math notranslate nohighlight">\(\rho\)</span> 表示在离策略情况下需要重要采样的一半过渡。
-第四种更新通过逐个状态地选择是否采样（<span class="math notranslate nohighlight">\(\sigma_{t}=1\)</span>）或不采样（<span class="math notranslate nohighlight">\(\sigma_{t}=0\)</span>）来统一所有其他更新。</span><a class="headerlink" href="#id8" title="永久链接至图片">¶</a></p>
+第四种更新通过逐个状态地选择是否采样（<span class="math notranslate nohighlight">\(\sigma_{t}=1\)</span>）或不采样（<span class="math notranslate nohighlight">\(\sigma_{t}=0\)</span>）来统一所有其他更新。</span><a class="headerlink" href="#id8" title="永久链接至图片"></a></p>
 </div>
 <p>当然，如图中的最后一个图所示，还有许多其他可能性。为了进一步提高可能性，我们可以考虑采样和期望之间的连续变化。
 令 <span class="math notranslate nohighlight">\(\sigma_{t} \in[0,1]\)</span> 表示步骤 <span class="math notranslate nohighlight">\(t\)</span> 的采样程度，
@@ -736,7 +645,7 @@ G_{t : h} \doteq R_{t+1} &amp;+\gamma\left(\sigma_{t+1} \rho_{t+1}+\left(1-\sigm
 </div>
 </div>
 <div class="section" id="id2">
-<h2>7.7 总结<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>7.7 总结<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>在本章中，我们开发了一系列时序差分学习方法，介于前一章的一步法TD方法和之前章的蒙特卡罗方法之间。
 涉及中间量引导的方法很重要，因为它们通常比任何一个极端都要好。</p>
 <div class="figure align-right">
@@ -756,7 +665,7 @@ G_{t : h} \doteq R_{t+1} &amp;+\gamma\left(\sigma_{t+1} \rho_{t+1}+\left(1-\sigm
 它不涉及重要性采样，但是，如果目标和行为策略实质上不同，则即使n很大，引导也可能仅跨越几个步骤。</p>
 </div>
 <div class="section" id="id3">
-<h2>书目和历史评论<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>n步回报的概念归功于Watkins（1989），他也首先讨论了它们的误差减少性质。
 在本书的第一版中探讨了n步算法，其中它们被视为概念上的兴趣，但在实践中是不可行的。
 Cichosz（1995）和特别是van Seijen（2016）的工作表明它们实际上是完全实用的算法。
@@ -774,50 +683,33 @@ Cichosz（1995）和特别是van Seijen（2016）的工作表明它们实际上�
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter8/planning_and_learning_with_tabular_methods.html" class="btn btn-neutral float-right" title="第8章 表格方法规划和学习" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter6/temporal_difference_learning.html" class="btn btn-neutral float-left" title="第6章 时序差分学习" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter6/temporal_difference_learning.html" class="btn btn-neutral float-left" title="第6章 时序差分学习" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter8/planning_and_learning_with_tabular_methods.html" class="btn btn-neutral float-right" title="第8章 表格方法规划和学习" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

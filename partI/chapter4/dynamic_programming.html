@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第4章 动态规划 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第5章 蒙特卡洛方法" href="../chapter5/monte_carlo_methods.html" />
     <link rel="prev" title="第3章 有限马尔可夫决策过程" href="../chapter3/finite_markov_decision_process.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -123,8 +74,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -144,72 +93,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
-        
       <li>第4章 动态规划</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partI/chapter4/dynamic_programming.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partI/chapter4/dynamic_programming.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第4章 动态规划<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第4章 动态规划<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>动态规划（DP）这个术语是指可以用于在给定完整的环境模型是马尔可夫决策过程（MDP）的情况下计算最优策略的算法集合。
 传统的DP算法在增强学习领域应用十分有限，因为它们不仅要求理想的模型，同时计算量也非常大，但是在理论方面依然非常重要。
 DP算法为本书后面章节的理解提供了必要的基础。事实上，那些方法都可以被看作是取得与DP算法相同的效果的尝试，
@@ -226,13 +135,13 @@ DP算法为本书后面章节的理解提供了必要的基础。事实上，那
 本章我们向读者展示DP怎么被用来计算第3章中定义的价值函数。
 在第3章中讨论过的，一旦我们找到最优价值函数 <span class="math notranslate nohighlight">\(v_*\)</span> 或者 <span class="math notranslate nohighlight">\(q_*\)</span>，我们就可以很容易的获得最优策略，这符合贝尔曼最优方程：</p>
 <div class="math notranslate nohighlight" id="equation-4-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-4-1" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(1)<a class="headerlink" href="#equation-4-1" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 v_*(s) &amp;= \max_a\mathbb{E}[R_{t+1}+\gamma v_*(S_{t+1}) | S_t=s,A_t=a] \\
 &amp;= \max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_*(s')]
 \end{aligned}\end{split}\]</div>
 <p>或者</p>
 <div class="math notranslate nohighlight" id="equation-4-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-4-2" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(2)<a class="headerlink" href="#equation-4-2" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 q_*(s,a)&amp; = \mathbb{E}[R_{t+1}+\gamma \max_{a'} q_*(S_{t+1},a') | S_t=s,A_t=a]\\
 &amp;=\sum_{s',r}p(s',r|s,a)[r+\gamma\max_{a'} q_*(s',a')],
 \end{aligned}\end{split}\]</div>
@@ -240,7 +149,7 @@ q_*(s,a)&amp; = \mathbb{E}[R_{t+1}+\gamma \max_{a'} q_*(S_{t+1},a') | S_t=s,A_t=
 以及 <span class="math notranslate nohighlight">\(s^\prime\in\mathcal{S^+}\)</span> 。
 我们可以看到，DP算法其实是将贝尔曼方程转换为更新规则以此来提升价值函数的近似效果。</p>
 <div class="section" id="id2">
-<h2>4.1 策略评估（预测）<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>4.1 策略评估（预测）<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>首先我们考虑给定任意策略 <span class="math notranslate nohighlight">\(\pi\)</span> 怎样计算状态值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
 这在DP文献中被称作 <em>策略评估</em>。我们把它当作 <em>预测问题</em>。回想第三章，对于所有的 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>，</p>
 <div class="math notranslate nohighlight">
@@ -262,7 +171,7 @@ v_\pi(s) &amp; \doteq \mathbb{E_\pi}[G_t | S_t=s] \\
 初始的近似值 <span class="math notranslate nohighlight">\(v_0\)</span> 是任意选取的（除了终止状态，如果有的话，需要被赋值为0），
 并通过使用 <span class="math notranslate nohighlight">\(v_\pi (3.12)\)</span> 的贝尔曼方程作为更新规则来获得每个逐次逼近：</p>
 <div class="math notranslate nohighlight" id="equation-4-5">
-<span class="eqno">(3)<a class="headerlink" href="#equation-4-5" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(3)<a class="headerlink" href="#equation-4-5" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 v_{k+1}(s)&amp; \overset{\cdot}{=}\mathbb{E}[R_{t+1}+\gamma v_k(S_{t+1}) | S_t=s] \\
 &amp;= \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)[r+\gamma{v_k(s')}],
 \end{aligned}\end{split}\]</div>
@@ -330,7 +239,7 @@ v_{k+1}(s)&amp; \overset{\cdot}{=}\mathbb{E}[R_{t+1}+\gamma v_k(S_{t+1}) | S_t=s
 近似得到的 <span class="math notranslate nohighlight">\(q_\pi\)</span>，求类似于 <span class="math notranslate nohighlight">\((4.3)，(4.4)和(4.5)\)</span> 的方程？</p>
 </div>
 <div class="section" id="id3">
-<h2>4.2 策略提升<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>4.2 策略提升<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>我们计算某个策略价值函数的目的是找到一个更好的策略。假设我们已经确定了一个任意确定性的策略 <span class="math notranslate nohighlight">\(\pi\)</span> 价值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
 对于某些状态 <span class="math notranslate nohighlight">\(s\)</span> 我们想知道是否应该改变策略来明确的选择一个动作 <span class="math notranslate nohighlight">\(a\not=\pi(s)\)</span>。
 我们知道在当前状态 <span class="math notranslate nohighlight">\(s\)</span> 遵从当前的策略有多好——也就是 <span class="math notranslate nohighlight">\(v_\pi(s)\)</span>——但是改变为一个新的状态会更好还是坏呢？
@@ -339,11 +248,11 @@ v_{k+1}(s)&amp; \overset{\cdot}{=}\mathbb{E}[R_{t+1}+\gamma v_k(S_{t+1}) | S_t=s
 <img alt="figure-4.1" src="../../_images/figure-4.1.png" />
 <p class="caption"><span class="caption-text"><strong>图4.1：</strong> 迭代策略评估在一个小的棋盘格游戏上收敛。左边一列是对于随机策略（所有的动作执行概率相等）下的状态值函数的一系列近似。
 右边一列是一系列相对于估计的价值函数（箭头代表所有能够取得最大值的动作）的贪婪策略。
-上一个策略仅仅保证了是对随机策略的提升，但是在这种情况下，所有的策略在经过第三次迭代后都是最优的。</span><a class="headerlink" href="#id11" title="永久链接至图片">¶</a></p>
+上一个策略仅仅保证了是对随机策略的提升，但是在这种情况下，所有的策略在经过第三次迭代后都是最优的。</span><a class="headerlink" href="#id11" title="永久链接至图片"></a></p>
 </div>
 <p>这种的方式的值是：</p>
 <div class="math notranslate nohighlight" id="equation-4-6">
-<span class="eqno">(4)<a class="headerlink" href="#equation-4-6" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(4)<a class="headerlink" href="#equation-4-6" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 q_\pi(s,a)&amp; \doteq \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a] \\
 &amp;= \sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')]
 \end{aligned}\end{split}\]</div>
@@ -354,11 +263,11 @@ q_\pi(s,a)&amp; \doteq \mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a] \
 <p>这种方法是正确的，只是 <em>策略提升理论</em> 的一种特殊情况。<span class="math notranslate nohighlight">\(\pi\)</span> 和 <span class="math notranslate nohighlight">\(\pi'\)</span> 是任意一对确定性的策略，
 这样一来，对于所有的 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-4-7">
-<span class="eqno">(5)<a class="headerlink" href="#equation-4-7" title="公式的永久链接">¶</a></span>\[q_\pi(s,\pi'(s)) \geq v_\pi(s)\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-4-7" title="公式的永久链接"></a></span>\[q_\pi(s,\pi'(s)) \geq v_\pi(s)\]</div>
 <p>那么策略 <span class="math notranslate nohighlight">\(\pi'\)</span> 必须与策略 <span class="math notranslate nohighlight">\(\pi\)</span> 同样好或者比策略 <span class="math notranslate nohighlight">\(\pi\)</span> 更好。
 也就是说，必须从所有的状态 <span class="math notranslate nohighlight">\(s\in\mathcal{S}\)</span> 取得更好或者相等的期望回报:</p>
 <div class="math notranslate nohighlight" id="equation-4-8">
-<span class="eqno">(6)<a class="headerlink" href="#equation-4-8" title="公式的永久链接">¶</a></span>\[v_\pi'(s) \geq v_\pi(s)\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-4-8" title="公式的永久链接"></a></span>\[v_\pi'(s) \geq v_\pi(s)\]</div>
 <p>另外，如果 <span class="math notranslate nohighlight">\((4.7)\)</span> 在任意状态严格不等，那么 <span class="math notranslate nohighlight">\((4.8)\)</span> 也应该至少在一个状态严格等。
 这个结果尤其适用于我们在之前考虑的两种策略，一个最初的确定的策略 <span class="math notranslate nohighlight">\(\pi\)</span> 和一个改变的策略 <span class="math notranslate nohighlight">\(\pi'\)</span>，
 除了 <span class="math notranslate nohighlight">\(\pi'(s)=a\not=\pi(s)\)</span>，都与 <span class="math notranslate nohighlight">\(\pi\)</span> 相同。
@@ -383,7 +292,7 @@ v_\pi(s)&amp; \leq q_\pi(s,\pi'(s))\\
 很自然就会扩展到考虑所有状态和所有可能的动作，根据 <span class="math notranslate nohighlight">\(q_\pi(s,a)\)</span> 选择在每个状态最好的动作。
 换句话说，考虑新的 <em>贪婪</em> 策略 <span class="math notranslate nohighlight">\(\pi'\)</span>，如下</p>
 <div class="math notranslate nohighlight" id="equation-4-9">
-<span class="eqno">(7)<a class="headerlink" href="#equation-4-9" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(7)<a class="headerlink" href="#equation-4-9" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 \pi'(s)&amp; \doteq \arg\max_a q_\pi(s,a) \\
 &amp; =\arg \max_a\mathbb{E}[R_{t+1}+\gamma v_\pi(S_{t+1}) | S_t=s,A_t=a]\\
 &amp;=\arg\max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_\pi(s')],
@@ -417,7 +326,7 @@ v_{\pi'}(s)&amp; =\max_a\mathbb{E}[R_{t+1}+\gamma v_{\pi'}(S_{t+1}) | S_t=s,A_t=
 虽然在这种情况下新的策略 <span class="math notranslate nohighlight">\(\pi'\)</span> 偶然成为最优策略，在更广泛的意义下，这只能保证策略的提升。</p>
 </div>
 <div class="section" id="id4">
-<h2>4.3 策略迭代<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>4.3 策略迭代<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>一旦策略 <span class="math notranslate nohighlight">\(\pi\)</span>，已经用 <span class="math notranslate nohighlight">\(v_\pi\)</span> 提升为更好的策略  <span class="math notranslate nohighlight">\(\pi'\)</span>，
 我们可以计算 <span class="math notranslate nohighlight">\(v_{\pi'}\)</span> 再次提升策略得到更好的策略 <span class="math notranslate nohighlight">\(\pi''\)</span>。
 我们可以得到一系列单调提升的策略和价值函数：</p>
@@ -484,7 +393,7 @@ v_{\pi'}(s)&amp; =\max_a\mathbb{E}[R_{t+1}+\gamma v_{\pi'}(S_{t+1}) | S_t=s,A_t=
 <p class="caption"><span class="caption-text">图4.2: 通过策略迭代找到的一系列关于杰克租车问题的策略，和最终的状态价值函数。
 前五个图表明，每天结束时在每个地点的车数量以及需要从第一个位置转移到第二个位置的车子的数量
 （负数意味着从第二个位置转移到第一个位置）。每一个成功的策略都是在之前策略基础上严格的提升，
-并且最终的策略是最优的。</span><a class="headerlink" href="#id12" title="永久链接至图片">¶</a></p>
+并且最终的策略是最优的。</span><a class="headerlink" href="#id12" title="永久链接至图片"></a></p>
 </div>
 <p>策略迭代经常在非常少的几次迭代中收敛，图4.1中的例子阐明了这一点。
 图4.1中，左下角的图展示了等概率随机策略的价值函数，右下角的图展示了一个对应于这个价值函数的贪婪策略。
@@ -506,7 +415,7 @@ v_{\pi'}(s)&amp; =\max_a\mathbb{E}[R_{t+1}+\gamma v_{\pi'}(S_{t+1}) | S_t=s,A_t=
 定性地描述计算 <span class="math notranslate nohighlight">\(v_*\)</span> 的策略迭代算法中按照3，2，1的顺序的每一步所需要的改变。</p>
 </div>
 <div class="section" id="id5">
-<h2>4.4 价值迭代<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>4.4 价值迭代<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>策略迭代的一个缺点是每一次迭代过程都包含策略评估，策略评估本身就可能是需要多次对整个状态集迭代计算的过程。
 如果策略评估需要迭代计算，那么只能在极限处准确收敛到 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
 我们一定要等到准确的收敛吗？是否可以中途停止？图4.1中的例子显然表明截断策略评估是可行的。
@@ -515,7 +424,7 @@ v_{\pi'}(s)&amp; =\max_a\mathbb{E}[R_{t+1}+\gamma v_{\pi'}(S_{t+1}) | S_t=s,A_t=
 一个重要的特例就是策略评估在一次迭代之后就停止（每个状态只有一个回溯）。这个算法就叫做 <em>价值迭代</em> 。
 可以被写成一个特殊的结合策略提升和截断之后的策略评估步骤的简单回溯操作：</p>
 <div class="math notranslate nohighlight" id="equation-4-10">
-<span class="eqno">(8)<a class="headerlink" href="#equation-4-10" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(8)<a class="headerlink" href="#equation-4-10" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 v_{k+1}(s)&amp;\doteq \max_a\mathbb{E}[R_{t+1}+\gamma v_{k}(S_{t+1}) | S_t=s,A_t=a] \\
 &amp;= \max_a\sum_{s',r}p(s',r|s,a)[r+\gamma v_{k}(s')],
 \end{aligned}\end{split}\]</div>
@@ -561,7 +470,7 @@ v_{k+1}(s)&amp;\doteq \max_a\mathbb{E}[R_{t+1}+\gamma v_{k}(S_{t+1}) | S_t=s,A_t
 <div class="figure align-default" id="id13">
 <img alt="../../_images/figure-4.3.png" src="../../_images/figure-4.3.png" />
 <p class="caption"><span class="caption-text"><strong>图4.3：</strong> <span class="math notranslate nohighlight">\(p_h=0.4\)</span> 情况下赌徒问题的解。上面的图是经过价值迭代成功地更新找到的价值函数。
-下面是最终的策略。</span><a class="headerlink" href="#id13" title="永久链接至图片">¶</a></p>
+下面是最终的策略。</span><a class="headerlink" href="#id13" title="永久链接至图片"></a></p>
 </div>
 <p><strong>练习4.8</strong> 为什么赌徒问题的最优策略有这样奇怪的形式？
 尤其是，在资本剩余50美元的时候需要押注所有在一次投掷上，但是对于资本剩余51美元的时候却没有这样做。
@@ -572,7 +481,7 @@ v_{k+1}(s)&amp;\doteq \max_a\mathbb{E}[R_{t+1}+\gamma v_{k}(S_{t+1}) | S_t=s,A_t
 <p><strong>练习4.10</strong> 类似于（4.10）的值迭代的回溯图，写出动作价值 <span class="math notranslate nohighlight">\(q_{k+1}(s,a)\)</span>。</p>
 </div>
 <div class="section" id="id6">
-<h2>4.5 异步动态规划<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>4.5 异步动态规划<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p>到目前为止我们所讨论的DP方法一个主要的缺点是他们涉及整个MDP状态集合，也就是说，需要对整个状态集合进行更新。
 如果状态集非常大，即使一次更新也会代价很大。例如，五子棋有多于 <span class="math notranslate nohighlight">\(10^{20}\)</span> 个状态。
 即使我们能够一秒钟执行一百万个状态的价值迭代更新，也会花费一千年才能完成一次更新。</p>
@@ -597,7 +506,7 @@ v_{k+1}(s)&amp;\doteq \max_a\mathbb{E}[R_{t+1}+\gamma v_{k}(S_{t+1}) | S_t=s,A_t
 这种集中方法在强化学习中经常用到。</p>
 </div>
 <div class="section" id="id7">
-<h2>4.6 广义策略迭代<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>4.6 广义策略迭代<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>策略迭代包含两个同时进行的交互过程，一个使得价值函数与当前策略一致（策略评估），另一个使得策略在当前价值函数下变得贪婪（策略提升）。
 在策略迭代过程中，这两个过程相互交替，一个完成了另一个才开始，但是这并不是必须的。
 在价值迭代过程中，例如，在每两次策略提升的过程中只进行一次策略评估的迭代。
@@ -629,7 +538,7 @@ v_{k+1}(s)&amp;\doteq \max_a\mathbb{E}[R_{t+1}+\gamma v_{k}(S_{t+1}) | S_t=s,A_t
 任一种情况，这两个过程一起会达到整体的最优目标，即使每一个单独都不能达到最优。</p>
 </div>
 <div class="section" id="id8">
-<h2>4.7 动态规划的效率<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<h2>4.7 动态规划的效率<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 <p>对于非常大的问题，DP可能不实用，但与其他解决MDP的方法相比，DP方法实际上非常有效。
 如果我们忽略一些技术细节，那么（最坏的情况）DP方法找到最优解的时间是状态和动作数量的多项式。
 如果 <span class="math notranslate nohighlight">\(n\)</span> 和 <span class="math notranslate nohighlight">\(k\)</span> 指代状态和动作的数量，这意味着DP方法需要大量的计算操作，
@@ -649,7 +558,7 @@ v_{k+1}(s)&amp;\doteq \max_a\mathbb{E}[R_{t+1}+\gamma v_{k}(S_{t+1}) | S_t=s,A_t
 异步方法和其他GPI的一些变种可以被应用在这些例子中，并且可能比同步方法更快地找到好的或者最优的策略。</p>
 </div>
 <div class="section" id="id9">
-<h2>4.8 总结<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<h2>4.8 总结<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>在这一章节中我们熟悉了动态规划的基本思想和算法，它可以用来解决有限MDP。
 <em>策略评估</em> 指的是（通常）迭代计算一个给定策略的价值函数。<em>策略提升</em> 指的是给定一个策略的价值函数计算一个提升的策略。
 将这两种计算放在一起，就会得到策略迭代和价值迭代这两个最流行的DP方法。
@@ -678,7 +587,7 @@ GPI是一个关于两个交互过程围绕一个近似策略和一个近似价�
 下一章我们探索不需要模型但是进行自助的方法。这些关键特征和特性是分离的，当然可以以一种有趣的方式来混合。</p>
 </div>
 <div class="section" id="id10">
-<h2>书目和历史评论<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>“动态规划”这个词可以追溯到贝尔曼（1957a），他展示了这个方法可以被用到很多问题中。
 在很多教材中都有对于DP的扩充，包括Bertsekas(2005,2012)，Bertsekas和Tsitsiklis(1996)，
 Dreyfus和Law(1977)，Ross(1983)，White(1969)，还有Whittle(1982,1983)。
@@ -710,50 +619,33 @@ Williams和Baird(1990)提出了一种更加细化的异步DP算法，我们之�
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter5/monte_carlo_methods.html" class="btn btn-neutral float-right" title="第5章 蒙特卡洛方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter3/finite_markov_decision_process.html" class="btn btn-neutral float-left" title="第3章 有限马尔可夫决策过程" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter3/finite_markov_decision_process.html" class="btn btn-neutral float-left" title="第3章 有限马尔可夫决策过程" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter5/monte_carlo_methods.html" class="btn btn-neutral float-right" title="第5章 蒙特卡洛方法" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第3章 有限马尔可夫决策过程 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第4章 动态规划" href="../chapter4/dynamic_programming.html" />
     <link rel="prev" title="第2章 多臂赌博机问题" href="../chapter2/multi_armed_bandits.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -123,8 +74,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -144,72 +93,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
-        
       <li>第3章 有限马尔可夫决策过程</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partI/chapter3/finite_markov_decision_process.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partI/chapter3/finite_markov_decision_process.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第3章 有限马尔可夫决策过程<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第3章 有限马尔可夫决策过程<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>在本章中，我们将介绍有限马尔可夫决策过程或有限MDP的形式问题，我们将在本书的其余部分尝试解决这些问题。
 这个问题涉及评价反馈，如在赌博机问题中，但也涉及一个关联方面，即在不同情况下选择不同的行动。
 MDP是顺序决策的经典形式化，其中行动不仅影响直接奖励，还影响后续情况或状态，以及贯穿未来的奖励。
@@ -225,14 +134,14 @@ MDP是顺序决策的经典形式化，其中行动不仅影响直接奖励，�
 在本章中，我们将介绍这种矛盾关系，并讨论它所暗示的一些权衡和挑战。
 第17章介绍了在MDP之外进行强化学习的一些方法。</p>
 <div class="section" id="id2">
-<h2>3.1 个体环境接口<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>3.1 个体环境接口<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>MDP旨在直接构建从交互中学习以实现目标的问题。
 学习者和决策者被称为 <em>个体（agent）</em>。它与之交互的东西，包括个体之外的所有东西，被称为 <em>环境</em>。
 这些交互持续不断，个体选择动作同时环境响应那些动作并向个体呈现新情况 <a class="footnote-reference brackets" href="#id18" id="id3">1</a>。
 环境还产生奖励，这是个体通过其行动选择寻求最大化的特殊数值。</p>
 <div class="figure align-default" id="id25">
 <img alt="../../_images/figure-3.1.png" src="../../_images/figure-3.1.png" />
-<p class="caption"><span class="caption-text">图3.1：马尔可夫决策过程中的个体 - 环境交互。</span><a class="headerlink" href="#id25" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">图3.1：马尔可夫决策过程中的个体 - 环境交互。</span><a class="headerlink" href="#id25" title="永久链接至图片"></a></p>
 </div>
 <p>更具体地，个体和环境在离散时间序列每一步相互作用，<span class="math notranslate nohighlight">\(t = 0,1,2,3,\dots\)</span> <a class="footnote-reference brackets" href="#id19" id="id4">2</a>。
 在每个时间步t，个体接收环境 <em>状态</em> <span class="math notranslate nohighlight">\(S_{t} \in \mathcal{S}\)</span> ，
@@ -242,14 +151,14 @@ MDP是顺序决策的经典形式化，其中行动不仅影响直接奖励，�
 并且自身处于一个新状态，<span class="math notranslate nohighlight">\(S_{t+1}\)</span> <a class="footnote-reference brackets" href="#id21" id="id6">4</a> ，
 MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 <div class="math notranslate nohighlight" id="equation-3-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-3-1" title="公式的永久链接">¶</a></span>\[S_0,A_0,R_1,S_1,A_1,R_2,S_2,A_2,R_3,\dots\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-3-1" title="公式的永久链接"></a></span>\[S_0,A_0,R_1,S_1,A_1,R_2,S_2,A_2,R_3,\dots\]</div>
 <p>在 <em>有限</em> MDP中，状态，动作和奖励
 （<span class="math notranslate nohighlight">\(\mathcal{S}\)</span>，<span class="math notranslate nohighlight">\(\mathcal{A}\)</span> 和 <span class="math notranslate nohighlight">\(\mathcal{R}\)</span>）的集合都具有有限数量的元素。
 在这种情况下，随机变量 <span class="math notranslate nohighlight">\(R_t\)</span> 和 <span class="math notranslate nohighlight">\(S_t\)</span> 具有明确定义的离散概率分布，仅取决于先前的状态和动作。
 也就是说，对于这些随机变量的特定值，<span class="math notranslate nohighlight">\(s^\prime \in \mathcal{S}\)</span> 和 <span class="math notranslate nohighlight">\(r \in \mathcal{R}\)</span>，
 在给定前一状态和动作的特定值的情况下，存在这些值在时间t发生的概率：</p>
 <div class="math notranslate nohighlight" id="equation-3-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-3-2" title="公式的永久链接">¶</a></span>\[p(s^\prime,r|s,a) \doteq Pr\{S_t=s^\prime,R_t=r|S_{t-1}=s,A_{t-1}=a\}\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-3-2" title="公式的永久链接"></a></span>\[p(s^\prime,r|s,a) \doteq Pr\{S_t=s^\prime,R_t=r|S_{t-1}=s,A_{t-1}=a\}\]</div>
 <p>对所有 <span class="math notranslate nohighlight">\(s^\prime, s \in \mathcal{S}\)</span>，<span class="math notranslate nohighlight">\(\mathcal{r} \in \mathcal{R}\)</span>
 和 <span class="math notranslate nohighlight">\(a \in \mathcal{A}(s)\)</span>。函数 <span class="math notranslate nohighlight">\(p\)</span> 定义了MDP的 <em>动态</em>。
 方程中等号上的点提醒我们它是一个定义（在这个例子中是函数 <span class="math notranslate nohighlight">\(p\)</span>），而不是从先前定义得出的事实。
@@ -257,7 +166,7 @@ MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 是四个参数的普通确定性函数。 中间的“|”来自条件概率的符号，
 但这里只是提醒我们 <span class="math notranslate nohighlight">\(p\)</span> 指定 <span class="math notranslate nohighlight">\(s\)</span> 和 <span class="math notranslate nohighlight">\(a\)</span> 的每个选择的概率分布，即</p>
 <div class="math notranslate nohighlight" id="equation-3-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-3-3" title="公式的永久链接">¶</a></span>\[\sum_{s^\prime \in \mathcal{S}}\sum_{r \in \mathcal{R}}p(s^\prime,r|s,a)=1，对所有 s \in \mathcal{S}，a \in \mathcal{A}(s)\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-3-3" title="公式的永久链接"></a></span>\[\sum_{s^\prime \in \mathcal{S}}\sum_{r \in \mathcal{R}}p(s^\prime,r|s,a)=1，对所有 s \in \mathcal{S}，a \in \mathcal{A}(s)\]</div>
 <p>在 <em>马尔可夫</em> 决策过程中，<span class="math notranslate nohighlight">\(p\)</span> 给出的概率完全表征了环境的动态。
 也就是说，<span class="math notranslate nohighlight">\(S_t\)</span> 和 <span class="math notranslate nohighlight">\(R_t\)</span> 的每个可能值的概率
 仅取决于前一个状态和动作 <span class="math notranslate nohighlight">\(S_{t-1}\)</span> 和 <span class="math notranslate nohighlight">\(A_{t-1}\)</span>，
@@ -269,14 +178,14 @@ MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 <p>从四参数动力学函数p中，可以计算出人们可能想知道的关于环境的任何其他信息，例如状态转移概率（我们将其略微滥用符号表示为三参数函数
 <span class="math notranslate nohighlight">\(p : \mathcal{S} \times \mathcal{S} \times \mathcal{A} \to [0, 1]\)</span>），</p>
 <div class="math notranslate nohighlight" id="equation-3-4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-3-4" title="公式的永久链接">¶</a></span>\[p(s^\prime|s,a) \doteq Pr\{S_t=s^\prime|S_{t-1}=s,A_{t-1}=a\}=\sum_{r\in\mathcal{R}}p(s^\prime,r|s,a)\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-3-4" title="公式的永久链接"></a></span>\[p(s^\prime|s,a) \doteq Pr\{S_t=s^\prime|S_{t-1}=s,A_{t-1}=a\}=\sum_{r\in\mathcal{R}}p(s^\prime,r|s,a)\]</div>
 <p>我们还可以将状态 - 动作对的预期奖励计算为双参数函数 <span class="math notranslate nohighlight">\(r : \mathcal{S} \times \mathcal{A} \to \mathbb{R}\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-3-5">
-<span class="eqno">(5)<a class="headerlink" href="#equation-3-5" title="公式的永久链接">¶</a></span>\[r(s,a)\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a\right]=\sum_{r\in\mathcal{R}}r\sum_{s^\prime\in\mathcal{S}}p(s^\prime,r|s,a)\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-3-5" title="公式的永久链接"></a></span>\[r(s,a)\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a\right]=\sum_{r\in\mathcal{R}}r\sum_{s^\prime\in\mathcal{S}}p(s^\prime,r|s,a)\]</div>
 <p>以及状态 - 行动 - 下一状态三元组的预期奖励作为三个参数函数
 <span class="math notranslate nohighlight">\(r : \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to \mathbb{R}\)</span>，</p>
 <div class="math notranslate nohighlight" id="equation-3-6">
-<span class="eqno">(6)<a class="headerlink" href="#equation-3-6" title="公式的永久链接">¶</a></span>\[r(s,a,s^\prime)\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a,S_t=s^\prime\right]=\sum_{r\in\mathcal{R}}r\frac{p(s^\prime,r|s,a)}{p(s^\prime|s,a)}\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-3-6" title="公式的永久链接"></a></span>\[r(s,a,s^\prime)\doteq\mathbb{E}\left[R_t|S_{t-1}=s,A_{t-1}=a,S_t=s^\prime\right]=\sum_{r\in\mathcal{R}}r\frac{p(s^\prime,r|s,a)}{p(s^\prime|s,a)}\]</div>
 <p>在本书中，我们通常使用四参数p函数（3.2），但这些其他符号中的每一个偶尔也很方便。</p>
 <p>MDP框架是抽象和灵活的，可以以不同的方式应用在很多不同的问题上。
 例如，时间步长不需要指固定的实时间隔；它们可以指任意连续的决策和行动阶段。
@@ -364,7 +273,7 @@ MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 以及 <span class="math notranslate nohighlight">\(p(s^\prime,r|s,a)&gt;0\)</span> 的每个4元组的行。</p>
 </div>
 <div class="section" id="id7">
-<h2>3.2 目标和奖励<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>3.2 目标和奖励<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>在强化学习中，个体的目的或目标被形式化为从环境传递到个体的特殊信号（称为 <em>奖励</em>）。
 在每个时间步骤，奖励是一个简单的数字，<span class="math notranslate nohighlight">\(R_{t} \in \mathbb{R}\)</span>。非正式地，个体的目标是最大化其收到的总奖励。
 这意味着最大化不是立即奖励，而是长期累积奖励。我们可以用 <em>奖励假说</em> 来清楚表达这个非正式的想法：</p>
@@ -387,13 +296,13 @@ MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 例如，即使以失去游戏为代价，它也可能找到一种方法来获取对手的棋子。奖励信号是你与机器人沟通的 <em>方式</em>，而不是您希望 <em>如何</em> 实现 <a class="footnote-reference brackets" href="#id23" id="id9">6</a>。</p>
 </div>
 <div class="section" id="id10">
-<h2>3.3 回报和情节<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2>3.3 回报和情节<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>到目前为止，我们已经讨论了非正式学习的目标。我们已经说过，个体的目标是获得从长远来看的最大累积奖励。
 这如何正式定义？如果在时间步骤t之后接收的奖励序列表示为 <span class="math notranslate nohighlight">\(R_{t + 1}, R_{t + 2}, R_{t + 3}, \dots\)</span>，
 那么，我们希望最大化这个序列的具体什么方面？一般而言，我们寻求最大化 <em>预期收益</em>，其中收益 <span class="math notranslate nohighlight">\(G_{t}\)</span> 被定义为奖励序列的某个特定函数。
 在最简单的情况下，回报是奖励的总和：</p>
 <div class="math notranslate nohighlight" id="equation-3-7">
-<span class="eqno">(7)<a class="headerlink" href="#equation-3-7" title="公式的永久链接">¶</a></span>\[G_{t} \doteq R_{t+1} +R_{t+2} + R_{t+3} + \dots + R_{T}，\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-3-7" title="公式的永久链接"></a></span>\[G_{t} \doteq R_{t+1} +R_{t+2} + R_{t+3} + \dots + R_{T}，\]</div>
 <p>其中T是最后一步。这种方法在存在最终时间步骤的自然概念的应用中是有意义的，
 也就是说，当个体-环境交互自然地分解为子序列时，我们称之为 <em>情节</em> <a class="footnote-reference brackets" href="#id24" id="id11">7</a>，例如玩游戏，穿过迷宫，或任何形式的重复互动。
 每个情节在称为 <em>终点</em> 状态的特殊状态结束，随后是重置到标准起始状态或从起始状态的标准分布的抽样。
@@ -409,7 +318,7 @@ MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 <p>我们需要的另一个概念是 <em>衰减因子</em>。根据这种方法，个体尝试选择动作，以使其在未来接收的衰减的奖励的总和最大化。
 特别是，它选择 <span class="math notranslate nohighlight">\(A_{t}\)</span> 来最大化预期的 <em>衰减回报</em>：</p>
 <div class="math notranslate nohighlight" id="equation-3-8">
-<span class="eqno">(8)<a class="headerlink" href="#equation-3-8" title="公式的永久链接">¶</a></span>\[G_{t} \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty}\gamma^k R_{t+k+1}\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-3-8" title="公式的永久链接"></a></span>\[G_{t} \doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots = \sum_{k=0}^{\infty}\gamma^k R_{t+k+1}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\gamma\)</span> 是参数，<span class="math notranslate nohighlight">\(0 \leq\gamma \leq 1\)</span>，称为 <em>衰减因子</em>。</p>
 <p>衰减率决定了未来奖励的现值：未来收到的k个时间步骤的奖励价值仅为立即收到的 <span class="math notranslate nohighlight">\(\gamma^{k-1}\)</span> 倍。
 如果奖励是立即被接收的则是值得的。
@@ -421,7 +330,7 @@ MDP和个体一起产生了一个如下所示的序列或 <em>轨迹</em>：</p>
 当 <span class="math notranslate nohighlight">\(\gamma\)</span> 接近1时，回报目标更加强烈地考虑了未来的回报；个体变得更有远见。</p>
 <p>连续时间步骤的回报以一种对强化学习的理论和算法很重要的方式相互关联：</p>
 <div class="math notranslate nohighlight" id="equation-3-9">
-<span class="eqno">(9)<a class="headerlink" href="#equation-3-9" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(9)<a class="headerlink" href="#equation-3-9" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4} + \dots \\
 &amp;= R_{t+1} + \gamma(R_{t+2} + \gamma R_{t+3} + \gamma^2 R_{t+4} + \dots) \\
 &amp;= R_{t+1} + \gamma G_{t+1}
@@ -431,7 +340,7 @@ G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4}
 <p>请注意，尽管回报公式（3.8）是无穷多个项的总和，但奖励非零并且为常数，如果 <span class="math notranslate nohighlight">\(\gamma &lt; 1\)</span>，则它仍然是有限的。
 例如，如果奖励是常数+1，那么返回是</p>
 <div class="math notranslate nohighlight" id="equation-3-10">
-<span class="eqno">(10)<a class="headerlink" href="#equation-3-10" title="公式的永久链接">¶</a></span>\[G_t = \sum_{k=0}^{\infty}\gamma^k = \frac{1}{1-\gamma}\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-3-10" title="公式的永久链接"></a></span>\[G_t = \sum_{k=0}^{\infty}\gamma^k = \frac{1}{1-\gamma}\]</div>
 <p><em>练习3.5</em> 3.1节中的等式是针对连续的情况，需要进行修改（非常轻微）以应用于情节任务。通过给出（3.3）的修改版本，表明你知道所需的修改。</p>
 <div class="figure align-right">
 <img alt="pole_balancing" src="../../_images/pole_balancing.png" />
@@ -456,7 +365,7 @@ G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4}
 <p><em>练习3.10</em> 证明（3.10）中的第二个等式。</p>
 </div>
 <div class="section" id="id12">
-<h2>3.4 情节和持续任务的统一符号<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<h2>3.4 情节和持续任务的统一符号<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>在上一节中，我们描述了两种强化学习任务，其中一种是个体-环境交互自然地分解为一系列单独的情节（情节任务），而另一种则不是（连续任务）。
 前一种情况在数学上更容易，因为每个动作仅影响在情节期间随后收到的有限数量的奖励。
 在本书中，我们有时会考虑一种问题，有时候会考虑另一种问题，但通常都会考虑。
@@ -476,20 +385,20 @@ G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4}
 例如，考虑状态转换图：</p>
 <div class="figure align-default" id="id26">
 <img alt="state transition diagram" src="../../_images/state_transition_diagram.png" />
-<p class="caption"><span class="caption-text">state transition diagram</span><a class="headerlink" href="#id26" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">state transition diagram</span><a class="headerlink" href="#id26" title="永久链接至图片"></a></p>
 </div>
 <p>这里实心方块表示对应于情节结束的特殊吸收状态。从 <span class="math notranslate nohighlight">\(S_{0}\)</span> 开始，我们得到奖励序列+1，+1，+1，0，0，0，…。
 总结这些，我们得到相同的回报，无论我们是否在前 <span class="math notranslate nohighlight">\(T\)</span> 个奖励求和（这里 <span class="math notranslate nohighlight">\(T=3\)</span>）还是在整个无限序列上求和。
 即使我们引入衰减因子这仍然成立。因此，我们可以根据（3.8），使用在不需要时忽略情节编号的惯例来定义回报，
 并且包括如果总和仍然被定义时 <span class="math notranslate nohighlight">\(\gamma = 1\)</span> 的可能性（例如，因为所有情节终止）。或者，我们也可以写回报如下</p>
 <div class="math notranslate nohighlight" id="equation-3-11">
-<span class="eqno">(11)<a class="headerlink" href="#equation-3-11" title="公式的永久链接">¶</a></span>\[G_t \doteq \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k\]</div>
+<span class="eqno">(11)<a class="headerlink" href="#equation-3-11" title="公式的永久链接"></a></span>\[G_t \doteq \sum_{k=t+1}^{T} \gamma^{k-t-1} R_k\]</div>
 <p>包括 <span class="math notranslate nohighlight">\(T = \infty\)</span> 或 <span class="math notranslate nohighlight">\(\gamma = 1\)</span> （但不能同时存在）的可能性。
 我们在本书的剩余部分中使用这些约定来简化符号，并表达情节和持续任务之间的近乎相似。
 （之后，在第10章中，我们将介绍一个持续未衰减的形式。）</p>
 </div>
 <div class="section" id="id13">
-<h2>3.5 策略和价值函数<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<h2>3.5 策略和价值函数<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>几乎所有的强化学习算法都涉及估计状态（或状态-动作对）的 <em>价值函数</em>，
 它们估计个体在给定状态下的 <em>好坏程度</em> （或者在给定状态下执行给定动作的程度有多好）。
 这里的“有多好”的概念是根据未来的奖励来定义的，或者准确的的说是预期回报方面。
@@ -506,7 +415,7 @@ G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4}
 是从 <span class="math notranslate nohighlight">\(s\)</span> 开始并且之后遵循策略 <span class="math notranslate nohighlight">\(\pi\)</span> 的预期收益。
 对于 <strong>MDPs</strong>，我们可以正式将 <span class="math notranslate nohighlight">\(v_\pi(s)\)</span> 定义为</p>
 <div class="math notranslate nohighlight" id="equation-3-12">
-<span class="eqno">(12)<a class="headerlink" href="#equation-3-12" title="公式的永久链接">¶</a></span>\[v_\pi(s) \doteq \mathbb{E}_\pi\left[G_t|S_t=s\right]
+<span class="eqno">(12)<a class="headerlink" href="#equation-3-12" title="公式的永久链接"></a></span>\[v_\pi(s) \doteq \mathbb{E}_\pi\left[G_t|S_t=s\right]
 = \mathbb{E}_\pi\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k+1}|S_t=s\right]，对所有 s\in \mathbb{S}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\mathbb{E}[\dot]\)</span> 表示个体遵循策略 <span class="math notranslate nohighlight">\(\pi\)</span> 的随机变量的期望值， <span class="math notranslate nohighlight">\(t\)</span> 是任意的时间步长。
 请注意，如果有终止状态的话，其值一直为0。我们称函数 <span class="math notranslate nohighlight">\(v_\pi\)</span> 是 <em>策略</em> <span class="math notranslate nohighlight">\(\pi\)</span> <em>的状态—价值函数</em>。</p>
@@ -514,7 +423,7 @@ G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4}
 表示为 <span class="math notranslate nohighlight">\(q_\pi(s,a)\)</span>，作为从 <span class="math notranslate nohighlight">\(s\)</span> 开始的，采取行动` a <span class="math notranslate nohighlight">\(，
 此后遵循策略 :math:\)</span>pi` 的预期回报：</p>
 <div class="math notranslate nohighlight" id="equation-3-13">
-<span class="eqno">(13)<a class="headerlink" href="#equation-3-13" title="公式的永久链接">¶</a></span>\[q_\pi(s,a) \doteq \mathbb{E}_\pi\left[G_t|S_t=s,A_t=a\right]
+<span class="eqno">(13)<a class="headerlink" href="#equation-3-13" title="公式的永久链接"></a></span>\[q_\pi(s,a) \doteq \mathbb{E}_\pi\left[G_t|S_t=s,A_t=a\right]
 = \mathbb{E}_\pi\left[\sum^{\infty}_{k=0}\gamma^kR_{t+k+1}|S_t=s,A_t=a\right]\]</div>
 <p>我们称 <span class="math notranslate nohighlight">\(q_\pi\)</span> 为策略 <span class="math notranslate nohighlight">\(\pi\)</span> 的动作值函数。</p>
 <p><em>练习3.12</em> 用 <span class="math notranslate nohighlight">\(q_\pi\)</span> 和 <span class="math notranslate nohighlight">\(\pi\)</span> 给出 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的等式。
@@ -529,7 +438,7 @@ G_{t} &amp;\doteq R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \gamma^3 R_{t+4}
 <p>在强化学习和动态规划中使用的价值函数的基本属性是它们满足类似于我们已经为返回建立的递归关系（3.9）。
 对于任何策略 <span class="math notranslate nohighlight">\(\pi\)</span> 和任何状态 <span class="math notranslate nohighlight">\(s\)</span>，<span class="math notranslate nohighlight">\(s\)</span> 的值与其可能的后继状态的值之间保持以下一致性条件：</p>
 <div class="math notranslate nohighlight" id="equation-3-14">
-<span class="eqno">(14)<a class="headerlink" href="#equation-3-14" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(14)<a class="headerlink" href="#equation-3-14" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 &amp;= \mathbb{E}_\pi[R_{t+1} + \gamma G_{t+1}|S_t=s] (由 (3.9)) \\
 &amp;= \sum_a\pi(a|s) \sum_{s^\prime}\sum_r p(s^\prime,r|s,a) \left[r+\gamma\mathbb{E}_\pi[G_{t+1}|S_{t+1}=s^\prime]\right] \\
@@ -547,7 +456,7 @@ v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 用该概率对括号中的数量进行加权，然后对所有可能性求和得到预期值。</p>
 <div class="figure align-right" id="id27">
 <a class="reference internal image-reference" href="../../_images/backup_diagram_for_v_pi.png"><img alt="../../_images/backup_diagram_for_v_pi.png" src="../../_images/backup_diagram_for_v_pi.png" style="width: 200px;" /></a>
-<p class="caption"><span class="caption-text"><span class="math notranslate nohighlight">\(v_\pi\)</span> 的备份图</span><a class="headerlink" href="#id27" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><span class="math notranslate nohighlight">\(v_\pi\)</span> 的备份图</span><a class="headerlink" href="#id27" title="永久链接至图片"></a></p>
 </div>
 <p>公式（3.14）是 <span class="math notranslate nohighlight">\(v_\pi\)</span> 的贝尔曼方程。它表达了状态价值与下一个状态价值之间的关系。
 考虑从一个状态向可能的下一个状态的情况，如右图所示。每个空心圆表示状态，每个实心圆表示状态-动作对。
@@ -570,7 +479,7 @@ v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 从状态 <span class="math notranslate nohighlight">\(B\)</span>，所有动作都会获得 <span class="math notranslate nohighlight">\(+5\)</span> 的奖励，并将个体转到 <span class="math notranslate nohighlight">\(B^\prime\)</span> 。</p>
 <div class="figure align-default" id="id28">
 <img alt="figure-3.2" src="../../_images/figure-3.2.png" />
-<p class="caption"><span class="caption-text"><strong>图3.2</strong> 网格世界的例子：等概率随机随机策略的特殊奖励动态（左）和状态值函数（右）。</span><a class="headerlink" href="#id28" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图3.2</strong> 网格世界的例子：等概率随机随机策略的特殊奖励动态（左）和状态值函数（右）。</span><a class="headerlink" href="#id28" title="永久链接至图片"></a></p>
 </div>
 <p>假设个体在所有状态中以相等的概率选择所有四个动作。图3.2（右）显示了该策略的值函数 <span class="math notranslate nohighlight">\(v_\pi\)</span>，
 对于这个策略，衰减因子 <span class="math notranslate nohighlight">\(\gamma=0.9\)</span>。该值函数是通过求解线性方程（3.14）来计算的。
@@ -604,11 +513,11 @@ v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 总的说，通过推杆，我们需要六杆从球座入洞。</p>
 <div class="figure align-default" id="id29">
 <a class="reference internal image-reference" href="../../_images/figure-3.3.png"><img alt="figure-3.3" src="../../_images/figure-3.3.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><strong>图3.3：</strong> 高尔夫球示例：用于推杆（上面）的状态价值函数和使用挥杆的最佳动作价值函数（下图）。</span><a class="headerlink" href="#id29" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图3.3：</strong> 高尔夫球示例：用于推杆（上面）的状态价值函数和使用挥杆的最佳动作价值函数（下图）。</span><a class="headerlink" href="#id29" title="永久链接至图片"></a></p>
 </div>
 <div class="figure align-right" id="id30">
 <a class="reference internal image-reference" href="../../_images/q_pi_backup_diagram.png"><img alt="../../_images/q_pi_backup_diagram.png" src="../../_images/q_pi_backup_diagram.png" style="width: 200px;" /></a>
-<p class="caption"><span class="caption-text"><span class="math notranslate nohighlight">\(q_\pi\)</span> 的备份图</span><a class="headerlink" href="#id30" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><span class="math notranslate nohighlight">\(q_\pi\)</span> 的备份图</span><a class="headerlink" href="#id30" title="永久链接至图片"></a></p>
 </div>
 <p><strong>练习3.17</strong> 动作价值，即 <span class="math notranslate nohighlight">\(q_\pi\)</span> 的贝尔曼方程是什么？
 必须根据状态—动作对 <span class="math notranslate nohighlight">\((s,a)\)</span> 的可能后继的动作价值 <span class="math notranslate nohighlight">\(q_\pi(s^\prime,a^\prime)\)</span>
@@ -635,7 +544,7 @@ v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 然后给出第二个方程，用（3.2）定义的 <span class="math notranslate nohighlight">\(p(s^\prime,r|s,a)\)</span> 明确地写出期望值，使得方程式中不会出现预期值符号。</p>
 </div>
 <div class="section" id="id14">
-<h2>3.6 最优策略和最优价值函数<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<h2>3.6 最优策略和最优价值函数<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
 <p>解决强化学习任务大概意味着要从长远的角度找到一个取得很大回报策略。
 对于有限MDP，我们可以通过以下方式精确地定义一个最优策略。价值函数对策略进行部分排序。
 如果策略 <span class="math notranslate nohighlight">\(\pi\)</span> 所有状态的预期返回值大于或等于策略 <span class="math notranslate nohighlight">\(\pi^\prime\)</span> 的值，
@@ -646,16 +555,16 @@ v_\pi(s) &amp;\doteq \mathbb{E}_\pi[G_t|S_t=s] \\
 虽然可能有不止一个，我们用 <span class="math notranslate nohighlight">\(\pi_*\)</span> 表示所有最优策略。
 它们共享同样的状态值函数，称为 <em>最优状态价值函数</em>，表示为 <span class="math notranslate nohighlight">\(v_*\)</span>，并定义为</p>
 <div class="math notranslate nohighlight" id="equation-3-15">
-<span class="eqno">(15)<a class="headerlink" href="#equation-3-15" title="公式的永久链接">¶</a></span>\[v_*(s) \doteq \max_\pi v_\pi(s)，\]</div>
+<span class="eqno">(15)<a class="headerlink" href="#equation-3-15" title="公式的永久链接"></a></span>\[v_*(s) \doteq \max_\pi v_\pi(s)，\]</div>
 <p>对所有 <span class="math notranslate nohighlight">\(s\in \mathcal{S}\)</span>。</p>
 <p>最优策略还具有相同的最优动作价值函数，表示为 <span class="math notranslate nohighlight">\(q_*\)</span>，并定义为</p>
 <div class="math notranslate nohighlight" id="equation-3-16">
-<span class="eqno">(16)<a class="headerlink" href="#equation-3-16" title="公式的永久链接">¶</a></span>\[q_*(s,a) \doteq \max_\pi q_\pi(s,a)\]</div>
+<span class="eqno">(16)<a class="headerlink" href="#equation-3-16" title="公式的永久链接"></a></span>\[q_*(s,a) \doteq \max_\pi q_\pi(s,a)\]</div>
 <p>对所有 <span class="math notranslate nohighlight">\(s\in \mathcal{S}\)</span> 和 <span class="math notranslate nohighlight">\(a\in\mathcal{A}(s)\)</span>。
 对于状态—动作对 <span class="math notranslate nohighlight">\((s,a)\)</span>，此函数给出在状态 <span class="math notranslate nohighlight">\(s\)</span> 中执行动作 <span class="math notranslate nohighlight">\(a\)</span> 并且此后遵循最优策略的预期返回值。
 因此，我们可以用 <span class="math notranslate nohighlight">\(v_*\)</span> 来表示 <span class="math notranslate nohighlight">\(q_*\)</span> ，如下所示：</p>
 <div class="math notranslate nohighlight" id="equation-3-17">
-<span class="eqno">(17)<a class="headerlink" href="#equation-3-17" title="公式的永久链接">¶</a></span>\[q_*(s,a) = \mathbb{E}\left[R_{t+1}+\gamma v_* (S_{t+1})|S_t=s,A_t=a\right]\]</div>
+<span class="eqno">(17)<a class="headerlink" href="#equation-3-17" title="公式的永久链接"></a></span>\[q_*(s,a) = \mathbb{E}\left[R_{t+1}+\gamma v_* (S_{t+1})|S_t=s,A_t=a\right]\]</div>
 <p><strong>示例3.17：高尔夫的最优价值函数</strong> 图3.3的下部展示了一个可能的最优动作价值函数 <span class="math notranslate nohighlight">\(q_*(s,driver)\)</span> 的轮廓。
 如果我们首先用一号木杆用力进行击球，然后选择挥杆或推杆，以值较大者为准，这些是每个状态的价值。
 用力挥杆使我们能够把球打的更远，但精度较低。
@@ -679,7 +588,7 @@ v_*(s) &amp;= \max_{a\in\mathcal{A}(s)} q_{\pi_*}(s,a) \\
 \end{aligned}\end{split}\]</div>
 <p>最后两个方程是 <span class="math notranslate nohighlight">\(v_*\)</span> 的贝尔曼最优方程的两种形式，<span class="math notranslate nohighlight">\(q_*\)</span> 的贝尔曼最优方程为</p>
 <div class="math notranslate nohighlight" id="equation-3-20">
-<span class="eqno">(18)<a class="headerlink" href="#equation-3-20" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(18)<a class="headerlink" href="#equation-3-20" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 q_*(s,a) &amp;= \mathbb{E}\left[R_{t+1}+\gamma\sum_{a^\prime}q_*(S_{t+1,a^\prime})|S_t=s,A_t=a\right] \\
 &amp;=\sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma \max_{a^\prime}q_*(s^\prime,a^\prime)]
 \end{aligned}\end{split}\]</div>
@@ -688,7 +597,7 @@ q_*(s,a) &amp;= \mathbb{E}\left[R_{t+1}+\gamma\sum_{a^\prime}q_*(S_{t+1,a^\prime
 图3.4中，左图以图形方式表示贝尔曼最优方程（3.19），右图表示贝尔曼最优方程（3.20）。</p>
 <div class="figure align-default" id="id31">
 <img alt="figure-3.14" src="../../_images/figure-3.4.png" />
-<p class="caption"><span class="caption-text"><strong>图3.4：</strong> <span class="math notranslate nohighlight">\(v_*\)</span> 和 <span class="math notranslate nohighlight">\(q_*\)</span> 的备份图</span><a class="headerlink" href="#id31" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图3.4：</strong> <span class="math notranslate nohighlight">\(v_*\)</span> 和 <span class="math notranslate nohighlight">\(q_*\)</span> 的备份图</span><a class="headerlink" href="#id31" title="永久链接至图片"></a></p>
 </div>
 <p>对于有限的MDP，<span class="math notranslate nohighlight">\(v_*\)</span> 的贝尔曼最优方程（3.19）具有唯一解。
 贝尔曼最优方程实际上是一个方程组，每个状态一个方程，所以如果有 <span class="math notranslate nohighlight">\(n\)</span> 个状态，
@@ -719,7 +628,7 @@ q_*(s,a) &amp;= \mathbb{E}\left[R_{t+1}+\gamma\sum_{a^\prime}q_*(S_{t+1,a^\prime
 在单元格中有多个箭头，任何相应的动作都是最佳的。</p>
 <div class="figure align-default" id="id32">
 <img alt="figure-3.5" src="../../_images/figure-3.5.png" />
-<p class="caption"><span class="caption-text"><strong>图3.5：</strong> 网格世界例子的最优解决方案。</span><a class="headerlink" href="#id32" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图3.5：</strong> 网格世界例子的最优解决方案。</span><a class="headerlink" href="#id32" title="永久链接至图片"></a></p>
 </div>
 <p><strong>示例3.19：回收机器人的贝尔曼最优方程</strong> 使用（3.19），我们可以明确地给出回收机器人示例的贝尔曼最优方程。
 为了使事情变得更加紧凑，我们可以简单地描述 <strong>高</strong> 和 <strong>低</strong> 两种状态，
@@ -783,7 +692,7 @@ v_*(h)&amp;=\max\left\{
 <p><strong>练习3.26</strong> 用 <span class="math notranslate nohighlight">\(v_*\)</span> 和四参数 <span class="math notranslate nohighlight">\(p\)</span> 的方程。</p>
 </div>
 <div class="section" id="id15">
-<h2>3.7 优化和近似<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<h2>3.7 优化和近似<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
 <p>我们已经定义了最优价值函数和最优策略。显然，学习最优策略的个体会做得很好，但在实践中却很少发生。
 对于我们感兴趣的各种任务，只能以极高的计算成本才能生成最优策略。
 一个明确定义的最优化概念组织了我们在本书中描述的学习方法，并提供了一种了解各种学习算法的理论属性的方法，
@@ -806,7 +715,7 @@ v_*(h)&amp;=\max\left\{
 这是将强化学习与其他方法区分开来，近似解决MDP问题的一个关键属性。</p>
 </div>
 <div class="section" id="id16">
-<h2>3.8 总结<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h2>
+<h2>3.8 总结<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
 <p>我们总结一下我们在本章中提出的强化学习问题的要素。强化学习是从互动中学习如何行动从而实现目标。
 强化学习 <em>个体</em> 及其 <em>环境</em> 通过一系列离散的时间步长进行交互。
 其接口的规范定义了一个特定的任务：<em>动作</em> 是由个体所做的选择；<em>状态</em> 是做出选择的基础；<em>奖励</em> 是评估选择的基础。
@@ -837,7 +746,7 @@ v_*(h)&amp;=\max\left\{
 在强化学习中，我们非常关心虽然无法找到最优解决方案但必须能以某种方式得到近似的情况。</p>
 </div>
 <div class="section" id="id17">
-<h2>书目和历史评论<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
 <p>强化学习问题深深地受到来自最优控制领域的马尔可夫决策过程（MDP）的思想的影响。
 这些历史影响和心理学的其他主要影响在第1章给出的简要历史中有所描述。
 强化学习增加了MDP关注现实大问题的近似和不完整信息。
@@ -918,50 +827,33 @@ Michie（1961,1963）的MENACE系统和Mi​​chie and Chambers（1968）的BOX
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter4/dynamic_programming.html" class="btn btn-neutral float-right" title="第4章 动态规划" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter2/multi_armed_bandits.html" class="btn btn-neutral float-left" title="第2章 多臂赌博机问题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter2/multi_armed_bandits.html" class="btn btn-neutral float-left" title="第2章 多臂赌博机问题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter4/dynamic_programming.html" class="btn btn-neutral float-right" title="第4章 动态规划" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

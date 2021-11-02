@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第1章 简介 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="第一部分 表格解决方法" href="../partI/index.html" />
     <link rel="prev" title="符号一览" href="../notation.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../preface1st.html">第一版前言</a></li>
@@ -113,8 +64,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -134,70 +83,31 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>第1章 简介</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../_sources/chapter1/introduction.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../_sources/chapter1/introduction.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第1章 简介<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第1章 简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>当我们思考学习的本质时，我们首先想到的是通过与环境交互来学习。
 当一个婴儿玩耍，挥动手臂或环顾四周时，他没有明确的老师，但他确实通过直接的感觉与环境联系。
 他可以通过这种联系获得大量关于因果关系、动作的结果以及如何实现目标的信息。
@@ -215,7 +125,7 @@
 </dd>
 </dl>
 <div class="section" id="id4">
-<h2>1.1 强化学习<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>1.1 强化学习<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>强化学习是一种学习如何将状态映射到动作，以获得最大奖励的学习机制。
 学习者不会被告知要采取哪些动作，而是必须通过尝试来发现哪些动作会产生最大的回报。
 在最有趣和最具挑战性的案例中，动作不仅可以影响直接奖励，还可以影响下一个状态，并通过下一个状态，影响到随后而来的奖励。
@@ -284,7 +194,7 @@
 目前还不清楚钟摆会摆动多远，但强化学习研究肯定是摆向更简单和更少的人工智能一般原则的钟摆的一部分。</p>
 </div>
 <div class="section" id="id5">
-<h2>1.2 例子<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>1.2 例子<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>理解强化学习的一个好方法是思考指导其发展的一些例子和可能的应用。</p>
 <ul class="simple">
 <li><p>国际象棋大师落子。落子决定既通过规划 - 期待的回复和逆向回复
@@ -314,7 +224,7 @@
 但与环境的交互对于调整行为以利用任务的特性至关重要。</p>
 </div>
 <div class="section" id="id6">
-<h2>1.3 强化学习的要素<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>1.3 强化学习的要素<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p>在个体和环境之外，强化学习系统一般有四个要素：<em>策略</em>，<em>奖励信号</em>，<em>价值函数</em>，和可选的环境 <em>模型</em>。</p>
 <p><em>策略</em> 定义了学习个体在给定时间内的行为方式。
 简单来说，策略是从感知的环境状态到在这些状态下要采取的行动的映射。
@@ -354,7 +264,7 @@
 现代强化学习已经从低级的、试错学习跨越到高层次的、有计划的学习。</p>
 </div>
 <div class="section" id="id7">
-<h2>1.4 局限性和范围<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>1.4 局限性和范围<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>强化学习在很大程度上依赖于状态的概念 - 作为策略和价值函数的输入，以及模型的输入和输出。
 非正式地，我们可以将状态视为向个体传达某种特定时间“环境如何”的信号。
 我们在这里使用的状态的正式定义由第3章中提出的马尔可夫决策过程的框架给出。
@@ -377,7 +287,7 @@
 虽然进化和学习有许多共同的特性并且自然地协同工作，但我们并不认为进化方法本身特别适合强化学习问题，因此，我们不在本书中讨论它们。</p>
 </div>
 <div class="section" id="id8">
-<h2>1.5 拓展例子：井字棋<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<h2>1.5 拓展例子：井字棋<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 <p>为了说明强化学习的一般概念并将其与其他方法进行对比，我们接下来将详细地考虑一个简单的例子。</p>
 <p>考虑熟悉的孩子玩的井字棋游戏。两名玩家轮流在一个三乘三的棋盘上比赛。
 一个玩家画叉，另一个画圈，若叉或圈的连续三个棋子落于一行或一列或同一斜线上则获胜；若棋盘被填满了也不能决出胜负则为平局。
@@ -417,7 +327,7 @@
 <p class="caption"><span class="caption-text">图1.1：一系列井字棋移动。黑色实线代表游戏中所采取的动作；虚线表示我们（我们的强化学习者）考虑但未做出的动作。
 我们的第二步移动 <span class="math notranslate nohighlight">\(e^{*}\)</span> 是一次探索性的移动，这意味着 <span class="math notranslate nohighlight">\(e^{*}\)</span> 所表示的移动甚至优于当前移动。
 探索性移动不会导致任何学习，但是我们的其他每个移动都会导致更新，如红色箭头弧线所示，
-其估计价值自下而上移动到树的早期节点，如文中详述。</span><a class="headerlink" href="#id12" title="永久链接至图片">¶</a></p>
+其估计价值自下而上移动到树的早期节点，如文中详述。</span><a class="headerlink" href="#id12" title="永久链接至图片"></a></p>
 <div class="legend">
 </div>
 </div>
@@ -459,7 +369,7 @@
 强化学习也适用于甚至不能分解为像井字棋游戏这样的离散时间步骤的问题。
 一般原则也适用于连续时间问题，虽然理论变得更加复杂，我们在这份简介中将不会介绍。</p>
 <p>井字棋游戏具有相对较小的有限状态集，而当状态集非常大或甚至无限时，也可以使用强化学习。
-例如，Gerry Tesauro（1992,1995）将上述算法与人工神经网络相结合，学习玩西洋双子棋，其具有大约 <span class="math notranslate nohighlight">\(10^20\)</span> 个状态。
+例如，Gerry Tesauro（1992,1995）将上述算法与人工神经网络相结合，学习玩西洋双子棋，其具有大约 <span class="math notranslate nohighlight">\(10^{20}\)</span> 个状态。
 在这么多状态中，只能经历一小部分。Tesauro的规划学得比以前的任何规划都要好得多，最终比世界上最好的人类棋手更好（第16.1节）。
 人工神经网络为程序提供了从其经验中泛化的能力，以便在新状态下，它能根据其网络确定的过去面临的类似状态保存下来的信息来选择移动。
 强化学习系统在如此大型状态集的问题中如何运作，与它从过去的经验中泛化的程度密切相关。
@@ -494,7 +404,7 @@
 <p>练习1.5： <em>其他改进</em> 你能想到其他改善强化学习者的方法吗？你能想出更好的方法来解决所提出的井字棋游戏问题吗？</p>
 </div>
 <div class="section" id="id9">
-<h2>1.6 小结<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<h2>1.6 小结<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>强化学习是一种理解和自动化目标导向学习和决策的计算方法。
 它与其他计算方法的区别在于它强调个体通过与环境的直接交互来学习，而不需要示范监督或完整的环境模型。
 我们认为，强化学习是第一个认真解决从与环境交互中学习以实现长期目标时出现的计算问题的领域。</p>
@@ -506,7 +416,7 @@
 价值函数的使用将强化学习方法与在整个策略评估指导下直接搜索策略空间的进化方法区分开来。</p>
 </div>
 <div class="section" id="id10">
-<h2>1.7 强化学习早期历史<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2>1.7 强化学习早期历史<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>强化学习的早期历史有两个主线，悠久和丰富，都是在现代强化学习交织之前独立进行的。
 一个主线涉及通过试错试验来学习，并且起源于动物学习的心理学。这个主线贯穿了人工智能领域的一些最早的工作，并导致了20世纪80年代早期强化学习的复兴。
 第二个主线涉及使用值函数和动态规划的最优控制问题及其解决方案。在大多数情况下，这个主线不涉及学习。
@@ -713,7 +623,7 @@ Montague，Dayan和Sejnowski，1996；Schultz，Dayan和Montague，1997）。
 我们在其出现的各个章节的最后引用了更多这些内容。</p>
 </div>
 <div class="section" id="id11">
-<h2>书目备注<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2>书目备注<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>关于强化学习的其他一般性报道，我们建议读者参考阅读Szepesv ari（2010），Bertsekas和Tsitsiklis（1996），
 Kaelbling（1993a）以及Sugiyama，Hachiya和Morimura（2013）的书籍。
 从控制或操作研究角度出发的书籍包括Si，Barto，Powell和Wunsch（2004），Powell（2011），Lewis和Liu（2012）以及Bertsekas（2012）。
@@ -728,50 +638,33 @@ Weiring和van Otterlo（2012）编辑的卷提供了对最近发展的精彩概�
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../partI/index.html" class="btn btn-neutral float-right" title="第一部分 表格解决方法" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../notation.html" class="btn btn-neutral float-left" title="符号一览" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../notation.html" class="btn btn-neutral float-left" title="符号一览" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../partI/index.html" class="btn btn-neutral float-right" title="第一部分 表格解决方法" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第2章 多臂赌博机问题 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第3章 有限马尔可夫决策过程" href="../chapter3/finite_markov_decision_process.html" />
     <link rel="prev" title="第一部分 表格解决方法" href="../index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -125,8 +76,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -146,72 +95,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
-        
       <li>第2章 多臂赌博机问题</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partI/chapter2/multi_armed_bandits.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partI/chapter2/multi_armed_bandits.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第2章 多臂赌博机问题<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第2章 多臂赌博机问题<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>区分强化学习与其他类型学习的最重要特征是，它使用训练信息来 <em>评估</em> 所采取的行动，而不是通过给予正确的行动来 <em>指导</em>。
 这就是为了明确寻找良好行为而产生积极探索的需要。
 纯粹的评价反馈表明所采取的行动有多好，但不表明它是最好还是最坏的行动。
@@ -225,7 +134,7 @@
 我们使用这个问题来介绍一些基本的学习方法，我们将在后面的章节中对其进行扩展，以应用于完全强化学习问题。
 在本章的最后，我们通过讨论当赌博机问题变为关联时会发生什么，即在不止一种情况下采取行动，这种情况更接近完整的强化学习问题。</p>
 <div class="section" id="k">
-<h2>2.1 一个 <span class="math notranslate nohighlight">\(k\)</span> 臂赌博机问题<a class="headerlink" href="#k" title="永久链接至标题">¶</a></h2>
+<h2>2.1 一个 <span class="math notranslate nohighlight">\(k\)</span> 臂赌博机问题<a class="headerlink" href="#k" title="永久链接至标题"></a></h2>
 <p>考虑以下学习问题。你可以反复面对 <span class="math notranslate nohighlight">\(k\)</span> 种不同的选择或行动。在每次选择之后，你会收到一个数值奖励，该奖励取决于你选择的行动的固定概率分布。
 你的目标是在一段时间内最大化预期的总奖励，例如，超过1000个操作选择或 <em>时间步骤</em>。</p>
 <p>这是 <span class="math notranslate nohighlight">\(k\)</span> 臂赌博机问题的原始形式，通过类比于赌博机或“单臂强盗”命名，除了它有k个拉杆而不是一个。
@@ -260,11 +169,11 @@
 平衡探索和利用的需要是强化学习中出现的一个独特挑战；我们的 <span class="math notranslate nohighlight">\(k\)</span> 臂赌博机问题的简单性使我们能够以一种特别清晰的形式展示这一点。</p>
 </div>
 <div class="section" id="id2">
-<h2>2.2 行动价值方法<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>2.2 行动价值方法<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>我们首先仔细研究估算行动价值，并使用估算来做出行动选择决策的方法，我们统称为 <em>行动价值方法</em>。
 回想一下，当选择该动作时，动作的真实价值就是平均奖励。估计这一点的一种自然方法是平均实际收到的奖励：</p>
 <div class="math notranslate nohighlight" id="equation-2-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-2-1" title="公式的永久链接">¶</a></span>\[Q_t(a) \doteq \frac{在t之前采取a动作的奖励总和}{在t之前采取a动作的次数}
+<span class="eqno">(1)<a class="headerlink" href="#equation-2-1" title="公式的永久链接"></a></span>\[Q_t(a) \doteq \frac{在t之前采取a动作的奖励总和}{在t之前采取a动作的次数}
 = \frac{\sum_{i=1}^{t-1}R_i \cdot \mathbb{1}_{A_i=a}}{\sum_{i=1}^{t-1}\mathbb{1}_{A_i=a}}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\mathbb{1}_{谓词}\)</span> 表示随机变量，如果谓词为真，则为1，如果不是则为0。
 如果分母为零，那么我们将 <span class="math notranslate nohighlight">\(Q_t(a)\)</span> 定义为某个默认值，例如0。
@@ -276,7 +185,7 @@
 如果存在多个贪婪动作，则可以以任意方式（可能是随机的）在它们之间进行选择。
 我们把这个贪婪的动作选择方法写成</p>
 <div class="math notranslate nohighlight" id="equation-2-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-2-2" title="公式的永久链接">¶</a></span>\[A_t = \mathop{argmax} \limits_{a} Q_t(a)\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-2-2" title="公式的永久链接"></a></span>\[A_t = \mathop{argmax} \limits_{a} Q_t(a)\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(argmax_a\)</span> 表示随后的表达式最大时的动作a（再次，任意地断开关系）。
 贪婪行动选择总是利用当前的知识来最大化立即奖励；它没有花时间采取明显劣质的行动来看看它们是否真的会更好。
 一个简单的替代方案是在大多数情况下贪婪地行动，但每隔一段时间，以较小的概率 <span class="math notranslate nohighlight">\(\varepsilon\)</span>，
@@ -289,7 +198,7 @@
 选择贪婪动作的概率是多少？</p>
 </div>
 <div class="section" id="id3">
-<h2>2.3 10臂赌博机试验<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>2.3 10臂赌博机试验<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>为了粗略评估贪婪和 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪行动价值方法的相对有效性，
 我们在一系列测试问题上对它们进行了数值比较。这是一组2000个随机生成的 <span class="math notranslate nohighlight">\(k\)</span> 臂赌博机问题，<span class="math notranslate nohighlight">\(k = 10\)</span>。
 对于每个赌博机问题，如图2.1所示，动作价值 <span class="math notranslate nohighlight">\(q_*(a), a = 1, \dots, 10\)</span>，
@@ -297,7 +206,7 @@
 <div class="figure align-default" id="id12">
 <span id="figure-2-1"></span><img alt="../../_images/figure-2.1.png" src="../../_images/figure-2.1.png" />
 <p class="caption"><span class="caption-text"><strong>图2.1</strong> 一个10臂的赌博机问题例子。根据具有均值和方差为0的正态分布选择十个动作的每一个的真值 <span class="math notranslate nohighlight">\(q_*(a)\)</span>，
-然后根据平均 <span class="math notranslate nohighlight">\(q_*(a)\)</span> 单位方差正态分布选择实际奖励，如这些灰色分布显示。</span><a class="headerlink" href="#id12" title="永久链接至图片">¶</a></p>
+然后根据平均 <span class="math notranslate nohighlight">\(q_*(a)\)</span> 单位方差正态分布选择实际奖励，如这些灰色分布显示。</span><a class="headerlink" href="#id12" title="永久链接至图片"></a></p>
 </div>
 <p>然后，当应用于该问题的学习方法选择动作 <span class="math notranslate nohighlight">\(A_t\)</span> 时，
 从具有均值 <span class="math notranslate nohighlight">\(q_*(A_t)\)</span> 和方差1的正态分布中选择实际奖励 <span class="math notranslate nohighlight">\(R_t\)</span>。
@@ -319,7 +228,7 @@
 <div class="figure align-default" id="id13">
 <span id="figure-2-2"></span><img alt="../../_images/figure-2.2.png" src="../../_images/figure-2.2.png" />
 <p class="caption"><span class="caption-text"><strong>图2.2</strong> 10臂赌博机试验中的 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪行动价值方法的平均表现。
-这些数据是2000轮以上不同赌博机问题的平均值。所有方法都使用样本平均值作为其行动价值估计。</span><a class="headerlink" href="#id13" title="永久链接至图片">¶</a></p>
+这些数据是2000轮以上不同赌博机问题的平均值。所有方法都使用样本平均值作为其行动价值估计。</span><a class="headerlink" href="#id13" title="永久链接至图片"></a></p>
 </div>
 <p><span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪方法优于贪婪方法的优势取决于任务。例如，假设奖励方差较大，比如说10而不是1。
 有了更嘈杂的奖励，需要更多的探索才能找到最佳动作，并且 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪相对于贪婪的方法，使用方法应该更好。
@@ -342,7 +251,7 @@
 <p><em>练习2.3</em> 在图2.2所示的比较中，从累积奖励和选择最佳动作的概率来看，哪种方法在长期运行中表现最佳？会有多好？定量地表达你的答案。</p>
 </div>
 <div class="section" id="id4">
-<h2>2.4 增量实现<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>2.4 增量实现<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>到目前为止我们讨论过的行动价值方法都将行动值估计为观察到的奖励的样本平均值。
 我们现在转向如何以计算上有效的方式计算这些平均值的问题，特别是具有恒定内存和恒定的时间步长计算。</p>
 <p>为了简化表示法，我们专注于单一动作。让 <span class="math notranslate nohighlight">\(R_i\)</span> 现在表示在第i次选择 <em>此动作</em> 之后收到的奖励，
@@ -355,7 +264,7 @@
 <p>您可能怀疑，这不是必需的。通过处理每个新奖励所需的小的，恒定的计算，很容易设计用于更新平均值的增量公式。
 给定 <span class="math notranslate nohighlight">\(Q_n\)</span> 和第n个奖励 <span class="math notranslate nohighlight">\(R_n\)</span>，所有n个奖励的新平均值可以通过以下计算得出</p>
 <div class="math notranslate nohighlight" id="equation-2-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-2-3" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(3)<a class="headerlink" href="#equation-2-3" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 Q_{n+1} &amp;= \frac{1}{n}\sum_{i=1}^{n}R_i \\
         &amp;= \frac{1}{n}(R_n + \sum_{i=1}^{n-1}R_i) \\
         &amp;= \frac{1}{n}(R_n + (n-1)\frac{1}{n-1} \sum_{i=1}^{n-1}R_i) \\
@@ -367,7 +276,7 @@ Q_{n+1} &amp;= \frac{1}{n}\sum_{i=1}^{n}R_i \\
 该实现仅需要 <span class="math notranslate nohighlight">\(Q_n\)</span> 和 n 的存储器，并且每个新的奖励仅需要小的计算（2.3）。
 此更新规则（2.3）是本书中经常出现的一种形式。 一般形式是</p>
 <div class="math notranslate nohighlight" id="equation-2-4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-2-4" title="公式的永久链接">¶</a></span>\[新估计 \leftarrow 旧估计 + 步长 [目标 - 旧估计]\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-2-4" title="公式的永久链接"></a></span>\[新估计 \leftarrow 旧估计 + 步长 [目标 - 旧估计]\]</div>
 <p>表达式 <span class="math notranslate nohighlight">\([目标 - 旧估计]\)</span> 是估计中的误差。通过向“目标”迈出一步来减少它。
 目标被假定为指示移动的理想方向，尽管它可能是嘈杂的。例如，在上述情况下，目标是第n个奖励。</p>
 <p>请注意，增量方法（2.3）中使用的步长参数（StepSize）会从时间步长到时间步长变化。
@@ -398,16 +307,16 @@ argmax_aQ(a) &amp;  以 1-\varepsilon 概率 （随意打破关系）\\
 </div>
 </div>
 <div class="section" id="id5">
-<h2>2.5 追踪非平稳问题<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>2.5 追踪非平稳问题<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>到目前为止讨论的平均方法适用于固定赌博机问题，即对于其中奖励概率不随时间变化的赌博机问题。
 如前所述，我们经常会遇到非常不稳定的强化学习问题。 在这种情况下，给予最近的奖励比给长期的奖励更重要。
 最常用的方法之一是使用常量步长参数。例如，用于更新 <span class="math notranslate nohighlight">\(n-1\)</span> 过去奖励的平均 <span class="math notranslate nohighlight">\(Q_n\)</span> 的增量更新规则（2.3）被修改为</p>
 <div class="math notranslate nohighlight" id="equation-2-5">
-<span class="eqno">(5)<a class="headerlink" href="#equation-2-5" title="公式的永久链接">¶</a></span>\[Q_{n+1} \doteq Q_n + \alpha(R_n - Q_n)\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-2-5" title="公式的永久链接"></a></span>\[Q_{n+1} \doteq Q_n + \alpha(R_n - Q_n)\]</div>
 <p>步长参数 <span class="math notranslate nohighlight">\(\alpha \in (0, 1]\)</span> 是常数。
 这导致 <span class="math notranslate nohighlight">\(Q_{n+1}\)</span> 是过去奖励和初始估计 <span class="math notranslate nohighlight">\(Q_1\)</span> 的加权平均值：</p>
 <div class="math notranslate nohighlight" id="equation-2-6">
-<span class="eqno">(6)<a class="headerlink" href="#equation-2-6" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(6)<a class="headerlink" href="#equation-2-6" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 Q_{n+1} &amp;= Q_n + \alpha(R_n - Q_n) \\
 &amp;= \alpha R_n + (1-\alpha)Q_n \\
 &amp;= \alpha R_n + (1-\alpha)[\alpha R_{n-1} + (1-\alpha)Q_{n-1}] \\
@@ -429,7 +338,7 @@ Q_{n+1} &amp;= Q_n + \alpha(R_n - Q_n) \\
 保证通过大数定律收敛到真实的行动价值。但当然，对序列 <span class="math notranslate nohighlight">\(\{\alpha_n(a)\}\)</span> 的所有选择都不能保证收敛。
 随机逼近理论中的一个众所周知的结果为我们提供了确保收敛概率为1所需的条件：</p>
 <div class="math notranslate nohighlight" id="equation-2-7">
-<span class="eqno">(7)<a class="headerlink" href="#equation-2-7" title="公式的永久链接">¶</a></span>\[\sum_{n=1}^{\infty}\alpha_n(a) = \infty 和 \sum_{n=1}^{\infty}\alpha_n^2(a) &lt; \infty\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-2-7" title="公式的永久链接"></a></span>\[\sum_{n=1}^{\infty}\alpha_n(a) = \infty 和 \sum_{n=1}^{\infty}\alpha_n^2(a) &lt; \infty\]</div>
 <p>第一个条件是保证步骤足够大以最终克服任何初始条件或随机波动。第二个条件保证最终步骤变得足够小以确保收敛。</p>
 <p>注意，对于样本平均情况，<span class="math notranslate nohighlight">\(\alpha_n(a)=\frac{1}{n}\)</span> 都满足两个收敛条件，
 但对于恒定步长参数的情况不符合，<span class="math notranslate nohighlight">\(\alpha_n(a)=n\)</span>。
@@ -446,7 +355,7 @@ Q_{n+1} &amp;= Q_n + \alpha(R_n - Q_n) \\
 使用 <span class="math notranslate nohighlight">\(\varepsilon=0.1\)</span> 和更长的运行，比如10000步。</p>
 </div>
 <div class="section" id="id6">
-<h2>2.6 乐观的初始值<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>2.6 乐观的初始值<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p>到目前为止我们讨论的所有方法在某种程度上都依赖于初始行动价值估计 <span class="math notranslate nohighlight">\(Q_1(a)\)</span>。
 在统计语言中，这些方法的初始估计存在偏差。对于样本平均方法，一旦所有动作至少被选择一次，偏差就会消失，
 但对于具有常数 <span class="math notranslate nohighlight">\(\alpha\)</span> 的方法，偏差是永久性的，尽管随着时间的推移逐渐减少，如（2.6）所示。
@@ -470,7 +379,7 @@ Q_{n+1} &amp;= Q_n + \alpha(R_n - Q_n) \\
 在本书的其余部分，我们经常使用其中一些简单的探索技术。</p>
 <div class="figure align-default" id="id14">
 <span id="figure-2-3"></span><img alt="../../_images/figure-2.3.png" src="../../_images/figure-2.3.png" />
-<p class="caption"><span class="caption-text"><strong>图2.3</strong> 乐观的初始行动价值估计对10臂赌博机试验的影响。两种方法都使用恒定的步长参数， <span class="math notranslate nohighlight">\(alpha=0.1\)</span>。</span><a class="headerlink" href="#id14" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图2.3</strong> 乐观的初始行动价值估计对10臂赌博机试验的影响。两种方法都使用恒定的步长参数， <span class="math notranslate nohighlight">\(alpha=0.1\)</span>。</span><a class="headerlink" href="#id14" title="永久链接至图片"></a></p>
 </div>
 <p><em>练习2.6：神秘的尖峰</em> 图2.3所示的结果应该非常可靠，因为它们是超过2000个随机选择的10臂赌博机任务的平均值。
 那么，为什么乐观方法曲线的早期会出现振荡和峰值？换句话说，什么可能使这种方法在特定的早期步骤中表现得更好或更差？</p>
@@ -479,20 +388,20 @@ Q_{n+1} &amp;= Q_n + \alpha(R_n - Q_n) \\
 然而，样本平均值并不是一个完全令人满意的解决方案，因为它们可能在非平稳问题上表现不佳。
 是否有可能避免不变步长的偏差，同时保留其对非平稳问题的优势？一种方法是使用步长</p>
 <div class="math notranslate nohighlight" id="equation-2-8">
-<span class="eqno">(8)<a class="headerlink" href="#equation-2-8" title="公式的永久链接">¶</a></span>\[\beta_n \doteq \alpha / \overline{o}_n\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-2-8" title="公式的永久链接"></a></span>\[\beta_n \doteq \alpha / \overline{o}_n\]</div>
 <p>处理特定动作的第n个奖励，其中 <span class="math notranslate nohighlight">\(\alpha&gt;0\)</span> 是常规常量步长，<span class="math notranslate nohighlight">\(\overline{o}_n\)</span> 是从0开始的跟踪：</p>
 <div class="math notranslate nohighlight" id="equation-2-9">
-<span class="eqno">(9)<a class="headerlink" href="#equation-2-9" title="公式的永久链接">¶</a></span>\[\overline{o}_n \doteq \overline{o}_{n-1} + \alpha(1-\overline{o}_{n-1}) for n \ge 0, with \overline{o}_0 \doteq 0\]</div>
+<span class="eqno">(9)<a class="headerlink" href="#equation-2-9" title="公式的永久链接"></a></span>\[\overline{o}_n \doteq \overline{o}_{n-1} + \alpha(1-\overline{o}_{n-1}) for n \ge 0, with \overline{o}_0 \doteq 0\]</div>
 <p>进行如（2.6）中的分析，以表明 <span class="math notranslate nohighlight">\(Q_n\)</span> 是指数的新近加权平均值，<em>没有初始偏差</em>。</p>
 </div>
 <div class="section" id="id7">
-<h2>2.7 上限置信区间动作选择<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>2.7 上限置信区间动作选择<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>探索是必要的，因为行动价值估计的准确性始终存在不确定性。贪婪的行为是目前看起来最好的行动，但其他一些行动可能实际上更好。
 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪行动选择迫使不贪婪的行动被尝试，而不是那些几乎贪婪或特别不确定的动作。
 最好根据它们实际上最优的潜力来选择非贪婪行动，同时考虑到它们的估计与最大值的接近程度以及这些估计中的不确定性。
 这样做的一种有效方法是根据选择行动</p>
 <div class="math notranslate nohighlight" id="equation-2-10">
-<span class="eqno">(10)<a class="headerlink" href="#equation-2-10" title="公式的永久链接">¶</a></span>\[A_t \doteq \mathop{argmax} \limits_{a} \left[Q_t(a) + c \sqrt{\frac{\ln{t}}{N_t(a)}}\right]\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-2-10" title="公式的永久链接"></a></span>\[A_t \doteq \mathop{argmax} \limits_{a} \left[Q_t(a) + c \sqrt{\frac{\ln{t}}{N_t(a)}}\right]\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\ln{t}\)</span> 表示t的自然对数（ <span class="math notranslate nohighlight">\(e \approx 2.71828\)</span> 必须提高到等于t的数量），
 <span class="math notranslate nohighlight">\(N_t(a)\)</span> 表示在时间t之前选择动作a的次数（（2.1）中的分母），数字 <span class="math notranslate nohighlight">\(c&gt;0\)</span> 控制探索的程度。
 如果 <span class="math notranslate nohighlight">\(N_t(a)=0\)</span>，则a被认为是最大化动作。</p>
@@ -510,27 +419,27 @@ Q_{n+1} &amp;= Q_n + \alpha(R_n - Q_n) \\
 <div class="figure align-default" id="id15">
 <span id="figure-2-4"></span><img alt="../../_images/figure-2.4.png" src="../../_images/figure-2.4.png" />
 <p class="caption"><span class="caption-text"><strong>图2.4</strong> 10臂赌博机试验上UCB动作选择的平均表现。如图所示，除了在前 <span class="math notranslate nohighlight">\(k\)</span> 个步骤中，
-当它在尚未尝试的动作中随机选择时，UCB通常比 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪动作选择”更好。</span><a class="headerlink" href="#id15" title="永久链接至图片">¶</a></p>
+当它在尚未尝试的动作中随机选择时，UCB通常比 <span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪动作选择”更好。</span><a class="headerlink" href="#id15" title="永久链接至图片"></a></p>
 </div>
 <p><em>练习2.8 USB尖峰</em> 在图2.4中，UCB算法在第11步显示出明显的性能峰值。为什么是这样？
 请注意，为了使您的答案完全令人满意，它必须解释为什么奖励在第11步增加以及为什么在随后的步骤中减少。
 提示：如果 <span class="math notranslate nohighlight">\(c=1\)</span>，则尖峰不太突出。</p>
 </div>
 <div class="section" id="id8">
-<h2>2.8 赌博机问题的梯度算法<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<h2>2.8 赌博机问题的梯度算法<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 <p>到目前为止，在本章中我们已经考虑了估算行动价值并使用这些估计值来选择行动的方法。
 这通常是一种很好的方法，但它不是唯一可行的方法。在本节中，我们考虑为每个动作a学习数字 <em>偏好</em>，我们将其表示为 <span class="math notranslate nohighlight">\(H_t(a)\)</span>。
 偏好越大，采取行动的次数越多，但偏好在奖励方面没有解释。只有一种行为相对于另一种行为的相对偏好才是重要的；
 如果我们将1000添加到所有动作首选项，则对动作概率没有影响，动作概率是根据soft-max分布（如Gibbs或Boltzmann分布）确定的，如下所示：</p>
 <div class="math notranslate nohighlight" id="equation-2-11">
-<span class="eqno">(11)<a class="headerlink" href="#equation-2-11" title="公式的永久链接">¶</a></span>\[Pr\{A_t=a\} \doteq \frac{e^{H_t(a)}}{\sum_{b=1}^{k}e^{H_t(b)}} \doteq \pi_t(a)\]</div>
+<span class="eqno">(11)<a class="headerlink" href="#equation-2-11" title="公式的永久链接"></a></span>\[Pr\{A_t=a\} \doteq \frac{e^{H_t(a)}}{\sum_{b=1}^{k}e^{H_t(b)}} \doteq \pi_t(a)\]</div>
 <p>在这里，我们还引入了一个有用的新符号， <span class="math notranslate nohighlight">\(\pi_t(a)\)</span>，表示在时间t采取行动的概率。
 最初，所有动作偏好都是相同的（例如，对于所有a， <span class="math notranslate nohighlight">\(H_1(a)=0\)</span>），使得所有动作具有相同的被选择概率。</p>
 <p><em>练习2.9</em> 指出在两个动作的情况下，soft-max分布与统计学和人工神经网络中经常使用的逻辑或sigmoid函数给出的相同。</p>
 <p>基于随机梯度上升的思想，存在用于该设置的自然学习算法。在每个步骤中，
 在选择动作 <span class="math notranslate nohighlight">\(A_t\)</span> 并接收奖励 <span class="math notranslate nohighlight">\(R_t\)</span> 之后，动作偏好通过以下方式更新：</p>
 <div class="math notranslate nohighlight" id="equation-2-12">
-<span class="eqno">(12)<a class="headerlink" href="#equation-2-12" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(12)<a class="headerlink" href="#equation-2-12" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 H_{t+1}(A_t) &amp;\doteq H_t(A_t) + \alpha(R_t-\overline{R}_t)(1-\pi_t(A_t))， &amp;和 \\
 H_{t+1}(a) &amp;\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&amp;对所有 a \ne A_t
 \end{aligned}\end{split}\]</div>
@@ -545,14 +454,14 @@ H_{t+1}(a) &amp;\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&amp;对所
 <div class="figure align-default" id="id16">
 <span id="figure-2-5"></span><img alt="../../_images/figure-2.5.png" src="../../_images/figure-2.5.png" />
 <p class="caption"><span class="caption-text"><strong>图2.5</strong> 当 <span class="math notranslate nohighlight">\(q_*(a)\)</span> 被选择为接近+4而不是接近零时，
-在10臂赌博机试验上具有和不具有奖励基线的梯度赌博机算法的平均性能。</span><a class="headerlink" href="#id16" title="永久链接至图片">¶</a></p>
+在10臂赌博机试验上具有和不具有奖励基线的梯度赌博机算法的平均性能。</span><a class="headerlink" href="#id16" title="永久链接至图片"></a></p>
 </div>
 <div class="important admonition">
 <p class="admonition-title">随机梯度上升的赌博机梯度算法</p>
 <p>通过将其理解为梯度上升的随机近似，可以更深入地了解梯度赌博机算法。
 在精确的梯度上升中，每个动作偏好 <span class="math notranslate nohighlight">\(H_t(a)\)</span> 将与增量对性能的影响成比例增加：</p>
 <div class="math notranslate nohighlight" id="equation-2-13">
-<span class="eqno">(13)<a class="headerlink" href="#equation-2-13" title="公式的永久链接">¶</a></span>\[H_{t+1}(a) \doteq H_t(a) + \alpha\frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)}\]</div>
+<span class="eqno">(13)<a class="headerlink" href="#equation-2-13" title="公式的永久链接"></a></span>\[H_{t+1}(a) \doteq H_t(a) + \alpha\frac{\partial \mathbb{E}[R_t]}{\partial H_t(a)}\]</div>
 <p>这里的性能衡量指标是预期的奖励：</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{E}[R_t] = \sum_{x}\pi_t(x)q_*(x)\]</div>
@@ -618,7 +527,7 @@ H_{t+1}(a) &amp;\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&amp;对所
 </div>
 </div>
 <div class="section" id="id9">
-<h2>2.9 关联搜索（语境赌博机）<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<h2>2.9 关联搜索（语境赌博机）<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>到目前为止，在本章中我们只考虑了非关联性任务，即不需要将不同行为与不同情况联系起来的任务。
 在这些任务中，学习者要么在任务静止时尝试找到单个最佳动作，要么在任务非平稳时随着时间的推移而尝试跟踪最佳动作。
 但是，在一般的强化学习任务中，存在多种情况，目标是学习策略：从状态到在这些情况下最佳的行为的映射。
@@ -639,7 +548,7 @@ H_{t+1}(a) &amp;\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&amp;对所
 我们将在下一章中提出这个问题，并在本书的其余部分考虑它的影响。</p>
 </div>
 <div class="section" id="id10">
-<h2>2.10 总结<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2>2.10 总结<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>我们在本章中介绍了几种平衡探索和利用的简单方法。<span class="math notranslate nohighlight">\(\varepsilon\)</span> 贪婪方法随机选择一小部分时间，而UCB方法确定性地选择，
 但通过巧妙地在每个步骤中有利于（favoring at）目前为止接收到更少样本的动作来实现探索。
 梯度赌博机算法估计的不是动作价值，而是动作偏好，并且使用soft-max分布以分级的概率方式支持更优选的动作。
@@ -657,7 +566,7 @@ H_{t+1}(a) &amp;\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&amp;对所
 总的来说，在这个问题上，UCB似乎表现最佳。</p>
 <div class="figure align-default" id="id17">
 <span id="figure-2-6"></span><img alt="../../_images/figure-2.6.png" src="../../_images/figure-2.6.png" />
-<p class="caption"><span class="caption-text"><strong>图2.6</strong> 本章介绍的各种赌博机算法的参数研究。每个点是在其参数的特定设置下使用特定算法通过1000步获得的平均奖励。</span><a class="headerlink" href="#id17" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图2.6</strong> 本章介绍的各种赌博机算法的参数研究。每个点是在其参数的特定设置下使用特定算法通过1000步获得的平均奖励。</span><a class="headerlink" href="#id17" title="永久链接至图片"></a></p>
 </div>
 <p>尽管它们很简单，但我们认为本章介绍的方法可以被认为是最先进的。
 有更复杂的方法，但它们的复杂性和假设使得它们对于我们真正关注的完整强化学习问题是不切实际的。
@@ -686,7 +595,7 @@ H_{t+1}(a) &amp;\doteq H_t(a) - \alpha(R_t-\overline{R}_t)\pi_t(a)，&amp;对所
 使用200,000步的运行，并且，作为每个算法和参数设置的性能度量，使用过去100,000步的平均奖励。</p>
 </div>
 <div class="section" id="id11">
-<h2>书目和历史评论<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p><strong>2.1</strong> 在统计学，工程学和心理学中研究了赌博机问题。在统计数据中，
 赌博机问题属于Thompson（1933,1934）和Robbins（1952）引入并由Bellman（1956）研究的“实验的顺序设计”分类。
 Berry和Fristedt（1985）从统计学的角度提供了对赌博机问题的广泛处理。
@@ -732,50 +641,33 @@ Russo，Van Roy，Kazerouni，Osband和Wen（2018）提供了对Thompson采样�
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter3/finite_markov_decision_process.html" class="btn btn-neutral float-right" title="第3章 有限马尔可夫决策过程" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../index.html" class="btn btn-neutral float-left" title="第一部分 表格解决方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="第一部分 表格解决方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter3/finite_markov_decision_process.html" class="btn btn-neutral float-right" title="第3章 有限马尔可夫决策过程" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

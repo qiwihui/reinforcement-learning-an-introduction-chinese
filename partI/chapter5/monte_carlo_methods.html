@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第5章 蒙特卡洛方法 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第6章 时序差分学习" href="../chapter6/temporal_difference_learning.html" />
     <link rel="prev" title="第4章 动态规划" href="../chapter4/dynamic_programming.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -125,8 +76,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -146,72 +95,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
-        
       <li>第5章 蒙特卡洛方法</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partI/chapter5/monte_carlo_methods.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partI/chapter5/monte_carlo_methods.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第5章 蒙特卡洛方法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第5章 蒙特卡洛方法<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>这一章，我们开始考虑评估价值函数以及获得最优策略的第一种学习方法。
 不同于上一章，这里我们不再假设我们对环境有完全的了解。
 蒙特卡洛方法需要的仅仅是 <em>经验*──与环境进行真实的或者模拟的交互所得到的状态，动作，奖励的样本序列。
@@ -239,7 +148,7 @@
 然后是策略提升，以及最后，控制的问题和解决它的广义策略迭代方法。
 从动态规划（DP）中得到的这些想法都被推广到蒙特卡洛方法中，不过在这种情况下（指蒙特卡洛），我们只有样本经验。</p>
 <div class="section" id="id2">
-<h2>5.1 蒙特卡洛预测<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>5.1 蒙特卡洛预测<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>我们开始考虑在给定策略的情况下，用蒙特卡洛方法学习状态-价值函数。
 我们之前讲过，一个状态的价值等于从这个状态开始的期望回报──期望的累积未来折扣奖励。
 一个显而易见的估计方法是，对经验中的所有的这个状态的回报求平均。
@@ -309,7 +218,7 @@
 经过500,000次的游戏，我们看到价值函数被近似得很好。</p>
 <div class="figure align-default" id="id13">
 <img alt="图5.1：遵循一直要牌直到点数和等于20或21的策略，使用蒙特卡洛策略估计求得的估计的状态价值函数。" src="../../_images/figure-5.1.png" />
-<p class="caption"><span class="caption-text">图5.1：遵循一直要牌直到点数和等于20或21的策略，使用蒙特卡洛策略估计求得的估计的状态价值函数。</span><a class="headerlink" href="#id13" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">图5.1：遵循一直要牌直到点数和等于20或21的策略，使用蒙特卡洛策略估计求得的估计的状态价值函数。</span><a class="headerlink" href="#id13" title="永久链接至图片"></a></p>
 </div>
 <p><em>练习 5.1</em> 请思考，图5.1右边两幅图：为什么估计值在尾部的最后两行会突然变大？
 为什么最左边的整个一行价值会有下降？为什么前面部分，上面图中的价值要大于下面的图？</p>
@@ -338,7 +247,7 @@
 这是蒙特卡洛（MC）方法相对说DP方法的好处（继可以从真实经验和模拟经验中学习之后的第三个好处）。</p>
 <div class="figure align-right" id="id14">
 <a class="reference internal image-reference" href="../../_images/bubble.png"><img alt="../../_images/bubble.png" src="../../_images/bubble.png" style="width: 250px;" /></a>
-<p class="caption"><span class="caption-text">线圈上的肥皂泡（来自 Hersh 和 Griego（1969），已授权修改。1969 Scientific American，Nature America，Inc 的一个部门。保留所有权利。）</span><a class="headerlink" href="#id14" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">线圈上的肥皂泡（来自 Hersh 和 Griego（1969），已授权修改。1969 Scientific American，Nature America，Inc 的一个部门。保留所有权利。）</span><a class="headerlink" href="#id14" title="永久链接至图片"></a></p>
 </div>
 <p><strong>例5.2：肥皂泡</strong> 假设一根线围成一个闭环，在肥皂水中浸泡后，表面形成了一个肥皂薄膜或者泡泡。
 如果线是不规则的但是已知，如何计算肥皂泡表面的形状呢？
@@ -354,7 +263,7 @@
 如果我们仅仅对某一点或者某一小块区域的高度感兴趣，这个蒙特卡洛（MC）方法要比之前的迭代方法高效的多。</p>
 </div>
 <div class="section" id="id3">
-<h2>5.2 动作价值的蒙特卡洛估计<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>5.2 动作价值的蒙特卡洛估计<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>如果模型不可用，那么估计 <em>动作</em> 价值（即状态-价值对的值）而不是 <em>状态</em> 价值就会特别有用。
 如果模型可用，那么仅使用状态价值就可以决定策略；
 决定下一步只需要看哪个动作导致的奖励和下一状态组合最佳，就像我们在动态规划（DP）那章所讲的一样。
@@ -382,7 +291,7 @@ MC 和首次访问 MC）都会以二次方收敛到期望值。</p>
 <p><em>练习 5.2</em> 请问蒙特卡洛估计 <span class="math notranslate nohighlight">\(q_\pi\)</span> 的备份图怎样的？</p>
 </div>
 <div class="section" id="id4">
-<h2>5.3 蒙特卡洛控制<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>5.3 蒙特卡洛控制<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <div class="figure align-right">
 <a class="reference internal image-reference" href="../../_images/GPI_chp5.3.png"><img alt="../../_images/GPI_chp5.3.png" src="../../_images/GPI_chp5.3.png" style="width: 200px;" /></a>
 </div>
@@ -404,7 +313,7 @@ MC 和首次访问 MC）都会以二次方收敛到期望值。</p>
 对于任何的动作-价值函数 <span class="math notranslate nohighlight">\(q\)</span>，它对应的贪婪策略是：对每个 <span class="math notranslate nohighlight">\(s \in\mathcal{S}\)</span>，
 选择使动作-价值函数最大的那个动作：</p>
 <div class="math notranslate nohighlight" id="equation-5-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-5-1" title="公式的永久链接">¶</a></span>\[\pi(s) \dot{=} arg \space \underset{a}{max} \space q(s,a)\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-5-1" title="公式的永久链接"></a></span>\[\pi(s) \dot{=} arg \space \underset{a}{max} \space q(s,a)\]</div>
 <p>之后我们可以做策略提升，我们构建每个 <span class="math notranslate nohighlight">\(\pi_{k+1}\)</span> 为 <span class="math notranslate nohighlight">\(q_{\pi_k}\)</span> 的贪婪策略。
 策略提升理论（见4.2节）可以应用到 <span class="math notranslate nohighlight">\(\pi_k\)</span> 和 <span class="math notranslate nohighlight">\(\pi_{k+1}\)</span> 上，
 因为对于所有 <span class="math notranslate nohighlight">\(s \in\mathcal{S}\)</span>，</p>
@@ -468,7 +377,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。</p>
 不过这个还未被正式的证明。在我们看来，这个是强化学习中最为重要的开放问题（部分解决方法请看 Tsitsiklis，2002）。</p>
 <div class="figure align-default" id="id15">
 <img alt="图 5.3： 使用探索开端的蒙特卡洛算法（Monte Carlo ES），21点的最优策略和状态-价值函数。状态-价值函数是从算法得到的动作-价值函数计算而来的" src="../../_images/figure-5.2.png" />
-<p class="caption"><span class="caption-text"><strong>图 5.2：</strong> 使用探索开端的蒙特卡洛算法下21点的最优策略和状态-价值函数。状态-价值函数是从算法得到的动作-价值函数计算而来的。</span><a class="headerlink" href="#id15" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图 5.2：</strong> 使用探索开端的蒙特卡洛算法下21点的最优策略和状态-价值函数。状态-价值函数是从算法得到的动作-价值函数计算而来的。</span><a class="headerlink" href="#id15" title="永久链接至图片"></a></p>
 </div>
 <p><strong>例 5.3：解决21点问题</strong> 我们很容易的使用探索开端的蒙特卡洛算法来解决21点问题。
 由于这些回合都是仿真的游戏，所以很容易使探索开端包含所有的可能性。
@@ -479,7 +388,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。</p>
 我们虽然不清楚为什么会有那个缺口，但是我们确信上图的策略就是我们所说版本的21点游戏的最优策略。</p>
 </div>
 <div class="section" id="id5">
-<h2>5.4 非探索开端的蒙特卡洛控制<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>5.4 非探索开端的蒙特卡洛控制<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>如何摆脱这个在实践中不太可能发生的探索开端的假设呢？
 保证无限次后所有的动作都能被选到的惟一的通用办法是让个体能够持续地选择它们。
 具体来讲有两种方法，我们称之为 <em>在策略（on-policy）</em> 方法和 <em>离策略（off-policy）</em> 方法。
@@ -545,7 +454,7 @@ Carlo ES，即 Monte Carlo with Exploring Starts）。</p>
 设 <span class="math notranslate nohighlight">\(\pi'\)</span> 为 <span class="math notranslate nohighlight">\(\epsilon -\)</span> 贪心策略。
 策略提升理论能够应用在这里，因为对所有 <span class="math notranslate nohighlight">\(s \in \mathcal{S}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-5-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-5-2" title="公式的永久链接">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(2)<a class="headerlink" href="#equation-5-2" title="公式的永久链接"></a></span>\[\begin{split}\begin{aligned}
 q_{\pi}\left(s, \pi^{\prime}(s)\right) &amp;=\sum_{a} \pi^{\prime}(a | s) q_{\pi}(s, a) \\
 &amp;=\frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \max _{a} q_{\pi}(s, a) (5.2)\\
 &amp; \geq \frac{\varepsilon}{|\mathcal{A}(s)|} \sum_{a} q_{\pi}(s, a)+(1-\varepsilon) \sum_{a} \frac{\pi(a | s)-\frac{\varepsilon}{|\mathcal{A}(s)|}}{1-\varepsilon} q_{\pi}(s, a)
@@ -592,7 +501,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 但是另一方面，我们移除了探索开端的假设。</p>
 </div>
 <div class="section" id="id6">
-<h2>5.5 通过重要性采样的离策略预测<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>5.5 通过重要性采样的离策略预测<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p>所有的控制方法都会面临这样一个两难的问题：一方面，他们需要通过 <em>最优</em> 的行为来学习动作价值；
 但另一方面，他们需要表现地不那么好，来探索所有的动作（来 <em>找到</em> 最优的动作）。
 那么，如何既能够学到最优策略，又能够在实际中多探索呢？
@@ -632,7 +541,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 <p>其中， <span class="math notranslate nohighlight">\(p\)</span> 是状态转移概率函数，它的定义参见式（3.4）。
 因此，在目标策略和行为策略下的该轨迹的发生的相对概率为（即重要性采样率）</p>
 <div class="math notranslate nohighlight" id="equation-5-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-5-3" title="公式的永久链接">¶</a></span>\[\rho_{t:T-1} \doteq \frac{\prod_{k=t}^{T-1} \pi(A_k|S_k)p(S_{k+1}|S_k,A_k)}
+<span class="eqno">(3)<a class="headerlink" href="#equation-5-3" title="公式的永久链接"></a></span>\[\rho_{t:T-1} \doteq \frac{\prod_{k=t}^{T-1} \pi(A_k|S_k)p(S_{k+1}|S_k,A_k)}
 {\prod_{k=t}^{T-1} b(A_k|S_k)p(S_{k+1}|S_k,A_k)}
 = \prod_{k=t}^{T-1} \frac{\pi(A_k|S_k)}{b(A_k|S_k)}\]</div>
 <p>注意到上式中的轨迹的概率依赖于MDP的转移概率（常常是未知的），但是它们在分子和分母中都是相同的，能够被消掉。
@@ -641,7 +550,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 这些回报具有错误的期望 <span class="math notranslate nohighlight">\(\mathbb{E}[G_t|S_t=s]=v_b(s)\)</span>，因此不能平均得到 <span class="math notranslate nohighlight">\(v_\pi\)</span>。
 这是重要性抽样的来源。比率 <span class="math notranslate nohighlight">\(rho_{t:T-1}\)</span> 将收益转换为具有正确的期望值：</p>
 <div class="math notranslate nohighlight" id="equation-5-4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-5-4" title="公式的永久链接">¶</a></span>\[\mathbb{E}[\rho_{t:T-1}G_t|S_t=s]=v_{\pi}(s)\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-5-4" title="公式的永久链接"></a></span>\[\mathbb{E}[\rho_{t:T-1}G_t|S_t=s]=v_{\pi}(s)\]</div>
 <p>现在我们准备好给出蒙特卡洛算法，算法使用在策略 <span class="math notranslate nohighlight">\(b\)</span> 下的一批观察到的回合来估计 <span class="math notranslate nohighlight">\(v_\pi(s)\)</span>。
 为了方便，我们将时间步调设置为穿过回合的递增形式，即下一个回合开始时的时间步调不清零，而是接着上个回合的末尾加一。
 比如，这一批的回合中，第一回合在时间 <span class="math notranslate nohighlight">\(100\)</span> 的时候结束，那么下一个回合在时间 <span class="math notranslate nohighlight">\(t=101\)</span> 开始。
@@ -653,11 +562,11 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 <span class="math notranslate nohighlight">\(\{\rho_{t:T(t)-1} \}_{t \in \cal{T}(s)}\)</span> 表示对应的重要性采样率。
 为了估计 <span class="math notranslate nohighlight">\(v_\pi(s)\)</span> ，我们用重要性采样率来缩放回报，然后求平均：</p>
 <div class="math notranslate nohighlight" id="equation-5-5">
-<span class="eqno">(5)<a class="headerlink" href="#equation-5-5" title="公式的永久链接">¶</a></span>\[V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{|\cal{T}(s)|}.\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-5-5" title="公式的永久链接"></a></span>\[V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{|\cal{T}(s)|}.\]</div>
 <p>当重要性采样只是以上面的简单的方式求平均时，我们称为 <em>原始重要性采样（ordinary importance sampling）</em> 。</p>
 <p>另一个选择是 <em>加权重要性采样（weighted importance sampling）</em> ，它使用了加权平均，定义为</p>
 <div class="math notranslate nohighlight" id="equation-5-6">
-<span class="eqno">(6)<a class="headerlink" href="#equation-5-6" title="公式的永久链接">¶</a></span>\[V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1}},\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-5-6" title="公式的永久链接"></a></span>\[V(s) \doteq \frac{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1} G_t}{\sum_{t \in \cal{T}(s)} \rho_{t:T(t)-1}},\]</div>
 <p>若分母为零，加权重要性采样也为零。
 为了了解这两种不同的重要性采样方法，在观察状态 <span class="math notranslate nohighlight">\(s\)</span> 的单一回报后，我们考虑其首次访问方法的估计。
 对加权重要性采样来说，分子分母中的 <span class="math notranslate nohighlight">\(\rho_{t:T(t)-1}\)</span> 可以消掉，
@@ -694,7 +603,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 两种算法的误差都趋向于零，但是加权重要性采样在开始的时候误差更小，这在实践中很典型。</p>
 <div class="figure align-default" id="id16">
 <img alt="../../_images/figure-5.3.png" src="../../_images/figure-5.3.png" />
-<p class="caption"><span class="caption-text"><strong>图5.3：</strong> 从离策略回合数据估计21点的单个状态的价值，加权重要性采样有更低的估计误差。</span><a class="headerlink" href="#id16" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text"><strong>图5.3：</strong> 从离策略回合数据估计21点的单个状态的价值，加权重要性采样有更低的估计误差。</span><a class="headerlink" href="#id16" title="永久链接至图片"></a></p>
 </div>
 <p><strong>例 5.5：无限方差</strong> 对原始重要性采样的估计通常会有无限的方差，因此带来了不太让人满意的收敛特性，
 即无论合适，缩放的回报都有无限的方差——而这在回合的轨迹中包含环时更加容易发生。
@@ -710,7 +619,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 <img alt="../../_images/figure-5.4.png" src="../../_images/figure-5.4.png" />
 <p class="caption"><span class="caption-text"><strong>图5.4：</strong> 原始重要性采样估计例5.5的单状态MDP，产生了惊人的不稳定性。
 正确的估计值应该是1（<span class="math notranslate nohighlight">\(\gamma=1\)</span>），即使只有一次回报（在重要性采样之后）。
-但图中样本的方差是无限的，估计值不能收敛于这个正确值。这些结果对应于离策略首次访问MC方法。</span><a class="headerlink" href="#id17" title="永久链接至图片">¶</a></p>
+但图中样本的方差是无限的，估计值不能收敛于这个正确值。这些结果对应于离策略首次访问MC方法。</span><a class="headerlink" href="#id17" title="永久链接至图片"></a></p>
 </div>
 <p>图5.4的下部显示了使用原始重要性采样，十次独立的首次访问MC方法得到的结果。
 即使是经历了数百万次的回合后，估计值也不能收敛到正确值 <span class="math notranslate nohighlight">\(1\)</span>。
@@ -753,7 +662,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 假设对同样的问题，我们使用每次访问MC方法。估计值的方差还会是无限吗？为什么？</p>
 </div>
 <div class="section" id="id7">
-<h2>5.6 增量式的实现<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2>5.6 增量式的实现<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>蒙特卡洛预测方法可以用增量式的方式，用回合式的形式，使用在第二章（2.4节）提到的展开的技术实现。
 不同的是，第二章中我们平均 <em>奖励</em>，而蒙特卡洛方法中，我们平均 <em>回报</em>。
 其他第二章所用到的，都可以用在 <em>在策略</em> 蒙特卡洛方法中。
@@ -766,7 +675,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 <p>然后在每获得一个额外的回报 <span class="math notranslate nohighlight">\(G_n\)</span> 时保持更新。除了跟踪 <span class="math notranslate nohighlight">\(V_n\)</span>，
 我们还必须保持给定前 <span class="math notranslate nohighlight">\(n\)</span> 个回报下每个状态的累积权值 <span class="math notranslate nohighlight">\(C_n\)</span>。<span class="math notranslate nohighlight">\(V_n\)</span> 的更新规则是</p>
 <div class="math notranslate nohighlight" id="equation-5-8">
-<span class="eqno">(7)<a class="headerlink" href="#equation-5-8" title="公式的永久链接">¶</a></span>\[V_{n+1} \doteq V_n +\frac{W_n}{C_n}\left[G_n - V_n \right], \quad n \geq 1,\]</div>
+<span class="eqno">(7)<a class="headerlink" href="#equation-5-8" title="公式的永久链接"></a></span>\[V_{n+1} \doteq V_n +\frac{W_n}{C_n}\left[G_n - V_n \right], \quad n \geq 1,\]</div>
 <p>且</p>
 <div class="math notranslate nohighlight">
 \[C_{n+1} \doteq C_n + W_{n+1},\]</div>
@@ -803,7 +712,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 </div>
 </div>
 <div class="section" id="id8">
-<h2>5.7 离策略蒙特卡洛控制<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<h2>5.7 离策略蒙特卡洛控制<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 <p>现在我们开始展示一个例子，关于本书的第二类学习控制方法：离策略方法。
 前面讲到，在策略的显著特点是，它在估计策略值的同时也用于控制。而离策略方法中，这两个功能是分开的。
 用于产生行为的策略，即称作 <em>行为</em> 策略，事实上与要评估和提升的策略，即 <em>目标</em> 策略，是无关的。
@@ -857,7 +766,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 <p><em>练习 5.12：赛车轨迹（编程）</em> 考虑驾驶赛车在像图5.5那样的赛道上拐弯。你想要尽可能的快，但是又不能冲出赛道。</p>
 <div class="figure align-default" id="id18">
 <img alt="../../_images/figure-5.5.png" src="../../_images/figure-5.5.png" />
-<p class="caption"><span class="caption-text">图 5.5：一对向右转的赛车轨迹问题</span><a class="headerlink" href="#id18" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">图 5.5：一对向右转的赛车轨迹问题</span><a class="headerlink" href="#id18" title="永久链接至图片"></a></p>
 </div>
 <p>在我们简化版的赛车轨迹问题中，赛车在其中的一个离散的格子中。
 赛车的速度也是离散的，表示每个时间步长会在水平方向和竖直方向移动的格子数。
@@ -872,7 +781,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 展示一些遵循最优策略的轨迹（关掉轨迹噪声）。</p>
 </div>
 <div class="section" id="id9">
-<h2>5.8 *折扣感知的重要性采样<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<h2>5.8 *折扣感知的重要性采样<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>目前为止，我们所讨论的离策略是基于重要性采样，将回报看成一个整体，对回报进行加权，
 而并没有考虑到回报内在的结构是折扣奖励的和。
 这一节，我们将简单考虑一种前沿研究的思想，使用这个回报的结构来很大意义上减少离策略估计的方差。</p>
@@ -913,14 +822,14 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 由于 <span class="math notranslate nohighlight">\(G_{t:h}\)</span> 只包含了到水平线 <span class="math notranslate nohighlight">\(h\)</span> 的奖励，我们只需要到 <span class="math notranslate nohighlight">\(h\)</span> 的概率的比率。
 现在像式5.5那样，我们定义一个原始重要性采样估计器，如下</p>
 <div class="math notranslate nohighlight" id="equation-5-9">
-<span class="eqno">(8)<a class="headerlink" href="#equation-5-9" title="公式的永久链接">¶</a></span>\[V(s) \doteq \frac{
+<span class="eqno">(8)<a class="headerlink" href="#equation-5-9" title="公式的永久链接"></a></span>\[V(s) \doteq \frac{
 \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1} \overline{G}_{t : h}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1} \overline{G}_{t : T(t)}\right)
 }{
 |\mathcal{T}(s)|
 }\]</div>
 <p>像式5.6那样，定义一个加权重要性采样估计器，如下</p>
 <div class="math notranslate nohighlight" id="equation-5-10">
-<span class="eqno">(9)<a class="headerlink" href="#equation-5-10" title="公式的永久链接">¶</a></span>\[V(s) \doteq \frac{
+<span class="eqno">(9)<a class="headerlink" href="#equation-5-10" title="公式的永久链接"></a></span>\[V(s) \doteq \frac{
 \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1} \overline{G}_{t : h}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1} \overline{G}_{t : T(t)}\right)
 }{
 \sum_{t \in \mathcal{T}(s)}\left((1-\gamma) \sum_{h=t+1}^{T(t)-1} \gamma^{h-t-1} \rho_{t : h-1}+\gamma^{T(t)-t-1} \rho_{t : T(t)-1}\right)
@@ -929,7 +838,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 它们考虑了折扣率，但如果 <span class="math notranslate nohighlight">\(\gamma = 1\)</span> 则没有影响（与5.5节离策略估计器一样）。</p>
 </div>
 <div class="section" id="id10">
-<h2>5.9 *每决策重要性抽样<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2>5.9 *每决策重要性抽样<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>还有一种方法，在离策略重要性采样里将回报结构作为奖励总和考虑在内，
 这样的方法即使在没有折扣的情况下（即 <span class="math notranslate nohighlight">\(\gamma = 1\)</span> ）也可以减少方差。
 在离策略估计器5.5和5.6中，和中的每个元素本身也是和：</p>
@@ -942,14 +851,14 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 注意到，5.11中的每个元素是一个随机奖励和一个随机重要性采样率的乘积。
 比如，第一个元素，我们用5.3式展开，</p>
 <div class="math notranslate nohighlight" id="equation-5-12">
-<span class="eqno">(10)<a class="headerlink" href="#equation-5-12" title="公式的永久链接">¶</a></span>\[\rho_{t : T-1} R_{t+1} = \frac{\pi(A_t|S_t)}{b(A_t|S_t)} \frac{\pi(A_{t+1}|S_{t+1})}{b(A_{t+1}|S_{t+1})} \frac{\pi(A_{t+2}|S_{t+2})}{b(A_{t+2}|S_{t+2})} \cdots \frac{\pi(A_{T-1}|S_{T-1})}{b(A_{T-1}|S_{T-1})}R_{t+1}.\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-5-12" title="公式的永久链接"></a></span>\[\rho_{t : T-1} R_{t+1} = \frac{\pi(A_t|S_t)}{b(A_t|S_t)} \frac{\pi(A_{t+1}|S_{t+1})}{b(A_{t+1}|S_{t+1})} \frac{\pi(A_{t+2}|S_{t+2})}{b(A_{t+2}|S_{t+2})} \cdots \frac{\pi(A_{T-1}|S_{T-1})}{b(A_{T-1}|S_{T-1})}R_{t+1}.\]</div>
 <p>在所有这些项中，我们可以猜想，上式中只有第一项和最后一项（奖励）是相关的；所有其他都是与奖励后发生的事件有关，他们的期望值是：</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}:label: 5.13\\\mathbb{E}\left[\frac{\pi(A_k|S_k)}{b(A_k|S_k)}\right]
 = \sum_a b(a|S_k)\frac{\pi(a|S_k)}{b(a|S_k)} = \sum_a \pi(a|S_k) = 1.\end{aligned}\end{align} \]</div>
 <p>通过更多几个步骤可以证明，如所猜想的那样，所有这些其他项对期望没有影响，换句话说，</p>
 <div class="math notranslate nohighlight" id="equation-5-14">
-<span class="eqno">(11)<a class="headerlink" href="#equation-5-14" title="公式的永久链接">¶</a></span>\[\mathbb E[\rho_{t:T-1} R_{t+1}] = \mathbb E[\rho_{t:t} R_{t+1}].\]</div>
+<span class="eqno">(11)<a class="headerlink" href="#equation-5-14" title="公式的永久链接"></a></span>\[\mathbb E[\rho_{t:T-1} R_{t+1}] = \mathbb E[\rho_{t:t} R_{t+1}].\]</div>
 <p>如果对5.11中第k项重复上述的分析，我们得到</p>
 <div class="math notranslate nohighlight">
 \[\mathbb E[\rho_{t:T-1} R_{t+k}] = \mathbb E[\rho_{t:t+k-1}R_{t+k}].\]</div>
@@ -962,7 +871,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 <p>上述思想我们称作 <em>每决策（per-decision）</em> 重要性采样。紧随其后的是一个交替重要性采样估计器，
 同样是无偏差的，就像5.5的原始重要性采样估计器一样，它使用了 <span class="math notranslate nohighlight">\(\tilde{G}_{t}\)</span> ：</p>
 <div class="math notranslate nohighlight" id="equation-5-11">
-<span class="eqno">(12)<a class="headerlink" href="#equation-5-11" title="公式的永久链接">¶</a></span>\[V(s) \doteq \frac{\sum_{t \in \mathcal T(s)} \tilde{G}_t}{|\mathcal T(s)|},\]</div>
+<span class="eqno">(12)<a class="headerlink" href="#equation-5-11" title="公式的永久链接"></a></span>\[V(s) \doteq \frac{\sum_{t \in \mathcal T(s)} \tilde{G}_t}{|\mathcal T(s)|},\]</div>
 <p>我们可能会期望有时会降低方差。</p>
 <p>是否存在一个每决策版本的 <em>加权</em> 重要性采样呢？这个我们不太清楚。
 目前为止，我们所知的这样的估计器都是非一致的（即是说，无限数据也不能让他们收敛到正确的值）。</p>
@@ -971,7 +880,7 @@ v_{\pi}(s)=&amp;(1-\varepsilon) \max _{a} q_{\pi}(s, a)+\frac{\varepsilon}{|\mat
 请注意，您首先需要将此等式转换为动作价值。</p>
 </div>
 <div class="section" id="id11">
-<h2>5.10 小结<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2>5.10 小结<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>这一章的蒙特卡洛方法以 <em>样本回合</em> 的方式，从经验中学习价值函数和最优策略。
 相比于动态规划（DP）的方法，这至少有三种优势。
 首先，它们能够直接从与环境的交互中学习到最优的行为，并不需要知道环境的动态。
@@ -1006,7 +915,7 @@ GPI包含了策略评估和策略迭代的交互过程。蒙特卡洛方法提�
 下一章，我们将会考虑一种方法，它可以像蒙特卡洛那样从经验中学习，也可以像动态规划那样使用提升（bootstrap）。</p>
 </div>
 <div class="section" id="id12">
-<h2>书目和历史评论<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<h2>书目和历史评论<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>术语“蒙特卡洛”源于1940s，当时Los Alamos的物理学家发明了一种概率游戏，来帮助他们理解有关原子弹的复杂物理现象。
 有一些教材从这个方面谈论了蒙特卡洛方法（例如，Kalos and Whitlock, 1986；Rubinstein, 1981）。</p>
 <p><strong>5.1-2</strong> Singh和Sutton（1996）区分了每次访问MC方法和首次访问MC方法，并证明了强化学习中有关这些方法的一些结论。
@@ -1040,50 +949,33 @@ Narendra和Wheeler（1986）研究了一种蒙特卡洛方法，用于各态历�
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter6/temporal_difference_learning.html" class="btn btn-neutral float-right" title="第6章 时序差分学习" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter4/dynamic_programming.html" class="btn btn-neutral float-left" title="第4章 动态规划" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter4/dynamic_programming.html" class="btn btn-neutral float-left" title="第4章 动态规划" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter6/temporal_difference_learning.html" class="btn btn-neutral float-right" title="第6章 时序差分学习" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>

@@ -1,97 +1,48 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>第15章 神经科学 &mdash; 强化学习导论 0.0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
-    
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第16章 应用及案例分析" href="../chapter16/applications_and_case_studies.html" />
     <link rel="prev" title="第14章 心理学" href="../chapter14/psychology.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../../index.html" class="icon icon-home"> 强化学习导论
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.0.1
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
 
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-
-            
-            
-              
-            
-            
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -125,8 +76,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-            
-          
 <style>
 .adsbygoogle-style {
   background-color: rgb(52, 49, 49);
@@ -146,72 +95,32 @@
 </script>
 
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="../index.html">第三部分 深入研究</a> &raquo;</li>
-        
       <li>第15章 神经科学</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-            <a href="../../_sources/partIII/chapter15/neuroscience.rst.txt" rel="nofollow"> View page source</a>
-          
-        
+            <a href="../../_sources/partIII/chapter15/neuroscience.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <div class="section" id="id1">
-<h1>第15章 神经科学<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1>第15章 神经科学<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <p>神经科学是对神经系统的多学科研究的总称，主要包括：如何调节身体功能，如何控制行为，
 由发育、学习和老化所引起的随着时间的变化，以及细胞和分子机制如何使这些功能成为可能。
 强化学习的最令人兴奋的方面之一是来自神经科学的越来越多的证据表明，
@@ -238,7 +147,7 @@
 我们的方法和这些方法不太相似因为我们假设读者熟悉本书前面几章所介绍的强化学习，但是不了解有关神经科学的知识。
 因此我们首先简要介绍神经科学的概念，以便让你有基本的理解。</p>
 <div class="section" id="id2">
-<h2>15.1 神经科学基础<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2>15.1 神经科学基础<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>了解一些关于神经系统的基本知识有助于理解本章的内容。我们后面提到的术语用楷体表示。
 如果你已经有神经科学方面的基本知识，则可以跳过这一节。</p>
 <p><em>神经元</em> 是神经系统的主要组成部分，是专门用于电子和化学信号的处理及信息传输的细胞。
@@ -280,7 +189,7 @@
 通过神经调节剂多巴胺对突触可塑性进行调节是大脑实现学习算法的一种机制，就像本书所描述的那些算法一样。</p>
 </div>
 <div class="section" id="id3">
-<h2>15.2 收益信号、强化信号、价值和预测误差<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2>15.2 收益信号、强化信号、价值和预测误差<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <p>神经科学和计算型的强化学习之间的联系始于大脑信号和在强化学习理论与算法中起重要作用的信号之间的相似性。
 在第3章中，我们提到，任何对目标导向的行为进行学习的问题描述都可以归结为具有代表性的三种信号：动作、状态和收益。
 然而，为了解释神经科学和强化学习之间的联系，我们必须更加具体地考虑其他强化学习的信号，这些信号以特定的方式与大脑中的信号相对应。
@@ -326,7 +235,7 @@
 这个证据引出了 <em>多巴胺神经元活动的收益预测误差假说</em>，我们将在下面描述。</p>
 </div>
 <div class="section" id="id6">
-<h2>15.3 收益预测误差假说<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>15.3 收益预测误差假说<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p><em>多巴胺神经元活动的收益预测误差假说</em> 认为，哺乳动物体内产生多巴胺的神经元的相位活动的功能之一，
 就是将未来的期望收益的新旧估计值之间的误差传递到整个大脑的所有目标区域。
 Montague、 Dayan和 Sejnowski1996）首次明确提出了这个假说（虽然没有用这些确切的词语），
@@ -370,7 +279,7 @@ Montague等人选择了全串行复合刺激表示（CSC），如图141左边一
 </dl>
 </div>
 <div class="section" id="id9">
-<h2>15.4 多巴胺<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<h2>15.4 多巴胺<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>多巴胺是神经元产生的一种神经递质，其细胞体主要位于哺乳动物大脑的两个神经元群中：黑质致密部（SNpc）和腹侧被盖区（VTA）。
 多巴胺在哺乳动物大脑的许多活动中起着重要的作用。其中突出的是动机、学习、行动选择、大多数形式的成瘾、精神分裂症和帕金森病。
 多巴胺被称为神经调节剂，因为除了直接快速使靶向神经元兴奋或抑制靶向神经元之外，多巴胺还具有许多功能。
@@ -410,7 +319,7 @@ Montague等人选择了全串行复合刺激表示（CSC），如图141左边一
 由于收益已经被正确预测，所以学习通常会被阻塞（阻塞示例见本书14.2.1节）。</p>
 <div class="figure align-right" id="id19">
 <a class="reference internal image-reference" href="../../_images/single_neuron_producing_dopamine.png"><img alt="../../_images/single_neuron_producing_dopamine.png" src="../../_images/single_neuron_producing_dopamine.png" style="width: 250px;" /></a>
-<p class="caption"><span class="caption-text">单个神经元的轴突生成多巴胺作为神经递质。这些轴突通过突触和脑中目标区域的大量神经元树突进行信息传递。</span><a class="headerlink" href="#id19" title="永久链接至图片">¶</a></p>
+<p class="caption"><span class="caption-text">单个神经元的轴突生成多巴胺作为神经递质。这些轴突通过突触和脑中目标区域的大量神经元树突进行信息传递。</span><a class="headerlink" href="#id19" title="永久链接至图片"></a></p>
 <div class="legend">
 <p>引自： The Journal of Neurosctence, Matsuda, Furuta, Nakamura, Hioki. Fujiyama,
 Arai, and Kaneko, volume 29, 2009, page 451.</p>
@@ -457,11 +366,11 @@ Arai, and Kaneko, volume 29, 2009, page 451.</p>
 这使得可能有几种类型的学习规则共同支配皮质纹状突触的可塑性。
 多巴胺神经元的每个轴突与大约500 000个脊柱茎的突触发生信息传递。
 其他神经递质传递途径和多种受体类型不在我们讨论范围，如D1和D2多胺受，多巴胺可以在脊柱和其他突触后位点产生不同的效应。
-引自： Journal of Neurophysiology，w. Schultz vol.80，1998，page10.</span><a class="headerlink" href="#id20" title="永久链接至图片">¶</a></p>
+引自： Journal of Neurophysiology，w. Schultz vol.80，1998，page10.</span><a class="headerlink" href="#id20" title="永久链接至图片"></a></p>
 </div>
 </div>
 <div class="section" id="id10">
-<h2>15.5 收益预测误差假说的实验支持<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2>15.5 收益预测误差假说的实验支持<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>多巴胺神经元以激烈、新颖或意想不到的视觉、听觉刺激来触发眼部和身体的运动，但它们的活动很少与运动本身有关。
 这非常令人惊讶，因为多巴胺神经元的功能衰退是帕金森病的一个原因，其症状包括运动障碍，尤其是自发运动中的缺陷。
 Romo和 Schultz（1990）以及Schultz和Romo（1990）通过记录猴子移动手臂时多巴胺神经元和肌肉的活动开始向收益预测误差假说迈出第一步。</p>
@@ -489,7 +398,7 @@ Romo和 Schultz（1990）以及Schultz和Romo（1990）通过记录猴子移动�
 图中展示的是在细微时间间隔内被监测的多巴胺神经元产生的动作电位（这些数据是23~4个神经元产生的）。
 顶部图：多巴胺神经元被无规律产生的苹果汁激活。中间图：随着学习，多巴胺神经元对收益预测触发线索产生反应，对收益传递失去反应。
 底部图：通过在触发脉冲之前增加1s的指示线索，多巴胺神经元将它们的响应从触发线索转移到较早的指示线索。
-引自： Schultz et al.（1995）， MIT Press.</span><a class="headerlink" href="#id21" title="永久链接至图片">¶</a></p>
+引自： Schultz et al.（1995）， MIT Press.</span><a class="headerlink" href="#id21" title="永久链接至图片"></a></p>
 </div>
 <p>在这项研究之后，同样的猴子接受了新的任务训练（Schultz、 Apicella和 Ljungberg，1993）。
 这次猴子面临两个杠杆，每个杠杆上面都有一盏灯。点亮其中一个灯是一个“指示线索”，指示两个手柄中的哪一个会产生一滴苹果汁。
@@ -518,11 +427,11 @@ Romo和 Schultz（1990）以及Schultz和Romo（1990）通过记录猴子移动�
 这些图的下部分的光栅图显示了监测的单个多巴胺神经元的活动模式，每个点代表动作电位。
 引自： Schultz, Dayan, and Montague, A Neural Substrate of Prediction and Reward,
 Science, vol. 275, issue 5306, pages 1593-1598, March 14, 1997.
-经AAAS许可转载。</span><a class="headerlink" href="#id22" title="永久链接至图片">¶</a></p>
+经AAAS许可转载。</span><a class="headerlink" href="#id22" title="永久链接至图片"></a></p>
 </div>
 </div>
 <div class="section" id="td">
-<h2>15.6 TD误差／多巴胺对应<a class="headerlink" href="#td" title="永久链接至标题">¶</a></h2>
+<h2>15.6 TD误差／多巴胺对应<a class="headerlink" href="#td" title="永久链接至标题"></a></h2>
 <p>这一节解释TD误差 <span class="math notranslate nohighlight">\(\delta\)</span> 与实验中观察到的多巴胺神经元的相位反应之间的联系。
 我们观察在学习的过程中如何变化，如上文中提到的任务一样，一只猴子首先看到指令提示，
 然后在一个固定的时间之后必须正确地响应一个触发提示以获得收益。
@@ -556,7 +465,7 @@ Science, vol. 275, issue 5306, pages 1593-1598, March 14, 1997.
 （这里的TD误差 <span class="math notranslate nohighlight">\(\delta\)</span> 指的是 <span class="math notranslate nohighlight">\(t\)</span> 时刻的误差：<span class="math notranslate nohighlight">\(\delta_{t-1}\)</span>）。
 一个状态序列，通常情况下表示预测线索到收益之间的间隔，后面是非零收益R学习早期：初始化价值函数V和δ，一开始初始化为 <span class="math notranslate nohighlight">\(R^{\star}\)</span>。
 学习完成：价值函数精确地预测未来收益，在早期的预测状态，<span class="math notranslate nohighlight">\(\delta\)</span> 是正值，在非零收益时 <span class="math notranslate nohighlight">\(\delta=0\)</span>。
-省略 <span class="math notranslate nohighlight">\(R\)</span>：当省略预测收益时，<span class="math notranslate nohighlight">\(\delta\)</span> 是负值。文中有这一现象的完整解释。</span><a class="headerlink" href="#id23" title="永久链接至图片">¶</a></p>
+省略 <span class="math notranslate nohighlight">\(R\)</span>：当省略预测收益时，<span class="math notranslate nohighlight">\(\delta\)</span> 是负值。文中有这一现象的完整解释。</span><a class="headerlink" href="#id23" title="永久链接至图片"></a></p>
 </div>
 <p>在得到真实收益的每个状态之前是一系列的收益预测状态，<em>最早收益预测状态</em> 被展示在时间线的最左端。
 这个状态就像是接近试验开始时的状态，例如在上文中描述的 Schultz的猴子实验中的指令线索状态。
@@ -641,7 +550,7 @@ Pan、 Schmidt、 Wickens和 Hyland（205）发现即使使用CSC表示，
 其他的强化学习算法也是可行的候选，但是“行动器-评判器”算法特别符合哺乳动物的大脑解剖学和生理学，我们在下面两节中进行阐述。</p>
 </div>
 <div class="section" id="id11">
-<h2>15.7 神经“行动器-评判器”<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2>15.7 神经“行动器-评判器”<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>“行动器-评判器”算法同时对策略和价值函数进行学习。行动器是算法中用于学习策略的组件，
 评判器是算法中用于学习对行动器的动作选择进行“评价”的组件，这个“评价”是基于行动器所遵循的策略来进行的，
 无论这个策略是什么评判器采用TD算法来学习行动器当前策略的状态价值函数。
@@ -674,7 +583,7 @@ a）将“行动器-评判器”算法用人工神经网络来表示。行动器
 行动器不会直接得到收益信号，评判器也不会直接得到动作。
 b）“行动器-评判器”算法的模拟神经实现。行动器和评判器的状态价值学习部分分别位于纹状体的腹侧和背侧。
 TD误差由位于VTA和SNp的多巴胺神经元传递，以调节从皮质区到腹侧和背侧纹状体的突触效应的变化。
-引自： Frontiers in Neuroscience, vol. 2(1), 2008, Y. Takahashi, G. Schoenbaum, and Y. Niv, Silencing the critics: Understanding the e↵ects of cocaine sensitization on dorsolateral and ventral striatum in the context of an Actor/Critic model.</span><a class="headerlink" href="#id24" title="永久链接至图片">¶</a></p>
+引自： Frontiers in Neuroscience, vol. 2(1), 2008, Y. Takahashi, G. Schoenbaum, and Y. Niv, Silencing the critics: Understanding the e↵ects of cocaine sensitization on dorsolateral and ventral striatum in the context of an Actor/Critic model.</span><a class="headerlink" href="#id24" title="永久链接至图片"></a></p>
 </div>
 <p>评判器和行动器网络都可以接收多个特征，它们表示了智能体所在的环境的状态
 （回顾第1章，在这一章中提到的强化学习智能体的“环境”包括了很多组成部分，有的在容纳智能体的整体系统的外部，有的在这些系统的内部）。
@@ -710,7 +619,7 @@ TD误差由位于VTA和SNp的多巴胺神经元传递，以调节从皮质区到
 我们现在具体来看看行动器和评判器的学习算法是如何揭示控制突触功能变化的规则的。</p>
 </div>
 <div class="section" id="id12">
-<h2>15.8 行动器与评判器学习规则<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<h2>15.8 行动器与评判器学习规则<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>如果大脑真的实现了类似于“行动器-评判器的算法，并且如同图15.5b（如前所述，这可能是一个过于简单化的假设）
 一样假设大量的多巴胺神经元广播一个共同的强化信号到背侧和腹侧纹状体的皮质突触处，那么这个强化号对于这两种结构的突触的影响是不同的。
 行动器和评判器的学习规则使用的是同样的强化信号，即TD误差 <span class="math notranslate nohighlight">\(\delta\)</span>，但是这两个部分对学习的影响是不同的。
@@ -742,7 +651,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 <span class="math notranslate nohighlight">\(\mathbf{x}(s)=\left(x_{1}(s), \ldots, x_{n}(s)\right)^{\top}\)</span> 价值函数
 被权重向量 <span class="math notranslate nohighlight">\(\mathbf{w}=\left(w_{1}, \dots, w_{n}\right)^{\top}\)</span> 参数化为</p>
 <div class="math notranslate nohighlight" id="equation-15-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-15-1" title="公式的永久链接">¶</a></span>\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-15-1" title="公式的永久链接"></a></span>\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)\]</div>
 <p>每个 <span class="math notranslate nohighlight">\(x_{i}(s)\)</span> 就像神经元突触的突触前信号，其功效为 <span class="math notranslate nohighlight">\(w_{i}\)</span>。
 权重由上面公式的规则更新：<span class="math notranslate nohighlight">\(\alpha^{\mathbf{w}} \delta_{t} \mathbf{z}_{t}^{\mathbf{w}}\)</span>，
 这里强化信号 <span class="math notranslate nohighlight">\(\delta_t\)</span> 对应于广播到所有评判器单元的多巴胺信号。
@@ -771,7 +680,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 一个单元的输入向量的加权和 <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{\top} \mathbf{x}(S_{t})\)</span>
 通过柔性最大化分布（式13.2）决定了这个单元的动作被选择的概率，对于两个动作的情况即为逻辑回归函数</p>
 <div class="math notranslate nohighlight" id="equation-15-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-15-2" title="公式的永久链接">¶</a></span>\[\pi(1 | s, \boldsymbol{\theta})=1-\pi(0 | s, \boldsymbol{\theta})=\frac{1}{1+\exp (-\boldsymbol{\theta}^{\top} \mathbf{x}(s))}\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-15-2" title="公式的永久链接"></a></span>\[\pi(1 | s, \boldsymbol{\theta})=1-\pi(0 | s, \boldsymbol{\theta})=\frac{1}{1+\exp (-\boldsymbol{\theta}^{\top} \mathbf{x}(s))}\]</div>
 <p>每一个行动器单元的权重通过上面的规则更新：<span class="math notranslate nohighlight">\(\boldsymbol{\theta} \leftarrow \boldsymbol{\theta}+\alpha^{\boldsymbol{\theta}} \delta_{t} \mathbf{z}_{t}^{\boldsymbol{\theta}}\)</span>，
 这里 <span class="math notranslate nohighlight">\(\delta\)</span> 依然对应多巴胺信号：送往所有行动器单位突触的相同的强化信号。
 图15.5a中展示了 <span class="math notranslate nohighlight">\(\delta_t\)</span> 广播到了每一个行动器单位的突触
@@ -783,7 +692,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 这些项表示 <span class="math notranslate nohighlight">\(\nabla \ln \pi(a|s, \boldsymbol{\theta})\)</span>。
 对于在时刻 <span class="math notranslate nohighlight">\(t\)</span> 的动作和状态，答案是</p>
 <div class="math notranslate nohighlight" id="equation-15-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-15-3" title="公式的永久链接">¶</a></span>\[\nabla \ln \pi(A_{t} | S_{t}, \boldsymbol{\theta})=(A_t - \pi(\boldsymbol{1}|S_{t},\boldsymbol{\theta})) \mathbf{x}(S_{t})\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-15-3" title="公式的永久链接"></a></span>\[\nabla \ln \pi(A_{t} | S_{t}, \boldsymbol{\theta})=(A_t - \pi(\boldsymbol{1}|S_{t},\boldsymbol{\theta})) \mathbf{x}(S_{t})\]</div>
 <p>与评判器突触只累积突触前活动 <span class="math notranslate nohighlight">\(\mathbf{x}(S_{t})\)</span> 的非偶发资格迹不同，
 行动器单元的资格迹还取决于行动器单元本身的活动，我们称其为 <em>偶发资格迹</em>。
 资格迹在每一个突触都会持续衰减，但是会根据突触前活动以及突触后神经元是否放电增加或减少。
@@ -836,7 +745,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 我们接下来将讨论 Klopf的享乐主义神经元假说。</p>
 </div>
 <div class="section" id="id13">
-<h2>15.9 享乐主义神经元<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<h2>15.9 享乐主义神经元<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>在享乐主义神经元假说中，Klopf（1972，192）猜测，每一个独立的神经元会寻求将作为奖励的突触输入与作为惩罚的突触输入之间的差异最大化，
 这种最大化是通过调整它们的突触功效来实现的，调整过程基于它们自己的动作电位所产生的奖励或惩罚的结果。
 换言之，如同可以训练动物来完成工具性条件反射任务一样，单个神经元用基于条件性反应的强化信号来训练。
@@ -880,7 +789,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 无论这个观点对神经系统是否有用，强化学习智能体的集体行为对神经科学是有影响的。接下来我们讨论这个问题。</p>
 </div>
 <div class="section" id="id14">
-<h2>15.10 集体强化学习<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<h2>15.10 集体强化学习<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
 <p>强化学习智能体群体的行为与社会以及经济系统的研究高度相关。
 如果 Klopf的享乐主义神经元假设是正确的，则其与神经科学也是相关的。
 上文描述的人类大脑实现“行动器-评判器”算法的假说，仅仅在狭窄的范围内契合了纹状体的背侧与腹侧的细分根据假说，
@@ -950,7 +859,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 本章末尾的参考文献和历史评注部分列出了一系列公开的研究，包括涉及神经科学的集体强化学习的广泛的资料。</p>
 </div>
 <div class="section" id="id15">
-<h2>15.11 大脑中的基于模型的算法<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<h2>15.11 大脑中的基于模型的算法<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
 <p>对强化学习中无模型和基于模型的算法进行区分经被证明对于研究动物的学习和决策过程是有用的。
 14.6节讨论了如何区分动物的习惯性行为与目标导向行为。
 上文讨论的关于大脑可能如何使用“行动器-评判器”算法的假说仅仅与动物的习惯性行为模式有关，
@@ -990,7 +899,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 而对神经机制的更好的掌握，则可能会促进尚未在目前的计算强化学习理论中被探索的新型算法的产生，使得无模型和基于模型的算法特点可以结合在一起。</p>
 </div>
 <div class="section" id="id16">
-<h2>15.12 成瘾<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h2>
+<h2>15.12 成瘾<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
 <p>了解药物滥用的神经基础是神经科学的高优先目标，并有可能为这一严重的公共健康问题提供新的治疗方法。
 一种观点认为，药物需求与我们寻求能满足生理需求的具有自然收益的体验具有相同的动机和学习过程。
 通过被强化增强，成瘾物质有效地控制了我们学习和决策的自然机制。
@@ -1014,7 +923,7 @@ TD误差（资格迹结合）告诉行动器如何更新动作的概率以到达
 通过类似的方式，强化学习理论已经在计算精神病学新领域的发展中产生影响，其目的是通过数学和计算方法来提高对精神障碍的理解。</p>
 </div>
 <div class="section" id="id17">
-<h2>15.13 本章小结<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
+<h2>15.13 本章小结<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
 <p>与大脑收益系统相关的神经通路非常复杂并且至今没有被完全理解，但旨在理解这些通路及其在行为中的作用的神经科学研究正在迅速发展。
 本研究揭示了本书介绍的大脑收益系统和强化学习理论之间惊人的对应关系。</p>
 <p>多巴胺神经元活动的收益预测误差假说是由这样一群科学家提出的：他们认识到了TD误差行为与产生多巴胺的神经元活动之间的惊人相似之处。
@@ -1072,7 +981,7 @@ Klopf关于资格的想法是，如果突触参与了神经元的行动（使其
 如资格迹和强化学习智能体团队在全局广播的强化信号的影响下学习集体行动的能力，也可能最终显示出与实验数据的一致性。</p>
 </div>
 <div class="section" id="id18">
-<h2>参考文献和历史评注<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h2>
+<h2>参考文献和历史评注<a class="headerlink" href="#id18" title="永久链接至标题"></a></h2>
 <p>探讨关于学习和决策的神经科学与强化学习理论之间的相似性的出版物的数量是巨大的。我们只能列举一小部分。
 参考Niv（2009）， Dayan和Niv（2008）， Gimcher（2011） Ludvig、 Bellemare和 Pearson（2011）以及Sah（2012）是不错的开始。</p>
 <p>和经济学、进化生物学和数学心理学一起，强化学习理论正在帮助制定人类和非人类灵长类动物神经机制选择的定量模型。
@@ -1244,50 +1153,33 @@ Adams、Huys和 Roiser（2015）回顾了最近的进展。</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../chapter16/applications_and_case_studies.html" class="btn btn-neutral float-right" title="第16章 应用及案例分析" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../chapter14/psychology.html" class="btn btn-neutral float-left" title="第14章 心理学" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../chapter14/psychology.html" class="btn btn-neutral float-left" title="第14章 心理学" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../chapter16/applications_and_case_studies.html" class="btn btn-neutral float-right" title="第16章 应用及案例分析" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.
-
-    </p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
-
-  
-  
-    
-  
  
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>
