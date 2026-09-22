@@ -32,6 +32,10 @@ jobs:
     - name: Build sphinx documentation
       run: |
         make html
+    - name: Preserve Read the Docs URLs
+      run: |
+        mkdir -p build/html/zh-cn/latest
+        rsync -a --exclude='zh-cn' build/html/ build/html/zh-cn/latest/
     - name: Setup github pages domain
       run: |
         touch build/html/.nojekyll
