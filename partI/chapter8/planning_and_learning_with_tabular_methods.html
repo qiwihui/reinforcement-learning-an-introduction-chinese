@@ -1,27 +1,35 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第8章 表格方法规划和学习 &mdash; 强化学习导论 0.0.1 文档</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=13c8dd0b" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5a0213dc"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=540d3cec"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第二部分 近似解决方法" href="../../partII/index.html" />
-    <link rel="prev" title="第7章 \(n\) 步引导（Bootstrapping）方法" href="../chapter7/n_step_bootstrapping.html" /> 
+    <link rel="prev" title="第7章 \(n\) 步引导（Bootstrapping）方法" href="../chapter7/n_step_bootstrapping.html" />
+ 
+<!-- AdSense Auto ads: placement and formats are managed in AdSense. -->
+<script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8935595858652656"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,20 +37,20 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 强化学习导论
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            强化学习导论
           </a>
-              <div class="version">
-                0.0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -79,40 +87,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-<style>
-.adsbygoogle-style {
-  background-color: rgb(52, 49, 49);
-  margin-top: 20px;
-}
-</style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- square-ad -->
-<ins class="adsbygoogle adsbygoogle-style"
-     style="display:block"
-     data-ad-client="ca-pub-8935595858652656"
-     data-ad-slot="2636787302"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+          <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">第一部分 表格解决方法</a> &raquo;</li>
-      <li>第8章 表格方法规划和学习</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">第一部分 表格解决方法</a></li>
+      <li class="breadcrumb-item active">第8章 表格方法规划和学习</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/partI/chapter8/planning_and_learning_with_tabular_methods.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -122,8 +112,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="id1">
-<h1>第8章 表格方法规划和学习<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+  <section id="id1">
+<h1>第8章 表格方法规划和学习<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
 <p>在本章中，我们开发了强化学习方法的统一视图，这些方法需要环境模型，例如动态规划和启发式搜索，
 以及可以在没有模型的情况下使用的方法，例如蒙特卡洛和时序差分方法。
 这些分别称为 <em>基于模型（model-based）</em> 和 <em>不基于模型（model-free）*的强化学习方法。
@@ -133,8 +123,8 @@
 在本书的前面，我们将蒙特卡洛和时序差分方法作为不同的替代方法，然后展示了如何通过n步方法统一它们。
 我们在本章中的目标是基于模型和不基于模型方法的类似集成。
 在前面的章节中已经确定了这些不同之处，我们现在探讨它们可以混合的程度。</p>
-<div class="section" id="id2">
-<h2>8.1 模型和规划<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<section id="id2">
+<h2>8.1 模型和规划<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
 <p>通过环境 <em>模型</em>，我们指的是个体可以用来预测环境如何响应其行为的任何事物。
 给定状态和动作，模型产生对结果下一状态和下一奖励的预测。
 如果模型是随机的，那么有几种可能的下一个状态和下一个奖励，每个都有一定的发生概率。
@@ -199,9 +189,9 @@
 <p>除了统一的规划和学习方法之外，本章的第二个主题是以小的渐进步骤进行规划的好处。
 这使规划能够在几乎没有浪费的计算的情况下随时中断或重定向，这似乎是将规划与行为和学习模型有效混合的关键要求。
 如果问题太大而无法准确解决，即使在纯粹的规划问题上，以非常小的步骤进行规划也可能是最有效的方法。</p>
-</div>
-<div class="section" id="dyna">
-<h2>8.2 Dyna：集成规划，行动和学习<a class="headerlink" href="#dyna" title="永久链接至标题"></a></h2>
+</section>
+<section id="dyna">
+<h2>8.2 Dyna：集成规划，行动和学习<a class="headerlink" href="#dyna" title="链接到此标题。"></a></h2>
 <p>当规划在线完成时，在与环境交互时，会出现许多有趣的问题。
 从交互中获得的新信息可能会改变模型，从而与规划相互作用。
 可能需要以某种方式定制规划过程以适应当前正在考虑或在不久的将来预期的状态或决定。
@@ -210,9 +200,10 @@
 每个函数都以简单，几乎无关紧要的形式出现在Dyna-Q中。
 在后面的章节中，我们详细介绍了实现每个函数的一些替代方法以及它们之间的交易。
 目前，我们只是为了说明这些想法并激发你的直觉。</p>
-<div class="figure align-right">
-<a class="reference internal image-reference" href="../../_images/relationships-between-experience-model-values-and-policy.png"><img alt="../../_images/relationships-between-experience-model-values-and-policy.png" src="../../_images/relationships-between-experience-model-values-and-policy.png" style="width: 250px;" /></a>
-</div>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../../_images/relationships-between-experience-model-values-and-policy.png"><img alt="../../_images/relationships-between-experience-model-values-and-policy.png" src="../../_images/relationships-between-experience-model-values-and-policy.png" style="width: 250px;" />
+</a>
+</figure>
 <p>在规划个体中，实际经验至少有两个角色：它可以用于改进模型（使其更准确地匹配真实环境），
 并且它可以用来直接改进价值函数和政策，使用前面章节中讨论的各种强化学习方法。
 前者称为模型学习，后者称为 <em>直接强化学习</em> （直接RL）。
@@ -243,11 +234,13 @@
 通常，如在Dyna-Q中，相同的强化学习方法既用于从真实经验中学习，也用于从模拟经验中进行规划。
 因此，强化学习方法是学习和规划的“最终共同路径”。
 学习和规划是深深融合的，因为他们分享几乎所有相同的机制，只区别于他们的经验来源。</p>
-<div class="figure align-default" id="id18">
+<figure class="align-default" id="id18">
 <img alt="../../_images/figure-8.1.png" src="../../_images/figure-8.1.png" />
-<p class="caption"><span class="caption-text"><strong>图8.1：</strong> 一般Dyna架构。在环境和策略之间来回传递的真实经验会影响策略和价值函数，
-其方式与环境模型生成的模拟经验非常相似。</span><a class="headerlink" href="#id18" title="永久链接至图片"></a></p>
-</div>
+<figcaption>
+<p><span class="caption-text"><strong>图8.1：</strong> 一般Dyna架构。在环境和策略之间来回传递的真实经验会影响策略和价值函数，
+其方式与环境模型生成的模拟经验非常相似。</span><a class="headerlink" href="#id18" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>从概念上讲，规划，行动，模型学习和直接RL在Dyna个体中同时并行地发生。
 但是，为了在串行计算机上具体化和实现，我们完全指定它们在一个时间步长内发生的顺序。
 在Dyna-Q中，行动，模型学习和直接RL过程几乎不需要计算，我们假设它们只消耗了一小部分时间。
@@ -291,22 +284,26 @@
 这是迄今为止这个问题上最慢的个体，尽管事实上参数值（<span class="math notranslate nohighlight">\(\alpha\)</span> 和 <span class="math notranslate nohighlight">\(\varepsilon\)</span>）为它进行了优化。
 非规划个体花了大约25回合来达到（<span class="math notranslate nohighlight">\(\varepsilon\)</span> -）最佳表现，
 而 <span class="math notranslate nohighlight">\(n=5\)</span> 的代理人大约需要5个回合，而 <span class="math notranslate nohighlight">\(n=50\)</span> 的代理人只花了3个回合。</p>
-<div class="figure align-default" id="id19">
+<figure class="align-default" id="id19">
 <img alt="../../_images/figure-8.2.png" src="../../_images/figure-8.2.png" />
-<p class="caption"><span class="caption-text"><strong>图8.2：</strong> 一个简单的迷宫（插图）和Dyna-Q个体的平均学习曲线，每个实际步骤的规划步骤数（<span class="math notranslate nohighlight">\(n\)</span>）不同。
-任务是尽快从 <strong>S</strong> 旅行到 <strong>G</strong>。</span><a class="headerlink" href="#id19" title="永久链接至图片"></a></p>
-</div>
+<figcaption>
+<p><span class="caption-text"><strong>图8.2：</strong> 一个简单的迷宫（插图）和Dyna-Q个体的平均学习曲线，每个实际步骤的规划步骤数（<span class="math notranslate nohighlight">\(n\)</span>）不同。
+任务是尽快从 <strong>S</strong> 旅行到 <strong>G</strong>。</span><a class="headerlink" href="#id19" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>图8.3显示了规划个体发现解决方案的速度比非规划个体快得多的原因。
 显示了在第二回合中途由 <span class="math notranslate nohighlight">\(n=0\)</span> 和 <span class="math notranslate nohighlight">\(n=50\)</span> 个体发现的策略。
 如果没有规划（<span class="math notranslate nohighlight">\(n=0\)</span>），每回合只会为策略添加一个额外的步骤，因此到目前为止只学习了一步（最后一步）。
 通过规划，在第一回合中再次只学习一步，但是在第二回合中，已经开发了一个广泛的策略，在该回合结束时将几乎回到开始状态。
 此策略由规划过程构建，而个体仍然在启动状态附近徘徊。到第三回合结束时，将找到完整的最优政策并获得完美的表现。</p>
-<div class="figure align-default" id="id20">
+<figure class="align-default" id="id20">
 <img alt="../../_images/figure-8.3.png" src="../../_images/figure-8.3.png" />
-<p class="caption"><span class="caption-text"><strong>图8.3：</strong> 在第二回合中途通过规划和非规划Dyna-Q个体找到的策略。
+<figcaption>
+<p><span class="caption-text"><strong>图8.3：</strong> 在第二回合中途通过规划和非规划Dyna-Q个体找到的策略。
 箭头表示每个状态的贪婪行为；如果没有显示状态的箭头，则其所有动作价值都相等。
-黑色方块表示个体的位置。</span><a class="headerlink" href="#id20" title="永久链接至图片"></a></p>
-</div>
+黑色方块表示个体的位置。</span><a class="headerlink" href="#id20" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>在Dyna-Q中，学习和规划是通过完全相同的算法完成的，根据真实的学习经验和模拟的规划经验进行操作。
 由于规划逐步进行，因此混合规划和行动是微不足道的。两者都尽可能快地进行。
 个体总是被动并始终是审慎的，立即响应最新的感官信息，但总是在后台进行规划。后台中还有模型学习过程。
@@ -314,9 +311,9 @@
 随着模型的变化，正在进行的规划过程将逐渐计算出与新模型匹配的不同行为方式。</p>
 <p><em>练习8.1</em> 图8.3中的非规划方法看起来特别差，因为它是一步法；使用多步引导的方法会做得更好。
 你认为第7章中的多步引导方法之一可以和Dyna方法一样吗？解释为什么能或者为什么不能。</p>
-</div>
-<div class="section" id="id3">
-<h2>8.3 当模型错误时<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+</section>
+<section id="id3">
+<h2>8.3 当模型错误时<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
 <p>在上一节中介绍的迷宫示例中，模型中的更改相对适中。模型开始是空的，然后只填充完全正确的信息。
 一般来说，我们不能指望如此幸运。模型可能是不正确的，因为环境是随机的，
 并且只观察到有限数量的样本，或者因为模型是使用不完全推广的函数逼近来学习的，
@@ -333,20 +330,25 @@
 然而，过了一段时间，他们能够找到新的开口和新的最佳行为。</p>
 <p>当环境变得比以前变得 <em>更好</em> 时，会出现更大的困难，但以前正确的策略并未显示出改善。
 在这些情况下，如果有的话，可能无法长时间检测到建模错误。</p>
-<div class="figure align-default" id="id21">
+<figure class="align-default" id="id21">
 <img alt="../../_images/figure-8.4.png" src="../../_images/figure-8.4.png" />
-<p class="caption"><span class="caption-text"><strong>图8.4：</strong> Dyna个体在阻塞任务上的平均性能。左侧环境用于前1000个步骤，右侧环境用于剩下的步骤。
-Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerlink" href="#id21" title="永久链接至图片"></a></p>
-</div>
+<figcaption>
+<p><span class="caption-text"><strong>图8.4：</strong> Dyna个体在阻塞任务上的平均性能。左侧环境用于前1000个步骤，右侧环境用于剩下的步骤。
+Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerlink" href="#id21" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p><strong>例8.3：捷径迷宫</strong> 由这种环境变化引起的问题由图8.5中所示的迷宫示例说明。
 最初，最佳路径是绕过障碍物的左侧（左上角）。然而，在3000步之后，沿着右侧打开较短的路径，而不会干扰较长的路径（右上方）。
 该图显示常规Dyna-Q个体从未切换到捷径。事实上，它从未意识到它存在。
 它的模型表示没有捷径，所以规划得越多，向右走并发现它的可能性就越小。
 即使采用 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪策略，个体也不太可能采取如此多的探索性行动来发现捷径。</p>
-<div class="figure align-right" id="id22">
-<a class="reference internal image-reference" href="../../_images/figure-8.5.png"><img alt="../../_images/figure-8.5.png" src="../../_images/figure-8.5.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-text"><strong>图8.5：</strong> Dyna个体在捷径任务上的平均性能。左边的环境用于前3000个步骤，右边的环境用于剩下的步骤。</span><a class="headerlink" href="#id22" title="永久链接至图片"></a></p>
-</div>
+<figure class="align-right" id="id22">
+<a class="reference internal image-reference" href="../../_images/figure-8.5.png"><img alt="../../_images/figure-8.5.png" src="../../_images/figure-8.5.png" style="width: 350px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>图8.5：</strong> Dyna个体在捷径任务上的平均性能。左边的环境用于前3000个步骤，右边的环境用于剩下的步骤。</span><a class="headerlink" href="#id22" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>这里的一般问题是探索和利用之间冲突的另一种形式。在规划环境中，探索意味着尝试改进模型的行动，
 而利用意味着在给定当前模型的情况下以最佳方式行事。
 我们希望个体进行探索以查找环境中的更改，但不要太多，以至于性能会大大降低。
@@ -357,7 +359,7 @@ Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerli
 为了鼓励测试长期未尝试的行为，对涉及这些行为的模拟经验给出了特殊的“奖金奖励”。
 特别是，如果转换的建模奖励是 <span class="math notranslate nohighlight">\(r\)</span>，并且没有在 <span class="math notranslate nohighlight">\(\tau\)</span> 时间步骤中尝试转换，
 那么规划更新就好像转换产生 <span class="math notranslate nohighlight">\(r+\kappa\sqrt{\tau}\)</span> 的奖励，对于一些小 <span class="math notranslate nohighlight">\(\kappa\)</span>。
-这样可以鼓励个体继续测试所有可访问的状态转换，甚至可以找到很长的动作序列，以便进行测试 <a class="footnote-reference brackets" href="#id16" id="id4">1</a>。
+这样可以鼓励个体继续测试所有可访问的状态转换，甚至可以找到很长的动作序列，以便进行测试 <a class="footnote-reference brackets" href="#id16" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>。
 当然，所有这些测试都有其成本，但在很多情况下，就像在捷径迷宫中一样，这种计算的好奇心是非常值得额外的探索。</p>
 <p><em>练习8.2</em> 为什么具有探索奖励Dyna-Q+的Dyna个体在第一阶段以及阻塞和捷径实验的第二阶段表现更好？</p>
 <p><em>练习8.3</em> 仔细检查图8.5可以发现Dyna-Q+和Dyna-Q之间的差异在实验的第一部分略有缩小。这是什么原因？</p>
@@ -367,9 +369,9 @@ Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerli
 进行一个网格世界实验，测试并说明这种替代方法的优点和缺点。</p>
 <p><em>练习8.5</em> 如何修改8.2节上显示的表格Dyna-Q算法来处理随机环境？这种修改如何在不断变化的环境中表现不佳，如本节所述？
 如何修改算法以处理随机环境 <em>和</em> 变化的环境？</p>
-</div>
-<div class="section" id="id5">
-<h2>8.4 优先扫描<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+</section>
+<section id="id5">
+<h2>8.4 优先扫描<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
 <p>在前面部分中介绍的Dyna个体中，模拟转换是从所有先前经历过的状态-动作对中随机均匀选择的状态-动作对开始的。
 但统一的选择通常不是最好的；如果模拟转换和更新专注于特定的状态-动作对，则规划可以更加有效。
 例如，考虑在第一个迷宫任务的第二回合中发生的情况（图8.3）。
@@ -424,9 +426,10 @@ Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerli
 </div></blockquote>
 </div></blockquote>
 </div>
-<div class="figure align-right">
-<a class="reference internal image-reference" href="../../_images/example-8.4-prioritized-sweeping-on-mazes.png"><img alt="../../_images/example-8.4-prioritized-sweeping-on-mazes.png" src="../../_images/example-8.4-prioritized-sweeping-on-mazes.png" style="width: 350px;" /></a>
-</div>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../../_images/example-8.4-prioritized-sweeping-on-mazes.png"><img alt="../../_images/example-8.4-prioritized-sweeping-on-mazes.png" src="../../_images/example-8.4-prioritized-sweeping-on-mazes.png" style="width: 350px;" />
+</a>
+</figure>
 <p><strong>例8.4：迷宫优先扫描</strong> 已发现优先扫描可显着提高在迷宫任务中找到最佳解决方案的速度，通常为5到10倍。
 右侧显示了典型示例。这些数据用于一系列与图8.2所示结构完全相同的迷宫任务，只是它们的网格分辨率不同。
 优先扫描比未优先的Dyna-Q保持了决定性的优势。两个系统在每次环境交互中最多进行 <span class="math notranslate nohighlight">\(n=5\)</span> 次更新。
@@ -435,9 +438,10 @@ Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerli
 然后很自然地更新每一对，而不是像我们迄今为止使用的样本更新，而是考虑到所有可能的下一个状态及其发生的概率，进行预期的更新。</p>
 <div class="important admonition">
 <p class="admonition-title">例8.5 杆机动优先扫描</p>
-<div class="figure align-right">
-<a class="reference internal image-reference" href="../../_images/example-8.5-prioritized-sweeping-for-rod-maneuvering.png"><img alt="../../_images/example-8.5-prioritized-sweeping-for-rod-maneuvering.png" src="../../_images/example-8.5-prioritized-sweeping-for-rod-maneuvering.png" style="width: 350px;" /></a>
-</div>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../../_images/example-8.5-prioritized-sweeping-for-rod-maneuvering.png"><img alt="../../_images/example-8.5-prioritized-sweeping-for-rod-maneuvering.png" src="../../_images/example-8.5-prioritized-sweeping-for-rod-maneuvering.png" style="width: 350px;" />
+</a>
+</figure>
 <p>该任务的目的是在有限的矩形工作空间内围绕一些笨拙放置的障碍物操纵杆，以最少的步数到达目标位置。
 杆可沿其长轴或垂直于该轴平移，或者可沿其中心的任一方向旋转。
 每次运动的距离约为工作空间的1/20，旋转增量为10度。
@@ -457,15 +461,18 @@ Dyna-Q+是带有鼓励探索的探索奖金的Dyna-Q。</span><a class="headerli
 在本节中，我们强调了后向聚焦，但这只是一种策略。
 例如，另一种方法是关注于根据在当前策略下经常访问的状态可以轻松地达到的状态，这可被称为 <em>前向聚焦</em>。
 Peng和Williams（1993）以及Barto，Bradtke和Singh（1995）已经探索了前向聚焦不同版本，接下来几节中介绍的方法将其转化为极端形式。</p>
-</div>
-<div class="section" id="id6">
-<h2>8.5 预期与样本更新<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
+</section>
+<section id="id6">
+<h2>8.5 预期与样本更新<a class="headerlink" href="#id6" title="链接到此标题。"></a></h2>
 <p>前面章节中的示例给出了组合学习和规划方法的可能性的一些概念。
 在本章的其余部分，我们分析所涉及的一些组件思想，从预期和样本更新的相对优势开始。</p>
-<div class="figure align-right" id="id23">
-<a class="reference internal image-reference" href="../../_images/figure-8.6.png"><img alt="../../_images/figure-8.6.png" src="../../_images/figure-8.6.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-text"><strong>图8.6：</strong> 本书中考虑的所有一步更新的备份图。</span><a class="headerlink" href="#id23" title="永久链接至图片"></a></p>
-</div>
+<figure class="align-right" id="id23">
+<a class="reference internal image-reference" href="../../_images/figure-8.6.png"><img alt="../../_images/figure-8.6.png" src="../../_images/figure-8.6.png" style="width: 350px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><strong>图8.6：</strong> 本书中考虑的所有一步更新的备份图。</span><a class="headerlink" href="#id23" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>本书的大部分内容都是关于不同类型的价值函数更新，我们已经考虑了很多种类。
 目前关注一步更新，它们主要沿三个二进制维度变化。前两个维度是它们是更新状态价值还是动作价值，
 以及它们是否估计最优策略或任意给定策略的价值。
@@ -486,11 +493,11 @@ Dyna-AC系统使用 <span class="math notranslate nohighlight">\(v_\pi\)</span> 
 以及估计动态形式的模型 <span class="math notranslate nohighlight">\(\hat{p}\left(s^{\prime}, r | s, a\right)\)</span>。
 状态-动作对 <span class="math notranslate nohighlight">\(s, a\)</span> 的预期更新是：</p>
 <div class="math notranslate nohighlight" id="equation-8-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-8-1" title="公式的永久链接"></a></span>\[Q(s, a) \leftarrow \sum_{s^{\prime}, r} \hat{p}\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)\right]\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-8-1" title="链接到此公式"></a></span>\[Q(s, a) \leftarrow \sum_{s^{\prime}, r} \hat{p}\left(s^{\prime}, r | s, a\right)\left[r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)\right]\]</div>
 <p>对于 <span class="math notranslate nohighlight">\(s, a\)</span> 的相应样本更新，给定样本下一状态和奖励 <span class="math notranslate nohighlight">\(S_0\)</span> 和 <span class="math notranslate nohighlight">\(R\)</span> （来自模型），
 是类似Q-learning的更新：</p>
 <div class="math notranslate nohighlight" id="equation-8-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-8-2" title="公式的永久链接"></a></span>\[Q(s, a) \leftarrow Q(s, a)+\alpha\left[R+\gamma \max _{a^{\prime}} Q\left(S^{\prime}, a^{\prime}\right)-Q(s, a)\right]\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-8-2" title="链接到此公式"></a></span>\[Q(s, a) \leftarrow Q(s, a)+\alpha\left[R+\gamma \max _{a^{\prime}} Q\left(S^{\prime}, a^{\prime}\right)-Q(s, a)\right]\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(\alpha\)</span> 通常是正步长参数。</p>
 <p>这些预期和样本更新之间的差异在环境是随机的程度上是显着的，
 具体地，在给定状态和动作的情况下，可能以各种概率发生许多可能的下一状态。
@@ -518,19 +525,21 @@ Dyna-AC系统使用 <span class="math notranslate nohighlight">\(v_\pi\)</span> 
 其中 <span class="math notranslate nohighlight">\(t\)</span> 是已经执行的样本更新的数量（假设样本平均值，即 <span class="math notranslate nohighlight">\(\alpha=\frac{1}{t}\)</span>）。
 关键的观察结果是，对于中等大小的 <span class="math notranslate nohighlight">\(b\)</span>，误差会随着 <span class="math notranslate nohighlight">\(b\)</span> 更新的一小部分而急剧下降。
 对于这些情况，许多状态-动作对可以使其值显着改善，在预期更新的效果的几个百分点内，同时单个状态-动作对可以经历预期更新。</p>
-<div class="figure align-default" id="id24">
+<figure class="align-default" id="id24">
 <img alt="../../_images/figure-8.7.png" src="../../_images/figure-8.7.png" />
-<p class="caption"><span class="caption-text"><strong>图8.7：</strong> 预期更新和样本更新的效率比较。</span><a class="headerlink" href="#id24" title="永久链接至图片"></a></p>
-</div>
+<figcaption>
+<p><span class="caption-text"><strong>图8.7：</strong> 预期更新和样本更新的效率比较。</span><a class="headerlink" href="#id24" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>图8.7中显示的样本更新的优点可能是低估了实际效果。在实际问题中，后继状态的值将是自身更新的估计值。
 通过使估算更快更准确，样本更新将具有第二个优势，即从后继状态备份的值将更准确。
 这些结果表明，样本更新可能优于大型随机分支因子问题的预期更新，并且要解决的状态太多。</p>
 <p><em>练习8.6</em> 上面的分析假设所有 <span class="math notranslate nohighlight">\(b\)</span> 可能的下一个状态都可能同样发生。
 相反，假设分布是高度偏斜的，那么 <span class="math notranslate nohighlight">\(b\)</span> 状态中的一些比大多数状态更可能发生。
 这是否会加强或削弱样本更新超过预期更新的情况？支持你的答案。</p>
-</div>
-<div class="section" id="id7">
-<h2>8.6 轨迹采样<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
+</section>
+<section id="id7">
+<h2>8.6 轨迹采样<a class="headerlink" href="#id7" title="链接到此标题。"></a></h2>
 <p>在本节中，我们将比较两种分布更新的方法。
 来自动态规划的经典方法是在整个状态（或状态-动作）空间中执行扫描，每次扫描更新每个状态（或状态-动作对）一次。
 这对于大型任务来说是有问题的，因为可能没有时间来完成甚至一次扫描。
@@ -572,11 +581,14 @@ Dyna-AC系统使用 <span class="math notranslate nohighlight">\(v_\pi\)</span> 
 在规划过程中的任何一点，人们都可以停止并详尽地计算 <span class="math notranslate nohighlight">\(v_{\tilde{\pi}}\left(\mathcal{S}_{0}\right)\)</span>，
 即贪婪策略 <span class="math notranslate nohighlight">\(\tilde{\pi}\)</span> 下的起始状态的真实值，由当前的动作-价值函数 <span class="math notranslate nohighlight">\(Q\)</span> 给出，
 作为个体在贪婪行动的新回合中的表现（一直假设模型是正确的）。</p>
-<div class="figure align-right" id="id25">
-<a class="reference internal image-reference" href="../../_images/figure-8.8.png"><img alt="../../_images/figure-8.8.png" src="../../_images/figure-8.8.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-text">图8.8：更新的相对效率在整个状态空间内均匀分布，而不是侧重于模拟的策略轨迹，每个轨迹都以相同的状态开始。
-结果是随机生成的两种大小和各种分支因子 <span class="math notranslate nohighlight">\(b\)</span> 的任务。</span><a class="headerlink" href="#id25" title="永久链接至图片"></a></p>
-</div>
+<figure class="align-right" id="id25">
+<a class="reference internal image-reference" href="../../_images/figure-8.8.png"><img alt="../../_images/figure-8.8.png" src="../../_images/figure-8.8.png" style="width: 350px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">图8.8：更新的相对效率在整个状态空间内均匀分布，而不是侧重于模拟的策略轨迹，每个轨迹都以相同的状态开始。
+结果是随机生成的两种大小和各种分支因子 <span class="math notranslate nohighlight">\(b\)</span> 的任务。</span><a class="headerlink" href="#id25" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>右图的上半部分显示了200个样本任务的平均结果，其中有1000个状态和分支因子为1,3和10。
 所找到的策略的质量被绘制为预期更新完成的数量的函数。
 在所有情况下，根据在策略分布进行抽样导致最初的规划更快，从长远来看延迟了规划。
@@ -595,9 +607,9 @@ Dyna-AC系统使用 <span class="math notranslate nohighlight">\(v_\pi\)</span> 
 <p><em>练习8.7</em> 图8.8中的一些图形似乎在它们的早期部分是扇形的，特别是 <span class="math notranslate nohighlight">\(b=1\)</span> 的上图和均匀分布。
 你为什么认为这是？所显示数据的哪些方面支持你的假设？</p>
 <p><em>练习8.8（编程）</em> 复制实验，其结果显示在图8.8的下半部分，然后尝试相同的实验，但 <span class="math notranslate nohighlight">\(b=3\)</span>。讨论结果的含义。</p>
-</div>
-<div class="section" id="id8">
-<h2>8.7 实时动态规划<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
+</section>
+<section id="id8">
+<h2>8.7 实时动态规划<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
 <p><em>实时动态规划</em> （RTDP）是动态规划（DP）的价值迭代算法的策略轨迹采样版本。
 由于它与传统的基于扫描的策略迭代密切相关，因此RTDP以特别清晰的方式说明了策略轨迹采样可以提供的一些优势。
 RTDP通过（4.10）定义的预期表格价值迭代更新来更新在实际或模拟轨迹中访问的状态价值。
@@ -606,9 +618,10 @@ RTDP通过（4.10）定义的预期表格价值迭代更新来更新在实际或
 RTDP是第4.5节中描述的 <em>异步</em> DP算法的示例。
 异步DP算法不是根据状态集合的系统扫描来组织的；他们以任意顺序更新状态值，使用其他任何可能的状态价值。
 在RTDP中，更新顺序由在实际或模拟轨迹中状态访问的顺序决定。</p>
-<div class="figure align-right">
-<a class="reference internal image-reference" href="../../_images/start-relevant-irrelevant-states.png"><img alt="../../_images/start-relevant-irrelevant-states.png" src="../../_images/start-relevant-irrelevant-states.png" style="width: 300px;" /></a>
-</div>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../../_images/start-relevant-irrelevant-states.png"><img alt="../../_images/start-relevant-irrelevant-states.png" src="../../_images/start-relevant-irrelevant-states.png" style="width: 300px;" />
+</a>
+</figure>
 <p>如果轨迹只能从指定的一组起始状态开始，并且如果您对给定策略的预测问题感兴趣，
 那么在策略轨迹采样允许算法完全跳过任何给定策略从任何起始状态无法达到的状态：这些状态与预测问题 <em>不相干</em>。
 对于控制问题，其目标是找到最优策略而不是评估给定策略，可能存在任何起始状态的任何最优策略都无法达到的状态，
@@ -654,13 +667,8 @@ Barto，Bradtke和Singh（1995）通过将异步DP的结果与关于启发式搜
 并且当超过20回合越过终点线的平均时间呈现出稳定在渐近数量的步骤时，判断RTDP已收敛。
 此版本的RTDP仅更新了每个步骤的当前状态价值。</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 57%" />
-<col style="width: 20%" />
-<col style="width: 23%" />
-</colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>–</p></th>
+<tr class="row-odd"><th class="head"><p>--</p></th>
 <th class="head"><p>DP</p></th>
 <th class="head"><p>RTDP</p></th>
 </tr>
@@ -675,19 +683,19 @@ Barto，Bradtke和Singh（1995）通过将异步DP的结果与关于启发式搜
 <td><p>127,600</p></td>
 </tr>
 <tr class="row-even"><td><p>每集的平均更新次数</p></td>
-<td><p>–</p></td>
+<td><p>--</p></td>
 <td><p>31.9</p></td>
 </tr>
 <tr class="row-odd"><td><p>状态更新 <span class="math notranslate nohighlight">\(\leq 100\)</span> 次的百分比</p></td>
-<td><p>–</p></td>
+<td><p>--</p></td>
 <td><p>98.45</p></td>
 </tr>
 <tr class="row-even"><td><p>状态更新 <span class="math notranslate nohighlight">\(\leq 10\)</span> 次的百分比</p></td>
-<td><p>–</p></td>
+<td><p>--</p></td>
 <td><p>80.51</p></td>
 </tr>
 <tr class="row-odd"><td><p>状态更新 <span class="math notranslate nohighlight">\(0\)</span> 次的百分比</p></td>
-<td><p>–</p></td>
+<td><p>--</p></td>
 <td><p>3.18</p></td>
 </tr>
 </tbody>
@@ -711,9 +719,9 @@ Barto，Bradtke和Singh（1995）通过将异步DP的结果与关于启发式搜
 随着学习的继续，这种关注变得越来越窄。
 由于RTDP的收敛定理适用于模拟，我们知道RTDP最终只关注相关状态，即构成最佳路径的状态。
 RTDP实现了近乎最优的控制，是基于扫描的价值迭代所需的计算量的50％。</p>
-</div>
-<div class="section" id="id9">
-<h2>8.8 决策时规划<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+</section>
+<section id="id9">
+<h2>8.8 决策时规划<a class="headerlink" href="#id9" title="链接到此标题。"></a></h2>
 <p>规划可以至少以两种方式使用。我们在本章中到目前为止所考虑的，以动态规划和Dyna为代表，
 是基于从模型（样本或分布模型）获得的模拟经验，使用规划逐步改进策略或价值函数。
 那么选择动作就是比较从我们迄今为止考虑的表格案例中的表格中获得的当前状态的动作价值，
@@ -736,9 +744,9 @@ RTDP实现了近乎最优的控制，是基于扫描的价值迭代所需的计�
 决策时规划在不需要快速响应的应用程序中最有用。
 例如，在国际象棋游戏程序中，每次移动可以允许一秒钟或几分钟的计算，并且厉害的程序可以在此时间内规划数十次移动。
 另一方面，如果低延迟动作选择是优先级，则通常最好在后台进行规划以计算可以快速应用于每个新遇到状态的策略。</p>
-</div>
-<div class="section" id="id10">
-<h2>8.9 启发式搜索<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+</section>
+<section id="id10">
+<h2>8.9 启发式搜索<a class="headerlink" href="#id10" title="链接到此标题。"></a></h2>
 <p>人工智能中的经典状态空间规划方法是统称为 <em>启发式搜索</em> 的决策时规划方法。
 在启发式搜索中，对于遇到的每个状态，考虑一个可能延续的大的树。近似价值函数应用于叶节点，然后备份到根节点的当前状态。
 搜索树中的备份与本书中讨论的最大值（maxes）（<span class="math notranslate nohighlight">\(v_*\)</span> 和 <span class="math notranslate nohighlight">\(q_*\)</span> 的更新）预期更新中的相同。
@@ -752,7 +760,7 @@ RTDP实现了近乎最优的控制，是基于扫描的价值迭代所需的计�
 考虑奖励和估计的价值，然后选择最佳动作。就像在常规的启发式搜索中一样，此过程计算可能动作的备份值，但不尝试保存它们。
 因此，启发式搜索可以被视为超越一步的贪婪策略思想的扩展。</p>
 <p>搜索深度超过一步的重点是获得更好的动作选择。如果一个人有一个完美的模型和一个不完美的动作-价值函数，
-那么实际上更深层次的搜索通常会产生更好的策略 <a class="footnote-reference brackets" href="#id17" id="id11">2</a>。
+那么实际上更深层次的搜索通常会产生更好的策略 <a class="footnote-reference brackets" href="#id17" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>。
 当然，如果搜索一直到回合的结尾，那么不完美的价值函数的影响消除了，以这种方式确定的动作必定是最佳的。
 如果搜索具有足够的深度 <span class="math notranslate nohighlight">\(k\)</span> 使得 <span class="math notranslate nohighlight">\(\gamma^{k}\)</span> 非常小，那么动作将相应地接近最佳。
 另一方面，搜索越深，需要的计算越多，通常会导致响应时间变慢。
@@ -776,14 +784,16 @@ Tesauro发现启发式搜索越深，TD-Gammon的移动越好，但每次移动�
 可以通过这种方式查看任何状态空间搜索，即将大量单个一步更新拼凑在一起。
 因此，通过更深入的搜索观察到的性能改进不是由于使用多步骤更新。相反，这是由于聚焦和专注于当前状态下游的状态和动作的更新。
 通过投入大量与候选动作特别相关的计算，决策时计划可以产生比依赖未聚焦更新产生的更好的决策。</p>
-<div class="figure align-default" id="id26">
+<figure class="align-default" id="id26">
 <img alt="../../_images/figure-8.9.png" src="../../_images/figure-8.9.png" />
-<p class="caption"><span class="caption-text"><strong>图8.9：</strong> 启发式搜索可以实现为一系列一步更新（此处以蓝色显示），从叶节点向根备份价值。
-此处显示的顺序用于选择性深度优先搜索。</span><a class="headerlink" href="#id26" title="永久链接至图片"></a></p>
-</div>
-</div>
-<div class="section" id="rollout">
-<h2>8.10 Rollout算法<a class="headerlink" href="#rollout" title="永久链接至标题"></a></h2>
+<figcaption>
+<p><span class="caption-text"><strong>图8.9：</strong> 启发式搜索可以实现为一系列一步更新（此处以蓝色显示），从叶节点向根备份价值。
+此处显示的顺序用于选择性深度优先搜索。</span><a class="headerlink" href="#id26" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rollout">
+<h2>8.10 Rollout算法<a class="headerlink" href="#rollout" title="链接到此标题。"></a></h2>
 <p>Rollout算法是基于应用于模拟轨迹的蒙特卡洛控制的决策时规划算法，所有模拟轨迹都在当前环境状态下开始。
 他们通过平均从每个可能的动作开始然后遵循给定的策略的许多模拟轨迹的回报来估计给定策略的行动价值。
 当动作价值估计被认为足够准确时，执行具有最高估计值的动作（或动作之一），之后从所得到的下一状态重新执行该过程。
@@ -828,9 +838,9 @@ rollout策略制定决策所需的时间，以及获得良好的蒙特卡洛动�
 通过这种方式，它们就像强化学习算法一样，通过轨迹采样避免了动态规划的彻底扫描，
 并且通过依赖于样本而不是预期的更新来避免对分布模型的需求。
 最后，Rollout算法通过对估计的动作价值贪婪地行动来利用策略改进属性。</p>
-</div>
-<div class="section" id="id12">
-<h2>8.11 蒙特卡洛树搜索<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+</section>
+<section id="id12">
+<h2>8.11 蒙特卡洛树搜索<a class="headerlink" href="#id12" title="链接到此标题。"></a></h2>
 <p><em>蒙特卡洛树搜索</em> （MCTS）是决策时规划的一个最近且非常成功的例子。
 在其基础上，MCTS是如上所述的rollout算法，但通过增加一种累积从蒙特卡洛模拟中获得的价值估计的手段来增强，
 以便连续地将模拟引导到更高回报的轨迹。MCTS主要负责将计算机围棋从2005年的弱业余水平提升到2015年的大师级（6段或以上）。
@@ -852,12 +862,14 @@ MCTS通过添加表示看起来很有希望基于模拟轨迹的结果的状态�
 在树之外和叶节点处，rollout策略用于动作选择，但是在树内的状态下，可能会更好。
 对于这些状态，我们至少对某些行动进行了估值，因此我们可以使用一种称为 <em>树策略</em> 的知情策略来挑选它们，以平衡探索和利用。
 例如，树策略可以使用 <span class="math notranslate nohighlight">\(\varepsilon\)</span> -贪婪或UCB选择规则（第2章）来选择动作。</p>
-<div class="figure align-default" id="id27">
+<figure class="align-default" id="id27">
 <img alt="../../_images/figure-8.10.png" src="../../_images/figure-8.10.png" />
-<p class="caption"><span class="caption-text">图8.10：蒙特卡洛树搜索。当环境变为新状态时，MCTS在需要选择动作之前执行尽可能多的迭代，
+<figcaption>
+<p><span class="caption-text">图8.10：蒙特卡洛树搜索。当环境变为新状态时，MCTS在需要选择动作之前执行尽可能多的迭代，
 增量构建其根节点表示当前状态的树。每个迭代包括四个操作 <strong>选择</strong>，<strong>扩展</strong> （尽管可能在某些迭代中跳过），
-<strong>模拟</strong> 和 <strong>备份</strong>，如文中所述，并由树中的粗体箭头表示。改编自Chaslot，Bakkes，Szita和Spronck（2008）。</span><a class="headerlink" href="#id27" title="永久链接至图片"></a></p>
-</div>
+<strong>模拟</strong> 和 <strong>备份</strong>，如文中所述，并由树中的粗体箭头表示。改编自Chaslot，Bakkes，Szita和Spronck（2008）。</span><a class="headerlink" href="#id27" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>更详细地说，MCTS基本版本的每次迭代都包含以下四个步骤，如图8.10所示：</p>
 <ol class="arabic simple">
 <li><p><strong>选择。</strong> 从根节点开始，基于附加到树的边缘的动作价值的 <em>树策略</em> 遍历树以选择叶节点。</p></li>
@@ -886,9 +898,9 @@ MCTS通过添加表示看起来很有希望基于模拟轨迹的结果的状态�
 其中内存被分配给在高产量样本轨迹的初始段中访问的状态-动作对的估计价值。
 因此，MCTS避免了全局逼近动作-价值函数的问题，同时它保留了使用过去的经验来指导探索的好处。</p>
 <p>MCTS决策时规划取得的巨大成功深刻影响了人工智能，许多研究人员正在研究用于游戏和单一个体应用程序的基本程序的修改和扩展。</p>
-</div>
-<div class="section" id="id13">
-<h2>8.12 本章总结<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+</section>
+<section id="id13">
+<h2>8.12 本章总结<a class="headerlink" href="#id13" title="链接到此标题。"></a></h2>
 <p>规划需要环境模型。<em>分布模型</em> 包括下一个状态的概率和可能的行动的奖励；样本模型根据这些概率生成单个过渡和奖励。
 动态规划需要一个分布模型，因为它使用 <em>预期的更新</em>，这涉及计算所有可能的下一个状态和奖励的期望。
 另一方面，<em>样本模型</em> 是模拟与环境交互所需的，在此期间可以使用 <em>样本更新</em>，如许多强化学习算法所使用的那样。
@@ -909,9 +921,9 @@ MCTS通过添加表示看起来很有希望基于模拟轨迹的结果的状态�
 <p>规划还可以从相关状态向前聚焦，例如在个体-环境交互期间实际遇到的状态。
 最重要的形式是在决策时进行规划，即作为行动选择过程的一部分。在人工智能中研究的经典启发式搜索就是一个例子。
 其他示例是推出算法和蒙特卡洛树搜索，它们受益于在线，增量，基于样本的价值评估和策略改进。</p>
-</div>
-<div class="section" id="id14">
-<h2>8.13 第一部分总结：维度<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
+</section>
+<section id="id14">
+<h2>8.13 第一部分总结：维度<a class="headerlink" href="#id14" title="链接到此标题。"></a></h2>
 <p>本章总结了本书的第一部分。在其中，我们试图将强化学习不是作为单个方法的集合，而是作为跨越方法的一组连贯的思想。
 每个想法都可以被视为方法变化的维度。这组维度跨越了大量可能的方法。
 通过在维度层面探索这个空间，我们希望获得最广泛和最持久的理解。
@@ -929,10 +941,12 @@ MCTS通过添加表示看起来很有希望基于模拟轨迹的结果的状态�
 沿着空间的左边缘是样本更新方法，从一步TD更新到完全回报蒙特卡洛更新。
 在这些之间是包含基于n步更新的方法的谱
 （在第12章中，我们将其扩展为n步更新的混合，例如由资格迹实现的 <span class="math notranslate nohighlight">\(\lambda\)</span> -更新）。</p>
-<div class="figure align-default" id="id28">
+<figure class="align-default" id="id28">
 <img alt="../../_images/figure-8.11.png" src="../../_images/figure-8.11.png" />
-<p class="caption"><span class="caption-text">图8.11：通过强化学习方法的空间切片，突出显示本书第一部分探讨的两个最重要的维度：更新的深度和宽度。</span><a class="headerlink" href="#id28" title="永久链接至图片"></a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">图8.11：通过强化学习方法的空间切片，突出显示本书第一部分探讨的两个最重要的维度：更新的深度和宽度。</span><a class="headerlink" href="#id28" title="链接到此图片"></a></p>
+</figcaption>
+</figure>
 <p>动态规划方法显示在空间的最右上角，因为它们涉及一步预期的更新。
 右下角是预期更新的极端情况，它们一直运行到终止状态（或者，在持续的任务中，直到折扣将任何进一步奖励的贡献减少到可忽略的水平）。
 这是穷举搜索的情况。沿着这个维度的中间方法包括启发式搜索和相关方法，这些方法可能有选择地搜索和更新到有限的深度。
@@ -960,9 +974,9 @@ MCTS通过添加表示看起来很有希望基于模拟轨迹的结果的状态�
 <p>这里没有提到的最重要的维度，也没有在本书的第一部分中介绍，是函数逼近的维度。
 函数逼近可以被视为可能性的正交，范围从一个极端的表格方法到状态聚合，各种线性方法，然后是一组不同的非线性方法。
 第二部分探讨了这个方面。</p>
-</div>
-<div class="section" id="id15">
-<h2>书目和历史评论<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
+</section>
+<section id="id15">
+<h2>书目和历史评论<a class="headerlink" href="#id15" title="链接到此标题。"></a></h2>
 <p><strong>8.1</strong> 这里提出的规划和学习的总体观点已经逐渐发展，部分由作者提出
 （Sutton，1990,1991a，1991b；Barto，Bradtke和Singh，1991,1995；Sutton和Pinette，1985；Sutton和Barto，1981b）；
 它受到Agre和Chapman（1990； Agre 1988），Bertsekas和Tsitsiklis（1989），Singh（1993）
@@ -1007,22 +1021,24 @@ Bertsekas（2013）调查了它们在离散确定性优化问题中的应用，�
 他们建立在先前使用蒙特卡洛规划算法的研究基础上，这些算法由这些作者审阅。
 Browne，Powley，Whitehouse，Lucas，Cowling，Rohlfshagen，Tavener，Perez，Samothrakis和Colton（2012）是对MCTS方法及其应用的极好调查。
 David Silver对本节中的想法和演示做出了贡献。</p>
-<dl class="footnote brackets">
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id4">1</a></span></dt>
-<dd><p>Dyna-Q+个体也以另外两种方式改变。首先，允许在之前框中的表格Dyna-Q算法的规划步骤（f）中
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id16" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<p>Dyna-Q+个体也以另外两种方式改变。首先，允许在之前框中的表格Dyna-Q算法的规划步骤（f）中
 考虑从一个状态以前从未尝试过的动作。其次，这种行为的初始模型是，他们会以零回报率回到同一个状态。</p>
-</dd>
-<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id11">2</a></span></dt>
-<dd><p>这有一些有趣的例外（参见，例如，Pearl，1984）。</p>
-</dd>
-</dl>
-</div>
-</div>
+</aside>
+<aside class="footnote brackets" id="id17" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">2</a><span class="fn-bracket">]</span></span>
+<p>这有一些有趣的例外（参见，例如，Pearl，1984）。</p>
+</aside>
+</aside>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="../chapter7/n_step_bootstrapping.html" class="btn btn-neutral float-left" title="第7章 \(n\) 步引导（Bootstrapping）方法" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="../../partII/index.html" class="btn btn-neutral float-right" title="第二部分 近似解决方法" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
@@ -1030,12 +1046,12 @@ David Silver对本节中的想法和演示做出了贡献。</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto。</p>
   </div>
 
-  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>

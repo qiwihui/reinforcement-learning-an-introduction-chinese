@@ -1,27 +1,35 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>第14章 心理学 &mdash; 强化学习导论 0.0.1 文档</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=13c8dd0b" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/translations.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5a0213dc"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/translations.js?v=540d3cec"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="第15章 神经科学" href="../chapter15/neuroscience.html" />
-    <link rel="prev" title="第三部分 深入研究" href="../index.html" /> 
+    <link rel="prev" title="第三部分 深入研究" href="../index.html" />
+ 
+<!-- AdSense Auto ads: placement and formats are managed in AdSense. -->
+<script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8935595858652656"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -29,20 +37,20 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> 强化学习导论
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            强化学习导论
           </a>
-              <div class="version">
-                0.0.1
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../preface2nd.html">第二版前言</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../preface1st.html">第一版前言</a></li>
@@ -69,40 +77,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../../references.html">参考文献</a></li>
 </ul>
 
-<style>
-.adsbygoogle-style {
-  background-color: rgb(52, 49, 49);
-  margin-top: 20px;
-}
-</style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- square-ad -->
-<ins class="adsbygoogle adsbygoogle-style"
-     style="display:block"
-     data-ad-client="ca-pub-8935595858652656"
-     data-ad-slot="2636787302"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
         </div>
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">强化学习导论</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+          <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">第三部分 深入研究</a> &raquo;</li>
-      <li>第14章 心理学</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">第三部分 深入研究</a></li>
+      <li class="breadcrumb-item active">第14章 心理学</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/partIII/chapter14/psychology.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -112,8 +102,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="id1">
-<h1>第14章 心理学<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+  <section id="id1">
+<h1>第14章 心理学<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
 <p>在前面的章节中，我们仅从计算的角度讨论了各种算法。在本章中，我们从其他角度来探讨这些算法：心理学的角度以及对动物如何学习的研究。
 首先讨论强化学习的思想和算法与心理学家发现的有关动物学习方法的关联，其次解释强化学习对研究动物如何学习的影响。
 通过强化学习的清晰的形式化表达，将任务、回报和算法系统化，这对于理解实验数据、提出新的实验以及指出可能对实验操作和测量至关重要的因素而言，都是非常有用的。
@@ -131,9 +121,9 @@
 <p>本章的最后一部分不仅包括了我们已经讨论的这些关联的参考资料，也包括了我们在论中没有涉及的一些关联关系的参考资料。
 我们希望本章能够鼓励读者更深入地探讨两者的联系。在最后一节，我们还讨论了强化学习和心理学中使用的术语的关联。
 强化学习中使用的许多术语和短语都是从动物学习理论中借鉴的，但这些术语和短语的计算/工程意义并不总是与它们在心理学上的含义相吻合。</p>
-<div class="section" id="id2">
-<h2>14.1 预测与控制<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
-<p>我们在本书中描述的算法分为两大类：<em>预测</em> 算法和 <em>控制</em> 算法 <a class="footnote-reference brackets" href="#id4" id="id3">1</a>。
+<section id="id2">
+<h2>14.1 预测与控制<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<p>我们在本书中描述的算法分为两大类：<em>预测</em> 算法和 <em>控制</em> 算法 <a class="footnote-reference brackets" href="#id4" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>。
 这个分类在第3章介绍的强化学习问题的解决方法中已经很自然地体现出来了。
 这些类别分别对应于心理学家广泛研究的学习类别：<em>经典（或巴甫洛夫）条件反射和工具性（或操作性）条件反射</em>。
 考虑到心理学对强化学习的影响，有这些对应关系并不足为奇，但是由于它们将来源于不同目标的思想联系起来了，所以还是很令人惊讶的。</p>
@@ -152,19 +142,20 @@
 经典条件反射一般不仅仅是预测，它也会涉及动作，因此也可以将它看作一种控制模式，有时被称为 <em>巴甫洛夫控制</em>。
 更进一步，经典条件反射和工具性条件反射可能会相互交叉，在大多数实验情况下两种学习模式可能都存在。
 尽管存在这些复杂性，但将经典条件反射/工具性条件反射与预测/控制分别对应是将强化学习与动物学习联系起来的一个方便的初步近似。</p>
-<dl class="footnote brackets">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id3">1</a></span></dt>
-<dd><p>对我们来说，“控制”一词的含义与它在动物学习理论中的含义是不同的。
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
+<p>对我们来说，“控制”一词的含义与它在动物学习理论中的含义是不同的。
 在动物学习理论中，其意思是环境控制智能体，而不是反过来。参见本章结尾处的术语说明。</p>
-</dd>
-</dl>
+</aside>
+</aside>
 <p>在心理学中，术语“强化”用于描述经典条件反射和工具性条件反射中的学习。
 最初只是指加强某种行为模式，现在它通常也被用来指对某种行为模式的削弱。
 引起动物行为改变的刺激被称为强化剂，无论它是否依赖于动物先前的行为。
 在本章最后，我们将更详细地讨论这个术语，以及它与机器学习中使用的术语之间的关系。</p>
-</div>
-<div class="section" id="id5">
-<h2>14.2 经典条件反射<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+</section>
+<section id="id5">
+<h2>14.2 经典条件反射<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
 <p>俄罗斯著名生理学家伊凡·巴甫洛夫在研究消化系统活动时发现，动物对某些特定刺激因素的先天反应可以被其他无关的因素所激发。
 他以狗作为实验对象，并对它们进行手术以便于准确测量其唾液反射的强度。
 在他记录的一个实验中，狗只会在给其提供食物约5秒之后的几秒内分泌大约6滴唾液，而在其余时间内不产生唾液。
@@ -185,9 +176,10 @@
 在经过反复的训练之后，动物会认为条件刺激是无条件刺激的预示，因此会对条件刺激产生条件反射。
 这些术语仍然用于描述传统的条件反射实验（更确切地说应该是“条件制约的”和“无条件制约的”，而不是条件的和无条件的）。
 由于US强化了CR对CS的反应，因此我们将US称为强化剂。</p>
-<div class="figure align-right">
-<a class="reference internal image-reference" href="../../_images/delay_conditioning_trace_conditioning.png"><img alt="../../_images/delay_conditioning_trace_conditioning.png" src="../../_images/delay_conditioning_trace_conditioning.png" style="width: 350px;" /></a>
-</div>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../../_images/delay_conditioning_trace_conditioning.png"><img alt="../../_images/delay_conditioning_trace_conditioning.png" src="../../_images/delay_conditioning_trace_conditioning.png" style="width: 350px;" />
+</a>
+</figure>
 <p>右图显示了条件反射实验中的两种实现方式，分别为 <em>延迟条件反射</em> 和 <em>痕迹条件反射</em>。
 在延迟条件反射中，我们将CS产生与US产生之间的时间间隔称为刺激间隔（interstimulus interval ISI）
 ，CS贯穿了整个刺激间隔（在通常情况下，US和CS同时结束，如右图所示）。
@@ -203,8 +195,8 @@
 在多次训练之后，声音刺激会触发瞬膜闭合的条件反射，该反射最初发生在向家兔眼睛吹气之前，但是最终会在最有可能吹气的时间点产生闭合反射。
 这个CR通过对吹气时间的预期进行同步启动，相较于对US简单的闭合反应，它更能够起到保护作用。
 通过学习刺激之间的预测关系来预测事件发生的能力对于动物是非常有益的，这也在动物世界中广泛存在。</p>
-<div class="section" id="id6">
-<h3>14.2.1 阻塞与高级条件反射<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<section id="id6">
+<h3>14.2.1 阻塞与高级条件反射<a class="headerlink" href="#id6" title="链接到此标题。"></a></h3>
 <p>我们可以在实验中观察到经典条件反射的许多有趣特性。
 除了CR的预期性质之外，在经典条件反射模型的发展中还有两个显著的特点：<em>阻塞和高级条件反射</em>。
 当一个潜在的CS与之前曾用于激发动物产生该CR的另一个CS一起呈现时，若动物未能学习到该CR，则产生阻塞。
@@ -212,7 +204,7 @@
 实验的第二阶段包括一个额外的训练，在这个训练中增加了新的刺激因素，
 例如灯光，与声音一同组成了声音/光的复合条件刺激，在这个条件刺激之后，依然向家兔眼中吹气，作为无条件刺激。
 在实验的第三个阶段，只用灯光作为CS来对家兔进行条件刺激，发现家兔很少或几乎没有产生瞬膜闭合的条件反射。
-对光刺激的条件反射学习被之前对声音的条件反射学习所 <em>阻塞</em> 了 <a class="footnote-reference brackets" href="#id8" id="id7">2</a>。
+对光刺激的条件反射学习被之前对声音的条件反射学习所 <em>阻塞</em> 了 <a class="footnote-reference brackets" href="#id8" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>。
 实验中阻塞的结果挑战了条件反射的形成只取决于简单的时间接近性这一结论，即产生条件反射的充分必要条件是US频繁地紧随在CS后面。
 在下一节我门将讲述Rescorla–Wagner模型（Rescorla and Wagner，1972），该模型对阻塞提出了一种很有影响力的解释。</p>
 <p>如果我们将之前用作条件反射的CS作为另外一个中性的刺激因素的US进行条件作用时，则会形成高级条件反射。
@@ -241,16 +233,17 @@
 这种对于高级工具性条件反射的模拟有助于解决1.7节提到的功劳分配问题。
 因为当基础的收益信号被延迟时，评判器会给行动器提供每个时刻的强化。
 我们将在14.4节中进一步讨论这个问题。</p>
-<dl class="footnote brackets">
-<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id7">2</a></span></dt>
-<dd><p>与控制组进行对照实验是十分有必要的，这可以充分说明之前声音的条件作用阻塞了动物对光照刺激的学习。
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id8" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">2</a><span class="fn-bracket">]</span></span>
+<p>与控制组进行对照实验是十分有必要的，这可以充分说明之前声音的条件作用阻塞了动物对光照刺激的学习。
 在对照组的实验中，动物没有接受声音的条件作用，对光照条件的学习没有受到阻塞。
 Moore和 Schmajuk（2008）对这个实验做出了充分的说明。</p>
-</dd>
-</dl>
-</div>
-<div class="section" id="rescorla-wagner">
-<h3>14.2.2 Rescorla-Wagner模型<a class="headerlink" href="#rescorla-wagner" title="永久链接至标题"></a></h3>
+</aside>
+</aside>
+</section>
+<section id="rescorla-wagner">
+<h3>14.2.2 Rescorla-Wagner模型<a class="headerlink" href="#rescorla-wagner" title="链接到此标题。"></a></h3>
 <p>Rescorla和Wagner创建这个模型的主要目的是解决阻塞问题。
 Rescorla-Wagner-模型的核心思想是动物只有在事件违背其预期时才会学习，
 换句话说就是当动物感到惊讶时（尽管不一定意味着任何有 <em>意识的</em> 预期与情绪）。
@@ -279,7 +272,8 @@ Hescorla-Wagner模型的一个重要假设是认为聚合关联强度 <span clas
 由于这种映射可能会取决于实验中的各种细节，Rescorla 和 Wagner 并没有详细说明这种映射关系，
 仅仅简单地假定 <span class="math notranslate nohighlight">\(V\)</span> 的值越大，越有可能产生 CR，若 <span class="math notranslate nohighlight">\(V\)</span> 的值为负数，则不会产生任何 CR。</p>
 <p>Rescorla-Wagner模型考虑了如何获得CR，这在一定程度上解释了阻塞的产生。
-只要复合刺激物的聚合关联强度 <span class="math notranslate nohighlight">\(V_{AX}\)</span> 低于US Y所支持的关联强度渐近水平 <span class="math notranslate nohighlight">\(R_{Y}\)</span>，则预测误差 <span class="math notranslate nohighlight">\(R_{Y}-V_{AX}\)</span> 和 <span class="math notranslate nohighlight">\(V_{X}\)</span> 持续增加，
+只要复合刺激物的聚合关联强度 <span class="math notranslate nohighlight">\(V_{AX}\)</span> 低于US Y所支持的关联强度渐近水平 <span class="math notranslate nohighlight">\(R_{Y}\)</span>，则预测误差 <span class="math notranslate nohighlight">\(R_{Y}-V_{AX}`为正值。
+这说明在连续的实验中，复合CS中子刺激物的关联强度 :math:`V_{A}\)</span> 和 <span class="math notranslate nohighlight">\(V_{X}\)</span> 持续增加，
 直到聚合关联强度 <span class="math notranslate nohighlight">\(V_{AX}\)</span> 与  <span class="math notranslate nohighlight">\(R_{Y}\)</span> 相等为止，此时，子刺激物的关联水平不再变化（除非US变）。
 若动物已经对某种复合CS产生条件反射，那么再向这种复合CS中添加新的刺激物形成增强的CS，
 但是由于预测误差的值已经被减小到0或极低的值，因此增强的CS在被进一步的条件作用时，新添加刺激物的关联强度就会增加很少或者完全不增加。
@@ -294,23 +288,23 @@ Hescorla-Wagner模型的一个重要假设是认为聚合关联强度 <span clas
 其中，如果复合CS第 <span class="math notranslate nohighlight">\(i\)</span> 个组成成分 <span class="math notranslate nohighlight">\(CS_i\)</span> 在一次试验中存在，则 <span class="math notranslate nohighlight">\(x_{i}(s)=1\)</span> ，否则为0。
 设 <span class="math notranslate nohighlight">\(d\)</span> 维的关联强度向量为 <span class="math notranslate nohighlight">\(mathbf{w}\)</span>，则状态 <span class="math notranslate nohighlight">\(s\)</span> 的聚合关联强度为</p>
 <div class="math notranslate nohighlight" id="equation-14-1">
-<span class="eqno">(1)<a class="headerlink" href="#equation-14-1" title="公式的永久链接"></a></span>\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-14-1" title="链接到此公式"></a></span>\[\hat{v}(s, \mathbf{w})=\mathbf{w}^{\top} \mathbf{x}(s)\]</div>
 <p>这与强化学习中的 <em>价值估计</em> 相对应，我们将其视为对 <em>US的预测</em>。</p>
 <p>现在，我们暂时让 <span class="math notranslate nohighlight">\(t\)</span> 表示完整试验的总数，而不是它的通常含义时刻（当我们讲述下面的TD模型时，我们依然使用t的通常含义）。
 同时，<span class="math notranslate nohighlight">\(S+t\)</span> 是对应于试验 <span class="math notranslate nohighlight">\(t\)</span> 的状态。
 条件作用试验 <span class="math notranslate nohighlight">\(t\)</span> 按照如下公式将关联强度向量 <span class="math notranslate nohighlight">\(\mathbf{w}_{t}\)</span> 更新为 <span class="math notranslate nohighlight">\(\mathbf{w}_{t+1}\)</span> ：</p>
 <div class="math notranslate nohighlight" id="equation-14-2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-14-2" title="公式的永久链接"></a></span>\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{x}\left(S_{t}\right)\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-14-2" title="链接到此公式"></a></span>\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{x}\left(S_{t}\right)\]</div>
 <p>其中，<span class="math notranslate nohighlight">\(\alpha\)</span> 是步长参数，因为我们正在描述 Rescorla-Wagner 模型，所以这里 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 指 <em>预测误差</em>。</p>
 <div class="math notranslate nohighlight" id="equation-14-3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-14-3" title="公式的永久链接"></a></span>\[\delta_{t}=R_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
+<span class="eqno">(3)<a class="headerlink" href="#equation-14-3" title="链接到此公式"></a></span>\[\delta_{t}=R_{t}-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p><span class="math notranslate nohighlight">\(R_{t}\)</span> 是试验 <span class="math notranslate nohighlight">\(t\)</span> 的预测目标，即 US 的大小，用 Rescorla 和 Wagner 的话来说就是 US 在试验中可以支持的关联强度。
 我们可以注意到，由于式（14.2）中存在因子 <span class="math notranslate nohighlight">\(\mathbf{x}(S_{t})\)</span>，所以在复合CS中，只有在试验中出现的子刺激物的关联强度才会在一次试验后被调整。
 我们可以将预测误差视为对意外程度的度量，而聚合关联强度可以被视为动物的某种期望值，当它不符合目标 US 强度时就意味着动物的期望被违背了。</p>
 <p>从机器学习的角度来看， Rescorla-Wagner 模型是一个基于误差纠正的监督学习模型。
 它本质上与最小均方（LMS）或 Widrow-Hoff（Widrow 和 Hoff, 1960）学习规则一样，
 通过调整权重使得误差的均方差尽可能接近于0，在这个模型中，权重就是关联强度。
-这种“曲线拟合”或者回归算法被广泛地应用于工程和科学应用当中（参见9.4节） <a class="footnote-reference brackets" href="#id10" id="id9">3</a>。</p>
+这种“曲线拟合”或者回归算法被广泛地应用于工程和科学应用当中（参见9.4节） <a class="footnote-reference brackets" href="#id10" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>。</p>
 <p>Rescorla-Wagner 模型在动物学习理论的历史上是非常有影响力的，因为它表明，“机械”理论可以解释关于阻塞的主要事实，而不用诉诸于更复杂的认知学理论。
 例如当动物已经明确感知到另外一种子刺激物出现时，它会根据其之前的短期记忆来评估刺激物与US之间的预测关系。
 Rescorla-Wagner 模型表明了条件反射的连续性理论（即刺激的时间连续性是学习的充分必要条件）经过简单的调整可以用来解释阻塞现象（Moore and Schmajuk, 2008）。</p>
@@ -318,15 +312,16 @@ Rescorla-Wagner 模型表明了条件反射的连续性理论（即刺激的时�
 对于目前所观察到的效应也有许多不同的理论给出了解释，并且为了理解经典条件反射的许多微妙之处，相关方面仍在不断发展。
 我们在下面即将讲解的TD模型，虽然也不是最好或最完整的条件反射模型，但它扩展了 Rescorla-Wagner 模型，
 对试验内和试验间的刺激时序关系对学习效果的影响做出了解释，同时也解释了高级条件反射可能的出现原因。</p>
-<dl class="footnote brackets">
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id9">3</a></span></dt>
-<dd><p>LMS 规则和 Rescorl-Wagner 模型的唯一区别是，对于 LMS，输入向量 <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> 可以由任意多的实数组成，
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id10" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">3</a><span class="fn-bracket">]</span></span>
+<p>LMS 规则和 Rescorl-Wagner 模型的唯一区别是，对于 LMS，输入向量 <span class="math notranslate nohighlight">\(\mathbf{x}_{t}\)</span> 可以由任意多的实数组成，
 并且 <span class="math notranslate nohighlight">\(\alpha\)</span> 不依赖于输入向量以及刺激物的特性（至少在最简单的 LMS 规则中是这样的）。</p>
-</dd>
-</dl>
-</div>
-<div class="section" id="td">
-<h3>14.2.3 TD模型<a class="headerlink" href="#td" title="永久链接至标题"></a></h3>
+</aside>
+</aside>
+</section>
+<section id="td">
+<h3>14.2.3 TD模型<a class="headerlink" href="#td" title="链接到此标题。"></a></h3>
 <p>与 Rescorla-Wagner 相反，TD模型不是一个试验层面的模型，而是一个 <em>实时</em> 模型。
 在 Rescorla-Wagner 模型中，<span class="math notranslate nohighlight">\(t\)</span> 每增加1则表示经过了一个完整的条件反射试验，因此该模型不适合对试验进程中发生的细节进行描述。
 在每次试验中，动物可能会经历各种在特定时刻产生并持续特定时长的刺激，这些时间关系会对动物的学习效果产生显著的影响。
@@ -347,29 +342,29 @@ Rescorla-Wagner 模型表明了条件反射的连续性理论（即刺激的时�
 那么与状态 <span class="math notranslate nohighlight">\(s\)</span> 对应的聚合关联强度和 Rescorla Wagner 相同，都由式（14.1）给出。
 但是TD模型对于关联强度向量 <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> 的更新方式是不同的。由于参数 <span class="math notranslate nohighlight">\(t\)</span> 目前表示的是一个时刻而不是一次完整的试验，因此TD模型根据如下公式进行更新</p>
 <div class="math notranslate nohighlight" id="equation-14-4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-14-4" title="公式的永久链接"></a></span>\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{z}_{t}\]</div>
+<span class="eqno">(4)<a class="headerlink" href="#equation-14-4" title="链接到此公式"></a></span>\[\mathbf{w}_{t+1}=\mathbf{w}_{t}+\alpha \delta_{t} \mathbf{z}_{t}\]</div>
 <p>上式将 Rescorla-Wagner 模型更新公式（14.2）中的 <span class="math notranslate nohighlight">\(\mathbf{x}_t(S_t)\)</span> 替换为 <span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span>，<span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span> 是一个资格迹向量。
 同时，这里的 <span class="math notranslate nohighlight">\(\delta_{t}\)</span> 与式（14.3）中的不同，其代表TD误差。</p>
 <div class="math notranslate nohighlight" id="equation-14-5">
-<span class="eqno">(5)<a class="headerlink" href="#equation-14-5" title="公式的永久链接"></a></span>\[\delta_{t}=R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
+<span class="eqno">(5)<a class="headerlink" href="#equation-14-5" title="链接到此公式"></a></span>\[\delta_{t}=R_{t+1}+\gamma \hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)-\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\]</div>
 <p>其中， <span class="math notranslate nohighlight">\(\gamma\)</span> 是折扣系数（介于0和1之间），<span class="math notranslate nohighlight">\(R_t\)</span> 是在 <span class="math notranslate nohighlight">\(t\)</span> 时刻的预测目标，
 <span class="math notranslate nohighlight">\(\hat{v}\left(S_{t+1}, \mathbf{w}_{t}\right)\)</span> 和 <span class="math notranslate nohighlight">\(\hat{v}\left(S_{t}, \mathbf{w}_{t}\right)\)</span> 是在 <span class="math notranslate nohighlight">\(t+1\)</span> 时刻与 <span class="math notranslate nohighlight">\(t\)</span> 时刻对应的聚合关联强度，如式（14.1）中所定义的。</p>
 <p>资格迹向量 <span class="math notranslate nohighlight">\(\mathbf{z}_t\)</span> 的每个分量 <span class="math notranslate nohighlight">\(i\)</span> 根据特征向量 <span class="math notranslate nohighlight">\(x_i(S_t)\)</span> 分量 <span class="math notranslate nohighlight">\(\mathbf{x}(S_t)\)</span> 进行增加或减少，其余的资格迹向量根据系数 <span class="math notranslate nohighlight">\(\gamma\lambda\)</span> 进行衰减</p>
 <div class="math notranslate nohighlight" id="equation-14-6">
-<span class="eqno">(6)<a class="headerlink" href="#equation-14-6" title="公式的永久链接"></a></span>\[\mathbf{z}_{t+1}=\gamma \lambda \mathbf{z}_{t}+\mathbf{x}\left(S_{t}\right)\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-14-6" title="链接到此公式"></a></span>\[\mathbf{z}_{t+1}=\gamma \lambda \mathbf{z}_{t}+\mathbf{x}\left(S_{t}\right)\]</div>
 <p>这里的 <span class="math notranslate nohighlight">\(\lambda\)</span> 是资格迹的衰减系数。</p>
 <p>这里注意，如果 <span class="math notranslate nohighlight">\(\gamma=0\)</span>，那么TD模型就会退化为 Rescorla-Wagner 模型，
 但是不同之处在于 <span class="math notranslate nohighlight">\(t\)</span> 的含义（在 Rescorla-Wagner 模型中表示一次试验，在TD模型中表示某个时刻）。
 同时，在TD模型中，预测目标 <span class="math notranslate nohighlight">\(R\)</span> 要多出一步TD模型相当于线性函数逼近（第12章）中半梯度 <span class="math notranslate nohighlight">\(TD(\lambda)\)</span> 算法的后向视图，
 但区别在于当使用TD算法学习价值函数来进行策略改进时，<span class="math notranslate nohighlight">\(R_t\)</span> 不必是收益信号。</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="../index.html" class="btn btn-neutral float-left" title="第三部分 深入研究" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="../chapter15/neuroscience.html" class="btn btn-neutral float-right" title="第15章 神经科学" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
@@ -377,12 +372,12 @@ Rescorla-Wagner 模型表明了条件反射的连续性理论（即刺激的时�
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto.</p>
+    <p>&#169; 版权所有 2019, Richard S. Sutton，Andrew G. Barto。</p>
   </div>
 
-  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
    
 
 </footer>
