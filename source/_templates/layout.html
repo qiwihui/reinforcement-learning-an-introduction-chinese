@@ -1,5 +1,13 @@
 {% extends "!layout.html" %}
 
+{% block extrahead %}
+{{ super() }}
+<!-- AdSense Auto ads: placement and formats are managed in AdSense. -->
+<script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8935595858652656"
+        crossorigin="anonymous"></script>
+{% endblock %}
+
 {% block footer %}
 {{ super() }}
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -11,25 +19,4 @@
   gtag('config', 'UA-46660488-5');
 </script>
 
-{% endblock %}
-
-{% block menu %}
-{{ super() }}
-<style>
-.adsbygoogle-style {
-  background-color: rgb(52, 49, 49);
-  margin-top: 20px;
-}
-</style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- square-ad -->
-<ins class="adsbygoogle adsbygoogle-style"
-     style="display:block"
-     data-ad-client="ca-pub-8935595858652656"
-     data-ad-slot="2636787302"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 {% endblock %}
