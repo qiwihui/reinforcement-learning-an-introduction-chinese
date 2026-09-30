@@ -2,21 +2,13 @@
 
 {% block extrahead %}
 {{ super() }}
+<!-- Warm up connections used by AdSense so the first ad renders sooner. -->
+<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+<link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin>
+<link rel="preconnect" href="https://tpc.googlesyndication.com" crossorigin>
+<link rel="dns-prefetch" href="https://fundingchoicesmessages.google.com">
 <!-- AdSense Auto ads: placement and formats are managed in AdSense. -->
 <script async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8935595858652656"
         crossorigin="anonymous"></script>
-{% endblock %}
-
-{% block footer %}
-{{ super() }}
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-46660488-5');
-</script>
-
 {% endblock %}
