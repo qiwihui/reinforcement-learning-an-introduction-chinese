@@ -23,3 +23,36 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
         display: none !important;
     }
 }
+
+/* Desktop right rail (see _templates/layout.html). sphinx_rtd_theme puts a
+   300px menu and an 800px content column on the left above 1100px, so the
+   rail starts just right of the content and never overlaps it. */
+.rl-ad-rail {
+    display: none;
+    position: fixed;
+    top: 24px;
+    left: 1124px;
+    z-index: 100;
+}
+
+.rl-ad-rail ins.adsbygoogle {
+    display: inline-block;
+    width: 160px;
+    height: 600px;
+}
+
+@media screen and (min-width: 1460px) {
+    .rl-ad-rail ins.adsbygoogle {
+        width: 300px;
+    }
+}
+
+.rl-ad-rail:has(ins.adsbygoogle[data-ad-status="unfilled"]) {
+    display: none !important;
+}
+
+@media print {
+    .rl-ad-rail {
+        display: none !important;
+    }
+}
