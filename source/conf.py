@@ -89,6 +89,14 @@ html_theme = 'sphinx_rtd_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# Files copied to the site root as-is, e.g. ads.txt for AdSense.
+html_extra_path = ['_extra']
+
+# Emit <link rel="canonical"> so the mirrored /zh-cn/latest/ pages are not
+# treated as duplicate content. Read the Docs sets its own canonical URL.
+if os.environ.get('READTHEDOCS', None) != 'True':
+    html_baseurl = 'https://rl.qiwihui.com/'
+
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
