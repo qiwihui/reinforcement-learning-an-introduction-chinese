@@ -2,3 +2,24 @@ span.eqno {
     margin-left: 5px;
     float: right;
 }
+
+/* AdSense Auto ads: keep injected units from colliding with floated
+   equation numbers, figures and tables, and give them breathing room. */
+.rst-content .google-auto-placed {
+    clear: both;
+    margin: 24px 0;
+}
+
+/* Collapse slots that AdSense could not fill instead of leaving a gap. */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
+
+/* Never print ads. */
+@media print {
+    ins.adsbygoogle,
+    .google-auto-placed,
+    .adsbygoogle-noablate {
+        display: none !important;
+    }
+}
