@@ -12,3 +12,27 @@
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8935595858652656"
         crossorigin="anonymous"></script>
 {% endblock %}
+
+{% block footer %}
+{{ super() }}
+<!-- Desktop right rail: on wide screens the space right of the 800px content
+     column is empty, so a sticky vertical unit there stays in view without
+     covering any text. Only requested when the rail is actually visible. -->
+<aside class="rl-ad-rail" aria-label="广告">
+  <ins class="adsbygoogle"
+       data-ad-client="ca-pub-8935595858652656"
+       data-ad-slot="2636787302"></ins>
+</aside>
+<script>
+  (function () {
+    var rail = document.querySelector('.rl-ad-rail');
+    var mq = window.matchMedia('(min-width: 1310px) and (min-height: 680px)');
+    if (!rail || !mq.matches) {
+      if (rail) rail.parentNode.removeChild(rail);
+      return;
+    }
+    rail.style.display = 'block';
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  })();
+</script>
+{% endblock %}
